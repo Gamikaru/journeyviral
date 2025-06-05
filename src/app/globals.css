@@ -1,26 +1,244 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* CSS Variables for Design System */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Colors - Enhanced for better visual impact */
+    --color-primary: #1a0f2e;
+    /* Darker purple for more depth */
+    --color-primary-light: #2c1e4a;
+    --color-accent: #d73cbe;
+    --color-accent-bright: #ff6ec7;
+    --color-white: #ffffff;
+    --color-light-gray: #f2f2f2;
+
+    /* Enhanced gradients */
+    --gradient-primary: linear-gradient(180deg, #1a0f2e 0%, #2c1e4a 50%, #1a0f2e 100%);
+    --gradient-accent: linear-gradient(135deg, #d73cbe 0%, #ff6ec7 50%, #d73cbe 100%);
+    --gradient-hero: radial-gradient(ellipse at center, rgba(215, 60, 190, 0.15) 0%, transparent 70%);
+    --gradient-section: radial-gradient(circle at 50% 50%, rgba(44, 30, 74, 0.8) 0%, #1a0f2e 100%);
+
+    /* Spacing */
+    --spacing-section: 88.8px;
+    --spacing-element: 40px;
+
+    /* Animation */
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-anonymous);
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+}
+
+/* Add subtle noise texture to body */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-radial-gradient(circle at 0 0, transparent 0, #1a0f2e 40px),
+        repeating-radial-gradient(circle at 50% 50%, rgba(215, 60, 190, 0.03) 0, transparent 50px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+/* Custom Scrollbar - More vibrant */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-primary);
+    border-left: 1px solid rgba(215, 60, 190, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-accent), var(--color-accent-bright));
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(215, 60, 190, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-bright);
+    box-shadow: 0 0 12px rgba(215, 60, 190, 0.8);
+}
+
+/* Enhanced Typography Classes */
+.heading-hero {
+    font-family: var(--font-lastica);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    text-shadow: 0 0 40px rgba(215, 60, 190, 0.5);
+}
+
+.heading-section {
+    font-family: var(--font-interphases);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.body-large {
+    font-family: var(--font-anonymous);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* Enhanced Utility Classes */
+.text-accent {
+    color: var(--color-accent);
+    text-shadow: 0 0 20px rgba(215, 60, 190, 0.6);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #d73cbe 0%, #ff6ec7 50%, #d73cbe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(215, 60, 190, 0.5));
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    /* Increased for better spacing */
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-element);
+    }
+}
+
+/* Enhanced Section Base */
+.section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-section) 0;
+    background: var(--gradient-primary);
+}
+
+/* Add depth to sections */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-hero);
+    pointer-events: none;
+}
+
+/* Enhanced Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    33% {
+        transform: translateY(-30px) rotate(5deg) scale(1.05);
+    }
+
+    66% {
+        transform: translateY(20px) rotate(-5deg) scale(0.95);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+        filter: blur(0px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+        filter: blur(2px) brightness(1.2);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        filter: brightness(1) drop-shadow(0 0 20px rgba(215, 60, 190, 0.5));
+    }
+
+    50% {
+        filter: brightness(1.2) drop-shadow(0 0 40px rgba(215, 60, 190, 0.8));
+    }
+}
+
+.animate-float {
+    animation: float 8s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.animate-glow {
+    animation: glow 3s ease-in-out infinite;
+}
+
+/* Blob Enhancement */
+.blob-glow {
+    filter: drop-shadow(0 0 40px rgba(215, 60, 190, 0.6));
 }
