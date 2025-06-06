@@ -1,0 +1,485 @@
+/* Typography System */
+
+/* Hero Typography - Lastica Font */
+.heading-hero {
+    font-family: var(--font-lastica);
+    font-size: clamp(5rem, 14vw, 8.5rem);
+    line-height: 0.85;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    text-shadow:
+        0 0 80px rgba(255, 255, 255, 0.2),
+        0 6px 12px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(255, 0, 255, 0.1);
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.heading-hero-primary {
+    font-family: var(--font-lastica);
+    font-size: clamp(5.5rem, 16vw, 9.5rem);
+    line-height: 0.8;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    text-shadow:
+        0 0 100px rgba(255, 255, 255, 0.3),
+        0 8px 16px rgba(0, 0, 0, 1),
+        0 0 60px rgba(255, 0, 255, 0.2);
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.heading-hero-primary-xl {
+    font-family: var(--font-lastica);
+    font-size: clamp(6rem, 18vw, 12rem);
+    line-height: 0.75;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    text-shadow:
+        0 0 120px rgba(255, 255, 255, 0.4),
+        0 10px 20px rgba(0, 0, 0, 1),
+        0 0 80px rgba(255, 0, 255, 0.3);
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.heading-hero-subtitle {
+    font-family: var(--font-lastica);
+    font-size: clamp(4rem, 12vw, 7.5rem);
+    line-height: 0.85;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.heading-hero-subtitle-xl {
+    font-family: var(--font-lastica);
+    font-size: clamp(4.5rem, 14vw, 9rem);
+    line-height: 0.8;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+/* Section Headings - TT Interphases */
+.heading-section {
+    font-family: var(--font-interphases);
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.heading-subsection {
+    font-family: var(--font-interphases);
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+}
+
+/* Body Text - Anonymous Pro */
+.body-large {
+    font-family: var(--font-anonymous);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    line-height: 1.7;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.body-medium {
+    font-family: var(--font-anonymous);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+}
+
+.body-small {
+    font-family: var(--font-anonymous);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    line-height: 1.5;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+/* Enhanced Text Effects - Fixed rendering */
+.text-gradient-viral {
+    background: var(--gradient-viral);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 6s ease-in-out infinite;
+    letter-spacing: 0.02em;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 255, 0.4));
+    /* Fallback for better browser support */
+    color: #ff00ff;
+}
+
+.text-gradient-holographic {
+    background: var(--gradient-holographic);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 10s ease-in-out infinite;
+    letter-spacing: 0.02em;
+    filter: drop-shadow(0 0 40px rgba(255, 0, 255, 0.5));
+    /* Fallback for better browser support */
+    color: #ff00ff;
+}
+
+.text-gradient-electric {
+    background: linear-gradient(45deg, var(--color-accent-electric), var(--color-cyan-400));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.6));
+    /* Fallback for better browser support */
+    color: #00ffff;
+}
+
+/* Neon Text Effects */
+.text-neon-pink {
+    color: var(--color-accent-neon);
+    text-shadow: var(--shadow-neon);
+    animation: neonPulse 3s ease-in-out infinite alternate;
+}
+
+.text-neon-cyan {
+    color: #00ffff;
+    text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+    animation: electricPulse 2.5s ease-in-out infinite alternate;
+}
+
+/* Solid color text utilities for stats */
+.text-neon-green {
+    color: #00ff88;
+    text-shadow:
+        0 0 10px #00ff88,
+        0 0 20px #00ff88,
+        0 0 40px #00ff88;
+}
+
+.text-neon-magenta {
+    color: #ff00ff;
+    text-shadow:
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff;
+}
+
+/* Glitch Effect */
+.text-glitch {
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+}
+
+.text-glitch::before,
+.text-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.text-glitch::before {
+    animation: glitch-1 0.5s ease-in-out infinite;
+    color: var(--color-accent-electric);
+    transform: translate(-2px, 2px);
+}
+
+.text-glitch::after {
+    animation: glitch-2 0.5s ease-in-out infinite reverse;
+    color: var(--color-accent-neon);
+    transform: translate(2px, -2px);
+}
+
+/* Text Shadows */
+.text-shadow-glow {
+    text-shadow:
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 40px currentColor;
+}
+
+.text-shadow-neon {
+    text-shadow:
+        0 0 5px currentColor,
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 40px currentColor;
+}
+
+.text-shadow-deep {
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+/* Line Height Utilities */
+.leading-tight-plus { line-height: 1.1; }
+.leading-snug-plus { line-height: 1.3; }
+.leading-normal-plus { line-height: 1.7; }
+.leading-relaxed-plus { line-height: 1.8; }
+
+/* Letter Spacing */
+.tracking-tight-plus { letter-spacing: -0.02em; }
+.tracking-normal-plus { letter-spacing: 0.01em; }
+.tracking-wide-plus { letter-spacing: 0.05em; }
+.tracking-wider-plus { letter-spacing: 0.1em; }
+.tracking-widest-plus { letter-spacing: 0.15em; }
+
+/* Text Alignment & Wrapping */
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+/* Brand Voice Typography */
+.text-brand-bold {
+    font-family: var(--font-lastica);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.text-brand-tech {
+    font-family: var(--font-anonymous);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.text-brand-elegant {
+    font-family: var(--font-interphases);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+}
+
+/* Enhanced spacing utilities for better visual hierarchy */
+.section-breathing-room {
+    margin: 4rem 0;
+    padding: 3rem 0;
+}
+
+@media (min-width: 768px) {
+    .section-breathing-room {
+        margin: 6rem 0;
+        padding: 4rem 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .section-breathing-room {
+        margin: 8rem 0;
+        padding: 6rem 0;
+    }
+}
+
+/* Enhanced spacing utilities for compact viewport optimization */
+.hero-tagline-text {
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+/* Enhanced spacing utilities for ultra compact viewport optimization */
+.hero-tagline-text {
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+}
+
+/* Responsive Typography Adjustments */
+@media (max-width: 768px) {
+    .heading-hero-primary-xl {
+        font-size: clamp(4.5rem, 16vw, 8rem);
+        line-height: 0.8;
+        letter-spacing: -0.02em;
+    }
+
+    .heading-hero-subtitle-xl {
+        font-size: clamp(3.5rem, 12vw, 6rem);
+        line-height: 0.85;
+    }
+
+    .hero-tagline-text {
+        line-height: 0.95;
+        letter-spacing: -0.015em;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading-hero-primary-xl {
+        font-size: clamp(3.5rem, 14vw, 6rem);
+        line-height: 0.85;
+        letter-spacing: -0.01em;
+    }
+
+    .heading-hero-subtitle-xl {
+        font-size: clamp(2.5rem, 10vw, 4.5rem);
+        line-height: 0.9;
+    }
+
+    .hero-tagline-text {
+        line-height: 0.9;
+        letter-spacing: -0.01em;
+    }
+}
+
+/* Typography scaling for ultra compact layout */
+@media (max-height: 900px) {
+    .heading-hero-primary {
+        font-size: clamp(4.5rem, 14vw, 8rem);
+        line-height: 0.75;
+    }
+
+    .heading-hero-subtitle {
+        font-size: clamp(3.5rem, 10vw, 6.5rem);
+        line-height: 0.8;
+    }
+
+    .heading-hero-primary-xl {
+        font-size: clamp(5rem, 16vw, 10rem);
+        line-height: 0.7;
+    }
+
+    .heading-hero-subtitle-xl {
+        font-size: clamp(4rem, 12vw, 7.5rem);
+        line-height: 0.75;
+    }
+
+    .hero-tagline-text {
+        line-height: 0.85;
+        letter-spacing: -0.02em;
+    }
+}
+
+@media (max-height: 800px) {
+    .heading-hero-primary {
+        font-size: clamp(4rem, 12vw, 7rem);
+        line-height: 0.7;
+    }
+
+    .heading-hero-subtitle {
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        line-height: 0.75;
+    }
+
+    .heading-hero-primary-xl {
+        font-size: clamp(4.5rem, 14vw, 8.5rem);
+        line-height: 0.65;
+    }
+
+    .heading-hero-subtitle-xl {
+        font-size: clamp(3.5rem, 10vw, 6.5rem);
+        line-height: 0.7;
+    }
+
+    .hero-tagline-text {
+        line-height: 0.8;
+        letter-spacing: -0.025em;
+    }
+}
+
+@media (max-height: 700px) {
+    .heading-hero-primary {
+        font-size: clamp(3.5rem, 10vw, 6rem);
+        line-height: 0.65;
+    }
+
+    .heading-hero-subtitle {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        line-height: 0.7;
+    }
+
+    .heading-hero-primary-xl {
+        font-size: clamp(4rem, 12vw, 7rem);
+        line-height: 0.6;
+    }
+
+    .heading-hero-subtitle-xl {
+        font-size: clamp(3rem, 9vw, 5.5rem);
+        line-height: 0.65;
+    }
+
+    .hero-tagline-text {
+        line-height: 0.75;
+        letter-spacing: -0.03em;
+    }
+}
+
+@media (max-height: 600px) {
+    .heading-hero-primary {
+        font-size: clamp(3rem, 9vw, 5rem);
+        line-height: 0.6;
+    }
+
+    .heading-hero-subtitle {
+        font-size: clamp(2rem, 7vw, 3.5rem);
+        line-height: 0.65;
+    }
+
+    .heading-hero-primary-xl {
+        font-size: clamp(3.5rem, 10vw, 6rem);
+        line-height: 0.55;
+    }
+
+    .heading-hero-subtitle-xl {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        line-height: 0.6;
+    }
+
+    .hero-tagline-text {
+        line-height: 0.7;
+        letter-spacing: -0.035em;
+    }
+}
+
+/* Compact tagline text for small viewports */
+@media (max-height: 800px) {
+    .hero-tagline-text {
+        line-height: 1.05;
+        letter-spacing: -0.015em;
+    }
+}
+
+@media (max-height: 700px) {
+    .hero-tagline-text {
+        line-height: 1;
+        letter-spacing: -0.02em;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .text-gradient-viral,
+    .text-gradient-holographic,
+    .text-gradient-electric {
+        -webkit-text-fill-color: initial;
+        background: none;
+        color: var(--color-dark-gray);
+    }
+
+    .text-neon-pink,
+    .text-neon-cyan {
+        color: var(--color-dark-gray);
+        text-shadow: none;
+    }
+}
