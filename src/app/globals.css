@@ -8,37 +8,6 @@
 @import '../styles/animations.css';
 @import '../styles/utilities.css';
 
-/* Transform section isolation - prevent style conflicts */
-.transform-section * {
-  box-sizing: border-box;
-}
-
-.transform-section h1,
-.transform-section h2,
-.transform-section h3,
-.transform-section h4,
-.transform-section h5,
-.transform-section h6 {
-  margin: 0;
-  padding: 0;
-  line-height: inherit;
-  font-weight: inherit;
-  font-size: inherit;
-  font-family: inherit;
-  color: inherit;
-  text-transform: inherit;
-  letter-spacing: inherit;
-}
-
-.transform-section p {
-  margin: 0;
-  padding: 0;
-  line-height: inherit;
-  font-weight: inherit;
-  font-size: inherit;
-  font-family: inherit;
-  color: inherit;
-}
 
 /* Ensure font variables are available */
 :root {
