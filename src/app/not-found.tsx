@@ -4,7 +4,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import AnimatedBlob from "@/components/common/AnimatedBlob";
 
 export default function NotFound() {
   return (
@@ -12,24 +11,23 @@ export default function NotFound() {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-radial opacity-30" />
 
-      {/* Decorative Blobs */}
-      <AnimatedBlob
-        src="/images/blobs/blob_2.gif"
-        width={300}
-        height={300}
-        position={{ x: "10%", y: "20%" }}
-        animationType="float"
-        className="opacity-50"
-      />
-
-      <AnimatedBlob
-        src="/images/blobs/blob_5.gif"
-        width={250}
-        height={250}
-        position={{ x: "80%", y: "60%" }}
-        animationType="float"
-        delay={2}
-        className="opacity-50"
+      {/* Floating Blob GIF */}
+      <motion.img
+        src="/images/blobs/blob_1.gif"
+        alt="Animated blob"
+        width={400}
+        height={400}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none"
+        animate={{
+          y: [-20, 20, -20],
+          rotate: [0, 5, -5, 0],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       />
 
       <div className="relative z-10 text-center px-4">

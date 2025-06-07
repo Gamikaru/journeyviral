@@ -158,6 +158,9 @@ export default function SectionWrapper({
       style={{
         ...getBackgroundStyle(),
         backgroundColor: backgroundColor || undefined,
+        position: 'relative',
+        zIndex: className.includes('z-') ? undefined : 10,
+        isolation: 'isolate',
       }}
     >
       {/* Animated background effects based on variant */}
@@ -271,21 +274,27 @@ export default function SectionWrapper({
 
       {/* Parallax wrapper */}
       <motion.div
-        className="relative z-10 w-full"
-        style={parallax ? {
-          y: springY,
-          opacity: springOpacity,
-          scale: springScale,
-        } : {}}
+        className="relative z-20 w-full flex items-center justify-center"
+        style={{
+          ...(parallax ? {
+            y: springY,
+            opacity: springOpacity,
+            scale: springScale,
+          } : {}),
+          minHeight: minHeight === "min-h-screen" ? "100vh" : "auto",
+        }}
       >
         {/* Content container */}
-        <div className="container relative">
+        <div className="container relative z-30 w-full">
           {children}
         </div>
       </motion.div>
 
-      {/* Section transition gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary-ultraDark to-transparent pointer-events-none" />
+      {/* Enhanced section transition gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary-ultraDark to-transparent pointer-events-none z-40" />
+
+      {/* Top section separator */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-primary-ultraDark/30 to-transparent pointer-events-none z-40" />
 
       {/* Noise texture overlay */}
       <div
