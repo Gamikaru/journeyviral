@@ -1,3 +1,5 @@
+
+/*src/components/sections/Transform/index.tsx */
 "use client";
 
 import { motion } from "framer-motion";
@@ -21,7 +23,7 @@ export default function TransformSection() {
       {/* Background layers */}
       <div className="transform-bg-base" />
       <div className="transform-bg-gradient" />
-      <div className="transform-bg-overlay" />
+      <div className="transform-bg-mesh" />
 
       <div className="transform-container">
         <motion.div
@@ -49,14 +51,15 @@ export default function TransformSection() {
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          padding: 4rem 0;
+          padding: 0;
           isolation: isolate;
         }
 
+        /* Background layers for depth */
         .transform-bg-base {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, #1a0f2e 0%, #2d0037 100%);
+          background: linear-gradient(180deg, #2d0037 0%, #4a0e4e 50%, #2d0037 100%);
           z-index: 1;
         }
 
@@ -64,18 +67,18 @@ export default function TransformSection() {
           position: absolute;
           inset: 0;
           background:
-            radial-gradient(ellipse at 20% 80%, rgba(215, 60, 190, 0.15) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 20%, rgba(255, 110, 199, 0.15) 0%, transparent 50%),
-            radial-gradient(ellipse at 40% 40%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            radial-gradient(ellipse at 20% 80%, rgba(255, 0, 179, 0.25) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 20%, rgba(255, 110, 199, 0.2) 0%, transparent 50%),
+            radial-gradient(ellipse at 40% 40%, rgba(255, 0, 255, 0.15) 0%, transparent 50%);
           z-index: 2;
         }
 
-        .transform-bg-overlay {
+        .transform-bg-mesh {
           position: absolute;
           inset: 0;
           background:
-            radial-gradient(circle at 30% 70%, rgba(142, 0, 255, 0.08) 0%, transparent 60%),
-            radial-gradient(circle at 70% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 60%);
+            radial-gradient(circle at 30% 70%, rgba(142, 0, 255, 0.1) 0%, transparent 60%),
+            radial-gradient(circle at 70% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 60%);
           z-index: 3;
         }
 
@@ -86,9 +89,9 @@ export default function TransformSection() {
           max-width: 1400px;
           margin: 0 auto;
           padding: 0 2rem;
-          height: 100vh;
           display: flex;
           align-items: center;
+          min-height: 100vh;
         }
 
         .transform-grid {
@@ -97,62 +100,47 @@ export default function TransformSection() {
           gap: 4rem;
           align-items: center;
           width: 100%;
-          height: auto;
-          min-height: 70vh;
         }
 
         .transform-content-column {
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          height: 100%;
         }
 
         .transform-blob-column {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 100%;
         }
 
         @media (max-width: 1024px) {
+          .transform-container {
+            padding: 0 1.5rem;
+          }
+
           .transform-grid {
-            gap: 2rem;
+            gap: 3rem;
           }
         }
 
         @media (max-width: 768px) {
-          .transform-section {
-            padding: 3rem 0;
-          }
-
           .transform-container {
             padding: 0 1rem;
-            height: auto;
-            min-height: 100vh;
-          }
-
-          .transform-grid {
-            gap: 2rem;
-            min-height: auto;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .transform-section {
-            padding: 2rem 0;
           }
 
           .transform-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
-            min-height: auto;
+            text-align: center;
           }
 
-          .transform-content-column,
-          .transform-blob-column {
+          .transform-content-column {
             justify-content: center;
-            text-align: center;
+          }
+
+          .transform-blob-column {
+            order: 2;
           }
         }
       `}</style>
