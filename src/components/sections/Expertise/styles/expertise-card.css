@@ -1,0 +1,410 @@
+/* src/components/sections/Expertise/styles/expertise-card.css */
+
+.expertise-card {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  isolation: isolate;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradient border wrapper - simplified like stats cards */
+.card-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-start) 0%,
+    transparent 40%,
+    transparent 60%,
+    var(--gradient-end) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.border-glow {
+  display: none; /* Remove complex glow, keep it simple like stats */
+}
+
+/* Card variants */
+.expertise-card-cyan {
+  --gradient-start: #00ffff;
+  --gradient-end: #0088cc;
+}
+
+.expertise-card-blue {
+  --gradient-start: #00d4ff;
+  --gradient-end: #0066ff;
+}
+
+.expertise-card-pink {
+  --gradient-start: #ff00ff;
+  --gradient-end: #cc00cc;
+}
+
+.expertise-card-purple {
+  --gradient-start: #ff6ec7;
+  --gradient-end: #d73cbe;
+}
+
+/* Inner content - simplified */
+.card-inner {
+  position: relative;
+  background: rgba(10, 10, 20, 0.6);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border-radius: 22px;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Background effects */
+.card-bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(var(--card-color-rgb), 0.1) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px);
+  mix-blend-mode: overlay;
+}
+
+/* Icon container */
+.card-icon-container {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.card-icon {
+  color: var(--card-color);
+  filter: drop-shadow(0 0 15px currentColor);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.icon-glow {
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(
+    circle,
+    var(--card-color) 0%,
+    transparent 70%
+  );
+  opacity: 0.5;
+  filter: blur(15px);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.icon-ring {
+  position: absolute;
+  inset: -5px;
+  border: 2px solid var(--card-color);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* Number styling */
+.card-number {
+  position: relative;
+  font-family: var(--font-display), 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--card-color);
+  text-shadow:
+    0 0 30px currentColor,
+    0 0 60px currentColor,
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+.number-text {
+  position: relative;
+  z-index: 2;
+}
+
+.number-glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    circle,
+    var(--card-color) 0%,
+    transparent 50%
+  );
+  filter: blur(20px);
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* Label */
+.card-label {
+  font-family: var(--font-body), Inter, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+/* Description */
+.card-description {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  font-family: var(--font-body), Inter, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--card-color);
+  text-align: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* Corner accents */
+.card-corners {
+  position: absolute;
+  inset: 1rem;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--card-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.corner-tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.corner-br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Particles */
+.card-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--card-color);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+/* Hover states - simplified */
+.expertise-card:hover .card-border,
+.expertise-card.is-hovered .card-border {
+  opacity: 1;
+}
+
+.expertise-card:hover .card-inner,
+.expertise-card.is-hovered .card-inner {
+  background: rgba(10, 10, 20, 0.8);
+  backdrop-filter: blur(30px) saturate(1.8);
+  -webkit-backdrop-filter: blur(30px) saturate(1.8);
+}
+
+/* Focus state */
+.expertise-card:focus-visible {
+  outline: 2px solid var(--card-color);
+  outline-offset: 4px;
+}
+
+/* Active state */
+.expertise-card:active .card-inner {
+  transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .expertise-card {
+    min-height: 180px;
+  }
+
+  .card-inner {
+    padding: 1.75rem;
+  }
+
+  .card-number {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .expertise-card {
+    min-height: 160px;
+  }
+
+  .card-inner {
+    padding: 1.5rem;
+    gap: 0.75rem;
+  }
+
+  .card-icon-container {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .card-number {
+    font-size: 2.25rem;
+    text-shadow:
+      0 0 20px currentColor,
+      0 0 40px currentColor,
+      0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  .card-label {
+    font-size: 0.8rem;
+  }
+
+  .card-particles {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .expertise-card {
+    min-height: 140px;
+  }
+
+  .card-inner {
+    padding: 1.25rem;
+  }
+
+  .card-number {
+    font-size: 2rem;
+  }
+
+  .card-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .card-description {
+    display: none;
+  }
+
+  .corner {
+    display: none;
+  }
+}
+
+/* Performance mode */
+.performance-mode .border-glow,
+.performance-mode .icon-ring,
+.performance-mode .number-glow,
+.performance-mode .card-particles {
+  display: none;
+}
+
+.performance-mode .card-icon {
+  filter: none;
+}
+
+.performance-mode .card-number {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .expertise-card,
+  .expertise-card * {
+    animation: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .border-gradient {
+    padding: 3px;
+    opacity: 1;
+  }
+
+  .card-inner {
+    background: rgba(0, 0, 0, 0.98);
+    border: 2px solid var(--card-color);
+  }
+
+  .card-label {
+    color: #ffffff;
+  }
+}

@@ -42,8 +42,8 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-  transition: left 0.8s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transition: left 0.6s ease;
   z-index: 1;
   border-radius: 50px;
 }
@@ -59,8 +59,8 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
-  transition: left 1s ease;
+  background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.5), transparent);
+  transition: left 0.8s ease;
   z-index: 1;
   border-radius: 50px;
 }
@@ -72,33 +72,40 @@
 /* Enhanced button animations */
 @keyframes buttonPulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+  50% { transform: scale(1.03); }
   100% { transform: scale(1); }
 }
 
 @keyframes buttonGlow {
   0% {
-    box-shadow: 0 0 20px rgba(255, 110, 199, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 110, 199, 0.6), 0 0 80px rgba(215, 60, 190, 0.4);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.6), 0 0 80px rgba(0, 212, 255, 0.4);
   }
   100% {
-    box-shadow: 0 0 20px rgba(255, 110, 199, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
   }
 }
 
-@keyframes borderRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes secondaryButtonGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(138, 43, 226, 0.6), 0 0 80px rgba(75, 0, 130, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+  }
 }
 
 .hero-primary-btn:hover {
-  animation: buttonPulse 0.6s ease-in-out;
+  animation: buttonPulse 0.4s ease-in-out, buttonGlow 2s ease-in-out infinite;
 }
 
 .hero-secondary-btn:hover {
-  animation: buttonPulse 0.6s ease-in-out;
+  animation: buttonPulse 0.4s ease-in-out, secondaryButtonGlow 2s ease-in-out infinite;
 }
 
 .hero-shimmer-effect::after {
@@ -122,24 +129,810 @@
   animation: heroElectricPulse 2.5s ease-in-out infinite alternate;
 }
 
-@media (max-width: 640px) {
-  .hero-buttons-container {
-    flex-direction: column;
-    gap: 1rem;
-  }
+/* Ultra Enhanced Hero Buttons - Nav Inspired */
 
-  .hero-primary-btn,
-  .hero-secondary-btn {
-    min-width: 280px;
-    padding: 16px 32px;
-    font-size: 1rem;
-  }
+/* Base Button Styling */
+.hero-btn-ultra {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.26, 0.64, 1);
+  contain: layout style paint;
 }
 
-@media (max-height: 700px) {
-  .hero-buttons-container {
-    gap: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+/* Ultra Enhanced Background System */
+.hero-btn-bg-ultra {
+  position: absolute;
+  inset: 0;
+  border-radius: 32px;
+  overflow: hidden;
 }
+
+/* Primary Button Gradients */
+.hero-btn-gradient-primary {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #00ffff 0%, #00d4ff 50%, #0099cc 100%);
+  transition: all 0.4s ease;
+}
+
+.hero-btn-gradient-secondary {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(225deg, #33e6ff 0%, #00ccee 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hero-btn-border-glow {
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from 0deg,
+    #00ffff,
+    #00d4ff,
+    #0099cc,
+    #00ffff
+  );
+  border-radius: 34px;
+  opacity: 0;
+  animation: rotateBorderGlow 4s linear infinite;
+  transition: opacity 0.4s ease;
+}
+
+.hero-btn-border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: transparent;
+  border-radius: 32px;
+}
+
+/* Advanced Shimmer Effect */
+.hero-btn-shimmer-ultra {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 80%
+  );
+  border-radius: 32px;
+  transition: left 1s ease;
+}
+
+/* Pulse Rings */
+.hero-btn-pulse-ring-1,
+.hero-btn-pulse-ring-2 {
+  position: absolute;
+  inset: -40%;
+  border: 3px solid rgba(0, 255, 255, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  animation: heroBtnPulseRing1 4s ease-in-out infinite;
+}
+
+.hero-btn-pulse-ring-2 {
+  animation: heroBtnPulseRing2 4s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+@keyframes heroBtnPulseRing1 {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes heroBtnPulseRing2 {
+  0% { transform: scale(0.6); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 0.4; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* Spark Trail */
+.hero-btn-spark-trail {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.4) 45deg,
+    transparent 90deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.4) 315deg,
+    transparent 360deg
+  );
+  border-radius: 32px;
+  opacity: 0;
+  animation: heroSparkRotate 6s linear infinite;
+}
+
+@keyframes heroSparkRotate {
+  0% { transform: rotate(0deg); opacity: 0; }
+  25% { opacity: 0.6; }
+  75% { opacity: 0.6; }
+  100% { transform: rotate(360deg); opacity: 0; }
+}
+
+@keyframes rotateBorderGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Secondary Button Styling */
+.hero-btn-bg-secondary .hero-btn-glass-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 15, 46, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 32px;
+  transition: all 0.4s ease;
+}
+
+.hero-btn-bg-secondary .hero-btn-glass-border {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 32px;
+  transition: border-color 0.4s ease;
+}
+
+.hero-btn-secondary-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at center,
+    rgba(138, 43, 226, 0.4) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  filter: blur(25px);
+  transition: opacity 0.4s ease;
+}
+
+.hero-btn-secondary-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 20%,
+    rgba(138, 43, 226, 0.5) 50%,
+    transparent 80%
+  );
+  border-radius: 32px;
+  transition: left 1.2s ease;
+}
+
+.hero-btn-secondary-pulse-1,
+.hero-btn-secondary-pulse-2 {
+  position: absolute;
+  inset: -40%;
+  border: 3px solid rgba(138, 43, 226, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  animation: heroSecondaryPulse1 5s ease-in-out infinite;
+}
+
+.hero-btn-secondary-pulse-2 {
+  animation: heroSecondaryPulse2 5s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+@keyframes heroSecondaryPulse1 {
+  0% { transform: scale(0.7); opacity: 0; }
+  50% { transform: scale(1.4); opacity: 0.4; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes heroSecondaryPulse2 {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.6); opacity: 0.3; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Enhanced Content Styling */
+.hero-btn-content-ultra {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  height: 100%;
+}
+
+.hero-btn-text {
+  transition: all 0.3s ease;
+}
+
+.hero-btn-icon {
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Enhanced Hover Effects */
+.hero-btn-hover-effects {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 0 0 32px 32px;
+}
+
+.hero-btn-hover-trail {
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transition: left 0.5s ease;
+}
+
+.hero-btn-hover-spark {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.hero-btn-hover-secondary .hero-btn-hover-trail {
+  background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.8), transparent);
+}
+
+.hero-btn-hover-secondary .hero-btn-hover-spark {
+  background: rgba(138, 43, 226, 0.9);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.8);
+}
+
+/* Primary Button Hover States */
+.hero-btn-primary:hover .hero-btn-gradient-secondary {
+  opacity: 0.7;
+}
+
+.hero-btn-primary:hover .hero-btn-border-glow {
+  opacity: 1;
+}
+
+.hero-btn-primary:hover .hero-btn-shimmer-ultra {
+  left: 100%;
+}
+
+.hero-btn-primary:hover .hero-btn-spark-trail {
+  opacity: 1;
+}
+
+.hero-btn-primary:hover .hero-btn-hover-trail {
+  left: 100%;
+}
+
+.hero-btn-primary:hover .hero-btn-hover-spark {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Secondary Button Hover States */
+.hero-btn-secondary:hover .hero-btn-glass-bg {
+  background: rgba(26, 15, 46, 0.6);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.hero-btn-secondary:hover .hero-btn-glass-border {
+  border-color: rgba(138, 43, 226, 0.6);
+}
+
+.hero-btn-secondary:hover .hero-btn-secondary-glow {
+  opacity: 0.8;
+}
+
+.hero-btn-secondary:hover .hero-btn-secondary-shimmer {
+  left: 100%;
+}
+
+.hero-btn-secondary:hover .hero-btn-hover-trail {
+  left: 100%;
+}
+
+.hero-btn-secondary:hover .hero-btn-hover-spark {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Legacy support for old button classes */
+.hero-primary-btn,
+.hero-secondary-btn {
+  display: none;
+}
+
+/* HERO NAVBAR-STYLE BUTTONS - ULTRA ENHANCED */
+
+/* Base Button Styling */
+.hero-nav-btn-ultra {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.26, 0.64, 1);
+  contain: layout style paint;
+}
+
+/* Ultra Enhanced Background System */
+.hero-nav-bg-ultra {
+  position: absolute;
+  inset: 0;
+  border-radius: 36px;
+  overflow: hidden;
+}
+
+/* Multi-Layer Border System - Primary Button */
+.hero-nav-border-primary {
+  position: absolute;
+  inset: -3px;
+  background: conic-gradient(
+    from 0deg,
+    #ff00ff,
+    #ff6ec7,
+    #ffd700,
+    #00ffff,
+    #ff00ff
+  );
+  border-radius: 39px;
+  animation: heroNavRotateBorderPrimary 8s linear infinite;
+  opacity: 0.9;
+}
+
+.hero-nav-border-secondary {
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from 180deg,
+    #00ffff,
+    #ff00ff,
+    #ffd700,
+    #ff6ec7,
+    #00ffff
+  );
+  border-radius: 38px;
+  animation: heroNavRotateBorderSecondary 10s linear infinite reverse;
+  opacity: 0.6;
+}
+
+.hero-nav-border-accent {
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.3),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 37px;
+  animation: heroNavPulseBorder 4s ease-in-out infinite;
+}
+
+/* Create inner background for primary button */
+.hero-nav-border-primary::after,
+.hero-nav-border-secondary::after,
+.hero-nav-border-accent::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  background: linear-gradient(135deg, #ff00ff 0%, #ff6ec7 100%);
+  border-radius: 34px;
+}
+
+@keyframes heroNavRotateBorderPrimary {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes heroNavRotateBorderSecondary {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes heroNavPulseBorder {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* Main Gradient Backgrounds */
+.hero-nav-gradient-main {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff00ff 0%, #ff6ec7 50%, #ffd700 100%);
+  transition: all 0.4s ease;
+}
+
+.hero-nav-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(225deg, #ff6ec7 0%, #00ffff 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Advanced Shimmer Effect */
+.hero-nav-shimmer-ultra {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.9) 50%,
+    transparent 80%
+  );
+  border-radius: 36px;
+  transition: left 1.2s ease;
+}
+
+/* Pulse Rings */
+.hero-nav-pulse-ring-1,
+.hero-nav-pulse-ring-2 {
+  position: absolute;
+  inset: -50%;
+  border: 4px solid var(--btn-glow-light);
+  border-radius: 50%;
+  opacity: 0;
+  animation: heroNavPulseRing1 5s ease-in-out infinite;
+}
+
+.hero-nav-pulse-ring-2 {
+  animation: heroNavPulseRing2 5s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+@keyframes heroNavPulseRing1 {
+  0% { transform: scale(0.7); opacity: 0; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes heroNavPulseRing2 {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.6); opacity: 0.4; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Spark Trail */
+.hero-nav-spark-trail {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.5) 45deg,
+    transparent 90deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.5) 315deg,
+    transparent 360deg
+  );
+  border-radius: 36px;
+  opacity: 0;
+  animation: heroNavSparkRotate 7s linear infinite;
+}
+
+@keyframes heroNavSparkRotate {
+  0% { transform: rotate(0deg); opacity: 0; }
+  25% { opacity: 0.7; }
+  75% { opacity: 0.7; }
+  100% { transform: rotate(360deg); opacity: 0; }
+}
+
+/* Enhanced Content Styling */
+.hero-nav-content-ultra {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  height: 100%;
+}
+
+.hero-nav-icon-ultra {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-nav-icon-glyph {
+  font-size: 20px;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 10px var(--btn-glow));
+  z-index: 2;
+  position: relative;
+}
+
+.hero-nav-icon-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--btn-color);
+  border-radius: 50%;
+  opacity: 0.4;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.hero-nav-text-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-start;
+}
+
+.hero-nav-label {
+  font-family: var(--font-lastica);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: inherit;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.hero-nav-desc {
+  font-family: var(--font-interphases);
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.7);
+  transition: color 0.3s ease;
+  margin: 0;
+}
+
+.hero-nav-btn-secondary .hero-nav-desc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-nav-arrow-ultra {
+  width: 24px;
+  height: 24px;
+  color: var(--btn-color);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Secondary Button Styling */
+.hero-nav-bg-secondary .hero-nav-glass-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 5, 20, 0.6);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 36px;
+  transition: all 0.4s ease;
+}
+
+.hero-nav-bg-secondary .hero-nav-glass-border {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 36px;
+  transition: border-color 0.4s ease;
+}
+
+.hero-nav-bg-secondary .hero-nav-glass-glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle at center,
+    var(--btn-glow) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  filter: blur(30px);
+  transition: opacity 0.4s ease;
+}
+
+.hero-nav-secondary-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 20%,
+    var(--btn-glow-light) 50%,
+    transparent 80%
+  );
+  border-radius: 36px;
+  transition: left 1.4s ease;
+}
+
+.hero-nav-secondary-pulse-1,
+.hero-nav-secondary-pulse-2 {
+  position: absolute;
+  inset: -50%;
+  border: 4px solid var(--btn-glow-light);
+  border-radius: 50%;
+  opacity: 0;
+  animation: heroNavSecondaryPulse1 6s ease-in-out infinite;
+}
+
+.hero-nav-secondary-pulse-2 {
+  animation: heroNavSecondaryPulse2 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+@keyframes heroNavSecondaryPulse1 {
+  0% { transform: scale(0.6); opacity: 0; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes heroNavSecondaryPulse2 {
+  0% { transform: scale(0.4); opacity: 0; }
+  50% { transform: scale(1.7); opacity: 0.4; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Enhanced Hover Effects */
+.hero-nav-hover-ultra {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 0 0 36px 36px;
+}
+
+.hero-nav-hover-trail {
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  transition: left 0.6s ease;
+}
+
+.hero-nav-hover-spark {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.hero-nav-hover-secondary .hero-nav-hover-trail {
+  background: linear-gradient(90deg, transparent, var(--btn-glow), transparent);
+}
+
+.hero-nav-hover-secondary .hero-nav-hover-spark {
+  background: var(--btn-color);
+  box-shadow: 0 0 20px var(--btn-glow);
+}
+
+/* Primary Button Hover States */
+.hero-nav-btn-primary:hover .hero-nav-gradient-overlay {
+  opacity: 0.8;
+}
+
+.hero-nav-btn-primary:hover .hero-nav-shimmer-ultra {
+  left: 100%;
+}
+
+.hero-nav-btn-primary:hover .hero-nav-spark-trail {
+  opacity: 1;
+}
+
+.hero-nav-btn-primary:hover .hero-nav-icon-glyph {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 20px var(--btn-glow));
+}
+
+.hero-nav-btn-primary:hover .hero-nav-icon-ring {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+.hero-nav-btn-primary:hover .hero-nav-label {
+  color: #000000;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+  transform: translateX(6px);
+}
+
+.hero-nav-btn-primary:hover .hero-nav-desc {
+  color: rgba(0, 0, 0, 0.9);
+  transform: translateX(6px);
+}
+
+.hero-nav-btn-primary:hover .hero-nav-arrow-ultra {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-nav-btn-primary:hover .hero-nav-hover-trail {
+  left: 100%;
+}
+
+.hero-nav-btn-primary:hover .hero-nav-hover-spark {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Secondary Button Hover States */
+.hero-nav-btn-secondary:hover .hero-nav-glass-bg {
+  background: rgba(8, 5, 20, 0.8);
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-glass-border {
+  border-color: var(--btn-color);
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-glass-glow {
+  opacity: 0.8;
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-secondary-shimmer {
+  left: 100%;
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-icon-glyph {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 20px var(--btn-glow));
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-icon-ring {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-label {
+  color: var(--btn-color);
+  text-shadow: 0 0 25px var(--btn-glow);
+  transform: translateX(6px);
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-desc {
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateX(6px);
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-arrow-ultra {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-hover-trail {
+  left: 100%;
+}
+
+.hero-nav-btn-secondary:hover .hero-nav-hover-spark {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Remove the entire HERO CTA BUTTONS section since it's now in hero-buttons.css */
+/* ========================================
+   HERO CTA BUTTONS - BASED ON NAVBAR CTA
+   ======================================== */
+/* This entire section has been moved to hero-buttons.css */

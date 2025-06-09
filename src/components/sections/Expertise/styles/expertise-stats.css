@@ -1,0 +1,146 @@
+/* src/components/sections/Expertise/styles/expertise-stats.css */
+
+.expertise-stats-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.expertise-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Connecting lines overlay */
+.expertise-stats-connections {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Enhanced grid hover effect */
+@media (hover: hover) {
+  .expertise-stats-grid:hover .expertise-card {
+    opacity: 0.7;
+    transform: scale(0.98);
+    transition: all 0.3s ease;
+  }
+
+  .expertise-stats-grid .expertise-card:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    z-index: 10;
+  }
+}
+
+/* Responsive layouts */
+@media (max-width: 1200px) {
+  .expertise-stats-container {
+    max-width: 1000px;
+  }
+
+  .expertise-stats-grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .expertise-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .expertise-stats-connections {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .expertise-stats-grid {
+    gap: 1.5rem;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .expertise-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: 320px;
+  }
+}
+
+/* Animation classes */
+.expertise-stats-container.animating .expertise-card {
+  animation: statPulse 4s ease-in-out infinite;
+}
+
+.expertise-stats-container.animating .expertise-card:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.expertise-stats-container.animating .expertise-card:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.expertise-stats-container.animating .expertise-card:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+@keyframes statPulse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Performance mode */
+.performance-mode .expertise-stats-connections {
+  display: none;
+}
+
+.performance-mode .expertise-stats-container.animating .expertise-card {
+  animation: none;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .expertise-stats-grid {
+    gap: 3rem;
+  }
+
+  .expertise-stats-connections {
+    opacity: 1;
+  }
+
+  .expertise-stats-connections path {
+    stroke-width: 3;
+  }
+}
+
+/* Print styles */
+@media print {
+  .expertise-stats-connections {
+    display: none;
+  }
+
+  .expertise-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}

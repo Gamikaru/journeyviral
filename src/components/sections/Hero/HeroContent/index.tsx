@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import HeroLogo from "./HeroLogo";
 import HeroTitle from "./HeroTitle";
 import HeroButtons from "./HeroButtons";
 
@@ -19,6 +20,16 @@ export default function HeroContent({
 }: HeroContentProps) {
   return (
     <div className="max-w-6xl mx-auto" style={{ padding: 0, margin: '0 auto' }}>
+      {/* Logo Section */}
+      <motion.div
+        className="flex items-center justify-center gap-6"
+        style={{ marginBottom: '1.5rem', padding: 0 }}
+        variants={itemVariants}
+      >
+        <HeroLogo />
+      </motion.div>
+
+      {/* Title Section with 3D effect */}
       <motion.div
         className="text-center space-y-4"
         style={{

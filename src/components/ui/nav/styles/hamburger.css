@@ -1,0 +1,159 @@
+/* Hamburger Button - Enhanced Design */
+
+.hamburger-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 8px;
+  margin-right: 0.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Performance optimization */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hamburger-button:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 6px 25px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 0, 255, 0.3);
+  border-color: rgba(255, 0, 255, 0.6);
+}
+
+.hamburger-button:active {
+  transform: scale(0.95);
+}
+
+.hamburger-wrapper {
+  position: relative;
+  width: 32px;
+  height: calc(3px * 3 + 8px * 2);
+}
+
+/* Enhanced bar styling */
+.hamburger-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: calc(3px / 2);
+  background: #ffffff;
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.9),
+    0 0 40px rgba(255, 255, 255, 0.6),
+    0 0 60px rgba(255, 255, 255, 0.3);
+  opacity: 1;
+  transition: all 0.35s cubic-bezier(0.5, -0.35, 0.35, 1.5);
+}
+
+.hamburger-bar--top {
+  bottom: calc(50% + 8px + 3px / 2);
+  transition-property: bottom, transform;
+  transition-delay: calc(0s + 0.35s * 0.6);
+}
+
+.hamburger-bar--middle {
+  top: calc(50% - 3px / 2);
+  transition-property: opacity, transform;
+  transition-delay: calc(0s + 0.35s * 0.3);
+}
+
+.hamburger-bar--bottom {
+  top: calc(50% + 8px + 3px / 2);
+  transition-property: top, transform;
+  transition-delay: 0s;
+}
+
+/* Active state */
+.hamburger-button.is-open .hamburger-bar--top {
+  transform: rotate(-135deg);
+  transition-delay: 0s;
+  bottom: calc(50% - 3px / 2);
+}
+
+.hamburger-button.is-open .hamburger-bar--middle {
+  opacity: 0;
+  transform: rotate(-135deg);
+  transition-delay: calc(0s + 0.35s * 0.3);
+}
+
+.hamburger-button.is-open .hamburger-bar--bottom {
+  top: calc(50% - 3px / 2);
+  transform: rotate(-225deg);
+  transition-delay: calc(0s + 0.35s * 0.6);
+}
+
+/* Focus state for accessibility */
+.hamburger-button:focus-visible {
+  outline: 2px solid #00ffff;
+  outline-offset: 4px;
+}
+
+.hamburger-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .hamburger-button {
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+  }
+
+  .hamburger-wrapper {
+    width: 28px;
+  }
+
+  /* Reduce glow on mobile */
+  .hamburger-bar {
+    box-shadow:
+      0 0 15px rgba(255, 255, 255, 0.8),
+      0 0 30px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Performance mode */
+.performance-mode .hamburger-button {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(0, 0, 0, 0.8);
+  transition: none;
+}
+
+.performance-mode .hamburger-bar {
+  box-shadow: none;
+  transition: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hamburger-button,
+  .hamburger-bar {
+    transition: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .hamburger-button {
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid #ffffff;
+  }
+
+  .hamburger-bar {
+    box-shadow: none;
+  }
+}

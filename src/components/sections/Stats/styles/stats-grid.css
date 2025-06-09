@@ -1,0 +1,44 @@
+.stats-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  justify-items: center;
+  align-items: stretch;
+}
+
+/* Desktop optimizations - 2x2 grid */
+@media (min-width: 1280px) {
+  .stats-cards-grid {
+    gap: 2rem;
+    max-width: 650px;
+  }
+}
+
+/* Large tablet - maintain 2x2 grid */
+@media (max-width: 1024px) {
+  .stats-cards-grid {
+    max-width: 520px;
+    margin: 0 auto;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-cards-grid {
+    gap: 1.25rem;
+    max-width: 460px;
+  }
+}
+
+/* Mobile - Single column */
+@media (max-width: 480px) {
+  .stats-cards-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 220px;
+  }
+}

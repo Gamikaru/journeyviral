@@ -13,15 +13,15 @@ export default function HeroTitle() {
 
   const titleSubtitlePairs = [
     {
-      title: "YOUR CONTENT SUCKS.",
+      title: "#YOUR CONTENT SUCKS.",
       subtitle: "WE CAN FIX THAT."
     },
     {
-      title: "GO VIRAL",
+      title: "#GO VIRAL",
       subtitle: "OR GO HOME."
     },
     {
-      title: "BREAK ALGORITHMS.",
+      title: "#BREAK ALGORITHMS.",
       subtitle: "NOT THE BANK."
     }
   ];
@@ -66,6 +66,10 @@ export default function HeroTitle() {
     <>
       <motion.h1
         className="hero-title-primary text-white"
+        style={{
+          color: '#ffffff',
+          textShadow: '4px 4px 0px #000000, 8px 8px 0px rgba(0, 0, 0, 0.5), 0 0 120px rgba(255, 255, 255, 0.4)',
+        }}
         initial={isFirstRender ? { opacity: 0, y: 50, scale: 0.9 } : false}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={isFirstRender ? { duration: 1, delay: 0.3, ease: [0.4, 0, 0.2, 1] } : { duration: 0 }}

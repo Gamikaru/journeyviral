@@ -2,18 +2,16 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import TransformBackground from "./TransformBackground";
-import TransformHeadline from "./TransformHeadline";
-import TransformCTA from "./TransformCTA";
-import TransformSupportingText from "./TransformSupportingText";
-import "./styles/transform-section.css";
+import StatsBackground from "./StatsBackground";
+import StatsHeadline from "./StatsHeadline";
+import StatsGrid from "./StatsGrid";
+import "./styles/stats-section.css";
 
 // Performance detection hook
 const usePerformanceMode = () => {
   const [isLowPerf, setIsLowPerf] = useState(false);
 
   useEffect(() => {
-    // Check for low-end devices or reduced motion preference
     const checkPerformance = () => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const memory = (navigator as any).deviceMemory;
@@ -32,19 +30,17 @@ const usePerformanceMode = () => {
   return isLowPerf;
 };
 
-export default function TransformSection() {
+export default function StatsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const isLowPerf = usePerformanceMode();
 
-  // Use more efficient intersection observer settings
   const isInView = useInView(sectionRef, {
     once: true,
     margin: "-50px",
-    amount: 0.2 // Trigger when 20% visible
+    amount: 0.2
   });
 
-  // Delay heavy animations for better initial load
   useEffect(() => {
     if (isInView && !isLowPerf) {
       const timer = setTimeout(() => {
@@ -53,7 +49,6 @@ export default function TransformSection() {
 
       return () => clearTimeout(timer);
     } else if (isInView && isLowPerf) {
-      // Immediate for low performance mode
       setShouldAnimate(true);
     }
   }, [isInView, isLowPerf]);
@@ -61,24 +56,24 @@ export default function TransformSection() {
   return (
     <section
       ref={sectionRef}
-      id="transform"
-      className={`transform-section ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
-      aria-label="Transform your corporate content into viral success"
+      id="stats"
+      className={`stats-section ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
+      aria-label="Proven results and viral content statistics"
     >
-      {/* Background - conditional based on performance */}
-      <div className="transform-bg-container">
+      {/* Background */}
+      <div className="stats-bg-container">
         {!isLowPerf ? (
-          <TransformBackground isVisible={shouldAnimate} />
+          <StatsBackground isVisible={shouldAnimate} />
         ) : (
-          <div className="transform-bg-simple" />
+          <div className="stats-bg-simple" />
         )}
       </div>
 
       {/* Main Content Container */}
-      <div className="transform-content">
-        <div className="transform-inner">
+      <div className="stats-content">
+        <div className="stats-inner">
           <motion.div
-            className="transform-grid"
+            className="stats-grid"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={{
@@ -90,9 +85,9 @@ export default function TransformSection() {
               }
             }}
           >
-            {/* Left Column - Main Content */}
+            {/* Left Column - Stats Cards */}
             <motion.div
-              className="transform-left"
+              className="stats-left"
               variants={{
                 hidden: { opacity: 0, x: -40, y: 20 },
                 visible: {
@@ -106,13 +101,12 @@ export default function TransformSection() {
                 }
               }}
             >
-              <TransformHeadline isInView={isInView} isLowPerf={isLowPerf} />
-              <TransformCTA isInView={isInView} />
+              <StatsGrid isInView={isInView} isLowPerf={isLowPerf} />
             </motion.div>
 
-            {/* Right Column - Supporting Text */}
+            {/* Right Column - Headline */}
             <motion.div
-              className="transform-right"
+              className="stats-right"
               variants={{
                 hidden: { opacity: 0, x: 40, y: 20 },
                 visible: {
@@ -127,7 +121,7 @@ export default function TransformSection() {
                 }
               }}
             >
-              <TransformSupportingText isInView={isInView} isLowPerf={isLowPerf} />
+              <StatsHeadline isInView={isInView} isLowPerf={isLowPerf} />
             </motion.div>
           </motion.div>
         </div>

@@ -1,12 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { ArrowRight, Play } from "lucide-react";
+import "../styles/hero-buttons.css";
 
 interface HeroButtonsProps {
   itemVariants: any;
 }
 
 export default function HeroButtons({ itemVariants }: HeroButtonsProps) {
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+
   return (
     <motion.div
       variants={itemVariants}
@@ -16,68 +21,84 @@ export default function HeroButtons({ itemVariants }: HeroButtonsProps) {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '1rem',
+        gap: '1.5rem',
         flexWrap: 'wrap',
       }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 1.0 }}
     >
+      {/* Primary Hero CTA Button */}
       <motion.button
-        className="hero-primary-btn relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #00ffff 0%, #00d4ff 100%)',
-          color: '#000000',
-          fontFamily: 'var(--font-anonymous)',
-          fontWeight: 900,
-          fontSize: '1rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          borderRadius: '50px',
-          border: 'none',
-          padding: '16px 32px',
-          minWidth: '180px',
-          boxShadow: '0 8px 32px rgba(0, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          cursor: 'pointer',
-        }}
+        className="hero-cta-primary"
+        onMouseEnter={() => setHoveredButton('primary')}
+        onMouseLeave={() => setHoveredButton(null)}
         whileHover={{
           scale: 1.05,
-          y: -2,
-          boxShadow: '0 12px 40px rgba(0, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+          y: -4
         }}
         whileTap={{ scale: 0.95 }}
       >
-        LET'S GO VIRAL
+        {/* Ultra CTA Background Effects */}
+        <div className="hero-cta-bg-ultra">
+          <div className="hero-cta-gradient-primary" />
+          <div className="hero-cta-gradient-secondary" />
+          <div className="hero-cta-shimmer-ultra" />
+          <div className="hero-cta-pulse-ring-1" />
+          <div className="hero-cta-pulse-ring-2" />
+          <div className="hero-cta-spark-trail" />
+        </div>
+
+        {/* Enhanced CTA Content */}
+        <div className="hero-cta-content-ultra">
+          <span className="hero-cta-text-ultra">LET'S GO VIRAL</span>
+          <div className="hero-cta-icon-ultra">
+            <motion.div
+              animate={hoveredButton === 'primary' ? { x: [0, 4, 0] } : {}}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowRight size={24} strokeWidth={2.5} />
+            </motion.div>
+          </div>
+        </div>
       </motion.button>
 
+      {/* Secondary Hero CTA Button */}
       <motion.button
-        className="hero-secondary-btn relative overflow-hidden backdrop-blur-sm"
-        style={{
-          background: 'rgba(26, 15, 46, 0.6)',
-          color: '#ffffff',
-          fontFamily: 'var(--font-anonymous)',
-          fontWeight: 900,
-          fontSize: '1rem',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          borderRadius: '50px',
-          border: '2px solid rgba(255, 255, 255, 0.2)',
-          padding: '16px 32px',
-          minWidth: '180px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          cursor: 'pointer',
-        }}
+        className="hero-cta-secondary"
+        onMouseEnter={() => setHoveredButton('secondary')}
+        onMouseLeave={() => setHoveredButton(null)}
         whileHover={{
           scale: 1.05,
-          y: -2,
-          borderColor: 'rgba(255, 255, 255, 0.4)',
-          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+          y: -4
         }}
         whileTap={{ scale: 0.95 }}
       >
-        SEE HOW IT WORKS
+        {/* Ultra CTA Background Effects */}
+        <div className="hero-cta-bg-ultra">
+          <div className="hero-cta-gradient-secondary-alt" />
+          <div className="hero-cta-gradient-overlay" />
+          <div className="hero-cta-shimmer-secondary" />
+          <div className="hero-cta-pulse-ring-secondary-1" />
+          <div className="hero-cta-pulse-ring-secondary-2" />
+          <div className="hero-cta-spark-trail-secondary" />
+        </div>
+
+        {/* Enhanced CTA Content */}
+        <div className="hero-cta-content-ultra">
+          <span className="hero-cta-text-secondary">SEE HOW IT WORKS</span>
+          <div className="hero-cta-icon-ultra">
+            <motion.div
+              animate={hoveredButton === 'secondary' ? {
+                scale: [1, 1.15, 1],
+                rotate: [0, 0, 0]
+              } : {}}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Play size={24} strokeWidth={2.5} fill="currentColor" />
+            </motion.div>
+          </div>
+        </div>
       </motion.button>
     </motion.div>
   );

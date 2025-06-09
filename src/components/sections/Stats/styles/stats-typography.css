@@ -1,0 +1,307 @@
+/* Stats Typography - Complete Enhanced Version */
+
+.stats-headline {
+  font-family: var(--font-display), 'Bebas Neue', Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(4rem, 8.5vw, 7rem);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.headline-line {
+  display: block;
+  margin-bottom: -0.08em;
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.headline-text {
+  display: inline-block;
+  position: relative;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+/* Spacing between words */
+.headline-spacing {
+  display: inline-block;
+  width: 0.4em;
+}
+
+/* White text with subtle glow */
+.headline-white {
+  color: #ffffff;
+  text-shadow:
+    0 0 15px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Cyan text with enhanced glow */
+.headline-cyan {
+  color: #00ffff;
+  position: relative;
+  z-index: 1;
+}
+
+.headline-cyan.headline-glow {
+  text-shadow:
+    0 0 25px rgba(0, 255, 255, 0.9),
+    0 0 50px rgba(0, 255, 255, 0.6),
+    0 0 75px rgba(0, 255, 255, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+  animation: cyanPulse 3s ease-in-out infinite;
+}
+
+@keyframes cyanPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 25px rgba(0, 255, 255, 0.9),
+      0 0 50px rgba(0, 255, 255, 0.6),
+      0 0 75px rgba(0, 255, 255, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    text-shadow:
+      0 0 35px rgba(0, 255, 255, 1),
+      0 0 70px rgba(0, 255, 255, 0.8),
+      0 0 100px rgba(0, 255, 255, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Gold text base */
+.headline-gold {
+  color: #ffd700;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+}
+
+/* Gold with shimmer - animated gradient approach */
+.headline-gold.with-shimmer {
+  background: linear-gradient(
+    90deg,
+    #ffd700 0%,
+    #ffed4b 10%,
+    #ffd700 20%,
+    #ffed4b 30%,
+    #ffd700 40%,
+    #ffffff 50%,
+    #ffd700 60%,
+    #ffed4b 70%,
+    #ffd700 80%,
+    #ffed4b 90%,
+    #ffd700 100%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldTextShimmer 3s linear infinite;
+  filter:
+    drop-shadow(0 0 20px rgba(255, 215, 0, 0.7))
+    drop-shadow(0 0 40px rgba(255, 215, 0, 0.4))
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes goldTextShimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1440px) {
+  .stats-headline {
+    font-size: clamp(4.5rem, 9vw, 7.5rem);
+  }
+}
+
+@media (max-width: 1280px) {
+  .stats-headline {
+    font-size: clamp(4rem, 8vw, 6.5rem);
+  }
+
+  .headline-spacing {
+    width: 0.35em;
+  }
+}
+
+@media (max-width: 1024px) {
+  .stats-headline {
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    line-height: 0.85;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-headline {
+    font-size: clamp(3rem, 11vw, 5rem);
+  }
+
+  .headline-line {
+    margin-bottom: -0.05em;
+  }
+
+  .headline-spacing {
+    width: 0.3em;
+  }
+
+  /* Simpler shimmer on tablet */
+  .headline-gold.with-shimmer {
+    background: linear-gradient(
+      90deg,
+      #ffd700 0%,
+      #ffed4b 45%,
+      #ffffff 50%,
+      #ffed4b 55%,
+      #ffd700 100%
+    );
+    background-size: 200% 100%;
+    animation-duration: 4s;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-headline {
+    font-size: clamp(2.5rem, 13vw, 4rem);
+    line-height: 0.88;
+  }
+
+  .headline-line {
+    margin-bottom: -0.03em;
+  }
+
+  .headline-spacing {
+    width: 0.25em;
+  }
+
+  /* Reduce effects on mobile */
+  .headline-cyan.headline-glow {
+    text-shadow:
+      0 0 15px rgba(0, 255, 255, 0.8),
+      0 0 30px rgba(0, 255, 255, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Static gold on small mobile */
+  .headline-gold.with-shimmer {
+    background: linear-gradient(
+      135deg,
+      #ffed4b 0%,
+      #ffd700 50%,
+      #ffed4b 100%
+    );
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
+/* Fallback for browsers without background-clip support */
+@supports not (-webkit-background-clip: text) {
+  .headline-gold.with-shimmer {
+    background: none;
+    color: #ffd700;
+    text-shadow:
+      0 0 20px rgba(255, 215, 0, 0.7),
+      0 0 40px rgba(255, 215, 0, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+    animation: goldGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes goldGlow {
+    0%, 100% {
+      text-shadow:
+        0 0 20px rgba(255, 215, 0, 0.7),
+        0 0 40px rgba(255, 215, 0, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      text-shadow:
+        0 0 30px rgba(255, 255, 255, 0.9),
+        0 0 60px rgba(255, 215, 0, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+/* Performance mode */
+.performance-mode .headline-cyan,
+.performance-mode .headline-gold {
+  animation: none !important;
+}
+
+.performance-mode .headline-gold.with-shimmer {
+  background: #ffd700;
+  -webkit-text-fill-color: #ffd700;
+  filter: none;
+  text-shadow:
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .headline-cyan,
+  .headline-gold {
+    animation: none !important;
+  }
+
+  .headline-gold.with-shimmer {
+    background: linear-gradient(
+      135deg,
+      #ffed4b 0%,
+      #ffd700 50%,
+      #ffed4b 100%
+    );
+    background-size: 100% 100%;
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .headline-cyan {
+    color: #00ffff;
+    text-shadow: none;
+  }
+
+  .headline-gold {
+    color: #ffff00;
+    background: none;
+    -webkit-text-fill-color: #ffff00;
+    filter: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  }
+
+  .headline-white {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  }
+}
+
+/* Print styles */
+@media print {
+  .stats-headline {
+    color: black;
+  }
+
+  .headline-cyan,
+  .headline-gold,
+  .headline-white {
+    color: black;
+    text-shadow: none;
+    background: none;
+    -webkit-text-fill-color: black;
+    filter: none;
+    animation: none;
+  }
+}

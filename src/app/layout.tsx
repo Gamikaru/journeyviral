@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Inter, JetBrains_Mono } from "next/font/google";
+import { Bebas_Neue, Inter, JetBrains_Mono, Monoton } from "next/font/google";
 import Script from "next/script";
 import { Navbar } from "@/components/ui/nav";
 import "./globals.css";
@@ -28,6 +28,15 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
   preload: true,
   fallback: ["Courier New", "monospace"],
+});
+
+const monoton = Monoton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-monoton",
+  display: "swap",
+  preload: true,
+  fallback: ["Impact", "sans-serif"],
 });
 
 // Enhanced metadata
@@ -170,7 +179,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${bebasNeue.variable} ${inter.variable} ${jetbrainsMono.variable} ${monoton.variable}`}
       suppressHydrationWarning
     >
       <head>
