@@ -1,11 +1,14 @@
 .transform-section {
   position: relative;
-  width: 100%;
+  width: 100vw; /* Ensure full viewport width */
   min-height: 100vh;
   display: flex;
   align-items: center;
   padding: 8rem 0;
   overflow: hidden;
+  /* Add margin reset to prevent any inherited spacing */
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .transform-content {
@@ -15,17 +18,37 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 4rem;
+  box-sizing: border-box; /* Ensure padding doesn't add to width */
+}
+
+.transform-inner {
+  width: 100%;
+  height: 100%;
 }
 
 .transform-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 8rem;
+  gap: 6rem;
   align-items: center;
+  min-height: 60vh;
+  width: 100%; /* Ensure full width */
 }
 
 .transform-left {
   max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%; /* Ensure full width within grid */
+}
+
+.transform-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  width: 100%; /* Ensure full width within grid */
 }
 
 /* Responsive adjustments */
@@ -50,13 +73,19 @@
 
   .transform-grid {
     grid-template-columns: 1fr;
-    gap: 5rem;
+    gap: 4rem;
+    min-height: auto;
   }
 
   .transform-left {
     text-align: center;
     max-width: 100%;
     margin: 0 auto;
+    gap: 2.5rem;
+  }
+
+  .transform-right {
+    min-height: 300px;
   }
 }
 

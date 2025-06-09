@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { memo } from "react";
+import ChatContainer from "./components/ChatContainer";
+import "./styles/transform-supporting-text.css";
 
 interface TransformSupportingTextProps {
   isInView: boolean;
@@ -15,99 +17,44 @@ const TransformSupportingText = memo(function TransformSupportingText({
   const prefersReducedMotion = useReducedMotion();
   const shouldAnimate = !prefersReducedMotion && !isLowPerf;
 
-  const phrases = [
+  const messages = [
     {
-      text: "You paid for \"growth hacks.\"",
-      type: "small",
-      emphasis: ["\"growth hacks.\""]
+      id: 1,
+      text: "You paid for growth hacks.\nYou jumped on trends.\nYou followed the playbook.",
+      type: "setup" as const,
+      delay: 0
     },
     {
-      text: "You jumped on trends.",
-      type: "small",
-      emphasis: ["trends"]
+      id: 2,
+      text: "Still stuck at 83 views. And... your mom's in the comments?",
+      type: "problem" as const,
+      delay: 1.5
     },
     {
-      text: "You followed the playbook.",
-      type: "small",
-      emphasis: ["playbook"]
+      id: 3,
+      text: "That's why you're here now.",
+      type: "bridge" as const,
+      delay: 1.5
     },
     {
-      text: "But you're still stuck at 83 views. And your mother's in the comments?",
-      type: "punchline",
-      emphasis: ["83 views", "mum in the comments"]
-    },
-    {
-      text: "And now... That's why you're here.",
-      type: "bridge",
-      emphasis: []
-    },
-    {
-      text: "We don't chase virality.",
-      type: "impact",
-      emphasis: ["don't chase virality"]
-    },
-    {
-      text: "We manufacture it — with receipts to prove it.",
-      type: "closer",
-      emphasis: ["manufacture it", "receipts to prove it"]
+      id: 4,
+      text: "We don't chase virality.\nWe manufacture it.",
+      type: "final" as const,
+      delay: 1.5
     }
   ];
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: shouldAnimate ? 0.25 : 0.1,
-        delayChildren: shouldAnimate ? 0.4 : 0.2
-      }
-    }
-  };
-
-  const phraseVariants = {
-    hidden: {
-      opacity: 0,
-      y: shouldAnimate ? 20 : 10,
-      filter: shouldAnimate ? "blur(2px)" : "blur(0px)"
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: shouldAnimate ? 0.6 : 0.3,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
-
-  const renderPhrase = (phrase: typeof phrases[0], index: number) => {
-    let styledText = phrase.text;
-
-    // Apply emphasis styling
-    phrase.emphasis.forEach(emphasizedWord => {
-      const regex = new RegExp(`(${emphasizedWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-      styledText = styledText.replace(regex, `<strong class="phrase-emphasis">$1</strong>`);
-    });
-
-    return (
-      <motion.div
-        key={index}
-        className={`transform-phrase transform-phrase-${phrase.type}`}
-        variants={phraseVariants}
-        dangerouslySetInnerHTML={{ __html: styledText }}
-      />
-    );
-  };
-
   return (
-    <motion.div
+    <div
       className="transform-supporting-text"
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={containerVariants}
+      aria-label="Chat conversation about content transformation"
     >
-      {phrases.map((phrase, index) => renderPhrase(phrase, index))}
-    </motion.div>
+      <ChatContainer
+        isInView={isInView}
+        shouldAnimate={shouldAnimate}
+        messages={messages}
+      />
+    </div>
   );
 });
 

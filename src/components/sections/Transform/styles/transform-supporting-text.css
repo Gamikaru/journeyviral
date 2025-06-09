@@ -1,0 +1,43 @@
+/* Transform Supporting Text - Main Component */
+
+.transform-supporting-text {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  box-sizing: border-box; /* Ensure padding doesn't affect width calculations */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .transform-supporting-text {
+    max-width: 420px;
+    padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .transform-supporting-text {
+    max-width: 100%;
+    padding: 1rem 0;
+  }
+}
+
+/* Performance and accessibility modes */
+.performance-mode .transform-supporting-text {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transform-supporting-text * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .transform-supporting-text {
+    filter: contrast(1.5);
+  }
+}

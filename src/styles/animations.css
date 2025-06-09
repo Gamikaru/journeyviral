@@ -599,3 +599,46 @@
     animation: none;
   }
 }
+
+/* Enhanced border animations */
+.border-flow {
+  background-size: 300% 300%;
+  animation: borderFlow 4s ease-in-out infinite;
+}
+
+@keyframes borderFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Organic text glow - character based */
+.text-glow-organic {
+  text-shadow:
+    0 0 20px currentColor,
+    0 0 40px currentColor,
+    0 0 60px currentColor,
+    0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Enhanced backdrop blur */
+.backdrop-enhanced {
+  backdrop-filter: blur(20px) saturate(1.2) brightness(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) brightness(1.1);
+}
+
+/* Smooth border radius transitions */
+.border-radius-smooth {
+  border-radius: 24px;
+  transition: border-radius 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Container scaling for text clarity */
+.scale-crisp {
+  transform: translateZ(0) scale(1);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}

@@ -1,0 +1,63 @@
+/* Chat Container Styles - Layout Stable */
+
+.chat-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-end;
+  width: 100%;
+  min-height: 500px; /* Changed from fixed height to min-height */
+  /* overflow: hidden; - Removed this as it may cause layout issues */
+  padding: 1rem 0;
+}
+
+/* Chat messages area - stable positioning */
+.chat-messages-area {
+  position: relative; /* Changed from absolute to relative */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-end;
+  /* height: calc(100% - 2rem); - Removed fixed height */
+  min-height: 300px; /* Added min-height instead */
+}
+
+/* Final message container - centered */
+.final-message-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-container {
+    min-height: 400px; /* Changed from fixed height */
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .chat-messages-area {
+    align-items: stretch;
+    gap: 1rem;
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-container {
+    min-height: 350px; /* Changed from fixed height */
+    gap: 0.875rem;
+  }
+
+  .chat-messages-area {
+    gap: 0.875rem;
+    min-height: 200px;
+  }
+}

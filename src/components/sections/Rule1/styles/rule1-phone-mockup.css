@@ -1,0 +1,217 @@
+.rule1-phone-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 700px;
+}
+
+/* Professor image behind phone */
+.rule1-professor-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+  filter: brightness(0.8) contrast(1.1);
+}
+
+.rule1-professor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Phone device */
+.rule1-phone-device {
+  position: relative;
+  z-index: 2;
+  width: 320px;
+  height: 680px;
+  margin: 0 auto;
+}
+
+/* Phone frame */
+.rule1-phone-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #1a1a1a;
+  border-radius: 40px;
+  border: 4px solid #333;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    0 0 100px rgba(0, 212, 255, 0.1);
+}
+
+/* Status bar */
+.rule1-phone-statusbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 10;
+}
+
+.rule1-phone-time {
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+}
+
+.rule1-phone-indicators {
+  display: flex;
+  gap: 6px;
+}
+
+.rule1-signal,
+.rule1-wifi,
+.rule1-battery {
+  width: 20px;
+  height: 14px;
+  background: white;
+  border-radius: 2px;
+}
+
+/* Phone content */
+.rule1-phone-content {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 12px;
+  background: #0a0a0a;
+}
+
+/* Feed items */
+.rule1-feed-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.rule1-feed-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.rule1-feed-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.rule1-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff0080, #00d4ff);
+}
+
+.rule1-feed-meta {
+  flex: 1;
+}
+
+.rule1-username {
+  width: 100px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.rule1-timestamp {
+  width: 60px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.rule1-feed-media {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+}
+
+.rule1-media-1 {
+  background: linear-gradient(135deg, #ff0080 0%, #7f00ff 100%);
+}
+
+.rule1-media-2 {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+}
+
+.rule1-media-3 {
+  background: linear-gradient(135deg, #ffeb3b 0%, #ff6b6b 100%);
+}
+
+/* Phone glow effect */
+.rule1-phone-glow {
+  position: absolute;
+  inset: -60px;
+  background: radial-gradient(circle at center, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .rule1-phone-container {
+    max-width: 400px;
+    height: 500px;
+  }
+
+  .rule1-phone-device {
+    width: 260px;
+    height: 520px;
+  }
+
+  .rule1-feed-media {
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rule1-phone-container {
+    max-width: 320px;
+    height: 450px;
+  }
+
+  .rule1-phone-device {
+    width: 240px;
+    height: 480px;
+  }
+
+  .rule1-feed-media {
+    height: 100px;
+  }
+}

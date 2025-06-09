@@ -3,6 +3,7 @@ import TransformSection from "@/components/sections/Transform";
 import StatsSection from "@/components/sections/Stats";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import ExpertiseSection from "@/components/sections/Expertise";
+import Rule1Section from "@/components/sections/Rule1";
 
 
 export default function Home() {
@@ -22,6 +23,9 @@ export default function Home() {
         <StatsSection />
 
         <ExpertiseSection />
+
+        {/* Rule 1 Section */}
+        <Rule1Section />
 
       </main>
     </>
