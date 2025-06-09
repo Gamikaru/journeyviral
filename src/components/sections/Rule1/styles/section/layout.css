@@ -1,0 +1,183 @@
+/* Custom properties for dynamic effects */
+.rule1-section {
+  --mouse-x: 0.5;
+  --mouse-y: 0.5;
+  --scroll-progress: 0;
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000000;
+  contain: layout style paint;
+}
+
+/* Content wrapper with glass morphism */
+.rule1-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+
+/* Main content container */
+.rule1-content {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  padding: 0 5vw;
+  gap: 4vw;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Visibility state */
+.rule1-visible .rule1-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Text content area */
+.rule1-text-content {
+  position: relative;
+  max-width: 800px;
+  padding-left: 2vw;
+  transform: translateX(-60px);
+  opacity: 0;
+  transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.rule1-visible .rule1-text-content {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.rule1-text-inner {
+  position: relative;
+  z-index: 2;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transform: perspective(1000px) rotateY(calc((var(--mouse-x) - 0.5) * -5deg))
+                                   rotateX(calc((var(--mouse-y) - 0.5) * 5deg));
+  transition: transform 0.3s ease;
+}
+
+/* Visual content area */
+.rule1-visual-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-right: 2vw;
+  transform: translateX(60px) scale(0.9);
+  opacity: 0;
+  transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+}
+
+.rule1-visible .rule1-visual-content {
+  transform: translateX(0) scale(1);
+  opacity: 1;
+}
+
+.rule1-visual-inner {
+  position: relative;
+  transform: translateY(calc(var(--scroll-progress) * -30px));
+  transition: transform 0.1s linear;
+}
+
+/* Dynamic gradient overlay */
+.rule1-dynamic-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at calc(var(--mouse-x) * 100%) calc(var(--mouse-y) * 100%),
+    rgba(0, 212, 255, 0.1) 0%,
+    transparent 50%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Progress indicator */
+.rule1-progress-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 10;
+}
+
+.rule1-progress-bar {
+  height: 100%;
+  width: calc(var(--scroll-progress) * 100%);
+  background: linear-gradient(90deg, #ff0080, #00d4ff, #9333ea);
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* Section noise overlay */
+.rule1-section-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.rule1-section-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* Focus styles */
+.rule1-section:focus-within {
+  outline: 2px solid #00d4ff;
+  outline-offset: -2px;
+}
+
+/* Print styles */
+@media print {
+  .rule1-section {
+    background: white;
+    color: black;
+  }
+
+  .rule1-text-inner {
+    background: none;
+    border: 1px solid black;
+    backdrop-filter: none;
+  }
+
+  .rule1-visual-content,
+  .rule1-progress-indicator,
+  .rule1-dynamic-gradient,
+  .rule1-section-noise {
+    display: none;
+  }
+}

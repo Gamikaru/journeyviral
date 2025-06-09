@@ -1,0 +1,274 @@
+.rule1-phone-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 700px;
+  perspective: 1000px;
+}
+
+/* Professor image with glass morphism */
+.rule1-professor-image {
+  position: absolute;
+  inset: -50px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rule1-professor-glass {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.rule1-professor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.4;
+  filter: brightness(0.8) contrast(1.2) saturate(1.2);
+  animation: professor-float 20s ease-in-out infinite;
+}
+
+/* Phone wrapper for 3D effects */
+.rule1-phone-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Phone device */
+.rule1-phone-device {
+  position: relative;
+  width: 320px;
+  height: 680px;
+  transform-style: preserve-3d;
+  animation: phone-float 10s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.rule1-phone-device:hover {
+  transform: rotateY(-5deg) rotateX(2deg);
+}
+
+/* Metallic bezel */
+.rule1-phone-bezel {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 42px;
+  z-index: 2;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 10px 40px rgba(0, 0, 0, 0.8),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.rule1-phone-bezel-shine {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 20%,
+    transparent 80%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border-radius: 42px;
+}
+
+/* Phone frame */
+.rule1-phone-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.5),
+    inset 0 0 40px rgba(0, 212, 255, 0.1);
+}
+
+/* Screen glass effect */
+.rule1-screen-glass {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Notch */
+.rule1-phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 30px;
+  background: #000;
+  border-radius: 0 0 20px 20px;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.rule1-camera {
+  width: 8px;
+  height: 8px;
+  background: #222;
+  border-radius: 50%;
+  border: 1px solid #333;
+}
+
+.rule1-speaker {
+  width: 40px;
+  height: 4px;
+  background: #222;
+  border-radius: 2px;
+}
+
+/* Status bar */
+.rule1-phone-statusbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.rule1-phone-time {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.rule1-phone-indicators {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.rule1-signal {
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+.rule1-signal span {
+  width: 3px;
+  background: white;
+  border-radius: 1px;
+}
+
+.rule1-signal span:nth-child(1) { height: 4px; }
+.rule1-signal span:nth-child(2) { height: 6px; }
+.rule1-signal span:nth-child(3) { height: 8px; }
+
+.rule1-wifi {
+  width: 15px;
+  height: 15px;
+  background: white;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.65-4.35-1.65-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+.rule1-battery {
+  width: 24px;
+  height: 12px;
+  border: 1px solid white;
+  border-radius: 2px;
+  position: relative;
+  padding: 1px;
+}
+
+.rule1-battery::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 3px;
+  width: 2px;
+  height: 6px;
+  background: white;
+  border-radius: 0 1px 1px 0;
+}
+
+.rule1-battery-fill {
+  width: 80%;
+  height: 100%;
+  background: white;
+  border-radius: 1px;
+}
+
+/* Animations */
+@keyframes professor-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.02);
+  }
+}
+
+@keyframes phone-float {
+  0%, 100% {
+    transform: translateY(0) rotateY(0) rotateX(0);
+  }
+  25% {
+    transform: translateY(-10px) rotateY(2deg) rotateX(1deg);
+  }
+  75% {
+    transform: translateY(5px) rotateY(-2deg) rotateX(-1deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .rule1-phone-container {
+    max-width: 400px;
+    height: 550px;
+  }
+
+  .rule1-phone-device {
+    width: 280px;
+    height: 580px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rule1-phone-container {
+    max-width: 340px;
+    height: 500px;
+  }
+
+  .rule1-phone-device {
+    width: 260px;
+    height: 520px;
+    animation: none;
+  }
+}

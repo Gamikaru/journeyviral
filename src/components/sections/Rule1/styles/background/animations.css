@@ -1,0 +1,153 @@
+/* Gradient animations */
+.rule1-gradient {
+  animation: float 30s ease-in-out infinite;
+}
+
+.rule1-gradient-1 {
+  animation-duration: 25s;
+}
+
+.rule1-gradient-2 {
+  animation-duration: 28s;
+  animation-delay: -10s;
+}
+
+.rule1-gradient-3 {
+  animation-duration: 35s;
+  animation-delay: -20s;
+  animation-name: float-rotate;
+}
+
+.rule1-gradient-4 {
+  animation-duration: 22s;
+  animation-delay: -5s;
+}
+
+.rule1-gradient-5 {
+  animation-duration: 27s;
+  animation-delay: -15s;
+}
+
+/* Neon layer animations */
+.rule1-neon-layer {
+  animation: neon-pulse 4s ease-in-out infinite;
+}
+
+.rule1-neon-cyan {
+  animation-delay: 0s;
+}
+
+.rule1-neon-purple {
+  animation-delay: -2s;
+}
+
+/* Mesh and grid animations */
+.rule1-mesh-gradient {
+  animation: mesh-rotate 60s linear infinite;
+}
+
+.rule1-grid-overlay {
+  animation: grid-move 20s linear infinite;
+}
+
+.rule1-scanlines {
+  animation: scanline 8s linear infinite;
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10%, -15%) scale(1.05);
+  }
+  50% {
+    transform: translate(-5%, 10%) scale(0.95);
+  }
+  75% {
+    transform: translate(-10%, -5%) scale(1.02);
+  }
+}
+
+@keyframes float-rotate {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(-45%, -55%) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translate(-55%, -45%) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translate(-45%, -50%) rotate(270deg) scale(1.05);
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes mesh-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(60px, 60px);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .rule1-gradient,
+  .rule1-neon-layer,
+  .rule1-mesh-gradient,
+  .rule1-grid-overlay,
+  .rule1-scanlines {
+    animation: none;
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  .rule1-gradient {
+    filter: blur(80px) brightness(1.1);
+  }
+
+  .rule1-gradient-1,
+  .rule1-gradient-2 {
+    width: 600px;
+    height: 600px;
+  }
+
+  .rule1-gradient-3,
+  .rule1-gradient-4,
+  .rule1-gradient-5 {
+    width: 400px;
+    height: 400px;
+  }
+}

@@ -1,5 +1,7 @@
 import React from 'react';
-import './styles/rule1-background.css';
+import './styles/background/gradients.css';
+import './styles/background/effects.css';
+import './styles/background/animations.css';
 
 const Rule1Background: React.FC = () => {
   return (
