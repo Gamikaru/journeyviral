@@ -12,6 +12,7 @@
   padding: clamp(2rem, 5vh, 4rem) 0; /* Dynamic padding based on viewport */
   overflow: hidden;
   isolation: isolate;
+  background: transparent;
 }
 
 /* Content Container - Enhanced with CSS Grid */

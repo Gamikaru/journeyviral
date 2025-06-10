@@ -1,45 +1,85 @@
-/* Hamburger Button - Enhanced Design */
+/* Hamburger Button - Enhanced Floating Design */
 
 .hamburger-button {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   padding: 8px;
   margin-right: 0.5rem;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 0, 255, 0.3);
-  border-radius: 12px;
+  background: rgba(8, 5, 20, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   /* Performance optimization */
   transform: translateZ(0);
   backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.hamburger-button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from 180deg,
+    #00ffff,
+    #ff00ff,
+    #ffd700,
+    #ff6ec7,
+    #00ffff
+  );
+  border-radius: 30px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  animation: hamburgerRotate 10s linear infinite reverse;
+}
+
+.hamburger-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 5, 20, 0.9);
+  border-radius: 28px;
+  z-index: -1;
 }
 
 .hamburger-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) translateY(-2px);
   box-shadow:
-    0 6px 25px rgba(0, 0, 0, 0.4),
-    0 0 30px rgba(255, 0, 255, 0.3);
-  border-color: rgba(255, 0, 255, 0.6);
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.3);
+  border-color: rgba(0, 255, 255, 0.4);
+  background: rgba(8, 5, 20, 0.9);
+}
+
+.hamburger-button:hover::before {
+  opacity: 1;
 }
 
 .hamburger-button:active {
   transform: scale(0.95);
 }
 
+@keyframes hamburgerRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .hamburger-wrapper {
   position: relative;
   width: 32px;
   height: calc(3px * 3 + 8px * 2);
+  z-index: 2;
 }
 
 /* Enhanced bar styling */
@@ -51,9 +91,8 @@
   border-radius: calc(3px / 2);
   background: #ffffff;
   box-shadow:
-    0 0 20px rgba(255, 255, 255, 0.9),
-    0 0 40px rgba(255, 255, 255, 0.6),
-    0 0 60px rgba(255, 255, 255, 0.3);
+    0 0 15px rgba(255, 255, 255, 0.8),
+    0 0 30px rgba(255, 255, 255, 0.4);
   opacity: 1;
   transition: all 0.35s cubic-bezier(0.5, -0.35, 0.35, 1.5);
 }
@@ -77,6 +116,12 @@
 }
 
 /* Active state */
+.hamburger-button.is-open .hamburger-bar {
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.8),
+    0 0 40px rgba(0, 255, 255, 0.4);
+}
+
 .hamburger-button.is-open .hamburger-bar--top {
   transform: rotate(-135deg);
   transition-delay: 0s;
@@ -108,8 +153,8 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .hamburger-button {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
     padding: 6px;
   }
 
@@ -120,26 +165,17 @@
   /* Reduce glow on mobile */
   .hamburger-bar {
     box-shadow:
-      0 0 15px rgba(255, 255, 255, 0.8),
-      0 0 30px rgba(255, 255, 255, 0.4);
+      0 0 12px rgba(255, 255, 255, 0.7),
+      0 0 25px rgba(255, 255, 255, 0.3);
   }
 }
 
 /* Performance mode */
-.performance-mode .hamburger-button {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  background: rgba(0, 0, 0, 0.8);
-  transition: none;
-}
-
-.performance-mode .hamburger-bar {
-  box-shadow: none;
-  transition: none;
-}
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  .hamburger-button::before {
+    animation: none !important;
+  }
+
   .hamburger-button,
   .hamburger-bar {
     transition: none !important;
@@ -151,6 +187,10 @@
   .hamburger-button {
     background: rgba(0, 0, 0, 0.95);
     border: 2px solid #ffffff;
+  }
+
+  .hamburger-button::before {
+    display: none;
   }
 
   .hamburger-bar {

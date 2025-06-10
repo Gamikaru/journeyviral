@@ -1,71 +1,54 @@
 /* ========================================
-   HERO CTA BUTTONS - ULTRA ENHANCED
-   Based on Navbar CTA Button Styling
+   HERO BUTTONS - MODERN CLEAN DESIGN
    ======================================== */
 
-/* Base Hero CTA Button Styling */
-.hero-cta-primary,
-.hero-cta-secondary {
+/* Base Button Styling */
+.hero-btn-modern {
   position: relative;
-  width: 280px;
-  height: 72px;
+  width: 300px;
+  height: 70px;
   background: transparent;
   border: none;
-  border-radius: 36px;
+  border-radius: 35px;
   cursor: pointer;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s cubic-bezier(0.34, 1.26, 0.64, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   contain: layout style paint;
+  outline: none;
 }
 
-/* Ultra CTA Background Effects Container */
-.hero-cta-bg-ultra {
+/* Button Background Container */
+.hero-btn-background {
   position: absolute;
   inset: 0;
-  border-radius: 36px;
+  border-radius: 35px;
   overflow: hidden;
 }
 
-/* Primary Button Gradients */
-.hero-cta-gradient-primary {
+/* Primary Button Gradient */
+.hero-btn-gradient-primary {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
+  background: linear-gradient(135deg, #ff006e 0%, #8e00ff 50%, #00ffff 100%);
   transition: all 0.4s ease;
 }
 
-.hero-cta-gradient-secondary {
+/* Secondary Button Gradient */
+.hero-btn-gradient-secondary {
   position: absolute;
   inset: 0;
-  background: linear-gradient(225deg, #ff6ec7 0%, #ffd700 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-/* Secondary Button Glass Effect */
-.hero-cta-gradient-secondary-alt {
-  position: absolute;
-  inset: 0;
-  background: rgba(8, 5, 20, 0.6);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 2px solid rgba(255, 255, 255, 0.2);
   transition: all 0.4s ease;
 }
 
-.hero-cta-gradient-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(225deg, rgba(0, 255, 255, 0.8) 0%, rgba(138, 43, 226, 0.8) 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-/* Shimmer Effects */
-.hero-cta-shimmer-ultra {
+/* Shimmer Effect */
+.hero-btn-shimmer {
   position: absolute;
   top: 0;
   left: -100%;
@@ -73,323 +56,224 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    transparent 20%,
+    transparent 0%,
     rgba(255, 255, 255, 0.6) 50%,
-    transparent 80%
+    transparent 100%
   );
-  border-radius: 36px;
-  transition: left 1s ease;
+  transition: left 0.8s ease;
+  border-radius: 35px;
 }
 
-.hero-cta-shimmer-secondary {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
+.hero-btn-shimmer-secondary {
   background: linear-gradient(
     90deg,
-    transparent 20%,
-    rgba(0, 255, 255, 0.5) 50%,
-    transparent 80%
+    transparent 0%,
+    rgba(0, 255, 255, 0.4) 50%,
+    transparent 100%
   );
-  border-radius: 36px;
-  transition: left 1.2s ease;
 }
 
-/* Primary Pulse Rings */
-.hero-cta-pulse-ring-1,
-.hero-cta-pulse-ring-2 {
-  position: absolute;
-  inset: -30%;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  opacity: 0;
-  animation: heroCTAPulseRing1 3s ease-in-out infinite;
-}
-
-.hero-cta-pulse-ring-2 {
-  animation: heroCTAPulseRing2 3s ease-in-out infinite;
-  animation-delay: 1.5s;
-}
-
-/* Secondary Pulse Rings */
-.hero-cta-pulse-ring-secondary-1,
-.hero-cta-pulse-ring-secondary-2 {
-  position: absolute;
-  inset: -30%;
-  border: 3px solid rgba(0, 255, 255, 0.3);
-  border-radius: 50%;
-  opacity: 0;
-  animation: heroCTASecondaryPulse1 3.5s ease-in-out infinite;
-}
-
-.hero-cta-pulse-ring-secondary-2 {
-  animation: heroCTASecondaryPulse2 3.5s ease-in-out infinite;
-  animation-delay: 1.75s;
-}
-
-@keyframes heroCTAPulseRing1 {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.2); opacity: 0.4; }
-  100% { transform: scale(1.6); opacity: 0; }
-}
-
-@keyframes heroCTAPulseRing2 {
-  0% { transform: scale(0.6); opacity: 0; }
-  50% { transform: scale(1.4); opacity: 0.3; }
-  100% { transform: scale(1.8); opacity: 0; }
-}
-
-@keyframes heroCTASecondaryPulse1 {
-  0% { transform: scale(0.7); opacity: 0; }
-  50% { transform: scale(1.3); opacity: 0.4; }
-  100% { transform: scale(1.7); opacity: 0; }
-}
-
-@keyframes heroCTASecondaryPulse2 {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.5); opacity: 0.3; }
-  100% { transform: scale(1.9); opacity: 0; }
-}
-
-/* Spark Trails */
-.hero-cta-spark-trail {
-  position: absolute;
-  inset: 0;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(255, 255, 255, 0.3) 45deg,
-    transparent 90deg,
-    transparent 270deg,
-    rgba(255, 255, 255, 0.3) 315deg,
-    transparent 360deg
-  );
-  border-radius: 36px;
-  opacity: 0;
-  animation: heroCTASparkRotate 4s linear infinite;
-}
-
-.hero-cta-spark-trail-secondary {
-  position: absolute;
-  inset: 0;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(0, 255, 255, 0.3) 45deg,
-    transparent 90deg,
-    transparent 270deg,
-    rgba(0, 255, 255, 0.3) 315deg,
-    transparent 360deg
-  );
-  border-radius: 36px;
-  opacity: 0;
-  animation: heroCTASparkRotate 5s linear infinite;
-}
-
-@keyframes heroCTASparkRotate {
-  0% { transform: rotate(0deg); opacity: 0; }
-  25% { opacity: 0.5; }
-  75% { opacity: 0.5; }
-  100% { transform: rotate(360deg); opacity: 0; }
-}
-
-/* Enhanced CTA Content */
-.hero-cta-content-ultra {
+/* Button Content */
+.hero-btn-content {
   position: relative;
   z-index: 2;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 2rem;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px;
+  height: 100%;
+  width: 100%;
 }
 
-.hero-cta-text-ultra,
-.hero-cta-text-secondary {
+.hero-btn-text {
   font-family: var(--font-lastica);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.hero-btn-primary .hero-btn-text {
   color: #000000;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
+}
+
+.hero-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
   transition: all 0.3s ease;
 }
 
-.hero-cta-text-secondary {
-  color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-.hero-cta-icon-ultra {
-  width: 24px;
-  height: 24px;
+.hero-btn-primary .hero-btn-icon {
   color: #000000;
-  transition: all 0.3s ease;
 }
 
-.hero-cta-secondary .hero-cta-icon-ultra {
+.hero-btn-secondary .hero-btn-icon {
   color: #ffffff;
 }
 
-/* Hover States */
-.hero-cta-primary:hover .hero-cta-gradient-secondary {
-  opacity: 0.7;
+/* Hover Effects */
+.hero-btn-primary:hover .hero-btn-gradient-primary {
+  background: linear-gradient(135deg, #ff3d8b 0%, #a020f0 50%, #1ae5ff 100%);
+  transform: scale(1.02);
 }
 
-.hero-cta-primary:hover .hero-cta-shimmer-ultra {
-  left: 100%;
-}
-
-.hero-cta-primary:hover .hero-cta-spark-trail {
-  opacity: 1;
-}
-
-.hero-cta-primary:hover .hero-cta-text-ultra {
-  transform: scale(1.05);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-}
-
-.hero-cta-primary:hover .hero-cta-icon-ultra {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-}
-
-.hero-cta-secondary:hover .hero-cta-gradient-overlay {
-  opacity: 0.8;
-}
-
-.hero-cta-secondary:hover .hero-cta-gradient-secondary-alt {
-  background: rgba(8, 5, 20, 0.8);
+.hero-btn-secondary:hover .hero-btn-gradient-secondary {
+  background: rgba(0, 0, 0, 0.5);
   border-color: rgba(0, 255, 255, 0.4);
 }
 
-.hero-cta-secondary:hover .hero-cta-shimmer-secondary {
+.hero-btn-modern:hover .hero-btn-shimmer {
   left: 100%;
 }
 
-.hero-cta-secondary:hover .hero-cta-spark-trail-secondary {
-  opacity: 1;
+.hero-btn-modern:hover .hero-btn-text {
+  transform: translateY(-1px);
+  letter-spacing: 0.1em;
 }
 
-.hero-cta-secondary:hover .hero-cta-text-secondary {
-  transform: scale(1.05);
+.hero-btn-primary:hover .hero-btn-text {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.hero-btn-secondary:hover .hero-btn-text {
   color: #00ffff;
-  text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
 }
 
-.hero-cta-secondary:hover .hero-cta-icon-ultra {
+.hero-btn-modern:hover .hero-btn-icon {
   transform: scale(1.1);
+}
+
+.hero-btn-primary:hover .hero-btn-icon {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+.hero-btn-secondary:hover .hero-btn-icon {
   color: #00ffff;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+}
+
+/* Focus States */
+.hero-btn-modern:focus-visible {
+  outline: 2px solid #00ffff;
+  outline-offset: 3px;
+}
+
+/* Button Container */
+.hero-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+/* Force side-by-side layout on larger screens */
+@media (min-width: 640px) {
+  .hero-buttons-container {
+    flex-wrap: nowrap;
+    gap: 2.5rem;
+  }
 }
 
 /* Responsive Design */
-@media (max-width: 640px) {
-  .hero-cta-primary,
-  .hero-cta-secondary {
-    width: 260px;
-    height: 68px;
+@media (max-width: 768px) {
+  .hero-btn-modern {
+    width: 280px;
+    height: 65px;
   }
 
-  .hero-cta-content-ultra {
-    padding: 0.875rem 1.5rem;
+  .hero-btn-text {
+    font-size: 1rem;
   }
 
-  .hero-cta-text-ultra,
-  .hero-cta-text-secondary {
-    font-size: 0.85rem;
-  }
-
-  .hero-cta-icon-ultra {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Reduce effects on mobile */
-  .hero-cta-pulse-ring-1,
-  .hero-cta-pulse-ring-2,
-  .hero-cta-pulse-ring-secondary-1,
-  .hero-cta-pulse-ring-secondary-2,
-  .hero-cta-spark-trail,
-  .hero-cta-spark-trail-secondary {
-    display: none;
+  .hero-buttons-container {
+    gap: 1.5rem;
+    flex-wrap: nowrap; /* Keep side by side on tablet */
   }
 }
 
+@media (max-width: 640px) {
+  .hero-btn-modern {
+    width: 260px;
+    height: 60px;
+  }
+
+  .hero-btn-content {
+    padding: 0 20px;
+    gap: 10px;
+  }
+
+  .hero-btn-text {
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+
+  .hero-buttons-container {
+    flex-wrap: nowrap; /* Keep side by side even on mobile */
+    gap: 1rem;
+  }
+}
+
+/* Only stack vertically on very small screens */
 @media (max-width: 480px) {
   .hero-buttons-container {
     flex-direction: column;
     gap: 1.25rem;
   }
 
-  .hero-cta-primary,
-  .hero-cta-secondary {
+  .hero-btn-modern {
     width: 240px;
-    height: 64px;
+    height: 56px;
   }
 
-  .hero-cta-content-ultra {
-    padding: 0.75rem 1.25rem;
-  }
-
-  .hero-cta-text-ultra,
-  .hero-cta-text-secondary {
-    font-size: 0.8rem;
+  .hero-btn-text {
+    font-size: 0.9rem;
   }
 }
 
 /* Performance optimizations */
 @media (prefers-reduced-motion: reduce) {
-  .hero-cta-pulse-ring-1,
-  .hero-cta-pulse-ring-2,
-  .hero-cta-pulse-ring-secondary-1,
-  .hero-cta-pulse-ring-secondary-2,
-  .hero-cta-spark-trail,
-  .hero-cta-spark-trail-secondary {
-    animation: none !important;
+  .hero-btn-shimmer {
+    transition: none;
     display: none;
   }
 
-  .hero-cta-shimmer-ultra,
-  .hero-cta-shimmer-secondary {
-    transition: none;
+  .hero-btn-modern {
+    transition: transform 0.2s ease;
   }
 }
 
 /* High contrast mode */
 @media (prefers-contrast: high) {
-  .hero-cta-gradient-primary {
+  .hero-btn-gradient-primary {
     background: #ffffff;
   }
 
-  .hero-cta-gradient-secondary-alt {
-    background: rgba(0, 0, 0, 0.95);
+  .hero-btn-gradient-secondary {
+    background: #000000;
     border: 2px solid #ffffff;
   }
 
-  .hero-cta-text-ultra,
-  .hero-cta-text-secondary {
+  .hero-btn-text {
     text-shadow: none;
   }
-
-  .hero-cta-pulse-ring-1,
-  .hero-cta-pulse-ring-2,
-  .hero-cta-pulse-ring-secondary-1,
-  .hero-cta-pulse-ring-secondary-2 {
-    display: none;
-  }
 }
 
-/* Focus States for Accessibility */
-.hero-cta-primary:focus-visible,
-.hero-cta-secondary:focus-visible {
-  outline: 3px solid #00ffff;
-  outline-offset: 4px;
-}
-
-.hero-cta-primary:focus:not(:focus-visible),
-.hero-cta-secondary:focus:not(:focus-visible) {
-  outline: none;
+/* Remove old button styles */
+.hero-cta-primary,
+.hero-cta-secondary,
+.hero-primary-btn,
+.hero-secondary-btn {
+  display: none;
 }

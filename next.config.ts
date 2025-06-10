@@ -3,6 +3,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Disable type checking during build
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [

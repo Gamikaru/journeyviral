@@ -1,13 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
-import HeroLogo from "./HeroLogo";
+import { Variants } from "framer-motion";
 import HeroTitle from "./HeroTitle";
 import HeroButtons from "./HeroButtons";
 
 interface HeroContentProps {
   mousePosition: { x: number; y: number };
-  itemVariants: any;
+  itemVariants: Variants;
   showStats?: boolean;
   statsComponent?: React.ReactNode;
 }
@@ -19,41 +18,10 @@ export default function HeroContent({
   statsComponent
 }: HeroContentProps) {
   return (
-    <div className="max-w-6xl mx-auto" style={{ padding: 0, margin: '0 auto' }}>
-      {/* Logo Section */}
-      <motion.div
-        className="flex items-center justify-center gap-6"
-        style={{ marginBottom: '1.5rem', padding: 0 }}
-        variants={itemVariants}
-      >
-        <HeroLogo />
-      </motion.div>
-
-      {/* Title Section with 3D effect */}
-      <motion.div
-        className="text-center space-y-4"
-        style={{
-          marginBottom: '2rem',
-          padding: 0,
-          transform: `perspective(1000px) rotateX(${mousePosition.y * 1.5}deg) rotateY(${mousePosition.x * 1.5}deg)`,
-        }}
-        variants={itemVariants}
-      >
-        <HeroTitle />
-      </motion.div>
-
-      {/* Stats appear here - right after title */}
-      {showStats && statsComponent && (
-        <motion.div
-          className="mb-6"
-          variants={itemVariants}
-        >
-          {statsComponent}
-        </motion.div>
-      )}
-
-      {/* Buttons component */}
+    <div className="relative z-40">
+      <HeroTitle mousePosition={mousePosition} itemVariants={itemVariants} />
       <HeroButtons itemVariants={itemVariants} />
+      {showStats && statsComponent}
     </div>
   );
 }

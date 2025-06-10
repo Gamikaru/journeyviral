@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Inter, JetBrains_Mono, Monoton } from "next/font/google";
 import Script from "next/script";
 import { Navbar } from "@/components/ui/nav";
+import UnifiedBackground from "@/components/ui/layout/UnifiedBackground";
 import "./globals.css";
 
 // Font configurations with optimization
@@ -215,9 +216,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="bg-primary-ultraDark text-white antialiased overflow-x-hidden"
+        className="bg-transparent text-white antialiased overflow-x-hidden"
         suppressHydrationWarning
       >
+        {/* Unified background */}
+        <UnifiedBackground />
+
         {/* Noise texture overlay */}
         <div
           className="fixed inset-0 opacity-[0.015] pointer-events-none z-[1]"
@@ -234,6 +238,7 @@ export default function RootLayout({
 
         {/* Global scripts */}
         <Script
+          id="smooth-scroll-polyfill"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `

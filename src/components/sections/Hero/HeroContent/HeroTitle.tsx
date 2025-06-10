@@ -1,11 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTextScramble } from "../hooks/useTextScramble";
 import "../styles/hero-typography.css";
 
-export default function HeroTitle() {
+interface HeroTitleProps {
+  mousePosition: { x: number; y: number };
+  itemVariants: Variants;
+}
+
+export default function HeroTitle({ mousePosition, itemVariants }: HeroTitleProps) {
   const [currentPairIndex, setCurrentPairIndex] = useState(0);
   const [isScrambling, setIsScrambling] = useState(false);
   const [hasInitiallyLoaded, setHasInitiallyLoaded] = useState(false);
@@ -73,6 +78,7 @@ export default function HeroTitle() {
         initial={isFirstRender ? { opacity: 0, y: 50, scale: 0.9 } : false}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={isFirstRender ? { duration: 1, delay: 0.3, ease: [0.4, 0, 0.2, 1] } : { duration: 0 }}
+        variants={itemVariants}
       >
         {titleText}
       </motion.h1>
@@ -103,6 +109,7 @@ export default function HeroTitle() {
         } : {
           backgroundPosition: { duration: 8, repeat: Infinity, ease: "linear" }
         }}
+        variants={itemVariants}
       >
         {subtitleText}
       </motion.h2>

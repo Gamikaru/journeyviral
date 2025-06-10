@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import StatsBackground from "./StatsBackground";
 import StatsHeadline from "./StatsHeadline";
@@ -30,6 +30,11 @@ const usePerformanceMode = () => {
   return isLowPerf;
 };
 
+interface StatsProps {
+  containerVariants: Variants;
+  itemVariants: Variants;
+}
+
 export default function StatsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -40,6 +45,19 @@ export default function StatsSection() {
     margin: "-50px",
     amount: 0.2
   });
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   useEffect(() => {
     if (isInView && !isLowPerf) {
@@ -76,14 +94,7 @@ export default function StatsSection() {
             className="stats-grid"
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.12,
-                  delayChildren: 0.1
-                }
-              }
-            }}
+            variants={containerVariants}
           >
             {/* Left Column - Stats Cards */}
             <motion.div
