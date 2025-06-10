@@ -1,3 +1,4 @@
+// src/components/sections/Transform/components/ChatContainer.tsx
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
@@ -10,7 +11,7 @@ import "../styles/chat-container.css";
 interface Message {
   id: number;
   text: string;
-  type: 'setup' | 'problem' | 'bridge' | 'final';
+  type: "setup" | "problem" | "bridge" | "final";
   delay: number;
 }
 
@@ -23,44 +24,44 @@ interface ChatContainerProps {
 export default function ChatContainer({
   isInView,
   shouldAnimate,
-  messages
+  messages,
 }: ChatContainerProps) {
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
-  const [isLooping, setIsLooping] = useState(false);
-  const [showFloatingText, setShowFloatingText] = useState(false);
+  const [showFinalMessage, setShowFinalMessage] = useState(false);
 
-  // Memoize message arrays to prevent unnecessary re-renders
+  // Separate regular and final messages
   const { regularMessages, finalMessage } = useMemo(() => {
-    const regular = messages.filter(m => m.type !== 'final');
-    const final = messages.find(m => m.type === 'final');
+    const regular = messages.filter((m) => m.type !== "final");
+    const final = messages.find((m) => m.type === "final");
     return { regularMessages: regular, finalMessage: final };
   }, [messages]);
 
+  // Reset function
   const resetSequence = useCallback(() => {
     setVisibleMessages([]);
     setShowTyping(false);
     setCurrentStep(0);
-    setIsLooping(false);
-    setShowFloatingText(false);
+    setShowFinalMessage(false);
   }, []);
 
+  // Start sequence function
   const startSequence = useCallback(() => {
     if (!isInView || !shouldAnimate) {
-      // Show all messages immediately if not animating
-      setVisibleMessages(regularMessages.map(m => m.id));
-      setShowFloatingText(true);
+      // Show all immediately if not animating
+      setVisibleMessages(regularMessages.map((m) => m.id));
+      setShowFinalMessage(true);
       return;
     }
 
-    // Optimized timing - start faster
+    // Start animated sequence
     setTimeout(() => {
       setCurrentStep(1);
-    }, 300);
+    }, 200);
   }, [isInView, shouldAnimate, regularMessages]);
 
-  // Optimized sequence timing
+  // Sequence controller
   useEffect(() => {
     if (!shouldAnimate || currentStep === 0) return;
 
@@ -68,92 +69,77 @@ export default function ChatContainer({
 
     const executeStep = () => {
       switch (currentStep) {
-        case 1: // Show first message
+        case 1: // First message
           setVisibleMessages([1]);
-          timers.push(setTimeout(() => setCurrentStep(2), 1500)); // Faster
+          timers.push(setTimeout(() => setCurrentStep(2), 1200));
           break;
 
-        case 2: // Show typing for second message
+        case 2: // Typing indicator
           setShowTyping(true);
-          timers.push(setTimeout(() => setCurrentStep(3), 1200)); // Faster
+          timers.push(setTimeout(() => setCurrentStep(3), 1000));
           break;
 
-        case 3: // Show second message
+        case 3: // Second message
           setShowTyping(false);
-          setVisibleMessages(prev => [...prev, 2]);
-          timers.push(setTimeout(() => setCurrentStep(4), 1500));
+          setVisibleMessages((prev) => [...prev, 2]);
+          timers.push(setTimeout(() => setCurrentStep(4), 1200));
           break;
 
-        case 4: // Show typing for third message
+        case 4: // Typing indicator
           setShowTyping(true);
-          timers.push(setTimeout(() => setCurrentStep(5), 1000)); // Faster
+          timers.push(setTimeout(() => setCurrentStep(5), 800));
           break;
 
-        case 5: // Show third message
+        case 5: // Third message
           setShowTyping(false);
-          setVisibleMessages(prev => [...prev, 3]);
-          timers.push(setTimeout(() => setCurrentStep(6), 1200));
+          setVisibleMessages((prev) => [...prev, 3]);
+          timers.push(setTimeout(() => setCurrentStep(6), 1500));
           break;
 
-        case 6: // Hold, then start disappearing
-          timers.push(setTimeout(() => setCurrentStep(7), 1000)); // Faster
+        case 6: // Transition to final
+          // Fade out messages
+          setVisibleMessages([]);
+          timers.push(setTimeout(() => setCurrentStep(7), 600));
           break;
 
-        case 7: // Optimized staggered disappearance
-          timers.push(setTimeout(() => {
-            setVisibleMessages(prev => prev.filter(id => id !== 1));
-          }, 0));
-
-          timers.push(setTimeout(() => {
-            setVisibleMessages(prev => prev.filter(id => id !== 2));
-          }, 100)); // Faster stagger
-
-          timers.push(setTimeout(() => {
-            setVisibleMessages(prev => prev.filter(id => id !== 3));
-          }, 200));
-
-          timers.push(setTimeout(() => setCurrentStep(8), 600));
+        case 7: // Show final message
+          setShowFinalMessage(true);
+          timers.push(setTimeout(() => setCurrentStep(8), 5000));
           break;
 
-        case 8: // Show floating text
-          setShowFloatingText(true);
-          timers.push(setTimeout(() => setCurrentStep(9), 4000)); // Shorter hold
-          break;
-
-        case 9: // Loop back
-          setShowFloatingText(false);
-          timers.push(setTimeout(() => {
-            setIsLooping(true);
-            timers.push(setTimeout(() => {
+        case 8: // Reset and loop
+          setShowFinalMessage(false);
+          timers.push(
+            setTimeout(() => {
               resetSequence();
-              timers.push(setTimeout(() => startSequence(), 800)); // Faster loop
-            }, 400));
-          }, 600));
+              timers.push(setTimeout(() => startSequence(), 1000));
+            }, 500)
+          );
           break;
       }
     };
 
     executeStep();
 
-    // Cleanup function to prevent memory leaks
     return () => {
-      timers.forEach(timer => clearTimeout(timer));
+      timers.forEach((timer) => clearTimeout(timer));
     };
   }, [currentStep, shouldAnimate, resetSequence, startSequence]);
 
   // Initialize sequence
   useEffect(() => {
-    if (isInView && !isLooping) {
+    if (isInView) {
       resetSequence();
       const timer = setTimeout(() => startSequence(), 100);
       return () => clearTimeout(timer);
     }
-  }, [isInView, isLooping, resetSequence, startSequence]);
+  }, [isInView, resetSequence, startSequence]);
 
   return (
-    <div className="chat-container" role="log" aria-live="polite">
-      <div className="chat-messages-area">
-        <AnimatePresence mode="wait">
+    <div className="chat-container-modern" role="log" aria-live="polite">
+      {/* Messages area */}
+      <div className="chat-messages-wrapper">
+        <AnimatePresence mode="popLayout">
           {regularMessages.map((message) => (
             <ChatBubble
               key={message.id}
@@ -165,18 +151,16 @@ export default function ChatContainer({
           ))}
         </AnimatePresence>
 
-        <TypingIndicator
-          isVisible={showTyping}
-          shouldAnimate={shouldAnimate}
-        />
+        <TypingIndicator isVisible={showTyping} shouldAnimate={shouldAnimate} />
       </div>
 
-      <div className="final-message-container">
+      {/* Final message area - integrated into flow */}
+      <div className="final-message-area">
         <AnimatePresence>
-          {finalMessage && showFloatingText && (
+          {finalMessage && showFinalMessage && (
             <FloatingText
               text={finalMessage.text}
-              isVisible={showFloatingText}
+              isVisible={showFinalMessage}
               shouldAnimate={shouldAnimate}
             />
           )}

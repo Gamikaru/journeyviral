@@ -4,12 +4,12 @@
   position: relative;
 }
 
-/* RULE #1 Label */
+/* RULE #1 Label - refined with less noise */
 .rule1-label {
   font-size: clamp(3.5rem, 7vw, 6rem);
   font-weight: 900;
   letter-spacing: 0.02em;
-  margin-bottom: 24px;
+  margin-bottom: 28px; /* Slightly increased spacing */
   line-height: 0.9;
   position: relative;
   display: inline-block;
@@ -19,61 +19,100 @@
   position: relative;
   z-index: 2;
   color: #ff0080;
-  -webkit-text-stroke: 3px #ff0080;
+  -webkit-text-stroke: 2px #ff0080; /* Reduced stroke width */
   -webkit-text-fill-color: transparent;
   text-shadow:
-    0 0 8px #ff0080,
-    0 0 16px rgba(255, 0, 128, 0.8),
-    0 0 24px rgba(255, 0, 128, 0.4);
-  animation: neon-pulse 2s ease-in-out infinite;
+    0 0 15px rgba(255, 0, 128, 0.6), /* Reduced glow intensity */
+    0 0 30px rgba(255, 0, 128, 0.3), /* Softer secondary glow */
+    0 2px 8px rgba(0, 0, 0, 0.7); /* Enhanced drop shadow for depth */
+  animation: refined-neon-pulse 3s ease-in-out infinite; /* Slower, more refined animation */
 }
 
-/* Duplicate glow layer for extra intensity */
+/* Simplified glow layer - much more subtle */
 .rule1-label-glow {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
   color: #ff0080;
-  -webkit-text-stroke: 3px #ff0080;
+  -webkit-text-stroke: 2px #ff0080; /* Match main text */
   -webkit-text-fill-color: transparent;
-  filter: blur(4px);
-  opacity: 0.4;
-  animation: neon-pulse 2s ease-in-out infinite;
-  animation-delay: -0.1s;
+  filter: blur(2px); /* Reduced blur */
+  opacity: 0.2; /* Much more subtle */
+  animation: refined-neon-pulse 3s ease-in-out infinite;
+  animation-delay: -0.05s; /* Minimal offset */
 }
 
-/* Main Headline */
+/* Refined animation - less aggressive */
+@keyframes refined-neon-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 15px rgba(255, 0, 128, 0.6),
+      0 0 30px rgba(255, 0, 128, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.7);
+    filter: brightness(1);
+  }
+  50% {
+    text-shadow:
+      0 0 20px rgba(255, 0, 128, 0.8),
+      0 0 40px rgba(255, 0, 128, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.7);
+    filter: brightness(1.1);
+  }
+}
+
+/* Main Headline - enhanced spacing and balance */
 .rule1-main-headline {
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem); /* Slightly larger for better impact */
   font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.05; /* Tighter line height */
+  letter-spacing: -0.025em; /* Slightly tighter letter spacing */
   margin: 0;
 }
 
 .rule1-headline-line {
   display: block;
   position: relative;
+  margin-bottom: 0.15em; /* Fine-tuned line spacing */
 }
 
-/* Cyan text with glow */
+.rule1-headline-line:last-child {
+  margin-bottom: 0;
+}
+
+/* Refined cyan text with cleaner glow */
 .rule1-headline-glow {
   color: #00d4ff;
   text-shadow:
-    0 0 6px rgba(0, 212, 255, 0.6),
-    0 0 12px rgba(0, 212, 255, 0.4),
-    0 0 18px rgba(0, 212, 255, 0.2);
-  animation: cyan-glow 3s ease-in-out infinite;
+    0 0 12px rgba(0, 212, 255, 0.5), /* Reduced glow */
+    0 0 24px rgba(0, 212, 255, 0.25), /* Softer outer glow */
+    0 2px 6px rgba(0, 0, 0, 0.6); /* Clean drop shadow */
+  animation: refined-cyan-glow 4s ease-in-out infinite;
 }
 
-/* White text with subtle glow - now italic */
+/* Refined animation for cyan text */
+@keyframes refined-cyan-glow {
+  0%, 100% {
+    text-shadow:
+      0 0 12px rgba(0, 212, 255, 0.5),
+      0 0 24px rgba(0, 212, 255, 0.25),
+      0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    text-shadow:
+      0 0 16px rgba(0, 212, 255, 0.7),
+      0 0 32px rgba(0, 212, 255, 0.35),
+      0 2px 6px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Clean white text with subtle enhancement */
 .rule1-headline-white {
   color: #ffffff;
   font-style: italic;
   text-shadow:
-    0 0 8px rgba(255, 255, 255, 0.4),
-    0 0 16px rgba(255, 255, 255, 0.2);
+    0 0 8px rgba(255, 255, 255, 0.3), /* Reduced white glow */
+    0 2px 6px rgba(0, 0, 0, 0.6); /* Clean drop shadow */
 }
 
 /* White italic text with glow */
@@ -101,16 +140,17 @@
   transition: text-shadow 0.3s ease;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments with refined spacing */
 @media (max-width: 1024px) {
   .rule1-label {
     text-align: center;
     font-size: clamp(3rem, 10vw, 5rem);
+    margin-bottom: 24px;
   }
 
   .rule1-main-headline {
     text-align: center;
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2.2rem, 6.5vw, 3.2rem);
   }
 }
 
@@ -122,11 +162,16 @@
 
   .rule1-label-text,
   .rule1-label-glow {
-    -webkit-text-stroke: 2px #ff0080;
+    -webkit-text-stroke: 1.5px #ff0080; /* Thinner stroke on mobile */
+    text-shadow:
+      0 0 10px rgba(255, 0, 128, 0.5),
+      0 0 20px rgba(255, 0, 128, 0.25),
+      0 2px 6px rgba(0, 0, 0, 0.7);
   }
 
   .rule1-main-headline {
-    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    font-size: clamp(1.9rem, 7.5vw, 3rem);
+    line-height: 1.1;
   }
 }
 

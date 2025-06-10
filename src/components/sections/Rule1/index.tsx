@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Rule1Background from './Rule1Background';
 import Rule1Headline from './Rule1Headline';
-import Rule1SupportingText from './Rule1SupportingText';
 import Rule1PhoneMockup from './Rule1PhoneMockup';
 import './styles/section/layout.css';
 import './styles/section/animations.css';
@@ -132,7 +131,7 @@ const Rule1Section: React.FC = () => {
           <div className="rule1-text-content">
             <div className="rule1-text-inner">
               <Rule1Headline />
-              <Rule1SupportingText />
+              {/* Remove Rule1SupportingText component */}
             </div>
 
             {/* Decorative elements */}

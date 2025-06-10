@@ -3,8 +3,8 @@
 .rule1-phone-container {
   position: relative;
   width: 100%;
-  max-width: 480px;
-  height: 580px;
+  max-width: 380px; /* Increased from 450px */
+  height: 680px; /* Increased from 580px */
   perspective: 1000px;
 }
 
@@ -32,53 +32,53 @@
   justify-content: center;
 }
 
-/* Phone device */
+/* Phone device - optimized size for larger screens */
 .rule1-phone-device {
   position: relative;
-  width: 280px;
-  height: 560px;
+  width: 320px; /* Increased from 270px */
+  height: 640px; /* Increased from 540px */
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
 }
 
 .rule1-phone-device:hover {
-  transform: rotateY(-5deg) rotateX(2deg);
+  transform: rotateY(-3deg) rotateX(1deg); /* More subtle hover effect */
 }
 
-/* Enhanced metallic bezel */
+/* Enhanced metallic bezel - adjusted for new size */
 .rule1-phone-bezel {
   position: absolute;
   inset: -3px;
   background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  border-radius: 44px;
+  border-radius: 48px; /* Increased from 42px */
   z-index: 2;
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 15px 50px rgba(0, 0, 0, 0.8),
-    0 5px 20px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 16px 48px rgba(0, 0, 0, 0.7), /* Enhanced shadow for larger phone */
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08); /* Subtle inner highlight */
   overflow: hidden;
 }
 
-/* Gradient border effect */
+/* Refined gradient border effect */
 .rule1-phone-bezel-gradient {
   position: absolute;
   inset: 0;
   background: conic-gradient(
     from 0deg,
-    rgba(0, 212, 255, 0.2),
-    rgba(147, 51, 234, 0.2),
-    rgba(255, 0, 128, 0.2),
-    rgba(0, 212, 255, 0.2)
+    rgba(0, 212, 255, 0.15),
+    rgba(147, 51, 234, 0.15),
+    rgba(255, 0, 128, 0.15),
+    rgba(0, 212, 255, 0.15)
   );
   opacity: 0;
-  animation: bezel-glow 4s ease-in-out infinite;
-  border-radius: 44px;
+  animation: refined-bezel-glow 6s ease-in-out infinite;
+  border-radius: 48px; /* Adjusted for new size */
 }
 
-@keyframes bezel-glow {
+@keyframes refined-bezel-glow {
   0%, 100% { opacity: 0; transform: rotate(0deg); }
-  50% { opacity: 0.6; transform: rotate(180deg); }
+  50% { opacity: 0.4; transform: rotate(180deg); } /* Reduced max opacity */
 }
 
 .rule1-phone-bezel-shine {
@@ -95,7 +95,7 @@
     transparent 85%,
     rgba(255, 255, 255, 0.08) 100%
   );
-  border-radius: 44px;
+  border-radius: 50px; /* Adjusted for new size */
 }
 
 /* Phone frame */
@@ -104,7 +104,7 @@
   width: 100%;
   height: 100%;
   background: #000000;
-  border-radius: 40px;
+  border-radius: 46px; /* Increased from 40px */
   overflow: hidden;
   box-shadow:
     inset 0 0 20px rgba(0, 0, 0, 0.5),
@@ -150,55 +150,55 @@
   50% { opacity: 0.3; transform: rotate(-45deg) translateX(0%); }
 }
 
-/* Notch */
+/* Notch - adjusted for larger size */
 .rule1-phone-notch {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 30px;
+  width: 140px; /* Increased from 120px */
+  height: 34px; /* Increased from 30px */
   background: #000;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 22px 22px; /* Increased from 20px */
   z-index: 11;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 35px; /* Increased from 30px */
 }
 
 .rule1-camera {
-  width: 8px;
-  height: 8px;
+  width: 9px; /* Increased from 8px */
+  height: 9px;
   background: #222;
   border-radius: 50%;
   border: 1px solid #333;
 }
 
 .rule1-speaker {
-  width: 40px;
-  height: 4px;
+  width: 45px; /* Increased from 40px */
+  height: 5px; /* Increased from 4px */
   background: #222;
-  border-radius: 2px;
+  border-radius: 2.5px;
 }
 
-/* Status bar */
+/* Status bar - adjusted padding for larger size */
 .rule1-phone-statusbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 44px;
+  height: 50px; /* Increased from 44px */
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 24px; /* Increased from 20px */
   z-index: 10;
 }
 
 .rule1-phone-time {
-  font-size: 14px;
+  font-size: 16px; /* Increased from 14px */
   font-weight: 600;
   color: white;
 }
@@ -281,27 +281,80 @@
   }
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) {
+/* Desktop-specific enhancements */
+@media (min-width: 1200px) {
   .rule1-phone-container {
-    max-width: 400px;
-    height: 500px;
+    max-width: 420px; /* Even larger on desktop */
+    height: 740px;
   }
 
   .rule1-phone-device {
-    width: 260px;
-    height: 480px;
+    width: 360px; /* Larger on desktop */
+    height: 700px;
+  }
+
+  .rule1-phone-bezel {
+    border-radius: 52px;
+  }
+
+  .rule1-phone-bezel-gradient {
+    border-radius: 52px;
+  }
+
+  .rule1-phone-frame {
+    border-radius: 50px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .rule1-phone-container {
+    max-width: 450px; /* Maximum size for very large screens */
+    height: 780px;
+  }
+
+  .rule1-phone-device {
+    width: 380px;
+    height: 740px;
+  }
+}
+
+/* Responsive adjustments - refined */
+@media (max-width: 1024px) {
+  .rule1-phone-container {
+    max-width: 360px; /* Slightly larger than before */
+    height: 620px;
+  }
+
+  .rule1-phone-device {
+    width: 300px; /* Increased from 250px */
+    height: 580px; /* Increased from 460px */
+  }
+
+  .rule1-phone-bezel {
+    border-radius: 44px;
+  }
+
+  .rule1-phone-bezel-gradient {
+    border-radius: 44px;
   }
 }
 
 @media (max-width: 768px) {
   .rule1-phone-container {
     max-width: 320px;
-    height: 420px;
+    height: 520px;
   }
 
   .rule1-phone-device {
-    width: 240px;
-    height: 400px;
+    width: 280px; /* Increased from 230px */
+    height: 500px; /* Increased from 400px */
+  }
+
+  .rule1-phone-bezel {
+    border-radius: 40px;
+  }
+
+  .rule1-phone-bezel-gradient {
+    border-radius: 40px;
   }
 }

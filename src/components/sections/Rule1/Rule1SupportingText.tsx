@@ -93,7 +93,7 @@ const Rule1SupportingText: React.FC = () => {
   const paragraph2Text = "Your vid's crammed between memes, hot takes, and a cat doing backflips. So... how are you standing out?";
 
   return (
-    <div ref={textRef} className="rule1-supporting-wrapper">
+    <div ref={textRef} className="rule1-supporting-wrapper" style={{ marginTop: '1rem' }}>
       {/* Decorative elements */}
       <div className="rule1-text-decoration rule1-decoration-1" />
       <div className="rule1-text-decoration rule1-decoration-2" />
@@ -119,7 +119,7 @@ const Rule1SupportingText: React.FC = () => {
         />
 
         {/* Interactive hint */}
-        <div className={`rule1-interaction-hint ${isVisible ? 'rule1-hint-visible' : ''}`}>
+        <div className={`rule1-interaction-hint ${isVisible ? 'rule1-hint-visible' : ''}`} style={{ marginTop: '2rem' }}>
           <span className="rule1-hint-text">The secret? Stop thinking like a creator.</span>
           <span className="rule1-hint-arrow">→</span>
         </div>

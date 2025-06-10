@@ -5,14 +5,15 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  max-height: 100vh; /* Prevent overflow on desktop */
+  /* Remove max-height: 100vh; to prevent cutting off */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(2rem, 5vh, 4rem) 0; /* Dynamic padding based on viewport */
+  padding: clamp(4rem, 8vh, 6rem) 0; /* Increased padding for better spacing */
   overflow: hidden;
   isolation: isolate;
   background: transparent;
+  margin-bottom: 2rem; /* Add margin to create space before next section */
 }
 
 /* Content Container - Enhanced with CSS Grid */
@@ -21,7 +22,7 @@
   z-index: 10;
   width: 100%;
   height: 100%;
-  max-width: 1400px; /* Increased for better desktop layout */
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 clamp(1.5rem, 4vw, 4rem);
   display: flex;
@@ -33,11 +34,12 @@
 .expertise-grid {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: clamp(1.5rem, 3vh, 2.5rem); /* Dynamic gaps */
+  gap: clamp(2rem, 4vh, 3rem); /* Increased gaps for better spacing */
   width: 100%;
   height: 100%;
-  max-height: calc(100vh - clamp(4rem, 10vh, 8rem)); /* Account for padding */
+  /* Remove max-height constraint */
   align-items: center;
+  min-height: calc(100vh - clamp(8rem, 16vh, 12rem)); /* Account for increased padding */
 }
 
 /* Grid Areas */
@@ -95,13 +97,15 @@
 /* Responsive Design - Tablet */
 @media (max-width: 1024px) {
   .expertise-section {
-    max-height: none; /* Allow scrolling on tablet */
-    padding: clamp(3rem, 6vh, 5rem) 0;
+    /* Remove max-height restriction */
+    padding: clamp(4rem, 8vh, 6rem) 0;
+    margin-bottom: 3rem; /* More space on tablet */
   }
 
   .expertise-grid {
-    gap: clamp(2rem, 4vh, 3rem);
-    max-height: none;
+    gap: clamp(2.5rem, 5vh, 4rem);
+    /* Remove max-height restriction */
+    min-height: auto; /* Allow natural height on tablet */
   }
 
   .expertise-content {
@@ -112,18 +116,20 @@
 /* Responsive Design - Mobile */
 @media (max-width: 768px) {
   .expertise-section {
-    padding: 3rem 0;
+    padding: 4rem 0;
+    margin-bottom: 2rem;
   }
 
   .expertise-grid {
-    gap: 2rem;
+    gap: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .expertise-section {
-    padding: 2rem 0;
+    padding: 3rem 0;
     min-height: auto;
+    margin-bottom: 1.5rem;
   }
 
   .expertise-content {
@@ -131,7 +137,7 @@
   }
 
   .expertise-grid {
-    gap: 1.5rem;
+    gap: 2rem;
   }
 }
 

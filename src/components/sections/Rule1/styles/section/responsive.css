@@ -1,18 +1,70 @@
+/* Enhanced responsive breakpoints with improved spacing */
+
+/* Large desktop screens */
+@media (min-width: 1440px) {
+  .rule1-content {
+    max-width: 1600px; /* Larger max-width for very large screens */
+    padding: 0 8rem; /* More padding on very large screens */
+    gap: 8rem; /* Larger gap */
+  }
+
+  .rule1-text-content {
+    margin-right: 4rem;
+  }
+
+  .rule1-visual-content {
+    margin-left: 4rem;
+  }
+}
+
+/* Desktop screens */
+@media (min-width: 1200px) {
+  .rule1-content {
+    padding: 0 6rem;
+    gap: 6rem;
+  }
+
+  .rule1-text-content {
+    margin-right: 3rem;
+  }
+
+  .rule1-visual-content {
+    margin-left: 3rem;
+  }
+}
+
 /* Responsive breakpoints */
 @media (max-width: 1400px) {
   .rule1-content {
-    padding: 0 2vw;
-    gap: 2.5vw;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+    gap: clamp(1.5rem, 3vw, 4rem);
+  }
+
+  .rule1-text-content {
+    margin-right: clamp(0.5rem, 2vw, 2rem);
+  }
+
+  .rule1-visual-content {
+    margin-left: clamp(0.5rem, 2vw, 2rem);
   }
 
   .rule1-text-inner {
-    padding: 24px;
+    padding: clamp(20px, 3vw, 32px) clamp(16px, 2.5vw, 28px);
   }
 }
 
 @media (max-width: 1200px) {
   .rule1-content {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* Maintain equal columns */
+    gap: clamp(1rem, 2.5vw, 3rem);
+  }
+
+  .rule1-text-content {
+    margin-right: clamp(0.5rem, 1.5vw, 1.5rem);
+  }
+
+  .rule1-visual-content {
+    margin-left: clamp(0.5rem, 1.5vw, 1.5rem);
   }
 }
 
@@ -24,13 +76,15 @@
     min-height: 100vh;
     text-align: center;
     justify-items: center;
-    gap: 30px;
+    gap: 60px; /* Increased gap for better mobile spacing */
   }
 
   .rule1-text-content {
     order: 2;
+    justify-self: center; /* Center on mobile */
+    margin-right: 0; /* Remove margin on mobile */
     padding: 0;
-    max-width: 600px;
+    max-width: 700px;
     transform: translateY(20px);
   }
 
@@ -40,15 +94,18 @@
 
   .rule1-text-inner {
     transform: none !important;
-    padding: 20px;
+    padding: 32px 28px;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .rule1-visual-content {
     order: 1;
+    justify-self: center; /* Center on mobile */
+    margin-left: 0; /* Remove margin on mobile */
     padding: 0;
-    height: 400px;
+    height: 500px; /* Increased height for better mobile visibility */
     max-height: none;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
 
   .rule1-visible .rule1-visual-content {
@@ -63,26 +120,44 @@
 @media (max-width: 768px) {
   .rule1-content {
     padding: 40px 20px;
-    gap: 30px;
+    gap: 50px; /* Optimized mobile gap */
   }
 
   .rule1-text-inner {
-    padding: 24px;
-    background: rgba(0, 0, 0, 0.5);
+    padding: 28px 24px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
   }
 
   .rule1-visual-content {
-    height: 450px;
+    height: 460px; /* Increased for better mobile experience */
   }
 
-  /* Disable heavy effects on mobile */
+  /* Disable heavy effects on mobile for performance */
   .rule1-dynamic-gradient,
   .rule1-visual-particles {
     display: none;
   }
 
   .rule1-visual-glow {
-    filter: blur(40px);
+    filter: blur(30px);
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .rule1-content {
+    padding: 30px 16px;
+    gap: 40px;
+  }
+
+  .rule1-text-inner {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+
+  .rule1-visual-content {
+    height: 420px;
   }
 }
 

@@ -1,3 +1,4 @@
+// src/components/sections/Transform/index.tsx
 "use client";
 
 import { motion, useInView } from "framer-motion";
@@ -13,7 +14,6 @@ const usePerformanceMode = () => {
   const [isLowPerf, setIsLowPerf] = useState(false);
 
   useEffect(() => {
-    // Check for low-end devices or reduced motion preference
     const checkPerformance = () => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const memory = (navigator as any).deviceMemory;
@@ -37,26 +37,47 @@ export default function TransformSection() {
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const isLowPerf = usePerformanceMode();
 
-  // Use more efficient intersection observer settings
   const isInView = useInView(sectionRef, {
     once: true,
-    margin: "-50px",
-    amount: 0.2 // Trigger when 20% visible
+    margin: "-10%",
+    amount: 0.2
   });
 
-  // Delay heavy animations for better initial load
   useEffect(() => {
-    if (isInView && !isLowPerf) {
+    if (isInView) {
       const timer = setTimeout(() => {
         setShouldAnimate(true);
-      }, 300);
+      }, isLowPerf ? 100 : 300);
 
       return () => clearTimeout(timer);
-    } else if (isInView && isLowPerf) {
-      // Immediate for low performance mode
-      setShouldAnimate(true);
     }
   }, [isInView, isLowPerf]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
+  };
 
   return (
     <section
@@ -65,8 +86,8 @@ export default function TransformSection() {
       className={`transform-section ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
       aria-label="Transform your corporate content into viral success"
     >
-      {/* Background - conditional based on performance */}
-      <div className="transform-bg-container">
+      {/* Background */}
+      <div className="transform-bg-container" aria-hidden="true">
         {!isLowPerf ? (
           <TransformBackground isVisible={shouldAnimate} />
         ) : (
@@ -76,61 +97,39 @@ export default function TransformSection() {
 
       {/* Main Content Container */}
       <div className="transform-content">
-        <div className="transform-inner">
+        <motion.div
+          className="transform-container"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {/* Headline Section */}
           <motion.div
-            className="transform-grid"
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.12,
-                  delayChildren: 0.1
-                }
-              }
-            }}
+            className="transform-headline-wrapper"
+            variants={itemVariants}
           >
-            {/* Left Column - Main Content */}
+            <TransformHeadline isInView={isInView} isLowPerf={isLowPerf} />
+          </motion.div>
+
+          {/* Content Grid */}
+          <div className="transform-content-grid">
+            {/* Left Column - CTA */}
             <motion.div
-              className="transform-left"
-              variants={{
-                hidden: { opacity: 0, x: -40, y: 20 },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  transition: {
-                    duration: 0.8,
-                    ease: [0.22, 1, 0.36, 1]
-                  }
-                }
-              }}
+              className="transform-cta-wrapper"
+              variants={itemVariants}
             >
-              <TransformHeadline isInView={isInView} isLowPerf={isLowPerf} />
               <TransformCTA isInView={isInView} />
             </motion.div>
 
-            {/* Right Column - Supporting Text */}
+            {/* Right Column - Supporting Text/Chat */}
             <motion.div
-              className="transform-right"
-              variants={{
-                hidden: { opacity: 0, x: 40, y: 20 },
-                visible: {
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                  transition: {
-                    duration: 0.8,
-                    ease: [0.22, 1, 0.36, 1],
-                    delay: 0.15
-                  }
-                }
-              }}
+              className="transform-chat-wrapper"
+              variants={itemVariants}
             >
               <TransformSupportingText isInView={isInView} isLowPerf={isLowPerf} />
             </motion.div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

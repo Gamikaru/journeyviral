@@ -1,17 +1,160 @@
 // File: src/components/sections/Rule1/Rule1PhoneMockup.tsx
 'use client'
 
-import React, { useState } from 'react';
-import { Heart, MessageCircle, Share2, Bookmark, MoreVertical, Play, User, Music, ShoppingBag, Camera } from 'lucide-react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { Heart, MessageCircle, Share2, Bookmark, MoreVertical } from 'lucide-react';
 import './styles/phone/device.css';
 import './styles/phone/content.css';
 import './styles/phone/effects.css';
 
+interface FeedPost {
+  id: number;
+  username: string;
+  avatar: string;
+  time: string;
+  bgGradient: string;
+  textColor: string;
+  likes: string;
+  comments: string;
+  shares: string;
+  textSegment: string;
+  isHighlight: boolean;
+}
+
 const Rule1PhoneMockup: React.FC = () => {
   const [activePost, setActivePost] = useState<number | null>(null);
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
+  const [visiblePosts, setVisiblePosts] = useState(1);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const feedContainerRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleLike = (postId: number) => {
+  // Memoized feed posts data
+  const feedPosts: FeedPost[] = useMemo(() => [
+    {
+      id: 1,
+      username: "contentcreator",
+      avatar: "CC",
+      time: "5m",
+      bgGradient: "linear-gradient(135deg, #00ffff 0%, #0088cc 100%)",
+      textColor: "#001a2e",
+      likes: "2.1K",
+      comments: "156",
+      shares: "89",
+      textSegment: "Most creators (especially brands) make content as if...",
+      isHighlight: false
+    },
+    {
+      id: 2,
+      username: "socialmedia_guru",
+      avatar: "SG",
+      time: "8m",
+      bgGradient: "linear-gradient(135deg, #9333ea 0%, #6b21a8 100%)",
+      textColor: "#ffffff",
+      likes: "1.8K",
+      comments: "234",
+      shares: "67",
+      textSegment: "people are binge-watching their feed.",
+      isHighlight: false
+    },
+    {
+      id: 3,
+      username: "viral_insights",
+      avatar: "VI",
+      time: "12m",
+      bgGradient: "linear-gradient(135deg, #f8bbd9 0%, #f472b6 100%)",
+      textColor: "#4a0e2d",
+      likes: "3.2K",
+      comments: "89",
+      shares: "145",
+      textSegment: "They're not.",
+      isHighlight: true
+    },
+    {
+      id: 4,
+      username: "attention_hacker",
+      avatar: "AH",
+      time: "15m",
+      bgGradient: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)",
+      textColor: "#451a03",
+      likes: "1.9K",
+      comments: "178",
+      shares: "92",
+      textSegment: "Your vid's crammed between memes, hot takes...",
+      isHighlight: false
+    },
+    {
+      id: 5,
+      username: "feed_reality",
+      avatar: "FR",
+      time: "18m",
+      bgGradient: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+      textColor: "#ffffff",
+      likes: "2.7K",
+      comments: "345",
+      shares: "128",
+      textSegment: "and a cat doing backflips.",
+      isHighlight: false
+    },
+    {
+      id: 6,
+      username: "standout_strategy",
+      avatar: "SS",
+      time: "22m",
+      bgGradient: "linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)",
+      textColor: "#ffffff",
+      likes: "4.1K",
+      comments: "567",
+      shares: "234",
+      textSegment: "So... how are you standing out?",
+      isHighlight: true
+    }
+  ], []);
+
+  // Optimized auto-scroll with pause/resume functionality
+  const startAutoScroll = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    intervalRef.current = setInterval(() => {
+      if (!isPaused && visiblePosts < feedPosts.length) {
+        setVisiblePosts(prev => {
+          const newCount = prev + 1;
+
+          // Smooth scroll with optimized timing
+          if (feedContainerRef.current) {
+            const container = feedContainerRef.current;
+            const targetScroll = (newCount - 1) * container.clientHeight;
+
+            container.scrollTo({
+              top: targetScroll,
+              behavior: 'smooth'
+            });
+          }
+
+          return newCount;
+        });
+
+        setIsScrolling(true);
+        setTimeout(() => setIsScrolling(false), 1000);
+      }
+    }, 4500); // Optimized timing for better readability
+  }, [isPaused, visiblePosts, feedPosts.length]);
+
+  useEffect(() => {
+    startAutoScroll();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [startAutoScroll]);
+
+  // Optimized like handler with haptic feedback
+  const handleLike = useCallback((postId: number) => {
+    // Add haptic feedback for mobile devices
+    if ('vibrate' in navigator) {
+      navigator.vibrate(50);
+    }
+
     setLikedPosts(prev => {
       const newSet = new Set(prev);
       if (newSet.has(postId)) {
@@ -21,55 +164,35 @@ const Rule1PhoneMockup: React.FC = () => {
       }
       return newSet;
     });
-  };
+  }, []);
 
-  const feedPosts = [
-    {
-      id: 1,
-      username: "viralking",
-      avatar: <User size={16} />,
-      time: "2m",
-      type: "video",
-      icon: <Play size={32} />,
-      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      likes: "10.2K",
-      comments: "856",
-      shares: "2.1K",
-      caption: "Wait for it... 🔥"
-    },
-    {
-      id: 2,
-      username: "trendsetter",
-      avatar: <Music size={16} />,
-      time: "15m",
-      type: "reel",
-      icon: <Music size={32} />,
-      gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-      likes: "25.8K",
-      comments: "1.2K",
-      shares: "5.3K",
-      caption: "This sound is everything 🎵"
-    },
-    {
-      id: 3,
-      username: "creativehub",
-      avatar: <Camera size={16} />,
-      time: "1h",
-      type: "carousel",
-      icon: <ShoppingBag size={32} />,
-      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-      likes: "8.9K",
-      comments: "423",
-      shares: "892",
-      caption: "Swipe for the transformation →"
+  // Pause auto-scroll on hover/focus
+  const handleMouseEnter = useCallback((postId: number) => {
+    setActivePost(postId);
+    setIsPaused(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setActivePost(null);
+    setIsPaused(false);
+  }, []);
+
+  // Keyboard navigation support
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown' && visiblePosts < feedPosts.length) {
+      e.preventDefault();
+      setVisiblePosts(prev => Math.min(prev + 1, feedPosts.length));
+    } else if (e.key === 'ArrowUp' && visiblePosts > 1) {
+      e.preventDefault();
+      setVisiblePosts(prev => Math.max(prev - 1, 1));
     }
-  ];
+  }, [visiblePosts, feedPosts.length]);
 
   return (
     <div className="rule1-phone-container">
       <div className="rule1-phone-wrapper">
         <div className="rule1-phone-device">
-          {/* Enhanced metallic bezel with gradient */}
+          {/* Enhanced metallic bezel */}
           <div className="rule1-phone-bezel">
             <div className="rule1-phone-bezel-gradient" />
             <div className="rule1-phone-bezel-shine" />
@@ -77,7 +200,7 @@ const Rule1PhoneMockup: React.FC = () => {
 
           {/* Phone frame */}
           <div className="rule1-phone-frame">
-            {/* Enhanced screen glass effect */}
+            {/* Enhanced screen effects */}
             <div className="rule1-screen-glass" />
             <div className="rule1-screen-reflection" />
 
@@ -103,98 +226,161 @@ const Rule1PhoneMockup: React.FC = () => {
               </div>
             </div>
 
-            {/* Content area with visible feed */}
-            <div className="rule1-phone-content" style={{ zIndex: 10, position: 'relative' }}>
+            {/* Enhanced content area */}
+            <div
+              className="rule1-phone-content"
+              onKeyDown={handleKeyDown}
+              tabIndex={0}
+              role="application"
+              aria-label="Social media feed demonstration"
+            >
               {/* App header */}
               <div className="rule1-app-header">
-                <h3 className="rule1-app-title">For You</h3>
-                <div className="rule1-app-nav">
+                <nav className="rule1-app-nav" role="navigation" aria-label="Feed navigation">
                   <span className="rule1-nav-item rule1-nav-active">For You</span>
                   <span className="rule1-nav-item">Following</span>
-                </div>
+                </nav>
               </div>
 
-              {/* Feed container */}
-              <div className="rule1-feed-container" style={{ position: 'relative', zIndex: 12 }}>
-                {feedPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className={`rule1-feed-item ${activePost === post.id ? 'rule1-feed-item-active' : ''}`}
-                    style={{ position: 'relative', zIndex: 15 }}
-                    onMouseEnter={() => setActivePost(post.id)}
-                    onMouseLeave={() => setActivePost(null)}
-                  >
-                    {/* Feed header */}
-                    <div className="rule1-feed-header">
-                      <div className="rule1-avatar">
-                        <div className="rule1-avatar-ring">
-                          <div className="rule1-avatar-content">
+              {/* Optimized scrollable feed */}
+              <div
+                ref={feedContainerRef}
+                className={`rule1-feed-container rule1-scrollable-feed ${isScrolling ? 'scrolling' : ''}`}
+                role="feed"
+                aria-live="polite"
+                aria-label="Content demonstrating how posts get lost in feeds"
+              >
+                <div className="rule1-feed-scroll-content">
+                  {feedPosts.slice(0, visiblePosts).map((post, index) => (
+                    <article
+                      key={post.id}
+                      className={`rule1-feed-item rule1-tiktok-post ${
+                        activePost === post.id ? 'rule1-feed-item-active' : ''
+                      } ${post.isHighlight ? 'rule1-highlight-post' : ''}`}
+                      style={{
+                        background: post.bgGradient,
+                        animationDelay: `${index * 0.2}s`,
+                        opacity: index === visiblePosts - 1 ? 0 : 1,
+                        animation: index === visiblePosts - 1 ? 'fadeInUp 1s ease forwards' : 'none'
+                      }}
+                      onMouseEnter={() => handleMouseEnter(post.id)}
+                      onMouseLeave={handleMouseLeave}
+                      aria-label={`Post by ${post.username}: ${post.textSegment}`}
+                    >
+                      {/* Post header */}
+                      <header className="rule1-tiktok-header">
+                        <div className="rule1-tiktok-avatar" aria-hidden="true">
+                          <div
+                            className="rule1-avatar-letter"
+                            style={{ color: post.textColor }}
+                          >
                             {post.avatar}
                           </div>
                         </div>
-                      </div>
-                      <div className="rule1-feed-meta">
-                        <div className="rule1-username">@{post.username}</div>
-                        <div className="rule1-timestamp">{post.time} ago</div>
-                      </div>
-                      <button className="rule1-more-button">
-                        <MoreVertical size={20} />
-                      </button>
-                    </div>
-
-                    {/* Media content */}
-                    <div
-                      className="rule1-feed-media"
-                      style={{ background: post.gradient }}
-                    >
-                      <div className="rule1-media-overlay">
-                        <div className="rule1-media-icon">
-                          {post.icon}
-                        </div>
-                        {post.type === 'video' && (
-                          <div className="rule1-video-indicator">
-                            <Play size={16} fill="white" />
-                            <span>0:30</span>
+                        <div className="rule1-tiktok-meta">
+                          <div
+                            className="rule1-tiktok-username"
+                            style={{ color: post.textColor }}
+                          >
+                            @{post.username}
                           </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Caption */}
-                    <div className="rule1-feed-caption">
-                      <p>{post.caption}</p>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="rule1-feed-actions">
-                      <div className="rule1-action-group">
+                          <time
+                            className="rule1-tiktok-timestamp"
+                            style={{ color: `${post.textColor}99` }}
+                            dateTime={`${post.time} ago`}
+                          >
+                            {post.time} ago
+                          </time>
+                        </div>
                         <button
-                          className={`rule1-action-button rule1-like-button ${likedPosts.has(post.id) ? 'rule1-liked' : ''}`}
-                          onClick={() => handleLike(post.id)}
+                          className="rule1-tiktok-more"
+                          style={{ color: `${post.textColor}cc` }}
+                          aria-label="More options"
                         >
-                          <Heart size={22} fill={likedPosts.has(post.id) ? '#ff0080' : 'none'} />
-                          <span>{post.likes}</span>
+                          <MoreVertical size={18} />
                         </button>
-                        <button className="rule1-action-button">
-                          <MessageCircle size={22} />
-                          <span>{post.comments}</span>
-                        </button>
-                        <button className="rule1-action-button">
-                          <Share2 size={22} />
-                          <span>{post.shares}</span>
-                        </button>
-                      </div>
-                      <button className="rule1-action-button">
-                        <Bookmark size={22} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                      </header>
 
-              {/* Scroll indicator */}
-              <div className="rule1-scroll-indicator">
-                <div className="rule1-scroll-thumb" />
+                      {/* Main content */}
+                      <div className="rule1-tiktok-content">
+                        <p
+                          className={`rule1-tiktok-text ${
+                            post.isHighlight ? 'rule1-highlight-text' : ''
+                          }`}
+                          style={{ color: post.textColor }}
+                        >
+                          {post.textSegment}
+                        </p>
+
+                        {/* Decorative elements */}
+                        <div className="rule1-text-decoration-dots" aria-hidden="true">
+                          <span style={{ backgroundColor: `${post.textColor}33` }}></span>
+                          <span style={{ backgroundColor: `${post.textColor}33` }}></span>
+                          <span style={{ backgroundColor: `${post.textColor}33` }}></span>
+                        </div>
+                      </div>
+
+                      {/* Enhanced actions */}
+                      <footer className="rule1-tiktok-actions">
+                        <div className="rule1-tiktok-action-group" role="group" aria-label="Post actions">
+                          <button
+                            className={`rule1-tiktok-action rule1-like-action ${
+                              likedPosts.has(post.id) ? 'rule1-liked' : ''
+                            }`}
+                            onClick={() => handleLike(post.id)}
+                            style={{
+                              color: likedPosts.has(post.id) ? '#ff0080' : `${post.textColor}dd`
+                            }}
+                            aria-label={`${likedPosts.has(post.id) ? 'Unlike' : 'Like'} post - ${post.likes} likes`}
+                          >
+                            <Heart
+                              size={20}
+                              fill={likedPosts.has(post.id) ? '#ff0080' : 'none'}
+                            />
+                            <span>{post.likes}</span>
+                          </button>
+
+                          <button
+                            className="rule1-tiktok-action"
+                            style={{ color: `${post.textColor}dd` }}
+                            aria-label={`Comment on post - ${post.comments} comments`}
+                          >
+                            <MessageCircle size={20} />
+                            <span>{post.comments}</span>
+                          </button>
+
+                          <button
+                            className="rule1-tiktok-action"
+                            style={{ color: `${post.textColor}dd` }}
+                            aria-label={`Share post - ${post.shares} shares`}
+                          >
+                            <Share2 size={20} />
+                            <span>{post.shares}</span>
+                          </button>
+                        </div>
+
+                        <button
+                          className="rule1-tiktok-action"
+                          style={{ color: `${post.textColor}dd` }}
+                          aria-label="Bookmark post"
+                        >
+                          <Bookmark size={20} />
+                        </button>
+                      </footer>
+                    </article>
+                  ))}
+
+                  {/* Enhanced loading indicator */}
+                  {visiblePosts < feedPosts.length && (
+                    <div className="rule1-loading-next" aria-live="polite">
+                      <div className="rule1-loading-dots" aria-label="Loading next post">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -210,22 +396,9 @@ const Rule1PhoneMockup: React.FC = () => {
           <div className="rule1-edge-light rule1-edge-bottom" />
           <div className="rule1-edge-light rule1-edge-left" />
         </div>
-
-        {/* Floating UI elements */}
-        <div className="rule1-floating-elements">
-          <div className="rule1-floating-heart">
-            <Heart size={24} fill="#ff0080" />
-          </div>
-          <div className="rule1-floating-comment">
-            <MessageCircle size={20} fill="#00d4ff" />
-          </div>
-          <div className="rule1-floating-share">
-            <Share2 size={22} fill="#9333ea" />
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
-export default Rule1PhoneMockup;
+export default React.memo(Rule1PhoneMockup);
