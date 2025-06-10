@@ -1,12 +1,12 @@
 /* Responsive breakpoints */
 @media (max-width: 1400px) {
   .rule1-content {
-    padding: 0 40px;
-    gap: 60px;
+    padding: 0 2vw;
+    gap: 2.5vw;
   }
 
   .rule1-text-inner {
-    padding: 32px;
+    padding: 24px;
   }
 }
 
@@ -19,19 +19,19 @@
 @media (max-width: 1024px) {
   .rule1-content {
     grid-template-columns: 1fr;
-    padding: 60px 30px;
+    padding: 40px 30px;
     height: auto;
     min-height: 100vh;
     text-align: center;
     justify-items: center;
-    gap: 40px;
+    gap: 30px;
   }
 
   .rule1-text-content {
     order: 2;
     padding: 0;
     max-width: 600px;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
 
   .rule1-visible .rule1-text-content {
@@ -40,13 +40,14 @@
 
   .rule1-text-inner {
     transform: none !important;
-    padding: 28px;
+    padding: 20px;
   }
 
   .rule1-visual-content {
     order: 1;
     padding: 0;
-    height: 500px;
+    height: 400px;
+    max-height: none;
     transform: scale(0.9);
   }
 

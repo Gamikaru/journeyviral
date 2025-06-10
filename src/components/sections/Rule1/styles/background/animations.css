@@ -1,3 +1,5 @@
+/* File: src/components/sections/Rule1/styles/background/animations.css */
+
 /* Gradient animations */
 .rule1-gradient {
   animation: float 30s ease-in-out infinite;

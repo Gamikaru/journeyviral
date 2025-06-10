@@ -1,3 +1,4 @@
+// File: src/components/sections/Rule1/Rule1Headline.tsx
 import React from 'react';
 import './styles/typography/base.css';
 import './styles/typography/headline.css';
@@ -10,12 +11,8 @@ const Rule1Headline: React.FC = () => {
         <span className="rule1-label-glow" aria-hidden="true">RULE #1</span>
       </h2>
       <h3 className="rule1-main-headline">
-        <span className="rule1-headline-line rule1-headline-glow">YOUR AUDIENCE</span>
-        <span className="rule1-headline-line rule1-headline-glow">ISN'T ON YOUR</span>
-        <span className="rule1-headline-line">
-          <span className="rule1-headline-glow">PAGE,</span> <span className="rule1-headline-italic">YOU'RE ON</span>
-        </span>
-        <span className="rule1-headline-line rule1-headline-italic">THEIR FEED.</span>
+        <span className="rule1-headline-line rule1-headline-glow">YOUR AUDIENCE ISN'T ON YOUR PAGE.</span>
+        <span className="rule1-headline-line rule1-headline-white">YOU'RE ON THEIR FEED.</span>
       </h3>
     </div>
   );

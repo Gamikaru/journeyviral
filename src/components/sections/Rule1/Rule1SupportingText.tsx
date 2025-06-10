@@ -1,3 +1,4 @@
+// File: src/components/sections/Rule1/Rule1SupportingText.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import './styles/typography/base.css';
 import './styles/typography/supporting-text.css';
@@ -13,44 +14,6 @@ const Rule1SupportingText: React.FC = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredWord, setHoveredWord] = useState<number | null>(null);
-  const [glitchActive, setGlitchActive] = useState(false);
-
-  // Split text into words for animation
-  const paragraph1Words: WordSpan[] = [
-    { text: 'Most' },
-    { text: 'creators—especially' },
-    { text: 'brands—make' },
-    { text: 'content' },
-    { text: 'like' },
-    { text: 'people' },
-    { text: 'are' },
-    { text: 'binge-watching' },
-    { text: 'their' },
-    { text: 'feed.' },
-    { text: "They're", isHighlight: true },
-    { text: 'not.', isHighlight: true }
-  ];
-
-  const paragraph2Words: WordSpan[] = [
-    { text: 'Your' },
-    { text: "vid's" },
-    { text: 'crammed' },
-    { text: 'between' },
-    { text: 'memes,' },
-    { text: 'hot' },
-    { text: 'takes,' },
-    { text: 'and' },
-    { text: 'a' },
-    { text: 'cat' },
-    { text: 'doing' },
-    { text: 'backflips.' },
-    { text: 'So...', isStrong: true },
-    { text: 'how', isStrong: true },
-    { text: 'are', isStrong: true },
-    { text: 'you', isStrong: true },
-    { text: 'standing', isStrong: true },
-    { text: 'out?', isStrong: true }
-  ];
 
   // Intersection Observer for visibility
   useEffect(() => {
@@ -58,8 +21,6 @@ const Rule1SupportingText: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Trigger glitch effect after delay
-          setTimeout(() => setGlitchActive(true), 1200);
         }
       },
       { threshold: 0.3 }
@@ -76,48 +37,60 @@ const Rule1SupportingText: React.FC = () => {
     };
   }, []);
 
-  // Glitch effect for highlight
-  useEffect(() => {
-    if (!glitchActive) return;
+  const renderParagraphWithSpans = (text: string, specialWords: WordSpan[]) => {
+    let result = text;
+    let spanIndex = 0;
 
-    const glitchInterval = setInterval(() => {
-      setGlitchActive(prev => !prev);
-    }, 3000);
+    specialWords.forEach((word) => {
+      const globalIndex = spanIndex++;
+      const isHovered = hoveredWord === globalIndex;
 
-    return () => clearInterval(glitchInterval);
-  }, [glitchActive]);
+      let className = 'rule1-word';
+      if (word.isHighlight) className += ' rule1-word-highlight';
+      if (word.isStrong) className += ' rule1-word-strong';
+      if (isHovered) className += ' rule1-word-hovered';
+      if (isVisible) className += ' rule1-word-visible';
 
-  const renderWord = (word: WordSpan, index: number, paragraphIndex: number) => {
-    const globalIndex = paragraphIndex === 0 ? index : paragraph1Words.length + index;
-    const isHovered = hoveredWord === globalIndex;
+      const spanElement = `<span
+        class="${className}"
+        data-index="${globalIndex}"
+        data-glow="${word.isHighlight || word.isStrong ? 'true' : 'false'}"
+      >${word.text}</span>`;
+      result = result.replace(word.text, spanElement);
+    });
 
-    let className = 'rule1-word';
-    if (word.isHighlight) className += ' rule1-word-highlight';
-    if (word.isStrong) className += ' rule1-word-strong';
-    if (isHovered) className += ' rule1-word-hovered';
-    if (isVisible) className += ' rule1-word-visible';
-
-    return (
-      <span
-        key={globalIndex}
-        className={className}
-        onMouseEnter={() => setHoveredWord(globalIndex)}
-        onMouseLeave={() => setHoveredWord(null)}
-        style={{
-          animationDelay: `${globalIndex * 0.05}s`
-        }}
-      >
-        {word.isHighlight && glitchActive ? (
-          <span className="rule1-glitch" data-text={word.text}>
-            {word.text}
-          </span>
-        ) : (
-          word.text
-        )}
-        {index < (paragraphIndex === 0 ? paragraph1Words.length - 1 : paragraph2Words.length - 1) && ' '}
-      </span>
-    );
+    return result;
   };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const index = target.getAttribute('data-index');
+    if (index) {
+      setHoveredWord(parseInt(index));
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredWord(null);
+  };
+
+  // Only special words that need formatting
+  const paragraph1SpecialWords: WordSpan[] = [
+    { text: "They're", isHighlight: true },
+    { text: "not.", isHighlight: true }
+  ];
+
+  const paragraph2SpecialWords: WordSpan[] = [
+    { text: "So...", isStrong: true },
+    { text: "how", isStrong: true },
+    { text: "are", isStrong: true },
+    { text: "you", isStrong: true },
+    { text: "standing", isStrong: true },
+    { text: "out?", isStrong: true }
+  ];
+
+  const paragraph1Text = "Most creators—especially brands—make content like people are binge-watching their feed. They're not.";
+  const paragraph2Text = "Your vid's crammed between memes, hot takes, and a cat doing backflips. So... how are you standing out?";
 
   return (
     <div ref={textRef} className="rule1-supporting-wrapper">
@@ -127,24 +100,23 @@ const Rule1SupportingText: React.FC = () => {
 
       {/* Main content */}
       <div className="rule1-supporting-content">
-        <p className="rule1-supporting-paragraph">
-          <span className="rule1-paragraph-inner">
-            {paragraph1Words.map((word, index) => renderWord(word, index, 0))}
-          </span>
+        <p
+          className="rule1-supporting-paragraph"
+          dangerouslySetInnerHTML={{
+            __html: renderParagraphWithSpans(paragraph1Text, paragraph1SpecialWords)
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
 
-          {/* Emphasis particles */}
-          <span className="rule1-emphasis-particles">
-            <span className="rule1-particle rule1-particle-1" />
-            <span className="rule1-particle rule1-particle-2" />
-            <span className="rule1-particle rule1-particle-3" />
-          </span>
-        </p>
-
-        <p className="rule1-detail-paragraph">
-          <span className="rule1-paragraph-inner">
-            {paragraph2Words.map((word, index) => renderWord(word, index, 1))}
-          </span>
-        </p>
+        <p
+          className="rule1-detail-paragraph"
+          dangerouslySetInnerHTML={{
+            __html: renderParagraphWithSpans(paragraph2Text, paragraph2SpecialWords)
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
 
         {/* Interactive hint */}
         <div className={`rule1-interaction-hint ${isVisible ? 'rule1-hint-visible' : ''}`}>

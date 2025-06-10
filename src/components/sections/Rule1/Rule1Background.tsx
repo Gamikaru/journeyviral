@@ -1,3 +1,4 @@
+// File: src/components/sections/Rule1/Rule1Background.tsx
 import React from 'react';
 import './styles/background/gradients.css';
 import './styles/background/effects.css';

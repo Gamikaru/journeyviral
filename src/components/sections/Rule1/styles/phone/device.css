@@ -1,36 +1,24 @@
+/* File: src/components/sections/Rule1/styles/phone/device.css */
+
 .rule1-phone-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  height: 700px;
+  max-width: 480px;
+  height: 580px;
   perspective: 1000px;
 }
 
 /* Professor image with glass morphism */
 .rule1-professor-image {
-  position: absolute;
-  inset: -50px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
 .rule1-professor-glass {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  display: none;
 }
 
 .rule1-professor-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0.4;
-  filter: brightness(0.8) contrast(1.2) saturate(1.2);
-  animation: professor-float 20s ease-in-out infinite;
+  display: none;
 }
 
 /* Phone wrapper for 3D effects */
@@ -47,10 +35,9 @@
 /* Phone device */
 .rule1-phone-device {
   position: relative;
-  width: 320px;
-  height: 680px;
+  width: 280px;
+  height: 560px;
   transform-style: preserve-3d;
-  animation: phone-float 10s ease-in-out infinite;
   transition: transform 0.3s ease;
 }
 
@@ -58,17 +45,40 @@
   transform: rotateY(-5deg) rotateX(2deg);
 }
 
-/* Metallic bezel */
+/* Enhanced metallic bezel */
 .rule1-phone-bezel {
   position: absolute;
-  inset: -2px;
+  inset: -3px;
   background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  border-radius: 42px;
+  border-radius: 44px;
   z-index: 2;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 10px 40px rgba(0, 0, 0, 0.8),
+    0 15px 50px rgba(0, 0, 0, 0.8),
+    0 5px 20px rgba(0, 0, 0, 0.6),
     inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+/* Gradient border effect */
+.rule1-phone-bezel-gradient {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg,
+    rgba(0, 212, 255, 0.2),
+    rgba(147, 51, 234, 0.2),
+    rgba(255, 0, 128, 0.2),
+    rgba(0, 212, 255, 0.2)
+  );
+  opacity: 0;
+  animation: bezel-glow 4s ease-in-out infinite;
+  border-radius: 44px;
+}
+
+@keyframes bezel-glow {
+  0%, 100% { opacity: 0; transform: rotate(0deg); }
+  50% { opacity: 0.6; transform: rotate(180deg); }
 }
 
 .rule1-phone-bezel-shine {
@@ -80,12 +90,12 @@
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 20%,
-    transparent 80%,
-    rgba(255, 255, 255, 0.05) 100%
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 15%,
+    transparent 85%,
+    rgba(255, 255, 255, 0.08) 100%
   );
-  border-radius: 42px;
+  border-radius: 44px;
 }
 
 /* Phone frame */
@@ -114,6 +124,30 @@
   );
   pointer-events: none;
   z-index: 100;
+}
+
+/* Screen reflection effect */
+.rule1-screen-reflection {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 40%
+  );
+  transform: rotate(-45deg);
+  opacity: 0;
+  animation: reflection-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 101;
+}
+
+@keyframes reflection-sweep {
+  0%, 100% { opacity: 0; transform: rotate(-45deg) translateX(-100%); }
+  50% { opacity: 0.3; transform: rotate(-45deg) translateX(0%); }
 }
 
 /* Notch */
@@ -251,24 +285,23 @@
 @media (max-width: 1024px) {
   .rule1-phone-container {
     max-width: 400px;
-    height: 550px;
-  }
-
-  .rule1-phone-device {
-    width: 280px;
-    height: 580px;
-  }
-}
-
-@media (max-width: 768px) {
-  .rule1-phone-container {
-    max-width: 340px;
     height: 500px;
   }
 
   .rule1-phone-device {
     width: 260px;
-    height: 520px;
-    animation: none;
+    height: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rule1-phone-container {
+    max-width: 320px;
+    height: 420px;
+  }
+
+  .rule1-phone-device {
+    width: 240px;
+    height: 400px;
   }
 }
