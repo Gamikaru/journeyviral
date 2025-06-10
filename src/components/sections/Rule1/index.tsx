@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react';
-import Rule1Background from './Rule1Background';
 import Rule1Headline from './Rule1Headline';
 import Rule1PhoneMockup from './Rule1PhoneMockup';
 import './styles/section/layout.css';
@@ -12,7 +11,6 @@ const Rule1Section: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
 
   // Intersection Observer for visibility
@@ -33,30 +31,6 @@ const Rule1Section: React.FC = () => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
-
-  // Scroll progress tracking
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const sectionHeight = rect.height;
-
-      // Calculate how much of the section has been scrolled through
-      const scrolled = Math.max(0, Math.min(1,
-        (windowHeight - rect.top) / (windowHeight + sectionHeight)
-      ));
-
-      setScrollProgress(scrolled);
-    };
-
-    const throttledScroll = throttle(handleScroll, 16); // ~60fps
-    window.addEventListener('scroll', throttledScroll);
-    handleScroll(); // Initial call
-
-    return () => window.removeEventListener('scroll', throttledScroll);
   }, []);
 
   // Mouse tracking for interactive effects
@@ -109,18 +83,14 @@ const Rule1Section: React.FC = () => {
     <section
       ref={sectionRef}
       id="rule1"
-      className={`rule1-section ${isVisible ? 'rule1-visible' : ''}`}
+      className={`rule1-section rule1-section-unified ${isVisible ? 'rule1-visible' : ''}`}
       aria-label="Rule 1 - Your audience isn't on your page"
       style={{
         '--mouse-x': mousePosition.x,
         '--mouse-y': mousePosition.y,
-        '--scroll-progress': scrollProgress,
       } as React.CSSProperties}
     >
-      <Rule1Background />
-
-      {/* Dynamic gradient overlay */}
-      <div className="rule1-dynamic-gradient" />
+      {/* Remove Rule1Background - now handled by UnifiedBackground */}
 
       {/* Content wrapper with glass effect */}
       <div className="rule1-content-wrapper">
@@ -151,10 +121,7 @@ const Rule1Section: React.FC = () => {
         </div>
       </div>
 
-      {/* Section progress indicator */}
-      <div className="rule1-progress-indicator">
-        <div className="rule1-progress-bar" />
-      </div>
+
 
       {/* Noise overlay */}
       <div className="rule1-section-noise" />

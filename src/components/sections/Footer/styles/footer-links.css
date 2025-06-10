@@ -1,0 +1,112 @@
+/* Footer Links Styles */
+.footer-links-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+}
+
+/* Link groups */
+.footer-link-group {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.footer-link-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #00ffff;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Link list */
+.footer-link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-link-list li {
+    margin-bottom: 0.75rem;
+}
+
+/* Individual links */
+.footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.footer-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, #00ffff 0%, #00ff88 100%);
+    transition: width 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    padding-left: 0.5rem;
+}
+
+.footer-link:hover::before {
+    width: 100%;
+}
+
+.link-text {
+    transition: transform 0.3s ease;
+}
+
+.link-arrow {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    color: #00ff88;
+}
+
+.footer-link:hover .link-text {
+    transform: translateX(5px);
+}
+
+.footer-link:hover .link-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footer-links-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-links-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .footer-link {
+        justify-content: center;
+    }
+
+    .footer-link:hover {
+        padding-left: 0;
+    }
+}

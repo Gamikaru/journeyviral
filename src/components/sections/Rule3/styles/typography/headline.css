@@ -1,0 +1,109 @@
+.rule3-headline-container {
+  position: relative;
+  z-index: 2;
+}
+
+.rule3-headline-number {
+  font-size: 8rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, #9333ea, #ec4899, #f59e0b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.rule3-headline-main {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.rule3-headline-accent {
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.rule3-headline-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.rule3-headline-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.rule3-headline-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  border-radius: 2px;
+  margin-top: 1rem;
+  transform-origin: left;
+}
+
+/* Responsive typography */
+@media (max-width: 1024px) {
+  .rule3-headline-number {
+    font-size: 6rem;
+  }
+
+  .rule3-headline-main {
+    font-size: 3rem;
+  }
+
+  .rule3-headline-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .rule3-headline-number {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rule3-headline-main {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .rule3-headline-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rule3-headline-number {
+    font-size: 3rem;
+  }
+
+  .rule3-headline-main {
+    font-size: 1.875rem;
+  }
+
+  .rule3-headline-subtitle {
+    font-size: 0.9rem;
+  }
+}

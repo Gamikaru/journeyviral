@@ -1,3 +1,4 @@
+// src/components/sections/Transform/components/ChatBubble.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -22,15 +23,15 @@ const ChatBubble = memo(function ChatBubble({
   const bubbleVariants = {
     hidden: {
       opacity: 0,
-      scale: 0.8,
+      scale: 0.9,
       x: 20,
-      filter: "blur(4px)"
+      y: 10
     },
     visible: {
       opacity: 1,
       scale: 1,
       x: 0,
-      filter: "blur(0px)",
+      y: 0,
       transition: {
         duration: 0.4,
         ease: [0.22, 1, 0.36, 1]
@@ -38,10 +39,11 @@ const ChatBubble = memo(function ChatBubble({
     },
     exit: {
       opacity: 0,
-      scale: 0.9,
+      scale: 0.95,
       x: -10,
+      y: -5,
       transition: {
-        duration: 0.25,
+        duration: 0.3,
         ease: "easeInOut"
       }
     }
@@ -49,31 +51,29 @@ const ChatBubble = memo(function ChatBubble({
 
   // Format text with line breaks
   const formatText = (text: string) => {
-    return text.split('\n').map((line, index) => (
-      <span key={index}>
+    return text.split('\n').map((line, index, array) => (
+      <span key={index} className="bubble-text-line">
         {line}
-        {index < text.split('\n').length - 1 && <br />}
+        {index < array.length - 1 && <br />}
       </span>
     ));
   };
 
   if (!shouldAnimate) {
     return isVisible ? (
-      <div className={`chat-bubble chat-bubble-${type}`}>
-        <div className="bubble-border">
-          <div className="border-glow" />
-        </div>
-        <div className="bubble-content">
+      <div className={`chat-bubble-modern chat-bubble-${type}`}>
+        <div className="bubble-glow-layer" aria-hidden="true" />
+        <div className="bubble-glass">
           <p className="bubble-text">{formatText(text)}</p>
         </div>
-        <div className="bubble-tail" />
+        <div className="bubble-tail" aria-hidden="true" />
       </div>
     ) : null;
   }
 
   return (
     <motion.div
-      className={`chat-bubble chat-bubble-${type}`}
+      className={`chat-bubble-modern chat-bubble-${type}`}
       variants={bubbleVariants}
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
@@ -82,15 +82,32 @@ const ChatBubble = memo(function ChatBubble({
       role="article"
       aria-label={`Message: ${text}`}
     >
-      <div className="bubble-border" aria-hidden="true">
-        <div className="border-glow" />
-      </div>
+      {/* Glow effect layer */}
+      <motion.div
+        className="bubble-glow-layer"
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      />
 
-      <div className="bubble-content">
+      {/* Glass bubble */}
+      <div className="bubble-glass">
         <p className="bubble-text">{formatText(text)}</p>
       </div>
 
+      {/* Tail */}
       <div className="bubble-tail" aria-hidden="true" />
+
+      {/* Accent dot for certain types */}
+      {type === 'problem' && (
+        <motion.div
+          className="bubble-accent-dot"
+          initial={{ scale: 0 }}
+          animate={isVisible ? { scale: 1 } : { scale: 0 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
+        />
+      )}
     </motion.div>
   );
 });

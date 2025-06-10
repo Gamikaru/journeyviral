@@ -1,0 +1,164 @@
+/* Rule2 Section Layout - Updated with swapped positions */
+.rule2-section {
+    --scroll-progress: 0;
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000000;
+    contain: layout style paint;
+    margin-top: 0;
+    z-index: 1;
+}
+
+/* Updated section for unified background */
+.rule2-section.rule2-section-unified {
+    background: transparent;
+    position: relative;
+    z-index: 10;
+}
+
+/* Content wrapper with glass morphism */
+.rule2-content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+
+/* Main content container - SWAPPED GRID ORDER */
+.rule2-content {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Visual gets more space */
+    align-items: center;
+    justify-content: center;
+    padding: 0 clamp(2rem, 5vw, 6rem);
+    gap: clamp(2rem, 4vw, 6rem);
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Visibility state */
+.rule2-visible .rule2-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Visual content area - NOW ON LEFT */
+.rule2-visual-content {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    max-height: 85vh;
+    margin-right: clamp(1rem, 3vw, 3rem);
+    transform: translateX(-60px) scale(0.9);
+    opacity: 0;
+    transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    order: 1; /* Ensure it's first */
+}
+
+.rule2-visible .rule2-visual-content {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+}
+
+.rule2-visual-inner {
+    position: relative;
+    transform: translateY(calc(var(--scroll-progress) * -30px));
+    transition: transform 0.1s linear;
+    width: 100%;
+    max-width: 700px;
+}
+
+/* Text content area - NOW ON RIGHT */
+.rule2-text-content {
+    position: relative;
+    max-width: 500px;
+    justify-self: start;
+    margin-left: clamp(1rem, 3vw, 3rem);
+    padding-right: 0;
+    transform: translateX(60px);
+    opacity: 0;
+    transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+    order: 2; /* Ensure it's second */
+}
+
+.rule2-visible .rule2-text-content {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.rule2-text-inner {
+    position: relative;
+    z-index: 2;
+    padding: clamp(32px, 4vw, 48px) clamp(24px, 3vw, 40px);
+    background: linear-gradient(135deg,
+        rgba(0, 212, 255, 0.03) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 255, 136, 0.02) 100%
+    );
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border-radius: 32px;
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(0, 212, 255, 0.1);
+}
+
+/* Enhanced responsive for swapped layout */
+@media (max-width: 1024px) {
+    .rule2-content {
+        grid-template-columns: 1fr;
+        padding: 40px 30px;
+        height: auto;
+        min-height: 100vh;
+        text-align: center;
+        justify-items: center;
+        gap: 60px;
+    }
+
+    .rule2-visual-content {
+        order: 2; /* Visual goes second on mobile */
+        justify-self: center;
+        margin-right: 0;
+        padding: 0;
+        height: auto;
+        max-height: none;
+        transform: scale(0.95);
+    }
+
+    .rule2-visible .rule2-visual-content {
+        transform: scale(1);
+    }
+
+    .rule2-text-content {
+        order: 1; /* Text goes first on mobile */
+        justify-self: center;
+        margin-left: 0;
+        padding: 0;
+        max-width: 700px;
+        transform: translateY(20px);
+    }
+
+    .rule2-visible .rule2-text-content {
+        transform: translateY(0);
+    }
+}

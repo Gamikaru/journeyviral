@@ -36,8 +36,6 @@
     transparent 70%
   );
   filter: blur(60px);
-  opacity: calc(0.5 + (var(--scroll-progress) * 0.3));
-  transform: scale(calc(1 + (var(--scroll-progress) * 0.1)));
   pointer-events: none;
 }
 
@@ -121,7 +119,4 @@
     animation: none;
   }
 
-  .rule1-progress-bar {
-    transition: none;
-  }
 }

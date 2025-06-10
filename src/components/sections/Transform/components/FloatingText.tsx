@@ -1,8 +1,8 @@
 // src/components/sections/Transform/components/FloatingText.tsx
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { memo } from "react";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { memo, useEffect, useState } from "react";
 import "../styles/floating-text.css";
 
 interface FloatingTextProps {
@@ -19,35 +19,71 @@ const FloatingText = memo(function FloatingText({
   const prefersReducedMotion = useReducedMotion();
   const shouldUseAnimation = shouldAnimate && !prefersReducedMotion;
 
+  // State to control animation stages
+  const [animationStage, setAnimationStage] = useState<'hidden' | 'firstLine' | 'fadeUp' | 'secondLine' | 'both'>('hidden');
+  const [hasStarted, setHasStarted] = useState(false);
+
+  // Control animation sequence
+  useEffect(() => {
+    if (!isVisible) {
+      // Don't immediately hide - let exit animations play
+      const hideTimer = setTimeout(() => {
+        setAnimationStage('hidden');
+        setHasStarted(false);
+      }, 300); // Give time for exit animation
+      return () => clearTimeout(hideTimer);
+    }
+
+    if (!shouldUseAnimation) {
+      setAnimationStage('both'); // Show both lines immediately
+      return;
+    }
+
+    // Prevent re-triggering if already started
+    if (hasStarted) return;
+
+    setHasStarted(true);
+    const timers: NodeJS.Timeout[] = [];
+
+    // Stage 1: Show first line
+    setAnimationStage('firstLine');
+
+    // Stage 2: After 2 seconds, fade up first line
+    timers.push(setTimeout(() => {
+      setAnimationStage('fadeUp');
+    }, 2000));
+
+    // Stage 3: After fade up completes (0.8s), slam down second line
+    timers.push(setTimeout(() => {
+      setAnimationStage('secondLine');
+    }, 2800));
+
+    // Stage 4: Keep both lines visible
+    timers.push(setTimeout(() => {
+      setAnimationStage('both');
+    }, 3600));
+
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+    };
+  }, [isVisible, shouldUseAnimation, hasStarted]);
+
   const containerVariants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      scale: 0.95,
     },
     visible: {
       opacity: 1,
-      y: 0,
-      scale: 1,
       transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-        staggerChildren: 0.2,
+        duration: 0.5,
+        ease: "easeOut",
       },
     },
-  };
-
-  const lineVariants = {
-    hidden: {
+    exit: {
       opacity: 0,
-      y: 20,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
+        duration: 0.5,
+        ease: "easeIn",
       },
     },
   };
@@ -60,7 +96,7 @@ const FloatingText = memo(function FloatingText({
   if (!shouldUseAnimation) {
     return isVisible ? (
       <div className="floating-text-modern">
-        <div className="floating-message-card">
+        <div className="floating-message-card static">
           {lines.map((line, index) => (
             <p
               key={index}
@@ -80,76 +116,106 @@ const FloatingText = memo(function FloatingText({
       variants={containerVariants}
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
+      exit="exit"
       role="article"
       aria-label={`Final message: ${text}`}
     >
-      {/* Clean gradient border */}
-      <motion.div
-        className="floating-border"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={
-          isVisible
-            ? {
+      <div className={`floating-message-card ${animationStage !== 'hidden' ? 'animating' : ''}`}>
+        <AnimatePresence mode="wait">
+          {/* First line - controlled by animation stages */}
+          {(animationStage === 'firstLine' || animationStage === 'fadeUp') && (
+            <motion.p
+              key="first-line"
+              className="floating-message-line line-setup animated"
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{
                 opacity: 1,
+                y: 0,
                 scale: 1,
-              }
-            : {
+                transition: { duration: 0.8, ease: "easeOut" }
+              }}
+              exit={{
                 opacity: 0,
-                scale: 0.9,
-              }
-        }
-        transition={{ duration: 0.6, delay: 0.2 }}
-      />
+                y: -30,
+                scale: 0.95,
+                transition: { duration: 0.8, ease: "easeIn" }
+              }}
+            >
+              {lines[0]}
+            </motion.p>
+          )}
 
-      {/* Message card */}
-      <motion.div
-        className="floating-message-card"
-        initial={{ opacity: 0 }}
-        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-      >
-        {lines.map((line, index) => (
-          <motion.p
-            key={index}
-            className={`floating-message-line ${index === 0 ? "line-setup" : "line-punch"}`}
-            variants={lineVariants}
-          >
-            {line}
-          </motion.p>
-        ))}
+          {/* Second line - only shows after first line fades */}
+          {(animationStage === 'secondLine' || animationStage === 'both') && (
+            <motion.p
+              key="second-line"
+              className="floating-message-line line-punch animated"
+              initial={{
+                opacity: 0,
+                y: 100,
+                scale: 0.7,
+                rotateX: -15
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                rotateX: 0,
+                transition: {
+                  duration: 0.8,
+                  ease: [0.16, 1, 0.3, 1],
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25,
+                }
+              }}
+              style={{ perspective: "1000px" }}
+            >
+              {lines[1]}
+            </motion.p>
+          )}
 
-        {/* Subtle accent line */}
-        <motion.div
-          className="floating-accent-line"
-          initial={{ scaleX: 0 }}
-          animate={isVisible ? { scaleX: 1 } : { scaleX: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.8,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        />
-      </motion.div>
+          {/* Both lines visible in final stage */}
+          {animationStage === 'both' && (
+            <motion.p
+              key="first-line-static"
+              className="floating-message-line line-setup static"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {lines[0]}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
 
-      {/* Corner accents - simplified */}
-      {shouldUseAnimation && (
+      {/* Enhanced floating particles triggered after slam */}
+      {shouldUseAnimation && (animationStage === 'secondLine' || animationStage === 'both') && (
         <>
-          <motion.div
-            className="floating-corner corner-tl"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={
-              isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }
-            }
-            transition={{ duration: 0.4, delay: 1 }}
-          />
-          <motion.div
-            className="floating-corner corner-br"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={
-              isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }
-            }
-            transition={{ duration: 0.4, delay: 1.1 }}
-          />
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="floating-particle"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0, 2, 0],
+                x: [0, (Math.random() - 0.5) * 200],
+                y: [0, -120 - (Math.random() * 80)],
+                rotate: [0, 360],
+              }}
+              transition={{
+                duration: 2.5,
+                delay: 0.5 + i * 0.08, // Start shortly after slam
+                repeat: 0,
+              }}
+              style={{
+                left: `${10 + Math.random() * 80}%`,
+                top: `${10 + Math.random() * 80}%`,
+              }}
+            />
+          ))}
         </>
       )}
     </motion.div>

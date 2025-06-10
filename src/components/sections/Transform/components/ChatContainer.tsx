@@ -30,6 +30,7 @@ export default function ChatContainer({
   const [showTyping, setShowTyping] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
 
   // Separate regular and final messages
   const { regularMessages, finalMessage } = useMemo(() => {
@@ -42,13 +43,14 @@ export default function ChatContainer({
   const resetSequence = useCallback(() => {
     setVisibleMessages([]);
     setShowTyping(false);
-    setCurrentStep(0);
     setShowFinalMessage(false);
   }, []);
 
   // Start sequence function
   const startSequence = useCallback(() => {
-    if (!isInView || !shouldAnimate) {
+    if (!isInView) return;
+
+    if (!shouldAnimate) {
       // Show all immediately if not animating
       setVisibleMessages(regularMessages.map((m) => m.id));
       setShowFinalMessage(true);
@@ -56,14 +58,13 @@ export default function ChatContainer({
     }
 
     // Start animated sequence
-    setTimeout(() => {
-      setCurrentStep(1);
-    }, 200);
+    setIsLooping(true);
+    setCurrentStep(1);
   }, [isInView, shouldAnimate, regularMessages]);
 
-  // Sequence controller
+  // Enhanced sequence controller with proper loop
   useEffect(() => {
-    if (!shouldAnimate || currentStep === 0) return;
+    if (!shouldAnimate || currentStep === 0 || !isLooping || !isInView) return;
 
     const timers: NodeJS.Timeout[] = [];
 
@@ -71,50 +72,59 @@ export default function ChatContainer({
       switch (currentStep) {
         case 1: // First message
           setVisibleMessages([1]);
-          timers.push(setTimeout(() => setCurrentStep(2), 1200));
+          timers.push(setTimeout(() => setCurrentStep(2), 1500));
           break;
 
         case 2: // Typing indicator
           setShowTyping(true);
-          timers.push(setTimeout(() => setCurrentStep(3), 1000));
+          timers.push(setTimeout(() => setCurrentStep(3), 1200));
           break;
 
         case 3: // Second message
           setShowTyping(false);
           setVisibleMessages((prev) => [...prev, 2]);
-          timers.push(setTimeout(() => setCurrentStep(4), 1200));
+          timers.push(setTimeout(() => setCurrentStep(4), 1500));
           break;
 
         case 4: // Typing indicator
           setShowTyping(true);
-          timers.push(setTimeout(() => setCurrentStep(5), 800));
+          timers.push(setTimeout(() => setCurrentStep(5), 1000));
           break;
 
         case 5: // Third message
           setShowTyping(false);
           setVisibleMessages((prev) => [...prev, 3]);
-          timers.push(setTimeout(() => setCurrentStep(6), 1500));
+          timers.push(setTimeout(() => setCurrentStep(6), 2000));
           break;
 
-        case 6: // Transition to final
-          // Fade out messages
+        case 6: // Fade out messages
           setVisibleMessages([]);
-          timers.push(setTimeout(() => setCurrentStep(7), 600));
+          timers.push(setTimeout(() => setCurrentStep(7), 800));
           break;
 
         case 7: // Show final message
           setShowFinalMessage(true);
-          timers.push(setTimeout(() => setCurrentStep(8), 5000));
+          // Increased duration to account for animation time:
+          // First line: 2s visible
+          // Fade transition: 0.8s
+          // Second line slam: 0.8s
+          // Hold both lines: 4s
+          // Total: ~8.6s minimum, using 10s for safety
+          timers.push(setTimeout(() => setCurrentStep(8), 10000));
           break;
 
-        case 8: // Reset and loop
+        case 8: // Hide final message
           setShowFinalMessage(false);
-          timers.push(
-            setTimeout(() => {
-              resetSequence();
-              timers.push(setTimeout(() => startSequence(), 1000));
-            }, 500)
-          );
+          timers.push(setTimeout(() => setCurrentStep(9), 800)); // Smooth fade out
+          break;
+
+        case 9: // Reset and restart loop
+          resetSequence();
+          timers.push(setTimeout(() => {
+            if (isLooping && isInView) {
+              setCurrentStep(1); // Restart the loop
+            }
+          }, 2000)); // Slightly longer pause between loops
           break;
       }
     };
@@ -124,38 +134,52 @@ export default function ChatContainer({
     return () => {
       timers.forEach((timer) => clearTimeout(timer));
     };
-  }, [currentStep, shouldAnimate, resetSequence, startSequence]);
+  }, [currentStep, shouldAnimate, isLooping, isInView, resetSequence]);
 
-  // Initialize sequence
+  // Initialize sequence when component comes into view
   useEffect(() => {
-    if (isInView) {
+    if (isInView && shouldAnimate) {
       resetSequence();
       const timer = setTimeout(() => startSequence(), 100);
       return () => clearTimeout(timer);
+    } else if (!isInView) {
+      setIsLooping(false);
+      resetSequence();
+      setCurrentStep(0);
     }
-  }, [isInView, resetSequence, startSequence]);
+  }, [isInView, shouldAnimate, resetSequence, startSequence]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      setIsLooping(false);
+      setCurrentStep(0);
+    };
+  }, []);
 
   return (
-    <div className="chat-container-modern" role="log" aria-live="polite">
-      {/* Messages area */}
-      <div className="chat-messages-wrapper">
-        <AnimatePresence mode="popLayout">
-          {regularMessages.map((message) => (
-            <ChatBubble
-              key={message.id}
-              text={message.text}
-              type={message.type}
-              isVisible={visibleMessages.includes(message.id)}
-              shouldAnimate={shouldAnimate}
-            />
-          ))}
-        </AnimatePresence>
+    <div className={`chat-container-modern ${showFinalMessage ? 'showing-final' : ''}`} role="log" aria-live="polite">
+      {/* Messages area - fade out completely when final message shows */}
+      <div className={`chat-messages-wrapper ${showFinalMessage ? 'hidden' : ''}`}>
+        <div className="messages-container">
+          <AnimatePresence mode="popLayout">
+            {regularMessages.map((message) => (
+              <ChatBubble
+                key={message.id}
+                text={message.text}
+                type={message.type}
+                isVisible={visibleMessages.includes(message.id)}
+                shouldAnimate={shouldAnimate}
+              />
+            ))}
+          </AnimatePresence>
 
-        <TypingIndicator isVisible={showTyping} shouldAnimate={shouldAnimate} />
+          <TypingIndicator isVisible={showTyping} shouldAnimate={shouldAnimate} />
+        </div>
       </div>
 
-      {/* Final message area - integrated into flow */}
-      <div className="final-message-area">
+      {/* Final message area - completely free floating, no container */}
+      <div className={`final-message-area ${showFinalMessage ? 'active' : ''}`}>
         <AnimatePresence>
           {finalMessage && showFinalMessage && (
             <FloatingText

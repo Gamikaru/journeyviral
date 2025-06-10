@@ -1,0 +1,103 @@
+/* Base typography styles for Rule2 section */
+
+/* Font smoothing and base properties */
+.rule2-section,
+.rule2-section * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Selection styles */
+.rule2-section ::selection {
+    background: rgba(0, 255, 136, 0.3);
+    color: white;
+}
+
+/* Focus styles */
+.rule2-section :focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 2px;
+}
+
+/* Base animations for typography */
+@keyframes text-glow-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        text-shadow:
+            0 0 8px currentColor,
+            0 0 16px currentColor,
+            0 0 24px currentColor;
+        transform: translateZ(0);
+    }
+
+    50% {
+        opacity: 0.95;
+        text-shadow:
+            0 0 6px currentColor,
+            0 0 12px currentColor,
+            0 0 20px currentColor;
+        transform: translateZ(0) scale(1.01);
+    }
+}
+
+@keyframes cyan-green-glow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 6px rgba(0, 255, 136, 0.6),
+            0 0 12px rgba(0, 255, 136, 0.4),
+            0 0 18px rgba(0, 255, 136, 0.2);
+    }
+
+    50% {
+        text-shadow:
+            0 0 8px rgba(0, 212, 255, 0.7),
+            0 0 16px rgba(0, 212, 255, 0.5),
+            0 0 24px rgba(0, 212, 255, 0.3);
+    }
+}
+
+/* Font family definitions */
+.rule2-section {
+    --font-display: var(--font-lastica), 'Bebas Neue', Impact, sans-serif;
+    --font-body: var(--font-interphases), Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: var(--font-anonymous), 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Base text styles */
+.rule2-section h2,
+.rule2-section h3,
+.rule2-section h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+.rule2-section p {
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .rule2-section {
+        background: black !important;
+        color: white !important;
+    }
+}

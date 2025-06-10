@@ -3,7 +3,6 @@
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
-import ExpertiseBackground from "./ExpertiseBackground";
 import ExpertiseHeadline from "./ExpertiseHeadline";
 import ExpertiseStats from "./ExpertiseStats";
 import ExpertiseMethod from "./ExpertiseMethod";
@@ -132,28 +131,11 @@ export default function ExpertiseSection() {
     <section
       ref={sectionRef}
       id="expertise"
-      className={`expertise-section ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
+      className={`expertise-section expertise-section-unified ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
       aria-label="Our viral content expertise and methodology"
       data-performance={performanceScore}
     >
-      {/* Optimized Background */}
-      <div className="expertise-bg-container" aria-hidden="true">
-        {performanceScore > 0.7 ? (
-          <ExpertiseBackground
-            isVisible={shouldAnimate}
-            scrollYProgress={scrollYProgress}
-            orbTransforms={{
-              orbY1,
-              orbX1: orbY1, // Reuse transform for performance
-              orbY2,
-              orbX2: orbY2, // Reuse transform for performance
-              orbScale
-            }}
-          />
-        ) : (
-          <div className="expertise-bg-static" />
-        )}
-      </div>
+      {/* Remove background container - now handled by UnifiedBackground */}
 
       {/* Main Content Container with Grid Layout */}
       <div className="expertise-content">

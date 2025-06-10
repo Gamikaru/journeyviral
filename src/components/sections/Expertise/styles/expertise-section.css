@@ -16,6 +16,13 @@
   margin-bottom: 2rem; /* Add margin to create space before next section */
 }
 
+/* Updated section for unified background */
+.expertise-section.expertise-section-unified {
+  background: transparent; /* Remove section background */
+  position: relative;
+  z-index: 10; /* Ensure content is above unified background */
+}
+
 /* Content Container - Enhanced with CSS Grid */
 .expertise-content {
   position: relative;
@@ -92,6 +99,11 @@
 .expertise-section.performance-mode * {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* Remove background container when using unified */
+.expertise-section-unified .expertise-bg-container {
+  display: none;
 }
 
 /* Responsive Design - Tablet */

@@ -1,3 +1,4 @@
+// src/components/sections/Transform/TransformSupportingText.tsx
 "use client";
 
 import { useReducedMotion } from "framer-motion";
@@ -17,24 +18,25 @@ const TransformSupportingText = memo(function TransformSupportingText({
   const prefersReducedMotion = useReducedMotion();
   const shouldAnimate = !prefersReducedMotion && !isLowPerf;
 
+  // Refined messages with better flow and formatting
   const messages = [
     {
       id: 1,
-      text: "You paid for growth hacks.\nYou jumped on trends.\nYou followed the playbook.",
+      text: "You tried everything.\nGrowth hacks. Trending audio.\nStill stuck at 200 views.",
       type: "setup" as const,
       delay: 0
     },
     {
       id: 2,
-      text: "Still stuck at 83 views. And... your mom's in the comments?",
+      text: "Your competitor just hit 10M.\nWith worse content than yours.",
       type: "problem" as const,
-      delay: 1.5
+      delay: 1.2
     },
     {
       id: 3,
-      text: "That's why you're here now.",
+      text: "The algorithm isn't broken.\nYour strategy is.",
       type: "bridge" as const,
-      delay: 1.5
+      delay: 1.2
     },
     {
       id: 4,
@@ -46,14 +48,25 @@ const TransformSupportingText = memo(function TransformSupportingText({
 
   return (
     <div
-      className="transform-supporting-text"
-      aria-label="Chat conversation about content transformation"
+      className="transform-supporting-wrapper"
+      role="region"
+      aria-label="Viral content transformation conversation"
     >
-      <ChatContainer
-        isInView={isInView}
-        shouldAnimate={shouldAnimate}
-        messages={messages}
-      />
+      <div className="supporting-content">
+        <ChatContainer
+          isInView={isInView}
+          shouldAnimate={shouldAnimate}
+          messages={messages}
+        />
+      </div>
+
+      {/* Subtle accent elements */}
+      {shouldAnimate && (
+        <div className="supporting-accents" aria-hidden="true">
+          <div className="accent-dot accent-top" />
+          <div className="accent-dot accent-bottom" />
+        </div>
+      )}
     </div>
   );
 });

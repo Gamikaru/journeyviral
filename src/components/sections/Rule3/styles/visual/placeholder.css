@@ -1,0 +1,235 @@
+.rule3-placeholder-visual {
+  position: relative;
+  z-index: 2;
+}
+
+.rule3-placeholder-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.rule3-placeholder-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.rule3-placeholder-content {
+  position: relative;
+  z-index: 2;
+}
+
+.rule3-placeholder-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.rule3-placeholder-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.rule3-placeholder-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #9333ea, #ec4899);
+  opacity: 0.6;
+}
+
+.rule3-placeholder-dots span:nth-child(1) {
+  animation: rule3DotPulse 2s ease-in-out infinite;
+}
+
+.rule3-placeholder-dots span:nth-child(2) {
+  animation: rule3DotPulse 2s ease-in-out infinite 0.3s;
+}
+
+.rule3-placeholder-dots span:nth-child(3) {
+  animation: rule3DotPulse 2s ease-in-out infinite 0.6s;
+}
+
+@keyframes rule3DotPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.rule3-placeholder-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.rule3-placeholder-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.rule3-placeholder-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.rule3-placeholder-line {
+  height: 8px;
+  background: linear-gradient(90deg, rgba(147, 51, 234, 0.3), rgba(236, 72, 153, 0.3));
+  border-radius: 4px;
+  animation: rule3LineShimmer 2s ease-in-out infinite;
+}
+
+.rule3-line-long {
+  width: 80%;
+}
+
+.rule3-line-medium {
+  width: 60%;
+  animation-delay: 0.5s;
+}
+
+.rule3-line-short {
+  width: 40%;
+  animation-delay: 1s;
+}
+
+@keyframes rule3LineShimmer {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Floating elements */
+.rule3-floating-element {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+  border-radius: 50%;
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
+.rule3-element-1 {
+  top: 20%;
+  left: -20px;
+}
+
+.rule3-element-2 {
+  bottom: 25%;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+}
+
+/* Background effects */
+.rule3-visual-backdrop {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
+  z-index: 1;
+  animation: rule3BackdropRotate 20s linear infinite;
+}
+
+@keyframes rule3BackdropRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rule3-visual-glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+  animation: rule3GlowEffect 4s ease-in-out infinite;
+}
+
+@keyframes rule3GlowEffect {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.rule3-placeholder-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rule3-placeholder-box {
+    padding: 1.5rem;
+  }
+
+  .rule3-placeholder-title {
+    font-size: 1.25rem;
+  }
+
+  .rule3-placeholder-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .rule3-floating-element {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .rule3-placeholder-box {
+    padding: 1rem;
+  }
+
+  .rule3-placeholder-title {
+    font-size: 1rem;
+  }
+
+  .rule3-placeholder-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .rule3-placeholder-caption {
+    font-size: 0.8rem;
+  }
+}

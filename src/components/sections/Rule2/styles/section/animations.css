@@ -1,0 +1,168 @@
+/* Rule2 Section Animations */
+
+/* Text decorative accents */
+.rule2-text-accent {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+.rule2-accent-1 {
+    top: -20%;
+    left: -10%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+    animation: accent-float-2 8s ease-in-out infinite;
+}
+
+.rule2-accent-2 {
+    bottom: -20%;
+    right: -10%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+    animation: accent-float-2 8s ease-in-out infinite;
+    animation-delay: -4s;
+}
+
+/* Visual glow effect - static positioning */
+.rule2-visual-glow {
+    position: absolute;
+    inset: -100px;
+    background: radial-gradient(circle at center,
+            rgba(0, 255, 136, 0.2) 0%,
+            rgba(0, 212, 255, 0.1) 40%,
+            transparent 70%);
+    filter: blur(60px);
+    opacity: calc(0.5 + (var(--scroll-progress) * 0.3));
+    pointer-events: none;
+}
+
+/* Particle effects */
+.rule2-visual-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.rule2-visual-particles::before,
+.rule2-visual-particles::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(45deg, #00ffff, #00ff88);
+    border-radius: 50%;
+    box-shadow:
+        0 0 15px currentColor,
+        0 0 30px currentColor;
+    animation: particle-rise-2 10s linear infinite;
+}
+
+.rule2-visual-particles::before {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.rule2-visual-particles::after {
+    left: 80%;
+    animation-delay: -5s;
+}
+
+/* Animations */
+@keyframes accent-float-2 {
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+}
+
+@keyframes particle-rise-2 {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* Entrance animations */
+.rule2-visible .rule2-text-accent {
+    animation-play-state: running;
+}
+
+.rule2-visible .rule2-visual-particles::before,
+.rule2-visible .rule2-visual-particles::after {
+    animation-play-state: running;
+}
+
+/* Scroll-based animations only */
+@keyframes scroll-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+
+    .rule2-content,
+    .rule2-text-content,
+    .rule2-visual-content {
+        transition: none !important;
+        transform: none !important;
+    }
+
+    .rule2-accent-1,
+    .rule2-accent-2,
+    .rule2-visual-particles::before,
+    .rule2-visual-particles::after {
+        animation: none;
+    }
+
+    .rule2-progress-bar {
+        transition: none;
+    }
+}
+
+/* High refresh rate displays */
+@media (min-resolution: 120dpi) {
+    /* No mouse-based transitions */
+}
+
+/* GPU acceleration hints */
+.rule2-text-accent,
+.rule2-visual-glow,
+.rule2-visual-particles {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}

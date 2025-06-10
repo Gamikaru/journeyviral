@@ -1,297 +1,383 @@
-/* Chat Bubble Styles - Layout Stable */
+/* src/components/sections/Transform/styles/chat-bubble.css */
 
-.chat-bubble {
-  position: relative;
-  max-width: 85%;
-  width: fit-content;
-  min-height: 60px; /* Minimum height to prevent layout jumps */
-  isolation: isolate;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  margin-bottom: 0; /* Remove margin to control spacing via parent */
+/* Modern Chat Bubble Design - Clean and Readable */
+
+.chat-bubble-modern {
+    position: relative;
+    max-width: 85%;
+    width: fit-content;
+    margin-bottom: 0; /* Remove bottom margin, rely on container gap */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    /* Ensure proper text flow */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    /* Ensure bubble doesn't get clipped */
+    z-index: 1;
+    /* Ensure bubble content is always visible */
+    position: relative;
 }
 
-/* Subtle Thin Cyan-Pink Gradient Border */
-.bubble-border {
-  position: absolute;
-  inset: 0;
-  border-radius: 20px 20px 4px 20px;
-  padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 255, 255, 0.6) 0%,
-    rgba(255, 0, 255, 0.6) 100%
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.4;
-  transition: opacity 0.3s ease;
+/* Glow layer - subtle effect */
+.bubble-glow-layer {
+    position: absolute;
+    inset: -8px;
+    border-radius: 24px;
+    opacity: 0.3;
+    filter: blur(12px);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-.border-glow {
-  position: absolute;
-  inset: -1px;
-  border-radius: 21px 21px 5px 21px;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 255, 255, 0.2) 0%,
-    rgba(255, 0, 255, 0.2) 100%
-  );
-  filter: blur(2px);
-  opacity: 0.3;
+/* Type-specific glows */
+.chat-bubble-setup .bubble-glow-layer {
+    background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.2) 0%,
+            transparent 70%);
 }
 
-.bubble-content {
-  position: relative;
-  background: rgba(10, 10, 20, 0.85);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border-radius: 19px 19px 3px 19px;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
-  min-height: 36px; /* Ensure consistent height */
-  display: flex;
-  align-items: center;
+.chat-bubble-problem .bubble-glow-layer {
+    background: radial-gradient(ellipse at center,
+            rgba(255, 110, 199, 0.3) 0%,
+            transparent 70%);
 }
 
+.chat-bubble-bridge .bubble-glow-layer {
+    background: radial-gradient(ellipse at center,
+            rgba(173, 216, 230, 0.25) 0%,
+            transparent 70%);
+}
+
+/* Glass bubble design */
+.bubble-glass {
+    position: relative;
+    background: rgba(15, 15, 25, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px 20px 4px 20px;
+    padding: 1rem 1.25rem; /* Compact but readable padding */
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: all 0.3s ease;
+    overflow: visible;
+    /* Ensure adequate minimum height */
+    min-height: 48px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Subtle gradient overlay */
+.bubble-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.01) 100%);
+    pointer-events: none;
+}
+
+/* Text styling - ensure readability */
 .bubble-text {
-  font-family: var(--font-body), Inter, sans-serif;
-  margin: 0;
-  color: #ffffff; /* Changed to white */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-body), Inter, sans-serif;
+    margin: 0;
+    color: #ffffff;
+    line-height: 1.4; /* Slightly tighter for better fit */
+    /* Critical for readability and proper wrapping */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    transform: translateZ(0);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    white-space: normal; /* Allow text to wrap naturally */
+    width: 100%;
+    flex: 1;
 }
 
-.bubble-tail {
-  position: absolute;
-  bottom: 0;
-  right: 12px;
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid rgba(10, 10, 20, 0.85);
-  transform: translateY(100%);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+.bubble-text-line {
+    display: inline;
+    /* Ensure proper line spacing */
+    line-height: inherit;
 }
 
-/* Message Type Variations */
-
-.chat-bubble-small .bubble-text {
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-}
-
-.chat-bubble-question .bubble-text {
-  font-size: 1.125rem;
-  line-height: 1.3;
-  color: #ff00ff;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  text-shadow:
-    0 0 15px rgba(255, 0, 255, 0.4),
-    0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.chat-bubble-bridge .bubble-text {
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #ffffff;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  text-shadow:
-    0 0 10px rgba(173, 216, 230, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.chat-bubble-impact .bubble-text {
-  font-size: 1.25rem;
-  line-height: 1.2;
-  color: #00ffff;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  text-shadow:
-    0 0 20px rgba(0, 255, 255, 0.6),
-    0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.chat-bubble-closer .bubble-text {
-  font-size: 1.2rem;
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  background: linear-gradient(
-    135deg,
-    #ffd700 0%,
-    #ffed4b 50%,
-    #ffd700 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
-}
-
-/* New Message Type Variations */
-
-/* Setup message - clean white text */
+/* Type-specific text styles - optimized sizing */
 .chat-bubble-setup .bubble-text {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: #ffffff;
-  font-weight: 400;
-  letter-spacing: 0.01em;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.01em;
+    line-height: 1.4;
 }
 
-/* Problem message - white with pink accent glow */
 .chat-bubble-problem .bubble-text {
-  font-size: 1.1rem;
-  line-height: 1.35;
-  color: #ffffff;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  text-shadow:
-    0 0 15px rgba(255, 110, 199, 0.4),
-    0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    line-height: 1.4;
 }
 
-/* Bridge message - white with subtle blue tint */
 .chat-bubble-bridge .bubble-text {
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #ffffff;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  text-shadow:
-    0 0 10px rgba(173, 216, 230, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.4);
+    font-size: 0.95rem;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.02em;
+    line-height: 1.4;
 }
 
-/* Enhanced borders for different message types */
-.chat-bubble-setup .bubble-border {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.4) 0%,
-    rgba(173, 216, 230, 0.3) 100%
-  );
-  opacity: 0.5;
+/* Type-specific borders */
+.chat-bubble-problem .bubble-glass {
+    border-color: rgba(255, 110, 199, 0.2);
+    background: rgba(20, 15, 30, 0.85);
 }
 
-.chat-bubble-problem .bubble-border {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 110, 199, 0.6) 0%,
-    rgba(255, 0, 255, 0.4) 100%
-  );
-  opacity: 0.7;
+.chat-bubble-bridge .bubble-glass {
+    border-color: rgba(173, 216, 230, 0.15);
 }
 
-.chat-bubble-bridge .bubble-border {
-  background: linear-gradient(
-    135deg,
-    rgba(173, 216, 230, 0.5) 0%,
-    rgba(135, 206, 235, 0.3) 100%
-  );
-  opacity: 0.5;
+/* Tail styling */
+.bubble-tail {
+    position: absolute;
+    bottom: 0;
+    right: 16px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(15, 15, 25, 0.85);
+    transform: translateY(100%);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Enhanced glow for problem message */
-.chat-bubble-problem .border-glow {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 110, 199, 0.3) 0%,
-    rgba(255, 0, 255, 0.2) 100%
-  );
-  filter: blur(4px);
-  opacity: 0.4;
+.chat-bubble-problem .bubble-tail {
+    border-top-color: rgba(20, 15, 30, 0.85);
 }
 
-/* Hover Effects */
+/* Accent dot for problem messages */
+.bubble-accent-dot {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle,
+            rgba(255, 110, 199, 1) 0%,
+            rgba(255, 110, 199, 0.6) 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(255, 110, 199, 0.6);
+}
+
+/* Hover effects */
 @media (hover: hover) {
-  .chat-bubble:hover .bubble-content {
-    background: rgba(15, 15, 25, 0.9);
-    border-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-1px);
-  }
+    .chat-bubble-modern:hover .bubble-glass {
+        background: rgba(20, 20, 35, 0.9);
+        border-color: rgba(255, 255, 255, 0.12);
+        transform: translateY(-1px);
+        box-shadow:
+            0 6px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
 
-  .chat-bubble:hover .bubble-border {
-    opacity: 0.8;
-  }
+    .chat-bubble-modern:hover .bubble-glow-layer {
+        opacity: 0.5;
+    }
 
-  .chat-bubble:hover .border-glow {
-    opacity: 0.5;
-    filter: blur(4px);
-  }
-
-  .chat-bubble-impactful:hover .bubble-content {
-    transform: scale(1.02) translateY(-2px);
-    border-color: rgba(0, 255, 255, 0.5);
-  }
+    .chat-bubble-problem:hover .bubble-accent-dot {
+        box-shadow: 0 0 20px rgba(255, 110, 199, 0.8);
+    }
 }
 
-/* Responsive Design */
+/* Desktop optimizations */
+@media (min-width: 1024px) {
+    .chat-bubble-modern {
+        max-width: 80%;
+    }
+
+    .bubble-glass {
+        padding: 1.25rem 1.5rem; /* Slightly increased for desktop */
+        min-height: 60px;
+    }
+
+    .bubble-text {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .chat-bubble-setup .bubble-text {
+        font-size: 0.95rem;
+    }
+
+    .chat-bubble-problem .bubble-text {
+        font-size: 1.1rem;
+    }
+
+    .chat-bubble-bridge .bubble-text {
+        font-size: 1rem;
+    }
+}
+
+/* Tablet adjustments */
 @media (max-width: 768px) {
-  .chat-bubble {
-    max-width: 100%;
-    min-height: 50px;
-  }
+    .chat-bubble-modern {
+        max-width: 90%;
+    }
 
-  .bubble-content {
-    padding: 1rem 1.25rem;
-    min-height: 32px;
-  }
+    .bubble-glass {
+        padding: 1rem 1.25rem;
+        border-radius: 18px 18px 4px 18px;
+        min-height: 50px;
+    }
+
+    .bubble-glow-layer {
+        inset: -6px;
+        filter: blur(8px);
+    }
+
+    .chat-bubble-setup .bubble-text {
+        font-size: 0.875rem;
+        line-height: 1.4;
+    }
+
+    .chat-bubble-problem .bubble-text {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .chat-bubble-bridge .bubble-text {
+        font-size: 0.925rem;
+        line-height: 1.4;
+    }
 }
 
+/* Mobile optimizations */
 @media (max-width: 480px) {
-  .chat-bubble {
-    min-height: 45px;
-  }
+    .chat-bubble-modern {
+        max-width: 95%;
+    }
 
-  .bubble-content {
-    padding: 0.875rem 1rem;
-    min-height: 28px;
-  }
+    .bubble-glass {
+        padding: 0.875rem 1.125rem; /* Reduced for mobile */
+        border-radius: 16px 16px 4px 16px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        min-height: 45px; /* Reduced for mobile */
+    }
 
-  /* Simplify effects on mobile */
-  .bubble-pulse,
-  .bubble-shimmer {
-    display: none;
-  }
+    /* Simplify effects on mobile */
+    .bubble-glow-layer {
+        display: none;
+    }
 
-  .chat-bubble-impactful .border-glow {
-    animation: none;
-    opacity: 0.5;
-  }
+    .bubble-glass::before {
+        display: none;
+    }
+
+    .bubble-accent-dot {
+        display: none;
+    }
+
+    .chat-bubble-setup .bubble-text {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .chat-bubble-problem .bubble-text {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    .chat-bubble-bridge .bubble-text {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .bubble-tail {
+        border-left-width: 6px;
+        border-right-width: 6px;
+        border-top-width: 6px;
+        right: 12px;
+    }
 }
 
 /* Performance mode */
-.performance-mode .bubble-pulse,
-.performance-mode .bubble-shimmer {
-  display: none;
+.performance-mode .bubble-glow-layer {
+    display: none;
 }
 
-.performance-mode .chat-bubble-impactful .bubble-border,
-.performance-mode .chat-bubble-impactful .border-glow {
-  animation: none;
+.performance-mode .bubble-glass {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(15, 15, 25, 0.95);
+}
+
+.performance-mode .bubble-glass::before {
+    display: none;
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .bubble-pulse,
-  .bubble-shimmer,
-  .chat-bubble-impactful .bubble-border,
-  .chat-bubble-impactful .border-glow {
-    animation: none !important;
-  }
+
+    .chat-bubble-modern,
+    .bubble-glass,
+    .bubble-glow-layer,
+    .bubble-accent-dot {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .bubble-glass {
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .bubble-text {
+        color: #ffffff;
+        font-weight: 500;
+    }
+
+    .bubble-tail {
+        border-top-color: rgba(0, 0, 0, 0.95);
+    }
+
+    .bubble-glow-layer {
+        display: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .chat-bubble-modern {
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .bubble-glass {
+        background: white;
+        border: 1px solid black;
+        box-shadow: none;
+    }
+
+    .bubble-text {
+        color: black;
+    }
+
+    .bubble-glow-layer,
+    .bubble-tail,
+    .bubble-accent-dot {
+        display: none;
+    }
 }

@@ -1,0 +1,136 @@
+/* Footer Section Layout */
+.footer-section {
+    --mouse-x: 0.5;
+    --mouse-y: 0.5;
+    position: relative;
+    width: 100%;
+    background: #000000;
+    overflow: hidden;
+    margin-top: 8rem;
+    z-index: 10;
+}
+
+/* Background wrapper */
+.footer-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Gradient background */
+.footer-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(5, 2, 8, 0.9) 0%,
+            rgba(0, 0, 0, 1) 100%);
+}
+
+/* Mesh overlay */
+.footer-bg-mesh {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(at 20% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(at 80% 70%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 70%);
+    opacity: 0.8;
+}
+
+/* Animated orbs */
+.footer-bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: footer-orb-float 20s ease-in-out infinite;
+}
+
+.footer-orb-1 {
+    top: -20%;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at center,
+            rgba(0, 255, 255, 0.3) 0%,
+            transparent 70%);
+}
+
+.footer-orb-2 {
+    bottom: -20%;
+    right: 10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at center,
+            rgba(255, 0, 255, 0.25) 0%,
+            transparent 70%);
+    animation-delay: -10s;
+}
+
+/* Main content */
+.footer-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+.footer-main {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Top section */
+.footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(3rem, 6vw, 8rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    align-items: start;
+}
+
+/* Middle section */
+.footer-middle {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: clamp(3rem, 6vw, 8rem);
+}
+
+/* Noise texture */
+.footer-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' seed='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .footer-middle {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-section {
+        margin-top: 4rem;
+    }
+
+    .footer-main {
+        padding: 3rem 0;
+    }
+
+    .footer-bg-orb {
+        filter: blur(60px);
+    }
+}

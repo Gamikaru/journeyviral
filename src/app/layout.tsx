@@ -219,8 +219,10 @@ export default function RootLayout({
         className="bg-transparent text-white antialiased overflow-x-hidden"
         suppressHydrationWarning
       >
-        {/* Unified background */}
-        <UnifiedBackground />
+        {/* Unified background - moved to lower z-index */}
+        <div className="fixed inset-0 z-0">
+          <UnifiedBackground />
+        </div>
 
         {/* Noise texture overlay */}
         <div

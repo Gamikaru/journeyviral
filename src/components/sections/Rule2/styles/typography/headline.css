@@ -1,0 +1,185 @@
+/* Rule2 Headline Styles */
+.rule2-headline-wrapper {
+    margin-bottom: 32px;
+    position: relative;
+}
+
+/* RULE #2 Label - cyan theme */
+.rule2-label {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+    line-height: 0.9;
+    position: relative;
+    display: inline-block;
+}
+
+.rule2-label-text {
+    position: relative;
+    z-index: 2;
+    color: #00d4ff;
+    -webkit-text-stroke: 2px #00d4ff;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+        0 0 15px rgba(0, 212, 255, 0.6),
+        0 0 30px rgba(0, 212, 255, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.7);
+    animation: refined-cyan-pulse 3s ease-in-out infinite;
+}
+
+/* Simplified glow layer */
+.rule2-label-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    color: #00d4ff;
+    -webkit-text-stroke: 2px #00d4ff;
+    -webkit-text-fill-color: transparent;
+    filter: blur(2px);
+    opacity: 0.2;
+    animation: refined-cyan-pulse 3s ease-in-out infinite;
+    animation-delay: -0.05s;
+}
+
+/* Refined animation */
+@keyframes refined-cyan-pulse {
+    0%, 100% {
+        text-shadow:
+            0 0 15px rgba(0, 212, 255, 0.6),
+            0 0 30px rgba(0, 212, 255, 0.3),
+            0 2px 8px rgba(0, 0, 0, 0.7);
+        filter: brightness(1);
+    }
+    50% {
+        text-shadow:
+            0 0 20px rgba(0, 212, 255, 0.8),
+            0 0 40px rgba(0, 212, 255, 0.4),
+            0 2px 8px rgba(0, 0, 0, 0.7);
+        filter: brightness(1.1);
+    }
+}
+
+/* Main Headline - Updated layout */
+.rule2-main-headline {
+    font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0;
+}
+
+.rule2-headline-line {
+    display: block;
+    position: relative;
+    margin-bottom: 0.1em;
+}
+
+.rule2-headline-line:last-child {
+    margin-bottom: 0;
+}
+
+/* White text */
+.rule2-headline-white {
+    color: #ffffff;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Gradient text with subtle animation */
+.rule2-headline-gradient {
+    background: linear-gradient(135deg,
+            #00ffff 0%,
+            #00ff88 50%,
+            #00ffff 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: subtle-gradient-shift 6s ease-in-out infinite;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+
+@keyframes subtle-gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Strike-through effect for "ADS" - refined */
+.rule2-headline-strike {
+    color: #ff0080;
+    font-style: italic;
+    position: relative;
+    display: inline-block;
+    text-shadow:
+        0 0 12px rgba(255, 0, 128, 0.6),
+        0 0 24px rgba(255, 0, 128, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.rule2-headline-strike::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    top: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, #ff0080, #ff00ff);
+    transform: translateY(-50%) rotate(-2deg);
+    box-shadow:
+        0 0 8px rgba(255, 0, 128, 0.6),
+        0 0 16px rgba(255, 0, 128, 0.3);
+    animation: subtle-strike-pulse 4s ease-in-out infinite;
+}
+
+@keyframes subtle-strike-pulse {
+    0%, 100% {
+        opacity: 0.9;
+        transform: translateY(-50%) rotate(-2deg) scaleX(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-50%) rotate(-2deg) scaleX(1.02);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .rule2-label {
+        text-align: center;
+        font-size: clamp(3rem, 10vw, 5rem);
+        margin-bottom: 24px;
+    }
+
+    .rule2-main-headline {
+        text-align: center;
+        font-size: clamp(2.2rem, 6.5vw, 3.2rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .rule2-label {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        margin-bottom: 20px;
+    }
+
+    .rule2-label-text,
+    .rule2-label-glow {
+        -webkit-text-stroke: 1.5px #00d4ff;
+    }
+
+    .rule2-main-headline {
+        font-size: clamp(1.9rem, 7.5vw, 3rem);
+        line-height: 1.15;
+    }
+
+    .rule2-headline-strike::after {
+        height: 2px;
+    }
+}

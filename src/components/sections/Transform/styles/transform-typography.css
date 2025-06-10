@@ -496,6 +496,41 @@
   }
 }
 
+/* Left-aligned headline variant */
+.transform-headline-left-aligned {
+  text-align: left;
+  margin-bottom: 0; /* Remove bottom margin for column layout */
+}
+
+.transform-headline-left-aligned .headline-line {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+/* Desktop left alignment */
+@media (min-width: 1025px) {
+  .transform-headline-left-aligned {
+    max-width: 100%;
+  }
+
+  .transform-headline-left-aligned .headline-line {
+    display: block;
+    text-align: left;
+  }
+}
+
+/* Tablet/mobile - center alignment */
+@media (max-width: 1024px) {
+  .transform-headline-left-aligned {
+    text-align: center;
+  }
+
+  .transform-headline-left-aligned .headline-line {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 /* Fallback for browsers without background-clip support */
 @supports not (-webkit-background-clip: text) {
   .headline-gold.with-shimmer {

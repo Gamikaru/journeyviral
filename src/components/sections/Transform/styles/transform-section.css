@@ -14,6 +14,13 @@
   isolation: isolate;
 }
 
+/* Updated section for unified background */
+.transform-section.transform-section-unified {
+  background: transparent; /* Remove section background */
+  position: relative;
+  z-index: 10; /* Ensure content is above unified background */
+}
+
 /* Background container */
 .transform-bg-container {
   position: absolute;
@@ -30,6 +37,11 @@
     #1a0f2e 50%,
     #0d1520 100%
   );
+}
+
+/* Remove background container when using unified */
+.transform-section-unified .transform-bg-container {
+  display: none;
 }
 
 /* Content wrapper */
@@ -51,169 +63,144 @@
   width: 100%;
 }
 
-/* Headline wrapper */
-.transform-headline-wrapper {
-  width: 100%;
-  max-width: 900px;
-  text-align: center;
-  margin: 0 auto;
-}
-
-/* Content grid - better proportions */
+/* Content grid - enhanced two-column layout */
 .transform-content-grid {
   display: grid;
-  grid-template-columns: 0.6fr 1.4fr;
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
+  align-items: start;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
-/* CTA wrapper */
-.transform-cta-wrapper {
+/* Left column - headline and CTA */
+.transform-left-column {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.transform-headline-container {
   width: 100%;
 }
 
-/* Chat wrapper */
-.transform-chat-wrapper {
+.transform-cta-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Right column - messaging */
+.transform-right-column {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+  padding-top: 2rem;
+}
+
+/* Remove old wrappers */
+.transform-headline-wrapper,
+.transform-cta-wrapper,
+.transform-chat-wrapper {
+  display: none;
+}
+
+/* Desktop adjustments */
+@media (min-width: 1440px) {
+  .transform-content-grid {
+    max-width: 1600px;
+    gap: 5rem;
+  }
+
+  .transform-left-column {
+    gap: 3.5rem;
+  }
 }
 
 /* Large desktop optimization */
 @media (min-width: 1920px) {
-  .transform-section {
-    padding: 6rem 0;
-  }
-
-  .transform-content {
-    max-width: 1600px;
-  }
-
   .transform-content-grid {
-    max-width: 1400px;
-    gap: 5rem;
-  }
-}
-
-/* Desktop adjustments */
-@media (max-width: 1440px) {
-  .transform-content-grid {
-    gap: 3.5rem;
+    max-width: 1800px;
+    gap: 6rem;
   }
 }
 
 /* Laptop/small desktop */
 @media (max-width: 1280px) {
-  .transform-section {
-    padding: 4.5rem 0;
-  }
-
-  .transform-container {
-    gap: 3.5rem;
-  }
-
   .transform-content-grid {
-    grid-template-columns: 0.7fr 1.3fr;
     gap: 3rem;
+  }
+
+  .transform-left-column {
+    gap: 2.5rem;
+  }
+
+  .transform-right-column {
+    padding-top: 1.5rem;
   }
 }
 
 /* Tablet - switch to single column */
 @media (max-width: 1024px) {
-  .transform-section {
-    padding: 4rem 0;
-    min-height: auto;
-  }
-
-  .transform-content {
-    padding: 0 clamp(1.25rem, 3vw, 2rem);
-  }
-
-  .transform-container {
-    gap: 3rem;
-  }
-
-  .transform-headline-wrapper {
-    max-width: 700px;
-  }
-
-  /* Stack layout on tablet */
   .transform-content-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
-    max-width: 700px;
+    max-width: 800px;
   }
 
-  /* Reorder for better mobile flow */
-  .transform-chat-wrapper {
-    order: 1;
-  }
-
-  .transform-cta-wrapper {
-    order: 2;
-  }
-}
-
-/* Small tablet */
-@media (max-width: 768px) {
-  .transform-section {
-    padding: 3.5rem 0;
-  }
-
-  .transform-container {
+  .transform-left-column {
+    text-align: center;
+    align-items: center;
     gap: 2.5rem;
   }
 
-  .transform-headline-wrapper {
-    max-width: 100%;
+  .transform-headline-container {
+    max-width: 700px;
   }
 
+  .transform-cta-container {
+    justify-content: center;
+  }
+
+  .transform-right-column {
+    padding-top: 0;
+    order: -1; /* Show messaging first on mobile */
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
   .transform-content-grid {
     gap: 2.5rem;
     max-width: 600px;
   }
-}
 
-/* Mobile */
-@media (max-width: 480px) {
-  .transform-section {
-    padding: 3rem 0;
-  }
-
-  .transform-content {
-    padding: 0 1rem;
-  }
-
-  .transform-container {
+  .transform-left-column {
     gap: 2rem;
   }
 
+  .transform-headline-container {
+    max-width: 100%;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
   .transform-content-grid {
     gap: 2rem;
     max-width: 100%;
   }
 
-  /* Ensure CTA is centered on mobile */
-  .transform-cta-wrapper {
+  .transform-left-column {
+    gap: 1.5rem;
+  }
+
+  .transform-cta-container {
     padding: 0 1rem;
-  }
-}
-
-/* Ultra-wide displays */
-@media (min-width: 2560px) {
-  .transform-content {
-    max-width: 1800px;
-  }
-
-  .transform-content-grid {
-    max-width: 1600px;
   }
 }
 

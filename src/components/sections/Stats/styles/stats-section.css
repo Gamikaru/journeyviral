@@ -52,6 +52,18 @@
     );
 }
 
+/* Updated section for unified background */
+.stats-section.stats-section-unified {
+    background: transparent; /* Remove section background */
+    position: relative;
+    z-index: 10; /* Ensure content is above unified background */
+}
+
+/* Remove background container when using unified */
+.stats-section-unified .stats-bg-container {
+    display: none;
+}
+
 /* Responsive adjustments - match Transform section */
 @media (max-width: 1280px) {
     .stats-content {

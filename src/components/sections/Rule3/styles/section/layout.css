@@ -1,0 +1,138 @@
+.rule3-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgb(15, 15, 25) 0%,
+    rgb(25, 15, 35) 50%,
+    rgb(15, 25, 45) 100%
+  );
+}
+
+.rule3-content-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  padding: 3rem;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.rule3-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.rule3-text-content {
+  position: relative;
+  order: 1;
+}
+
+.rule3-visual-content {
+  position: relative;
+  order: 2;
+}
+
+.rule3-text-inner,
+.rule3-visual-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Decorative accents */
+.rule3-text-accent {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #9333ea, #ec4899);
+  filter: blur(40px);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.rule3-accent-1 {
+  width: 200px;
+  height: 200px;
+  top: -100px;
+  left: -100px;
+}
+
+.rule3-accent-2 {
+  width: 150px;
+  height: 150px;
+  bottom: -75px;
+  right: -75px;
+}
+
+/* Visual effects */
+.rule3-visual-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.rule3-visual-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(236, 72, 153, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(147, 51, 234, 0.1) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px;
+  z-index: 1;
+}
+
+/* Progress indicator */
+.rule3-progress-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rule3-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #9333ea, #ec4899);
+  border-radius: 2px;
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left;
+  transition: transform 0.1s ease-out;
+}
+
+/* Noise overlay */
+.rule3-section-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}

@@ -41,7 +41,7 @@ const TransformHeadline = memo(function TransformHeadline({
 
   return (
     <motion.h2
-      className="transform-headline"
+      className="transform-headline transform-headline-left-aligned"
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       aria-label="We transform your corporate cringe into viral gold"

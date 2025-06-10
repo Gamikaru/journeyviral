@@ -3,7 +3,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import TransformBackground from "./TransformBackground";
 import TransformHeadline from "./TransformHeadline";
 import TransformCTA from "./TransformCTA";
 import TransformSupportingText from "./TransformSupportingText";
@@ -83,17 +82,10 @@ export default function TransformSection() {
     <section
       ref={sectionRef}
       id="transform"
-      className={`transform-section ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
+      className={`transform-section transform-section-unified ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
       aria-label="Transform your corporate content into viral success"
     >
-      {/* Background */}
-      <div className="transform-bg-container" aria-hidden="true">
-        {!isLowPerf ? (
-          <TransformBackground isVisible={shouldAnimate} />
-        ) : (
-          <div className="transform-bg-simple" />
-        )}
-      </div>
+      {/* Remove background container - now handled by UnifiedBackground */}
 
       {/* Main Content Container */}
       <div className="transform-content">
@@ -111,19 +103,24 @@ export default function TransformSection() {
             <TransformHeadline isInView={isInView} isLowPerf={isLowPerf} />
           </motion.div>
 
-          {/* Content Grid */}
+          {/* Content Grid - Updated for proper two-column layout */}
           <div className="transform-content-grid">
-            {/* Left Column - CTA */}
+            {/* Left Column - Headline and CTA */}
             <motion.div
-              className="transform-cta-wrapper"
+              className="transform-left-column"
               variants={itemVariants}
             >
-              <TransformCTA isInView={isInView} />
+              <div className="transform-headline-container">
+                <TransformHeadline isInView={isInView} isLowPerf={isLowPerf} />
+              </div>
+              <div className="transform-cta-container">
+                <TransformCTA isInView={isInView} />
+              </div>
             </motion.div>
 
             {/* Right Column - Supporting Text/Chat */}
             <motion.div
-              className="transform-chat-wrapper"
+              className="transform-right-column"
               variants={itemVariants}
             >
               <TransformSupportingText isInView={isInView} isLowPerf={isLowPerf} />

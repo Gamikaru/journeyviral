@@ -2,7 +2,6 @@
 
 import { motion, useInView, Variants } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import StatsBackground from "./StatsBackground";
 import StatsHeadline from "./StatsHeadline";
 import StatsGrid from "./StatsGrid";
 import "./styles/stats-section.css";
@@ -75,17 +74,10 @@ export default function StatsSection() {
     <section
       ref={sectionRef}
       id="stats"
-      className={`stats-section ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
+      className={`stats-section stats-section-unified ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
       aria-label="Proven results and viral content statistics"
     >
-      {/* Background */}
-      <div className="stats-bg-container">
-        {!isLowPerf ? (
-          <StatsBackground isVisible={shouldAnimate} />
-        ) : (
-          <div className="stats-bg-simple" />
-        )}
-      </div>
+      {/* Remove background container - now handled by UnifiedBackground */}
 
       {/* Main Content Container */}
       <div className="stats-content">
