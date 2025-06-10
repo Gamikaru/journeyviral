@@ -14,100 +14,121 @@ export default function UnifiedBackground() {
     offset: ["start start", "end end"]
   });
 
-  // Enhanced color transitions with more variation
+  // Enhanced color transitions with more character and smoother blending
   const backgroundColor = useTransform(
     scrollYProgress,
-    [0, 0.12, 0.28, 0.45, 0.62, 0.78, 1],
+    [0, 0.08, 0.18, 0.32, 0.48, 0.64, 0.78, 0.88, 1],
     [
       "rgb(10, 6, 22)",      // Hero - deep purple
-      "rgb(8, 4, 18)",       // Hero to Transform transition
-      "rgb(5, 2, 8)",        // Transform - darker purple
-      "rgb(12, 8, 28)",      // Stats - enhanced blue-purple
-      "rgb(10, 6, 22)",      // Expertise - back to purple but different tone
-      "rgb(4, 2, 8)",        // Rule1 transition - very dark
-      "rgb(0, 0, 0)"         // Rule1 - pure black
+      "rgb(12, 4, 24)",      // Early transition
+      "rgb(8, 8, 28)",       // Transform - creative purple with blue hints
+      "rgb(5, 12, 18)",      // Stats - data blue-teal
+      "rgb(8, 6, 20)",       // Expertise - professional purple-blue
+      "rgb(2, 2, 8)",        // Rule1 - dramatic dark
+      "rgb(4, 2, 12)",       // Rule2 - comparison contrast
+      "rgb(8, 6, 12)",       // Rule3 - value warmth
+      "rgb(0, 0, 0)"         // Footer - pure black
     ]
   );
 
-  // Multiple gradient orbs with section-specific behaviors
-  const orb1Y = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], ["15%", "45%", "75%", "90%"]);
-  const orb2Y = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], ["85%", "55%", "25%", "10%"]);
-  const orb3Y = useTransform(scrollYProgress, [0, 0.5, 1], ["50%", "30%", "70%"]);
+  // Enhanced floating orbs that travel across the screen
+  const floatingOrb1X = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["-10%", "30%", "70%", "110%", "120%"]);
+  const floatingOrb1Y = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], ["20%", "60%", "30%", "80%", "10%", "50%"]);
 
-  const orb1X = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["20%", "60%", "30%", "70%", "40%"]);
-  const orb2X = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["80%", "40%", "75%", "25%", "60%"]);
-  const orb3X = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], ["50%", "25%", "75%", "50%"]);
+  const floatingOrb2X = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], ["110%", "60%", "20%", "-20%"]);
+  const floatingOrb2Y = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["80%", "20%", "70%", "30%", "90%"]);
 
-  // Section-specific opacity with more dramatic changes
+  const floatingOrb3X = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], ["-15%", "80%", "40%", "115%"]);
+  const floatingOrb3Y = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], ["50%", "15%", "85%", "25%"]);
+
+  // Dynamic orb positioning with section-specific behaviors
+  const orb1Y = useTransform(scrollYProgress, [0, 0.28, 0.45, 0.78, 1], ["15%", "35%", "60%", "85%", "95%"]);
+  const orb2Y = useTransform(scrollYProgress, [0, 0.28, 0.62, 0.9, 1], ["85%", "65%", "40%", "15%", "5%"]);
+  const orb3Y = useTransform(scrollYProgress, [0, 0.45, 0.78, 1], ["50%", "25%", "75%", "90%"]);
+
+  const orb1X = useTransform(scrollYProgress, [0, 0.28, 0.45, 0.62, 0.78, 1], ["20%", "70%", "30%", "80%", "40%", "60%"]);
+  const orb2X = useTransform(scrollYProgress, [0, 0.28, 0.45, 0.62, 0.78, 1], ["80%", "30%", "75%", "20%", "65%", "35%"]);
+  const orb3X = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], ["50%", "20%", "80%", "45%"]);
+
+  // Enhanced section-specific opacity with more dramatic changes
   const orb1Opacity = useTransform(
     scrollYProgress,
-    [0, 0.12, 0.28, 0.45, 0.62, 0.78, 1],
-    [0.3, 0.6, 0.4, 0.8, 0.5, 0.2, 0.1] // More dramatic for Transform and Stats
+    [0, 0.12, 0.28, 0.45, 0.62, 0.78, 0.9, 1],
+    [0.4, 0.8, 0.6, 0.9, 0.5, 0.3, 0.2, 0.1] // Strong in Transform and Stats
   );
 
   const orb2Opacity = useTransform(
     scrollYProgress,
-    [0, 0.12, 0.28, 0.45, 0.62, 0.78, 1],
-    [0.4, 0.3, 0.7, 0.5, 0.8, 0.4, 0.2] // Peaks at Stats and Expertise
+    [0, 0.12, 0.28, 0.45, 0.62, 0.78, 0.9, 1],
+    [0.5, 0.4, 0.9, 0.6, 0.9, 0.5, 0.3, 0.2] // Peaks at Stats and Expertise
   );
 
   const orb3Opacity = useTransform(
     scrollYProgress,
-    [0, 0.12, 0.28, 0.45, 0.62, 0.78, 1],
-    [0.2, 0.4, 0.3, 0.6, 0.4, 0.6, 0.3] // More active in middle sections
+    [0, 0.12, 0.28, 0.45, 0.62, 0.78, 0.9, 1],
+    [0.3, 0.5, 0.4, 0.7, 0.5, 0.8, 0.6, 0.4] // Active in Rules sections
   );
 
-  // Enhanced orb scale variations
-  const orb1Scale = useTransform(scrollYProgress, [0, 0.28, 0.45, 0.78, 1], [1, 1.3, 0.9, 1.1, 0.7]);
-  const orb2Scale = useTransform(scrollYProgress, [0, 0.28, 0.45, 0.78, 1], [0.8, 0.9, 1.2, 0.8, 1]);
-  const orb3Scale = useTransform(scrollYProgress, [0, 0.45, 0.62, 1], [1.1, 0.8, 1.3, 0.9]);
+  // Dynamic orb scale with energy bursts
+  const orb1Scale = useTransform(scrollYProgress, [0, 0.15, 0.3, 0.5, 0.7, 0.85, 1], [1, 1.2, 0.9, 1.4, 0.8, 1.1, 0.7]);
+  const orb2Scale = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0.8, 1.1, 1.3, 0.9, 1.2, 0.8]);
+  const orb3Scale = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [1.1, 0.8, 1.4, 1, 0.9]);
 
-  // New: Section-specific rotation for dynamic feel
-  const orb1Rotate = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const orb2Rotate = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  // Floating orb properties
+  const floatingOrb1Opacity = useTransform(scrollYProgress, [0, 0.1, 0.4, 0.7, 0.9, 1], [0, 0.8, 1, 0.9, 0.6, 0]);
+  const floatingOrb2Opacity = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [0, 0.7, 0.9, 0.8, 0]);
+  const floatingOrb3Opacity = useTransform(scrollYProgress, [0, 0.15, 0.6, 0.85, 1], [0, 0.6, 1, 0.7, 0]);
 
-  // Enhanced section-specific overlay opacity controls
+  const floatingOrb1Scale = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0.5, 1.2, 0.8, 1.1]);
+  const floatingOrb2Scale = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [0.7, 1, 1.3, 0.6]);
+  const floatingOrb3Scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.1, 0.8]);
+
+  // Dynamic traveling spotlights with more variation
+  const spotlightPrimaryX = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], ["10%", "60%", "20%", "80%", "40%", "90%"]);
+  const spotlightPrimaryY = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["80%", "20%", "70%", "30%", "85%"]);
+
+  const spotlightSecondaryX = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], ["90%", "30%", "85%", "15%", "70%"]);
+  const spotlightSecondaryY = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], ["20%", "85%", "30%", "75%"]);
+
+  // Background texture variations
+  const meshOpacity = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0.8, 1, 0.6, 0.9, 0.7, 0.5]);
+  const meshScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 0.9]);
+
+  // Section-specific overlay controls with smoother transitions
   const transformOverlayOpacity = useTransform(
     scrollYProgress,
-    [0, 0.08, 0.15, 0.25, 0.32],
-    [0, 0.6, 1, 0.8, 0]
+    [0.05, 0.12, 0.20, 0.28, 0.35],
+    [0, 0.8, 1, 0.9, 0]
   );
 
   const statsOverlayOpacity = useTransform(
     scrollYProgress,
-    [0.25, 0.32, 0.38, 0.48, 0.55],
-    [0, 0.7, 1, 0.9, 0]
+    [0.22, 0.28, 0.36, 0.45, 0.52],
+    [0, 0.9, 1, 0.9, 0]
   );
 
   const expertiseOverlayOpacity = useTransform(
     scrollYProgress,
-    [0.45, 0.52, 0.58, 0.68, 0.75],
-    [0, 0.8, 1, 0.7, 0]
+    [0.40, 0.45, 0.54, 0.62, 0.68],
+    [0, 0.85, 1, 0.8, 0]
   );
 
   const rule1OverlayOpacity = useTransform(
     scrollYProgress,
-    [0.68, 0.75, 0.82, 0.92, 1],
-    [0, 0.9, 1, 0.8, 0.6]
+    [0.60, 0.68, 0.76, 0.84, 0.90],
+    [0, 0.9, 1, 0.8, 0.3]
   );
 
   const rule2OverlayOpacity = useTransform(
     scrollYProgress,
-    [0.75, 0.82, 0.88, 0.95, 1],
-    [0, 0.6, 1, 0.7, 0]
+    [0.75, 0.82, 0.88, 0.94, 1],
+    [0, 0.7, 1, 0.6, 0]
   );
 
-  const footerOverlayOpacity = useTransform(
+  const rule3OverlayOpacity = useTransform(
     scrollYProgress,
-    [0.85, 0.92, 1],
-    [0, 0.8, 1]
-  );
-
-  // Floating elements animation controls
-  const floatingElementsScale = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [0.8, 1.1, 0.9]
+    [0.82, 0.88, 0.94, 1],
+    [0, 0.8, 1, 0.5]
   );
 
   return (
@@ -117,7 +138,41 @@ export default function UnifiedBackground() {
         className="unified-background"
         style={{ backgroundColor }}
       >
-        {/* Primary gradient orb - cyan with enhanced behavior */}
+        {/* FLOATING ORBS - Travel across screen during scroll */}
+        <motion.div
+          className="unified-floating-orb floating-orb-cyan"
+          style={{
+            left: floatingOrb1X,
+            top: floatingOrb1Y,
+            opacity: floatingOrb1Opacity,
+            scale: floatingOrb1Scale,
+            rotate: useTransform(scrollYProgress, [0, 1], [0, 360])
+          }}
+        />
+
+        <motion.div
+          className="unified-floating-orb floating-orb-magenta"
+          style={{
+            left: floatingOrb2X,
+            top: floatingOrb2Y,
+            opacity: floatingOrb2Opacity,
+            scale: floatingOrb2Scale,
+            rotate: useTransform(scrollYProgress, [0, 1], [0, -270])
+          }}
+        />
+
+        <motion.div
+          className="unified-floating-orb floating-orb-mixed"
+          style={{
+            left: floatingOrb3X,
+            top: floatingOrb3Y,
+            opacity: floatingOrb3Opacity,
+            scale: floatingOrb3Scale,
+            rotate: useTransform(scrollYProgress, [0, 1], [0, 180])
+          }}
+        />
+
+        {/* Enhanced primary orb - cyan with dynamic behavior */}
         <motion.div
           className="unified-orb unified-orb-cyan"
           style={{
@@ -125,11 +180,11 @@ export default function UnifiedBackground() {
             left: orb1X,
             opacity: orb1Opacity,
             scale: orb1Scale,
-            rotate: orb1Rotate
+            rotate: useTransform(scrollYProgress, [0, 1], [0, 270])
           }}
         />
 
-        {/* Secondary gradient orb - magenta with enhanced behavior */}
+        {/* Enhanced secondary orb - magenta with counter-rotation */}
         <motion.div
           className="unified-orb unified-orb-magenta"
           style={{
@@ -137,11 +192,11 @@ export default function UnifiedBackground() {
             right: orb2X,
             opacity: orb2Opacity,
             scale: orb2Scale,
-            rotate: orb2Rotate
+            rotate: useTransform(scrollYProgress, [0, 1], [0, -180])
           }}
         />
 
-        {/* Tertiary gradient orb - green accent */}
+        {/* Enhanced tertiary orb - green accent */}
         <motion.div
           className="unified-orb unified-orb-green"
           style={{
@@ -152,21 +207,56 @@ export default function UnifiedBackground() {
           }}
         />
 
-        {/* New: Fourth orb for more complexity */}
+        {/* Enhanced fourth orb - purple with section-specific activation */}
         <motion.div
           className="unified-orb unified-orb-purple"
           style={{
-            top: useTransform(scrollYProgress, [0, 0.5, 1], ["70%", "20%", "80%"]),
-            left: useTransform(scrollYProgress, [0, 0.5, 1], ["10%", "90%", "30%"]),
-            opacity: useTransform(scrollYProgress, [0, 0.28, 0.62, 1], [0, 0.4, 0.6, 0.2]),
-            scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1.1, 0.8])
+            top: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], ["70%", "20%", "80%", "40%"]),
+            left: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], ["10%", "90%", "30%", "70%"]),
+            opacity: useTransform(scrollYProgress, [0, 0.28, 0.62, 0.9, 1], [0, 0.5, 0.8, 0.4, 0.2]),
+            scale: useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0.7, 1.2, 0.8, 1.1, 0.6])
           }}
         />
 
-        {/* Enhanced mesh gradient overlay */}
-        <div className="unified-mesh" />
+        {/* Enhanced dynamic traveling spotlights */}
+        <motion.div
+          className="unified-spotlight unified-spotlight-primary"
+          style={{
+            left: spotlightPrimaryX,
+            top: spotlightPrimaryY,
+            opacity: useTransform(scrollYProgress, [0, 0.1, 0.3, 0.7, 0.9, 1], [0.3, 0.8, 0.6, 0.9, 0.7, 0.3]),
+            scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.9])
+          }}
+        />
 
-        {/* Section-specific overlay effects */}
+        <motion.div
+          className="unified-spotlight unified-spotlight-secondary"
+          style={{
+            left: spotlightSecondaryX,
+            top: spotlightSecondaryY,
+            opacity: useTransform(scrollYProgress, [0, 0.1, 0.4, 0.8, 1], [0.4, 0.7, 0.9, 0.6, 0.4]),
+            scale: useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [0.7, 1.1, 1.3, 0.8])
+          }}
+        />
+
+        {/* Enhanced animated mesh gradient with scroll responsiveness */}
+        <motion.div
+          className="unified-mesh"
+          style={{
+            opacity: meshOpacity,
+            scale: meshScale
+          }}
+        />
+
+        {/* Floating particles for extra depth */}
+        <motion.div
+          className="unified-floating-particles"
+          style={{
+            opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.5, 0.8, 0.6, 0.3])
+          }}
+        />
+
+        {/* DRAMATICALLY ENHANCED section-specific overlays */}
         <motion.div
           className="unified-section-overlay unified-overlay-transform"
           style={{ opacity: transformOverlayOpacity }}
@@ -193,90 +283,48 @@ export default function UnifiedBackground() {
         />
 
         <motion.div
-          className="unified-section-overlay unified-overlay-footer"
-          style={{ opacity: footerOverlayOpacity }}
+          className="unified-section-overlay unified-overlay-rule3"
+          style={{ opacity: rule3OverlayOpacity }}
         />
 
-        {/* Section-specific floating elements */}
-        <motion.div
-          className="unified-floating-elements unified-floating-transform"
-          style={{
-            opacity: transformOverlayOpacity,
-            scale: floatingElementsScale
-          }}
-        />
-
-        <motion.div
-          className="unified-floating-elements unified-floating-stats"
-          style={{
-            opacity: statsOverlayOpacity,
-            scale: floatingElementsScale
-          }}
-        />
-
-        {/* Section transition zones */}
+        {/* Enhanced section transition zones with more dynamic effects */}
         <motion.div
           className="unified-transition-zone transition-to-transform"
           style={{
-            opacity: useTransform(scrollYProgress, [0.05, 0.12, 0.18], [0, 1, 0])
+            opacity: useTransform(scrollYProgress, [0.08, 0.12, 0.16], [0, 1, 0]),
+            scale: useTransform(scrollYProgress, [0.08, 0.12, 0.16], [0.8, 1.1, 0.9])
           }}
         />
 
         <motion.div
           className="unified-transition-zone transition-to-stats"
           style={{
-            opacity: useTransform(scrollYProgress, [0.28, 0.35, 0.42], [0, 1, 0])
+            opacity: useTransform(scrollYProgress, [0.25, 0.28, 0.32], [0, 1, 0]),
+            scale: useTransform(scrollYProgress, [0.25, 0.28, 0.32], [0.9, 1.2, 0.8])
           }}
         />
 
         <motion.div
           className="unified-transition-zone transition-to-expertise"
           style={{
-            opacity: useTransform(scrollYProgress, [0.48, 0.55, 0.62], [0, 1, 0])
+            opacity: useTransform(scrollYProgress, [0.42, 0.45, 0.48], [0, 1, 0]),
+            scale: useTransform(scrollYProgress, [0.42, 0.45, 0.48], [0.7, 1.3, 0.9])
           }}
         />
 
         <motion.div
           className="unified-transition-zone transition-to-rule1"
           style={{
-            opacity: useTransform(scrollYProgress, [0.68, 0.75, 0.82], [0, 1, 0])
+            opacity: useTransform(scrollYProgress, [0.65, 0.68, 0.72], [0, 1, 0]),
+            scale: useTransform(scrollYProgress, [0.65, 0.68, 0.72], [0.8, 1.1, 0.8])
           }}
         />
 
-        {/* Enhanced section-specific accent layers with more variation */}
-        <motion.div
-          className="unified-accent-layer unified-accent-transform"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.05, 0.12, 0.28, 0.35], [0, 0.8, 1, 0])
-          }}
-        />
-
-        <motion.div
-          className="unified-accent-layer unified-accent-stats"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.25, 0.32, 0.45, 0.52], [0, 0.9, 1, 0])
-          }}
-        />
-
-        <motion.div
-          className="unified-accent-layer unified-accent-expertise"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.42, 0.48, 0.62, 0.68], [0, 0.7, 1, 0])
-          }}
-        />
-
-        <motion.div
-          className="unified-accent-layer unified-accent-rule1"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.65, 0.75, 0.9, 1], [0, 0.8, 1, 0.6])
-          }}
-        />
-
-        {/* Enhanced vignette with section awareness */}
+        {/* Enhanced vignette with dynamic intensity */}
         <motion.div
           className="unified-vignette"
           style={{
-            opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 0.6, 1])
+            opacity: useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.8, 0.5, 0.7, 1])
           }}
         />
       </motion.div>

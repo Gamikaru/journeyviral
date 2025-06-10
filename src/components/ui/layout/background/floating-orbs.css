@@ -1,0 +1,185 @@
+/* Enhanced floating orbs with performance optimizations */
+.floating-orbs-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* FLOATING ORBS - Travel across screen during scroll */
+.unified-floating-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform, opacity;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
+  animation: subtlePulse 8s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    filter: blur(80px) brightness(1);
+  }
+  50% {
+    filter: blur(85px) brightness(1.1);
+  }
+}
+
+/* Enhanced cyan orb with improved gradients */
+.floating-orb-cyan {
+  width: 40vw;
+  height: 40vw;
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 200px;
+  min-height: 200px;
+  background:
+    radial-gradient(circle at 40% 30%, rgba(0, 255, 255, 0.95) 0%, rgba(0, 255, 255, 0.4) 35%, transparent 70%),
+    radial-gradient(circle at center, rgba(0, 255, 255, 0.8) 0%, rgba(0, 212, 255, 0.5) 25%, rgba(0, 255, 255, 0.2) 50%, transparent 80%),
+    radial-gradient(circle at 70% 70%, rgba(64, 224, 255, 0.3) 0%, transparent 40%);
+  box-shadow:
+    0 0 300px rgba(0, 255, 255, 0.7),
+    0 0 150px rgba(0, 255, 255, 0.4),
+    inset 0 0 150px rgba(0, 255, 255, 0.3);
+}
+
+/* Enhanced magenta orb with improved gradients */
+.floating-orb-magenta {
+  width: 45vw;
+  height: 45vw;
+  max-width: 550px;
+  max-height: 550px;
+  min-width: 220px;
+  min-height: 220px;
+  background:
+    radial-gradient(circle at 60% 70%, rgba(255, 0, 255, 0.9) 0%, rgba(255, 0, 255, 0.4) 30%, transparent 65%),
+    radial-gradient(circle at center, rgba(255, 0, 255, 0.7) 0%, rgba(255, 64, 129, 0.5) 25%, rgba(255, 0, 255, 0.2) 50%, transparent 80%),
+    radial-gradient(circle at 30% 30%, rgba(255, 105, 180, 0.4) 0%, transparent 45%);
+  box-shadow:
+    0 0 280px rgba(255, 0, 255, 0.6),
+    0 0 140px rgba(255, 0, 255, 0.3),
+    inset 0 0 120px rgba(255, 0, 255, 0.25);
+}
+
+/* Enhanced mixed orb with improved gradients */
+.floating-orb-mixed {
+  width: 35vw;
+  height: 35vw;
+  max-width: 450px;
+  max-height: 450px;
+  min-width: 180px;
+  min-height: 180px;
+  background:
+    radial-gradient(circle at 30% 50%, rgba(0, 255, 255, 0.7) 0%, rgba(0, 255, 255, 0.3) 25%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(255, 0, 255, 0.6) 0%, rgba(255, 0, 255, 0.2) 30%, transparent 55%),
+    radial-gradient(circle at center, rgba(138, 43, 226, 0.5) 0%, rgba(0, 255, 136, 0.3) 40%, transparent 75%),
+    radial-gradient(circle at 50% 20%, rgba(147, 112, 219, 0.4) 0%, transparent 35%);
+  box-shadow:
+    0 0 220px rgba(138, 43, 226, 0.5),
+    0 0 110px rgba(138, 43, 226, 0.3),
+    inset 0 0 100px rgba(255, 0, 255, 0.2);
+}
+
+/* Mobile optimizations */
+.unified-floating-orb.mobile-optimized {
+  filter: blur(40px);
+  animation: none; /* Disable animations on mobile for performance */
+}
+
+/* Enhanced responsive design */
+@media (max-width: 1200px) {
+  .floating-orb-cyan {
+    width: 45vw;
+    height: 45vw;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .floating-orb-magenta {
+    width: 50vw;
+    height: 50vw;
+    max-width: 450px;
+    max-height: 450px;
+  }
+
+  .floating-orb-mixed {
+    width: 38vw;
+    height: 38vw;
+    max-width: 350px;
+    max-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .unified-floating-orb {
+    filter: blur(35px);
+    width: 60vw;
+    height: 60vw;
+    max-width: 250px;
+    max-height: 250px;
+    min-width: 120px;
+    min-height: 120px;
+  }
+
+  .floating-orb-cyan,
+  .floating-orb-magenta,
+  .floating-orb-mixed {
+    box-shadow:
+      0 0 150px rgba(138, 43, 226, 0.4),
+      inset 0 0 50px rgba(255, 0, 255, 0.15);
+  }
+}
+
+@media (max-width: 480px) {
+  .unified-floating-orb {
+    filter: blur(25px);
+    width: 70vw;
+    height: 70vw;
+    max-width: 180px;
+    max-height: 180px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .unified-floating-orb {
+    opacity: 0.8 !important;
+    filter: blur(60px) contrast(1.2);
+  }
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .unified-floating-orb {
+    animation: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .floating-orb-cyan {
+    background:
+      radial-gradient(circle at 40% 30%, rgba(0, 255, 255, 0.85) 0%, rgba(0, 255, 255, 0.35) 35%, transparent 70%),
+      radial-gradient(circle at center, rgba(0, 255, 255, 0.7) 0%, rgba(0, 212, 255, 0.45) 25%, rgba(0, 255, 255, 0.15) 50%, transparent 80%);
+  }
+
+  .floating-orb-magenta {
+    background:
+      radial-gradient(circle at 60% 70%, rgba(255, 0, 255, 0.8) 0%, rgba(255, 0, 255, 0.35) 30%, transparent 65%),
+      radial-gradient(circle at center, rgba(255, 0, 255, 0.65) 0%, rgba(255, 64, 129, 0.45) 25%, rgba(255, 0, 255, 0.15) 50%, transparent 80%);
+  }
+}
+
+/* Performance optimizations for older browsers */
+@supports not (backdrop-filter: blur(10px)) {
+  .unified-floating-orb {
+    filter: blur(60px);
+    opacity: 0.8;
+  }
+}

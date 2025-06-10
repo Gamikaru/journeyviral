@@ -1,0 +1,321 @@
+/* Enhanced section-specific decorations */
+
+.section-decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Transform Section Decorations - Creative Energy */
+.section-decorations-transform {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.creative-orb-1 {
+  position: absolute;
+  top: 20%;
+  right: 15%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 255, 0.3) 0%,
+    rgba(138, 43, 226, 0.2) 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.creative-orb-2 {
+  position: absolute;
+  bottom: 30%;
+  left: 10%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 110, 199, 0.4) 0%,
+    rgba(255, 0, 255, 0.2) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(30px);
+}
+
+.creative-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask: radial-gradient(circle at center, black 60%, transparent 80%);
+  -webkit-mask: radial-gradient(circle at center, black 60%, transparent 80%);
+}
+
+/* Stats Section Decorations - Data Visualization */
+.section-decorations-stats {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.stats-chart-bars {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  width: 100px;
+  height: 60px;
+  background-image:
+    linear-gradient(to top, rgba(0, 255, 255, 0.6) 0%, rgba(0, 255, 255, 0.6) 40%, transparent 40%),
+    linear-gradient(to top, rgba(0, 255, 136, 0.5) 0%, rgba(0, 255, 136, 0.5) 70%, transparent 70%),
+    linear-gradient(to top, rgba(0, 212, 255, 0.4) 0%, rgba(0, 212, 255, 0.4) 25%, transparent 25%);
+  background-size: 20px 100%, 20px 100%, 20px 100%;
+  background-position: 0 0, 25px 0, 50px 0;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+}
+
+.stats-metrics-dots {
+  position: absolute;
+  top: 40%;
+  right: 25%;
+  width: 80px;
+  height: 80px;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.8) 0%, transparent 20%),
+    radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.6) 0%, transparent 25%),
+    radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.7) 0%, transparent 15%);
+  filter: blur(1px);
+}
+
+.stats-graph-lines {
+  position: absolute;
+  bottom: 30%;
+  left: 30%;
+  width: 120px;
+  height: 40px;
+  background:
+    linear-gradient(135deg, transparent 0%, rgba(0, 255, 255, 0.3) 50%, transparent 100%),
+    linear-gradient(45deg, transparent 0%, rgba(0, 255, 136, 0.2) 50%, transparent 100%);
+  filter: blur(1px);
+}
+
+/* Expertise Section Decorations - Tech Circuits */
+.section-decorations-expertise {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.tech-circuit-nodes {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 25% 35%, rgba(138, 43, 226, 0.6) 0%, transparent 8%),
+    radial-gradient(circle at 75% 65%, rgba(0, 212, 255, 0.5) 0%, transparent 10%),
+    radial-gradient(circle at 50% 20%, rgba(186, 85, 211, 0.4) 0%, transparent 6%),
+    radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.3) 0%, transparent 7%);
+}
+
+.tech-connection-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, transparent 30%, rgba(138, 43, 226, 0.2) 35%, transparent 40%),
+    linear-gradient(135deg, transparent 60%, rgba(0, 212, 255, 0.15) 65%, transparent 70%);
+}
+
+/* Rule1 Section Decorations - Dramatic Neon */
+.section-decorations-rule1 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.rule-spotlight-1 {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 255, 0.4) 0%,
+    rgba(0, 255, 255, 0.2) 30%,
+    transparent 60%
+  );
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.rule-spotlight-2 {
+  position: absolute;
+  bottom: 20%;
+  right: 25%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 255, 0.4) 0%,
+    rgba(255, 0, 255, 0.2) 35%,
+    transparent 65%
+  );
+  border-radius: 50%;
+  filter: blur(50px);
+}
+
+.rule-neon-accents {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(0deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.08) 1px, transparent 1px);
+  background-size: 100px 100px;
+  mask: radial-gradient(ellipse at center, black 50%, transparent 70%);
+  -webkit-mask: radial-gradient(ellipse at center, black 50%, transparent 70%);
+}
+
+/* Rule2 Section Decorations - Comparison Split */
+.section-decorations-rule2 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.rule2-contrast-orb-1 {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 255, 0.3) 0%,
+    transparent 60%
+  );
+  border-radius: 50%;
+  filter: blur(35px);
+}
+
+.rule2-contrast-orb-2 {
+  position: absolute;
+  bottom: 25%;
+  right: 25%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 255, 0.3) 0%,
+    transparent 60%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.rule2-comparison-lines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 255, 0.1) 0%,
+    rgba(0, 255, 255, 0.05) 45%,
+    transparent 50%,
+    rgba(255, 0, 255, 0.05) 55%,
+    rgba(255, 0, 255, 0.1) 100%
+  );
+}
+
+/* Rule3 Section Decorations - Value Impact */
+.section-decorations-rule3 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.rule3-value-orb-1 {
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 193, 7, 0.4) 0%,
+    rgba(255, 235, 59, 0.2) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(45px);
+}
+
+.rule3-value-orb-2 {
+  position: absolute;
+  bottom: 30%;
+  left: 20%;
+  width: 190px;
+  height: 190px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 128, 0.3) 0%,
+    rgba(255, 64, 129, 0.2) 35%,
+    transparent 65%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.rule3-impact-rays {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, transparent 48%, rgba(255, 193, 7, 0.15) 50%, transparent 52%),
+    linear-gradient(135deg, transparent 48%, rgba(255, 0, 128, 0.12) 50%, transparent 52%);
+}
+
+.rule3-value-indicators {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background-image:
+    radial-gradient(circle at center, rgba(255, 193, 7, 0.2) 0%, transparent 30%);
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .creative-orb-1,
+  .creative-orb-2,
+  .rule-spotlight-1,
+  .rule-spotlight-2,
+  .rule2-contrast-orb-1,
+  .rule2-contrast-orb-2,
+  .rule3-value-orb-1,
+  .rule3-value-orb-2 {
+    width: 100px;
+    height: 100px;
+    filter: blur(20px);
+  }
+
+  .stats-chart-bars,
+  .stats-metrics-dots,
+  .stats-graph-lines {
+    width: 60px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-decorations * {
+    animation: none !important;
+  }
+}

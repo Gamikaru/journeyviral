@@ -1,0 +1,267 @@
+/* Enhanced unified background styles with performance optimizations */
+.unified-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color;
+  isolation: isolate;
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Container to measure scroll - optimized */
+.unified-scroll-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400vh; /* Adjust based on your content height */
+  pointer-events: none;
+  z-index: -1;
+  contain: layout;
+}
+
+/* Enhanced gradient orbs with better performance */
+.unified-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: transform, opacity;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+/* Performance mode variations */
+.unified-orb.performance-low {
+  filter: blur(80px);
+  opacity: 0.8;
+}
+
+.unified-orb.performance-medium {
+  filter: blur(120px);
+  opacity: 1;
+}
+
+.unified-orb.performance-high {
+  filter: blur(140px) saturate(1.1);
+  opacity: 1;
+}
+
+/* Enhanced cyan orb with improved gradients */
+.unified-orb-cyan {
+  width: 60vw;
+  height: 60vw;
+  max-width: 800px;
+  max-height: 800px;
+  min-width: 200px;
+  min-height: 200px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0, 255, 255, 0.9) 0%, rgba(0, 255, 255, 0.4) 30%, transparent 70%),
+    radial-gradient(circle at center, rgba(0, 255, 255, 0.7) 0%, rgba(0, 212, 255, 0.5) 20%, rgba(0, 255, 255, 0.2) 50%, transparent 80%),
+    radial-gradient(circle at 70% 70%, rgba(64, 224, 255, 0.3) 0%, transparent 50%);
+  box-shadow:
+    0 0 300px rgba(0, 255, 255, 0.6),
+    0 0 150px rgba(0, 255, 255, 0.3),
+    inset 0 0 150px rgba(0, 255, 255, 0.3);
+}
+
+/* Enhanced magenta orb with improved gradients */
+.unified-orb-magenta {
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  min-width: 250px;
+  min-height: 250px;
+  background:
+    radial-gradient(circle at 70% 70%, rgba(255, 0, 255, 0.8) 0%, rgba(255, 0, 255, 0.4) 25%, transparent 70%),
+    radial-gradient(circle at center, rgba(255, 0, 255, 0.6) 0%, rgba(255, 64, 129, 0.4) 20%, rgba(255, 0, 255, 0.15) 50%, transparent 80%),
+    radial-gradient(circle at 30% 30%, rgba(255, 105, 180, 0.35) 0%, transparent 45%);
+  box-shadow:
+    0 0 280px rgba(255, 0, 255, 0.5),
+    0 0 140px rgba(255, 0, 255, 0.25),
+    inset 0 0 120px rgba(255, 0, 255, 0.25);
+}
+
+/* Enhanced green orb with improved gradients */
+.unified-orb-green {
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
+  min-width: 180px;
+  min-height: 180px;
+  background:
+    radial-gradient(circle at 40% 60%, rgba(0, 255, 136, 0.7) 0%, rgba(0, 255, 136, 0.3) 35%, transparent 70%),
+    radial-gradient(circle at center, rgba(0, 255, 136, 0.5) 0%, rgba(0, 255, 136, 0.25) 30%, rgba(0, 255, 136, 0.1) 50%, transparent 80%),
+    radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.4) 0%, transparent 40%);
+  box-shadow:
+    0 0 220px rgba(0, 255, 136, 0.4),
+    0 0 110px rgba(0, 255, 136, 0.2),
+    inset 0 0 80px rgba(0, 255, 136, 0.15);
+}
+
+/* Enhanced purple orb with improved gradients */
+.unified-orb-purple {
+  width: 45vw;
+  height: 45vw;
+  max-width: 550px;
+  max-height: 550px;
+  min-width: 160px;
+  min-height: 160px;
+  background:
+    radial-gradient(circle at 60% 40%, rgba(138, 43, 226, 0.8) 0%, rgba(138, 43, 226, 0.4) 30%, transparent 70%),
+    radial-gradient(circle at center, rgba(138, 43, 226, 0.6) 0%, rgba(186, 85, 211, 0.3) 25%, rgba(138, 43, 226, 0.15) 50%, transparent 80%),
+    radial-gradient(circle at 20% 80%, rgba(147, 112, 219, 0.4) 0%, transparent 45%);
+  box-shadow:
+    0 0 200px rgba(138, 43, 226, 0.4),
+    0 0 100px rgba(138, 43, 226, 0.2),
+    inset 0 0 70px rgba(138, 43, 226, 0.2);
+}
+
+/* Section overlay base with improved performance */
+.unified-section-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  will-change: opacity;
+  contain: layout style paint;
+}
+
+/* Transition zone base with improved performance */
+.unified-transition-zone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  will-change: opacity, transform;
+  contain: layout style paint;
+}
+
+/* Container classes for organization */
+.floating-orbs-container,
+.static-orbs-container,
+.spotlight-container,
+.mesh-container,
+.particles-container,
+.overlays-container,
+.transitions-container,
+.vignette-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  contain: layout;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 1200px) {
+  .unified-orb-cyan {
+    width: 55vw;
+    height: 55vw;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  .unified-orb-magenta {
+    width: 65vw;
+    height: 65vw;
+    max-width: 700px;
+    max-height: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .unified-orb {
+    filter: blur(60px);
+  }
+
+  .unified-orb-cyan,
+  .unified-orb-magenta {
+    width: 80vw;
+    height: 80vw;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .unified-orb-green,
+  .unified-orb-purple {
+    width: 70vw;
+    height: 70vw;
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .unified-orb {
+    filter: blur(40px);
+  }
+
+  .unified-scroll-container {
+    height: 300vh;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .unified-orb,
+  .unified-section-overlay,
+  .unified-transition-zone {
+    animation: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+
+  .unified-background {
+    transition: background-color 0.3s ease !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .unified-orb {
+    opacity: 0.9 !important;
+    filter: blur(100px) contrast(1.3) !important;
+  }
+}
+
+/* Performance optimizations */
+@media (max-width: 768px) and (orientation: portrait) {
+  .unified-orb {
+    animation: none;
+    will-change: opacity;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .unified-background {
+    background-color: rgb(0, 0, 0);
+  }
+}
+
+/* Print styles */
+@media print {
+  .unified-background,
+  .unified-orb,
+  .unified-section-overlay,
+  .unified-transition-zone {
+    display: none !important;
+  }
+}
+
+/* GPU acceleration for supported properties */
+@supports (transform: translate3d(0, 0, 0)) {
+  .unified-orb {
+    transform: translate3d(0, 0, 0);
+  }
+}
