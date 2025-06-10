@@ -5,12 +5,11 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  /* Remove max-height: 100vh; to prevent cutting off */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(4rem, 8vh, 6rem) 0; /* Increased padding for better spacing */
-  overflow: hidden;
+  padding: clamp(4rem, 8vh, 6rem) 0;
+  overflow: visible; /* Changed from hidden to visible */
   isolation: isolate;
   background: transparent;
   margin-bottom: 2rem; /* Add margin to create space before next section */
@@ -21,6 +20,68 @@
   background: transparent; /* Remove section background */
   position: relative;
   z-index: 10; /* Ensure content is above unified background */
+  /* Add professional tech-inspired effects */
+  overflow: visible;
+}
+
+/* Tech-inspired circuit pattern overlay */
+.expertise-circuit-overlay {
+  position: absolute;
+  inset: -5%;
+  pointer-events: none;
+  background:
+    linear-gradient(0deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138, 43, 226, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask: radial-gradient(ellipse at center, black 60%, transparent 80%);
+  -webkit-mask: radial-gradient(ellipse at center, black 60%, transparent 80%);
+  opacity: 0;
+  animation: circuitFade 3s ease-in-out 1s forwards;
+}
+
+@keyframes circuitFade {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Data visualization inspired elements */
+.expertise-data-viz {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 100px;
+  height: 60px;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.expertise-data-viz::before,
+.expertise-data-viz::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.6), rgba(0, 212, 255, 0.3));
+  animation: dataVisualization 4s ease-in-out infinite;
+}
+
+.expertise-data-viz::before {
+  width: 3px;
+  height: 20px;
+  left: 20%;
+  bottom: 0;
+  animation-delay: 0s;
+}
+
+.expertise-data-viz::after {
+  width: 3px;
+  height: 40px;
+  right: 20%;
+  bottom: 0;
+  animation-delay: -2s;
+}
+
+@keyframes dataVisualization {
+  0%, 100% { transform: scaleY(0.5); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
 }
 
 /* Content Container - Enhanced with CSS Grid */
@@ -40,13 +101,11 @@
 /* Grid Layout for Precise Control */
 .expertise-grid {
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto auto; /* Changed from auto 1fr auto */
   gap: clamp(2rem, 4vh, 3rem); /* Increased gaps for better spacing */
   width: 100%;
-  height: 100%;
-  /* Remove max-height constraint */
   align-items: center;
-  min-height: calc(100vh - clamp(8rem, 16vh, 12rem)); /* Account for increased padding */
+  /* Removed min-height constraint that was causing issues */
 }
 
 /* Grid Areas */
@@ -109,15 +168,14 @@
 /* Responsive Design - Tablet */
 @media (max-width: 1024px) {
   .expertise-section {
-    /* Remove max-height restriction */
-    padding: clamp(4rem, 8vh, 6rem) 0;
-    margin-bottom: 3rem; /* More space on tablet */
+    padding: clamp(3rem, 6vh, 5rem) 0;
+    margin-bottom: 3rem;
+    min-height: auto; /* Allow natural height */
   }
 
   .expertise-grid {
-    gap: clamp(2.5rem, 5vh, 4rem);
-    /* Remove max-height restriction */
-    min-height: auto; /* Allow natural height on tablet */
+    gap: clamp(2rem, 4vh, 3rem);
+    grid-template-rows: auto auto auto; /* Ensure consistent layout */
   }
 
   .expertise-content {
@@ -130,10 +188,30 @@
   .expertise-section {
     padding: 4rem 0;
     margin-bottom: 2rem;
+    min-height: auto;
+    display: block; /* Change to block layout for mobile */
+  }
+
+  .expertise-content {
+    display: block; /* Remove flex constraints */
+    height: auto;
   }
 
   .expertise-grid {
-    gap: 2.5rem;
+    display: block; /* Switch to block layout on mobile */
+    gap: 0; /* Remove gap, handle with margins */
+  }
+
+  .expertise-headline-area {
+    margin-bottom: 3rem;
+  }
+
+  .expertise-stats-area {
+    margin-bottom: 3rem;
+  }
+
+  .expertise-method-area {
+    margin-bottom: 2rem;
   }
 }
 
@@ -141,15 +219,22 @@
   .expertise-section {
     padding: 3rem 0;
     min-height: auto;
-    margin-bottom: 1.5rem;
   }
 
   .expertise-content {
     padding: 0 1rem;
   }
 
-  .expertise-grid {
-    gap: 2rem;
+  .expertise-headline-area {
+    margin-bottom: 2.5rem;
+  }
+
+  .expertise-stats-area {
+    margin-bottom: 2.5rem;
+  }
+
+  .expertise-method-area {
+    margin-bottom: 1.5rem;
   }
 }
 

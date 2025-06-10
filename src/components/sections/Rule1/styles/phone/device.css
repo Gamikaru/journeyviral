@@ -318,43 +318,104 @@
   }
 }
 
-/* Responsive adjustments - refined */
+/* Enhanced mobile responsiveness */
 @media (max-width: 1024px) {
   .rule1-phone-container {
-    max-width: 360px; /* Slightly larger than before */
-    height: 620px;
+    max-width: 280px;
+    height: 480px;
+    margin: 0 auto; /* Ensure centering */
+    /* Center within its parent */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .rule1-phone-device {
-    width: 300px; /* Increased from 250px */
-    height: 580px; /* Increased from 460px */
+    width: 240px;
+    height: 440px;
+    /* Remove any transforms that might offset centering */
+    margin: 0 auto;
   }
 
   .rule1-phone-bezel {
-    border-radius: 44px;
+    border-radius: 36px;
   }
 
   .rule1-phone-bezel-gradient {
-    border-radius: 44px;
+    border-radius: 36px;
+  }
+
+  .rule1-phone-frame {
+    border-radius: 34px;
   }
 }
 
 @media (max-width: 768px) {
   .rule1-phone-container {
-    max-width: 320px;
-    height: 520px;
+    max-width: 260px;
+    height: 440px;
+    /* Ensure perfect centering */
+    margin: 0 auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .rule1-phone-device {
-    width: 280px; /* Increased from 230px */
-    height: 500px; /* Increased from 400px */
+    width: 220px;
+    height: 400px;
+    margin: 0 auto;
   }
 
   .rule1-phone-bezel {
-    border-radius: 40px;
+    border-radius: 32px;
   }
 
   .rule1-phone-bezel-gradient {
-    border-radius: 40px;
+    border-radius: 32px;
+  }
+
+  .rule1-phone-frame {
+    border-radius: 30px;
+  }
+
+  .rule1-phone-notch {
+    width: 100px;
+    height: 24px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .rule1-phone-statusbar {
+    height: 36px;
+    padding: 0 16px;
+  }
+
+  .rule1-phone-time {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rule1-phone-container {
+    max-width: 240px;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .rule1-phone-device {
+    width: 200px;
+    height: 360px;
+    margin: 0 auto;
+  }
+
+  .rule1-phone-bezel {
+    border-radius: 28px;
+  }
+
+  .rule1-phone-frame {
+    border-radius: 26px;
   }
 }

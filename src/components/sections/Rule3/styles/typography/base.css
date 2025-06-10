@@ -1,0 +1,260 @@
+/* src/components/sections/Rule3/styles/typography/base.css */
+
+/* Font smoothing and base properties */
+.rule3-section,
+.rule3-section * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Selection styles - using Rule3's pink theme */
+.rule3-section ::selection {
+    background: rgba(255, 0, 128, 0.3);
+    color: white;
+}
+
+/* Focus styles - pink accent for accessibility */
+.rule3-section :focus {
+    outline: 2px solid #ff0080;
+    outline-offset: 2px;
+}
+
+/* Font family definitions */
+.rule3-section {
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Base text styles */
+.rule3-section h2,
+.rule3-section h3,
+.rule3-section h4 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    margin: 0;
+}
+
+.rule3-section p {
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+/* ===== Shared Animation Library ===== */
+
+/* Neon pulse - primary glow effect */
+@keyframes neon-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        text-shadow:
+            0 0 8px #ff0080,
+            0 0 16px rgba(255, 0, 128, 0.8),
+            0 0 24px rgba(255, 0, 128, 0.4);
+        transform: translateZ(0);
+    }
+
+    50% {
+        opacity: 0.95;
+        text-shadow:
+            0 0 6px #ff0080,
+            0 0 12px rgba(255, 0, 128, 0.6),
+            0 0 20px rgba(255, 0, 128, 0.3);
+        transform: translateZ(0) scale(1.01);
+    }
+}
+
+/* Pink glow - for accent elements */
+@keyframes pink-glow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 6px rgba(255, 0, 128, 0.6),
+            0 0 12px rgba(255, 0, 128, 0.4),
+            0 0 18px rgba(255, 0, 128, 0.2);
+    }
+
+    50% {
+        text-shadow:
+            0 0 8px rgba(255, 0, 128, 0.7),
+            0 0 16px rgba(255, 0, 128, 0.5),
+            0 0 24px rgba(255, 0, 128, 0.3);
+    }
+}
+
+/* Cyan accent glow - for secondary elements */
+@keyframes cyan-glow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 6px rgba(0, 212, 255, 0.6),
+            0 0 12px rgba(0, 212, 255, 0.4),
+            0 0 18px rgba(0, 212, 255, 0.2);
+    }
+
+    50% {
+        text-shadow:
+            0 0 8px rgba(0, 212, 255, 0.7),
+            0 0 16px rgba(0, 212, 255, 0.5),
+            0 0 24px rgba(0, 212, 255, 0.3);
+    }
+}
+
+/* Text flicker - for glitch effects */
+@keyframes text-flicker {
+    0% {
+        opacity: 1;
+        text-shadow: 0 0 8px currentColor;
+    }
+
+    2% {
+        opacity: 0.8;
+        text-shadow: 0 0 4px currentColor;
+    }
+
+    4% {
+        opacity: 1;
+        text-shadow: 0 0 10px currentColor;
+    }
+
+    6% {
+        opacity: 0.9;
+        text-shadow: 0 0 6px currentColor;
+    }
+
+    8% {
+        opacity: 1;
+        text-shadow: 0 0 8px currentColor;
+    }
+
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 8px currentColor;
+    }
+}
+
+/* Fade in up - for content reveals */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Word glow hover - for interactive text */
+@keyframes word-glow-hover {
+    0% {
+        filter: brightness(1);
+        transform: translateY(0);
+    }
+
+    50% {
+        filter: brightness(1.2);
+        transform: translateY(-2px);
+    }
+
+    100% {
+        filter: brightness(1);
+        transform: translateY(0);
+    }
+}
+
+/* Background text float - for decorative elements */
+@keyframes bg-text-float {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(-2deg);
+        opacity: 0.02;
+    }
+
+    50% {
+        transform: translate(-50%, -48%) rotate(2deg);
+        opacity: 0.03;
+    }
+}
+
+/* ===== Utility Classes ===== */
+
+/* Text glow utilities */
+.rule3-glow-pink {
+    animation: pink-glow 2s ease-in-out infinite;
+}
+
+.rule3-glow-cyan {
+    animation: cyan-glow 2s ease-in-out infinite;
+}
+
+.rule3-glow-pulse {
+    animation: neon-pulse 3s ease-in-out infinite;
+}
+
+/* ===== Accessibility Preferences ===== */
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+
+    .rule3-section *,
+    .rule3-section *::before,
+    .rule3-section *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .rule3-section {
+        background: black !important;
+        color: white !important;
+    }
+
+    .rule3-section :focus {
+        outline: 3px solid white;
+        outline-offset: 3px;
+    }
+
+    .rule3-text-inner {
+        background: black !important;
+        border: 2px solid white !important;
+    }
+}
+
+/* Dark mode preference (if needed) */
+@media (prefers-color-scheme: dark) {
+
+    /* Rule3 is already dark, but this is here for completeness */
+    .rule3-section {
+        color-scheme: dark;
+    }
+}
+
+/* ===== Performance Optimizations ===== */
+
+/* GPU acceleration hints for animated elements */
+.rule3-section [class*="glow"],
+.rule3-section [class*="animate"] {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Remove will-change after animation */
+.rule3-section .animation-complete {
+    will-change: auto;
+}

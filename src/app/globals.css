@@ -11,7 +11,33 @@
 
 /* Ensure font variables are available */
 :root {
-  --font-lastica: 'Lastica', 'Bebas Neue', Impact, Arial, sans-serif;
-  --font-anonymous: 'Anonymous Pro', 'JetBrains Mono', 'Courier New', monospace;
-  --font-monoton: 'Monoton', cursive;
+    --font-lastica: 'Lastica', 'Bebas Neue', Impact, Arial, sans-serif;
+    --font-anonymous: 'Anonymous Pro', 'JetBrains Mono', 'Courier New', monospace;
+    --font-monoton: 'Monoton', cursive;
+}
+
+@media (max-width: 768px) {
+    section:not(:first-child) {
+        margin-top: 80px;
+        /* Add space between sections */
+    }
+
+    section {
+        padding-top: 60px;
+        /* Add top padding for better spacing */
+        padding-bottom: 60px;
+        /* Add bottom padding */
+    }
+}
+
+@media (max-width: 480px) {
+    section:not(:first-child) {
+        margin-top: 60px;
+        /* Slightly less on very small screens */
+    }
+
+    section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 }

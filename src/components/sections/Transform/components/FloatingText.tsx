@@ -2,97 +2,70 @@
 "use client";
 
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { memo, useEffect, useState } from "react";
+import { memo, useMemo } from "react";
+import { FloatingTextProps } from "../types";
+import { useAnimationSequence } from "../hooks/useAnimationSequence";
 import "../styles/floating-text.css";
+import "../styles/animations.css";
 
-interface FloatingTextProps {
-  text: string;
-  isVisible: boolean;
-  shouldAnimate: boolean;
-}
+const CONTAINER_VARIANTS = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+} as const;
 
-const FloatingText = memo(function FloatingText({
+const LINE_VARIANTS = {
+  initial: {
+    opacity: 0,
+    y: 30,
+    scale: 0.95,
+    filter: "blur(4px)"
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    scale: 0.95,
+    filter: "blur(4px)",
+    transition: {
+      duration: 0.6,
+      ease: "easeInOut"
+    }
+  }
+} as const;
+
+const FloatingText = memo<FloatingTextProps>(function FloatingText({
   text,
   isVisible,
   shouldAnimate,
-}: FloatingTextProps) {
+}) {
   const prefersReducedMotion = useReducedMotion();
   const shouldUseAnimation = shouldAnimate && !prefersReducedMotion;
 
-  // State to control animation stages
-  const [animationStage, setAnimationStage] = useState<'hidden' | 'firstLine' | 'fadeUp' | 'secondLine' | 'both'>('hidden');
-  const [hasStarted, setHasStarted] = useState(false);
+  const { stage } = useAnimationSequence({
+    isVisible,
+    shouldAnimate: shouldUseAnimation
+  });
 
-  // Control animation sequence
-  useEffect(() => {
-    if (!isVisible) {
-      // Don't immediately hide - let exit animations play
-      const hideTimer = setTimeout(() => {
-        setAnimationStage('hidden');
-        setHasStarted(false);
-      }, 300); // Give time for exit animation
-      return () => clearTimeout(hideTimer);
-    }
+  const lines = useMemo(() =>
+    text.includes("manufacture")
+      ? ["We don't chase virality.", "We manufacture it."]
+      : text.split("\n"),
+    [text]
+  );
 
-    if (!shouldUseAnimation) {
-      setAnimationStage('both'); // Show both lines immediately
-      return;
-    }
-
-    // Prevent re-triggering if already started
-    if (hasStarted) return;
-
-    setHasStarted(true);
-    const timers: NodeJS.Timeout[] = [];
-
-    // Stage 1: Show first line
-    setAnimationStage('firstLine');
-
-    // Stage 2: After 2 seconds, fade up first line
-    timers.push(setTimeout(() => {
-      setAnimationStage('fadeUp');
-    }, 2000));
-
-    // Stage 3: After fade up completes (0.8s), slam down second line
-    timers.push(setTimeout(() => {
-      setAnimationStage('secondLine');
-    }, 2800));
-
-    // Stage 4: Keep both lines visible
-    timers.push(setTimeout(() => {
-      setAnimationStage('both');
-    }, 3600));
-
-    return () => {
-      timers.forEach(timer => clearTimeout(timer));
-    };
-  }, [isVisible, shouldUseAnimation, hasStarted]);
-
-  const containerVariants = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeIn",
-      },
-    },
-  };
-
-  // Split text into two lines for the specific message
-  const lines = text.includes("manufacture")
-    ? ["We don't chase virality.", "We manufacture it."]
-    : text.split("\n");
-
+  // Static mode - show both lines
   if (!shouldUseAnimation) {
     return isVisible ? (
       <div className="floating-text-modern">
@@ -100,7 +73,9 @@ const FloatingText = memo(function FloatingText({
           {lines.map((line, index) => (
             <p
               key={index}
-              className={`floating-message-line ${index === 0 ? "line-setup" : "line-punch"}`}
+              className={`floating-message-line ${
+                index === 0 ? "line-setup" : "line-punch"
+              } centered`}
             >
               {line}
             </p>
@@ -113,111 +88,40 @@ const FloatingText = memo(function FloatingText({
   return (
     <motion.div
       className="floating-text-modern"
-      variants={containerVariants}
+      variants={CONTAINER_VARIANTS}
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
-      exit="exit"
       role="article"
-      aria-label={`Final message: ${text}`}
+      aria-label={`Looping message sequence: Currently displaying ${
+        stage === 'firstLine' ? '"We don\'t chase virality"' :
+        stage === 'secondLine' ? '"We manufacture it"' :
+        'complete message'
+      }. This message repeats every 7 seconds.`}
+      aria-live="polite"
     >
-      <div className={`floating-message-card ${animationStage !== 'hidden' ? 'animating' : ''}`}>
+      <div className="floating-message-card animated">
         <AnimatePresence mode="wait">
-          {/* First line - controlled by animation stages */}
-          {(animationStage === 'firstLine' || animationStage === 'fadeUp') && (
+          {stage === 'firstLine' && (
             <motion.p
-              key="first-line"
-              className="floating-message-line line-setup animated"
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                transition: { duration: 0.8, ease: "easeOut" }
-              }}
-              exit={{
-                opacity: 0,
-                y: -30,
-                scale: 0.95,
-                transition: { duration: 0.8, ease: "easeIn" }
-              }}
+              key="first-line-solo"
+              className="floating-message-line line-setup centered"
+              {...LINE_VARIANTS}
             >
               {lines[0]}
             </motion.p>
           )}
 
-          {/* Second line - only shows after first line fades */}
-          {(animationStage === 'secondLine' || animationStage === 'both') && (
+          {stage === 'secondLine' && (
             <motion.p
-              key="second-line"
-              className="floating-message-line line-punch animated"
-              initial={{
-                opacity: 0,
-                y: 100,
-                scale: 0.7,
-                rotateX: -15
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                rotateX: 0,
-                transition: {
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1],
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 25,
-                }
-              }}
-              style={{ perspective: "1000px" }}
+              key="second-line-solo"
+              className="floating-message-line line-punch centered"
+              {...LINE_VARIANTS}
             >
               {lines[1]}
             </motion.p>
           )}
-
-          {/* Both lines visible in final stage */}
-          {animationStage === 'both' && (
-            <motion.p
-              key="first-line-static"
-              className="floating-message-line line-setup static"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              {lines[0]}
-            </motion.p>
-          )}
         </AnimatePresence>
       </div>
-
-      {/* Enhanced floating particles triggered after slam */}
-      {shouldUseAnimation && (animationStage === 'secondLine' || animationStage === 'both') && (
-        <>
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="floating-particle"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 2, 0],
-                x: [0, (Math.random() - 0.5) * 200],
-                y: [0, -120 - (Math.random() * 80)],
-                rotate: [0, 360],
-              }}
-              transition={{
-                duration: 2.5,
-                delay: 0.5 + i * 0.08, // Start shortly after slam
-                repeat: 0,
-              }}
-              style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-              }}
-            />
-          ))}
-        </>
-      )}
     </motion.div>
   );
 });

@@ -1,0 +1,135 @@
+/* Transform Section - Consolidated Base Styles and Variables */
+
+:root {
+  /* Transform Colors - Unified Palette */
+  --transform-primary: #ff00ff;
+  --transform-secondary: #00ffff;
+  --transform-accent: #ff6ec7;
+  --transform-muted: rgba(255, 255, 255, 0.6);
+  --transform-white: #ffffff;
+  --transform-gold: #ffd700;
+
+  /* Background Colors */
+  --transform-bg-dark: rgba(10, 10, 20, 0.85);
+  --transform-bg-darker: rgba(5, 5, 15, 0.95);
+  --transform-bg-glass: rgba(15, 15, 25, 0.85);
+
+  /* Standardized Shadows & Glows */
+  --transform-glow-primary: 0 0 25px rgba(255, 0, 255, 0.9),
+    0 0 50px rgba(255, 0, 255, 0.6), 0 0 75px rgba(255, 0, 255, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+  --transform-glow-secondary: 0 0 25px rgba(0, 255, 255, 0.6);
+  --transform-shadow-text: 0 2px 4px rgba(0, 0, 0, 0.5);
+  --transform-shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+  /* Unified Spacing System */
+  --transform-gap-xs: 0.5rem;
+  --transform-gap-small: 0.75rem;
+  --transform-gap-medium: 1.5rem;
+  --transform-gap-large: 3rem;
+  --transform-gap-xl: 4rem;
+
+  /* Standardized Border Radius */
+  --transform-radius-small: 16px;
+  --transform-radius-medium: 20px;
+  --transform-radius-large: 24px;
+  --transform-radius-xl: 32px;
+
+  /* Consistent Transitions */
+  --transform-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transform-transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transform-transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Unified Breakpoints */
+  --transform-bp-mobile: 480px;
+  --transform-bp-tablet: 768px;
+  --transform-bp-desktop: 1024px;
+  --transform-bp-large: 1440px;
+  --transform-bp-xl: 1920px;
+
+  /* Container Dimensions */
+  --transform-container-height: 500px;
+  --transform-container-height-tablet: 450px;
+  --transform-container-height-mobile: 400px;
+}
+
+/* Transform Section Utility Classes */
+.transform-glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.transform-glow-primary {
+  text-shadow: var(--transform-glow-primary);
+}
+
+.transform-glow-secondary {
+  text-shadow: var(--transform-glow-secondary);
+}
+
+.transform-text-shadow {
+  text-shadow: var(--transform-shadow-text);
+}
+
+/* Base Layout Utilities */
+.transform-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transform-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.transform-gap-small {
+  gap: var(--transform-gap-small);
+}
+.transform-gap-medium {
+  gap: var(--transform-gap-medium);
+}
+.transform-gap-large {
+  gap: var(--transform-gap-large);
+}
+
+/* Performance Mode Universal Overrides */
+.performance-mode {
+  --transform-transition-fast: none;
+  --transform-transition-medium: none;
+  --transform-transition-slow: none;
+}
+
+.performance-mode *,
+.performance-mode *::before,
+.performance-mode *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Reduced Motion Universal Overrides */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transform-transition-fast: none;
+    --transform-transition-medium: none;
+    --transform-transition-slow: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High Contrast Universal Adjustments */
+@media (prefers-contrast: high) {
+  :root {
+    --transform-primary: #ff6ec7;
+    --transform-secondary: #00ffff;
+    --transform-gold: #ffff00;
+    --transform-white: #ffffff;
+  }
+}

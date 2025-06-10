@@ -622,3 +622,88 @@
     display: none;
   }
 }
+
+/* Mobile content optimizations */
+@media (max-width: 768px) {
+  .rule1-phone-content {
+    top: 36px; /* Match smaller status bar */
+  }
+
+  .rule1-app-header {
+    padding: 8px 12px 6px; /* Smaller padding */
+  }
+
+  .rule1-app-nav {
+    gap: 20px; /* Smaller gap */
+  }
+
+  .rule1-nav-item {
+    font-size: 13px; /* Smaller navigation */
+  }
+
+  .rule1-tiktok-post {
+    min-height: 200px; /* Smaller posts */
+  }
+
+  .rule1-tiktok-header {
+    padding: 12px 12px 0; /* Reduced padding */
+    gap: 8px;
+  }
+
+  .rule1-tiktok-avatar {
+    width: 32px; /* Smaller avatar */
+    height: 32px;
+  }
+
+  .rule1-avatar-letter {
+    font-size: 12px;
+  }
+
+  .rule1-tiktok-username {
+    font-size: 13px;
+  }
+
+  .rule1-tiktok-timestamp {
+    font-size: 11px;
+  }
+
+  .rule1-tiktok-content {
+    padding: 16px 12px; /* Reduced padding */
+  }
+
+  .rule1-tiktok-text {
+    font-size: clamp(14px, 5vw, 18px); /* Smaller text */
+    max-width: 90%;
+    line-height: 1.2;
+  }
+
+  .rule1-tiktok-actions {
+    padding: 0 12px 12px; /* Smaller action padding */
+  }
+
+  .rule1-tiktok-action-group {
+    gap: 12px; /* Smaller gaps */
+  }
+
+  .rule1-tiktok-action {
+    padding: 6px 8px; /* Smaller actions */
+    font-size: 10px;
+    gap: 4px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rule1-tiktok-post {
+    min-height: 180px; /* Even smaller */
+  }
+
+  .rule1-tiktok-text {
+    font-size: clamp(12px, 5vw, 16px);
+  }
+
+  .rule1-tiktok-action {
+    padding: 5px 6px;
+    font-size: 9px;
+  }
+}

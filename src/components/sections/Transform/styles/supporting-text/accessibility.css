@@ -1,0 +1,63 @@
+/* Transform Supporting Text - Accessibility & A11y */
+
+/* Performance mode */
+.performance-mode .supporting-content {
+  background: rgba(10, 10, 20, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.performance-mode .supporting-content::before {
+  display: none;
+}
+
+.performance-mode .supporting-accents {
+  display: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .supporting-content {
+    transition: none;
+  }
+
+  .accent-dot {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .supporting-content {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: none;
+  }
+
+  .supporting-content::before {
+    display: none;
+  }
+
+  .supporting-accents {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .transform-supporting-wrapper {
+    max-width: 100%;
+  }
+
+  .supporting-content {
+    padding: 1rem;
+    background: white;
+    border: 1px solid black;
+    box-shadow: none;
+  }
+
+  .supporting-content::before,
+  .supporting-accents {
+    display: none;
+  }
+}

@@ -1,0 +1,60 @@
+/* Transform Supporting Text - Layout & Positioning */
+
+/* Desktop - right column positioning */
+@media (min-width: 1025px) {
+  .transform-supporting-wrapper {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .supporting-content {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+/* Tablet and mobile - center alignment */
+@media (max-width: 1024px) {
+  .transform-supporting-wrapper {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  .supporting-content {
+    margin: 0 auto;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1440px) {
+  .transform-supporting-wrapper {
+    max-width: 650px;
+  }
+
+  .supporting-content {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .supporting-content {
+    padding: 2.25rem;
+    border-radius: 28px;
+  }
+}
+
+/* Ensure content doesn't overflow on very small screens */
+@media (max-width: 380px) {
+  .transform-supporting-wrapper {
+    width: calc(100% - 1rem);
+    margin: 0 auto;
+  }
+}
+
+/* Height-based adjustments for landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .supporting-content {
+    padding: 0.75rem 1rem;
+  }
+}

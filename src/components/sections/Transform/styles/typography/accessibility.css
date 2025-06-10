@@ -1,0 +1,130 @@
+/* Transform Typography - Accessibility & A11y */
+
+/* Performance mode */
+.performance-mode .headline-pink,
+.performance-mode .headline-gold {
+  animation: none !important;
+}
+
+.performance-mode .headline-gold.with-shimmer {
+  background: #ffd700;
+  -webkit-text-fill-color: #ffd700;
+  filter: none;
+  text-shadow:
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.performance-mode .transform-phrase {
+  transition: none !important;
+}
+
+.performance-mode .phrase-emphasis,
+.performance-mode .transform-phrase.is-question,
+.performance-mode .transform-phrase.is-statement,
+.performance-mode .transform-phrase.is-final {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .headline-pink,
+  .headline-gold {
+    animation: none !important;
+  }
+
+  .headline-gold.with-shimmer {
+    background: linear-gradient(
+      135deg,
+      #ffed4b 0%,
+      #ffd700 50%,
+      #ffed4b 100%
+    );
+    background-size: 100% 100%;
+    animation: none;
+  }
+
+  .transform-phrase {
+    transition: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .headline-pink {
+    color: #ff6ec7;
+    text-shadow: none;
+  }
+
+  .headline-gold {
+    color: #ffff00;
+    background: none;
+    -webkit-text-fill-color: #ffff00;
+    filter: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  }
+
+  .headline-white {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  }
+
+  .transform-supporting-text {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  }
+
+  .transform-phrase {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  }
+
+  .phrase-emphasis {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  }
+
+  .transform-phrase.is-question {
+    color: #ff69b4;
+  }
+
+  .transform-phrase.is-statement {
+    color: #00ffff;
+  }
+
+  .transform-phrase.is-final {
+    color: #ffff00;
+  }
+}
+
+/* Print styles */
+@media print {
+  .transform-headline {
+    color: black;
+  }
+
+  .headline-pink,
+  .headline-gold,
+  .headline-white {
+    color: black;
+    text-shadow: none;
+    background: none;
+    -webkit-text-fill-color: black;
+    filter: none;
+    animation: none;
+  }
+
+  .transform-supporting-text {
+    color: black;
+    text-shadow: none;
+  }
+
+  .transform-phrase {
+    color: black;
+    text-shadow: none;
+  }
+
+  .phrase-emphasis {
+    color: black;
+    text-shadow: none;
+  }
+}

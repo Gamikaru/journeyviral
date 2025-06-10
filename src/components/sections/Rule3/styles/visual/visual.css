@@ -1,0 +1,297 @@
+/* src/components/sections/Rule3/styles/visual/visual.css */
+
+/* Main container */
+.rule3-visual-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Visual content wrapper */
+.rule3-visual-content {
+    position: relative;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rule3-visual-content.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Image wrapper with aspect ratio */
+.rule3-visual-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16 / 10;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(255, 0, 128, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    transform: translateZ(0);
+}
+
+/* Image styling */
+.rule3-visual-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Simple loading state */
+.rule3-visual-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.loading-pulse {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 0, 128, 0.3);
+    animation: pulse-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-loading {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Minimal particles layer */
+.rule3-visual-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Individual particles */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 0, 128, 0.6);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: particle-float 12s ease-in-out infinite;
+}
+
+.particle-1 {
+    top: 20%;
+    left: 15%;
+    background: rgba(255, 0, 128, 0.5);
+}
+
+.particle-2 {
+    top: 70%;
+    right: 20%;
+    background: rgba(0, 212, 255, 0.4);
+    animation-duration: 15s;
+}
+
+.particle-3 {
+    bottom: 30%;
+    left: 25%;
+    background: rgba(255, 255, 255, 0.3);
+    animation-duration: 18s;
+}
+
+.particle-4 {
+    top: 40%;
+    right: 15%;
+    background: rgba(255, 0, 128, 0.4);
+    animation-duration: 20s;
+}
+
+@keyframes particle-float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.6;
+    }
+
+    25% {
+        transform: translate(-30px, -40px);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(20px, -60px);
+        opacity: 0.4;
+    }
+
+    75% {
+        transform: translate(-20px, -20px);
+        opacity: 0.7;
+    }
+}
+
+/* Static glow effect */
+.rule3-visual-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle,
+            rgba(255, 0, 128, 0.15) 0%,
+            rgba(255, 0, 128, 0.05) 40%,
+            transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* Hover effects */
+.rule3-visual-image-wrapper:hover {
+    transform: translateZ(0) scale(1.02);
+    transition: transform 0.3s ease;
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        0 0 120px rgba(255, 0, 128, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Entry animation for visual */
+.rule3-visible .rule3-visual-content {
+    animation: visual-entrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+@keyframes visual-entrance {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .rule3-visual-image-wrapper {
+        max-width: 500px;
+    }
+
+    .rule3-visual-glow {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .rule3-visual-image-wrapper {
+        max-width: 100%;
+        border-radius: 20px;
+    }
+
+    .rule3-visual-glow {
+        width: 350px;
+        height: 350px;
+    }
+
+    /* Reduce particles on mobile */
+    .particle-3,
+    .particle-4 {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .rule3-visual-image-wrapper {
+        border-radius: 16px;
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.4),
+            0 0 60px rgba(255, 0, 128, 0.08);
+    }
+
+    .rule3-visual-glow {
+        width: 300px;
+        height: 300px;
+        filter: blur(40px);
+    }
+
+    .loading-pulse {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+    .rule3-visual-content,
+    .particle,
+    .rule3-visual-glow,
+    .loading-pulse {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .rule3-visual-image-wrapper:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .rule3-visual-image-wrapper {
+        border: 2px solid white;
+        box-shadow: none;
+    }
+
+    .rule3-visual-glow,
+    .particle {
+        display: none;
+    }
+}
+
+/* Performance optimization */
+.rule3-visual-container {
+    contain: layout style paint;
+}
+
+.rule3-visual-image {
+    will-change: auto;
+    backface-visibility: hidden;
+}

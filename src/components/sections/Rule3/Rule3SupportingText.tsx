@@ -1,13 +1,23 @@
+// src/components/sections/Rule3/Rule3SupportingText.tsx
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import './styles/typography/base.css';
 import './styles/typography/supporting-text.css';
+import './styles/typography/glitch-effects.css';
+
+interface WordSpan {
+  text: string;
+  isHighlight?: boolean;
+  isStrong?: boolean;
+}
 
 const Rule3SupportingText: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hoveredWord, setHoveredWord] = useState<number | null>(null);
 
+  // Intersection Observer for visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -15,7 +25,7 @@ const Rule3SupportingText: React.FC = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.3 }
     );
 
     if (textRef.current) {
@@ -29,66 +39,97 @@ const Rule3SupportingText: React.FC = () => {
     };
   }, []);
 
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    })
+  const renderParagraphWithSpans = (text: string, specialWords: WordSpan[]) => {
+    let result = text;
+    let spanIndex = 0;
+
+    specialWords.forEach((word) => {
+      const globalIndex = spanIndex++;
+      const isHovered = hoveredWord === globalIndex;
+
+      let className = 'rule3-word';
+      if (word.isHighlight) className += ' rule3-word-highlight';
+      if (word.isStrong) className += ' rule3-word-strong';
+      if (isHovered) className += ' rule3-word-hovered';
+      if (isVisible) className += ' rule3-word-visible';
+
+      const spanElement = `<span
+        class="${className}"
+        data-index="${globalIndex}"
+        data-glow="${word.isHighlight || word.isStrong ? 'true' : 'false'}"
+      >${word.text}</span>`;
+      result = result.replace(word.text, spanElement);
+    });
+
+    return result;
   };
 
-  const supportingPoints = [
-    "The average attention span is 8 seconds",
-    "First impressions form in 50 milliseconds",
-    "Value must be immediately apparent"
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const index = target.getAttribute('data-index');
+    if (index) {
+      setHoveredWord(parseInt(index));
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredWord(null);
+  };
+
+  // Content configuration
+  const paragraph1SpecialWords: WordSpan[] = [
+    { text: "milliseconds.", isHighlight: true },
+    { text: "micro-decision", isStrong: true }
   ];
 
-  return (
-    <div
-      ref={textRef}
-      className={`rule3-supporting-text ${isVisible ? 'rule3-text-visible' : ''}`}
-    >
-      <motion.p
-        className="rule3-text-main"
-        custom={0}
-        variants={textVariants}
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-      >
-        In a world of infinite scroll and endless options, your content has mere moments
-        to prove its worth. The hook isn't just important—it's everything.
-      </motion.p>
+  const paragraph2SpecialWords: WordSpan[] = [
+    { text: "hook", isHighlight: true },
+    { text: "instantly,", isHighlight: true },
+    { text: "undeniable value,", isStrong: true },
+    { text: "curiosity gaps", isStrong: true },
+    { text: "impossible.", isHighlight: true }
+  ];
 
-      <div className="rule3-text-points">
-        {supportingPoints.map((point, index) => (
-          <motion.div
-            key={index}
-            className="rule3-text-point"
-            custom={index + 1}
-            variants={textVariants}
-            initial="hidden"
-            animate={isVisible ? "visible" : "hidden"}
-          >
-            <span className="rule3-point-bullet" />
-            {point}
-          </motion.div>
-        ))}
+  const paragraph1Text = "In today's attention economy, every scroll is a micro-decision. Your content faces instant judgment—not in minutes or even seconds, but in milliseconds.";
+  const paragraph2Text = "The brutal truth? You must hook viewers instantly, lead with undeniable value, and create curiosity gaps that make scrolling past impossible.";
+
+  return (
+    <div ref={textRef} className="rule3-supporting-wrapper" style={{ marginTop: '1rem' }}>
+      {/* Decorative elements */}
+      <div className="rule3-text-decoration rule3-decoration-1" />
+      <div className="rule3-text-decoration rule3-decoration-2" />
+
+      {/* Main content */}
+      <div className="rule3-supporting-content">
+        <p
+          className="rule3-supporting-paragraph"
+          dangerouslySetInnerHTML={{
+            __html: renderParagraphWithSpans(paragraph1Text, paragraph1SpecialWords)
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
+
+        <p
+          className="rule3-detail-paragraph"
+          dangerouslySetInnerHTML={{
+            __html: renderParagraphWithSpans(paragraph2Text, paragraph2SpecialWords)
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
+
+        {/* Interactive hint */}
+        <div className={`rule3-interaction-hint ${isVisible ? 'rule3-hint-visible' : ''}`} style={{ marginTop: '2rem' }}>
+          <span className="rule3-hint-text">The secret? Stop creating content. Start creating experiences.</span>
+          <span className="rule3-hint-arrow">→</span>
+        </div>
       </div>
 
-      <motion.div
-        className="rule3-text-emphasis"
-        custom={4}
-        variants={textVariants}
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-      >
-        Make every second count.
-      </motion.div>
+      {/* Background text effect */}
+      <div className="rule3-bg-text" aria-hidden="true">
+        VALUE
+      </div>
     </div>
   );
 };

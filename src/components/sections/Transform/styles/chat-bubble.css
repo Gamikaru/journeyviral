@@ -1,383 +1,138 @@
 /* src/components/sections/Transform/styles/chat-bubble.css */
 
-/* Modern Chat Bubble Design - Clean and Readable */
+/* Transform Chat Bubble - Focused Bubble Styles */
 
 .chat-bubble-modern {
-    position: relative;
-    max-width: 85%;
-    width: fit-content;
-    margin-bottom: 0; /* Remove bottom margin, rely on container gap */
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    /* Ensure proper text flow */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    /* Ensure bubble doesn't get clipped */
-    z-index: 1;
-    /* Ensure bubble content is always visible */
-    position: relative;
+  position: relative;
+  max-width: 85%;
+  width: fit-content;
+  margin-bottom: 0;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  z-index: 1;
 }
 
-/* Glow layer - subtle effect */
-.bubble-glow-layer {
-    position: absolute;
-    inset: -8px;
-    border-radius: 24px;
-    opacity: 0.3;
-    filter: blur(12px);
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-/* Type-specific glows */
-.chat-bubble-setup .bubble-glow-layer {
-    background: radial-gradient(ellipse at center,
-            rgba(255, 255, 255, 0.2) 0%,
-            transparent 70%);
-}
-
-.chat-bubble-problem .bubble-glow-layer {
-    background: radial-gradient(ellipse at center,
-            rgba(255, 110, 199, 0.3) 0%,
-            transparent 70%);
-}
-
-.chat-bubble-bridge .bubble-glow-layer {
-    background: radial-gradient(ellipse at center,
-            rgba(173, 216, 230, 0.25) 0%,
-            transparent 70%);
-}
-
-/* Glass bubble design */
 .bubble-glass {
-    position: relative;
-    background: rgba(15, 15, 25, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px 20px 4px 20px;
-    padding: 1rem 1.25rem; /* Compact but readable padding */
-    box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    transition: all 0.3s ease;
-    overflow: visible;
-    /* Ensure adequate minimum height */
-    min-height: 48px;
-    width: 100%;
-    display: flex;
-    align-items: center;
+  position: relative;
+  background: var(--transform-bg-glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--transform-radius-medium) var(--transform-radius-medium) 4px var(--transform-radius-medium);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--transform-shadow-card),
+              inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: var(--transform-transition-medium);
+  min-height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
-/* Subtle gradient overlay */
-.bubble-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.03) 0%,
-            transparent 50%,
-            rgba(255, 255, 255, 0.01) 100%);
-    pointer-events: none;
-}
-
-/* Text styling - ensure readability */
 .bubble-text {
-    position: relative;
-    z-index: 1;
-    font-family: var(--font-body), Inter, sans-serif;
-    margin: 0;
-    color: #ffffff;
-    line-height: 1.4; /* Slightly tighter for better fit */
-    /* Critical for readability and proper wrapping */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    transform: translateZ(0);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    white-space: normal; /* Allow text to wrap naturally */
-    width: 100%;
-    flex: 1;
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body), Inter, sans-serif;
+  margin: 0;
+  color: var(--transform-white);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  width: 100%;
+  flex: 1;
 }
 
-.bubble-text-line {
-    display: inline;
-    /* Ensure proper line spacing */
-    line-height: inherit;
-}
-
-/* Type-specific text styles - optimized sizing */
+/* Type-specific Styles */
 .chat-bubble-setup .bubble-text {
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 0.01em;
-    line-height: 1.4;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--transform-muted);
+  letter-spacing: 0.01em;
 }
 
 .chat-bubble-problem .bubble-text {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #ffffff;
-    letter-spacing: -0.01em;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-    line-height: 1.4;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--transform-white);
+  letter-spacing: -0.01em;
+  text-shadow: var(--transform-shadow-text);
 }
 
 .chat-bubble-bridge .bubble-text {
-    font-size: 0.95rem;
-    font-weight: 400;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.85);
-    letter-spacing: 0.02em;
-    line-height: 1.4;
+  font-size: 0.95rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
 }
 
-/* Type-specific borders */
 .chat-bubble-problem .bubble-glass {
-    border-color: rgba(255, 110, 199, 0.2);
-    background: rgba(20, 15, 30, 0.85);
+  border-color: rgba(255, 110, 199, 0.2);
+  background: rgba(20, 15, 30, 0.85);
 }
 
 .chat-bubble-bridge .bubble-glass {
-    border-color: rgba(173, 216, 230, 0.15);
+  border-color: rgba(173, 216, 230, 0.15);
 }
 
-/* Tail styling */
+/* Tail */
 .bubble-tail {
-    position: absolute;
-    bottom: 0;
-    right: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid rgba(15, 15, 25, 0.85);
-    transform: translateY(100%);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  position: absolute;
+  bottom: 0;
+  right: 16px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--transform-bg-glass);
+  transform: translateY(100%);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-.chat-bubble-problem .bubble-tail {
-    border-top-color: rgba(20, 15, 30, 0.85);
-}
-
-/* Accent dot for problem messages */
+/* Accent Dot */
 .bubble-accent-dot {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 6px;
-    height: 6px;
-    background: radial-gradient(circle,
-            rgba(255, 110, 199, 1) 0%,
-            rgba(255, 110, 199, 0.6) 100%);
-    border-radius: 50%;
-    box-shadow: 0 0 12px rgba(255, 110, 199, 0.6);
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, var(--transform-accent) 0%, rgba(255, 110, 199, 0.6) 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 110, 199, 0.6);
 }
 
-/* Hover effects */
-@media (hover: hover) {
-    .chat-bubble-modern:hover .bubble-glass {
-        background: rgba(20, 20, 35, 0.9);
-        border-color: rgba(255, 255, 255, 0.12);
-        transform: translateY(-1px);
-        box-shadow:
-            0 6px 32px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
-
-    .chat-bubble-modern:hover .bubble-glow-layer {
-        opacity: 0.5;
-    }
-
-    .chat-bubble-problem:hover .bubble-accent-dot {
-        box-shadow: 0 0 20px rgba(255, 110, 199, 0.8);
-    }
-}
-
-/* Desktop optimizations */
-@media (min-width: 1024px) {
-    .chat-bubble-modern {
-        max-width: 80%;
-    }
-
-    .bubble-glass {
-        padding: 1.25rem 1.5rem; /* Slightly increased for desktop */
-        min-height: 60px;
-    }
-
-    .bubble-text {
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-
-    .chat-bubble-setup .bubble-text {
-        font-size: 0.95rem;
-    }
-
-    .chat-bubble-problem .bubble-text {
-        font-size: 1.1rem;
-    }
-
-    .chat-bubble-bridge .bubble-text {
-        font-size: 1rem;
-    }
-}
-
-/* Tablet adjustments */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .chat-bubble-modern {
-        max-width: 90%;
-    }
+  .chat-bubble-modern {
+    max-width: 90%;
+  }
 
-    .bubble-glass {
-        padding: 1rem 1.25rem;
-        border-radius: 18px 18px 4px 18px;
-        min-height: 50px;
-    }
-
-    .bubble-glow-layer {
-        inset: -6px;
-        filter: blur(8px);
-    }
-
-    .chat-bubble-setup .bubble-text {
-        font-size: 0.875rem;
-        line-height: 1.4;
-    }
-
-    .chat-bubble-problem .bubble-text {
-        font-size: 1rem;
-        line-height: 1.4;
-    }
-
-    .chat-bubble-bridge .bubble-text {
-        font-size: 0.925rem;
-        line-height: 1.4;
-    }
+  .bubble-glass {
+    padding: 1rem 1.25rem;
+    border-radius: 18px 18px 4px 18px;
+    min-height: 50px;
+  }
 }
 
-/* Mobile optimizations */
 @media (max-width: 480px) {
-    .chat-bubble-modern {
-        max-width: 95%;
-    }
+  .chat-bubble-modern {
+    max-width: 95%;
+  }
 
-    .bubble-glass {
-        padding: 0.875rem 1.125rem; /* Reduced for mobile */
-        border-radius: 16px 16px 4px 16px;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        min-height: 45px; /* Reduced for mobile */
-    }
+  .bubble-glass {
+    padding: 0.875rem 1.125rem;
+    border-radius: var(--transform-radius-small) var(--transform-radius-small) 4px var(--transform-radius-small);
+    min-height: 45px;
+  }
 
-    /* Simplify effects on mobile */
-    .bubble-glow-layer {
-        display: none;
-    }
-
-    .bubble-glass::before {
-        display: none;
-    }
-
-    .bubble-accent-dot {
-        display: none;
-    }
-
-    .chat-bubble-setup .bubble-text {
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    .chat-bubble-problem .bubble-text {
-        font-size: 0.95rem;
-        line-height: 1.4;
-    }
-
-    .chat-bubble-bridge .bubble-text {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-
-    .bubble-tail {
-        border-left-width: 6px;
-        border-right-width: 6px;
-        border-top-width: 6px;
-        right: 12px;
-    }
-}
-
-/* Performance mode */
-.performance-mode .bubble-glow-layer {
+  .bubble-accent-dot {
     display: none;
-}
-
-.performance-mode .bubble-glass {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: rgba(15, 15, 25, 0.95);
-}
-
-.performance-mode .bubble-glass::before {
-    display: none;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-
-    .chat-bubble-modern,
-    .bubble-glass,
-    .bubble-glow-layer,
-    .bubble-accent-dot {
-        transition: none !important;
-        animation: none !important;
-    }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-    .bubble-glass {
-        background: rgba(0, 0, 0, 0.95);
-        border: 2px solid rgba(255, 255, 255, 0.5);
-    }
-
-    .bubble-text {
-        color: #ffffff;
-        font-weight: 500;
-    }
-
-    .bubble-tail {
-        border-top-color: rgba(0, 0, 0, 0.95);
-    }
-
-    .bubble-glow-layer {
-        display: none;
-    }
-}
-
-/* Print styles */
-@media print {
-    .chat-bubble-modern {
-        max-width: 100%;
-        margin-bottom: 0.5rem;
-    }
-
-    .bubble-glass {
-        background: white;
-        border: 1px solid black;
-        box-shadow: none;
-    }
-
-    .bubble-text {
-        color: black;
-    }
-
-    .bubble-glow-layer,
-    .bubble-tail,
-    .bubble-accent-dot {
-        display: none;
-    }
+  }
 }

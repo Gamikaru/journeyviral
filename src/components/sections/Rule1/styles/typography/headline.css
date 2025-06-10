@@ -154,24 +154,47 @@
   }
 }
 
+/* Enhanced mobile typography */
 @media (max-width: 768px) {
+  .rule1-headline-wrapper {
+    margin-bottom: 16px; /* Reduced margin */
+  }
+
   .rule1-label {
-    font-size: clamp(2.5rem, 12vw, 4rem);
-    margin-bottom: 20px;
+    font-size: clamp(2rem, 10vw, 3.5rem); /* More conservative sizing */
+    margin-bottom: 12px;
+    line-height: 0.95; /* Tighter line height */
   }
 
   .rule1-label-text,
   .rule1-label-glow {
-    -webkit-text-stroke: 1.5px #ff0080; /* Thinner stroke on mobile */
+    -webkit-text-stroke: 1px #ff0080; /* Thinner stroke */
     text-shadow:
-      0 0 10px rgba(255, 0, 128, 0.5),
-      0 0 20px rgba(255, 0, 128, 0.25),
-      0 2px 6px rgba(0, 0, 0, 0.7);
+      0 0 8px rgba(255, 0, 128, 0.4),
+      0 0 16px rgba(255, 0, 128, 0.2),
+      0 1px 4px rgba(0, 0, 0, 0.6);
   }
 
   .rule1-main-headline {
-    font-size: clamp(1.9rem, 7.5vw, 3rem);
+    font-size: clamp(1.5rem, 6vw, 2.5rem); /* Smaller headline */
     line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+
+  .rule1-headline-line {
+    margin-bottom: 0.1em; /* Tighter spacing */
+  }
+}
+
+@media (max-width: 480px) {
+  .rule1-label {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+    margin-bottom: 8px;
+  }
+
+  .rule1-main-headline {
+    font-size: clamp(1.25rem, 5.5vw, 2rem);
+    line-height: 1.15;
   }
 }
 

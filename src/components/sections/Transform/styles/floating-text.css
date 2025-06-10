@@ -1,366 +1,264 @@
 /* src/components/sections/Transform/styles/floating-text.css */
 
-/* Modern Floating Text Design - Free Floating Sequential Animation */
+/* Transform Floating Text - Focused Animation Styles */
 
 .floating-text-modern {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    background: transparent;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: transparent;
 }
 
 /* Remove all container styling - no card, no borders */
 .floating-message-card {
-    position: relative;
-    z-index: 10;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    overflow: visible;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    text-align: center;
-    /* Ensure proper height for positioned children */
-    min-height: 200px;
-    height: auto;
+  position: relative;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px;
+  height: auto;
 }
 
 /* Static display mode - both lines visible */
 .floating-message-card.static {
-    gap: 1rem;
+  gap: 1rem;
 }
 
 /* Remove all card styling pseudo-elements */
 .floating-message-card::before,
 .floating-message-card::after {
-    display: none;
+  display: none;
 }
 
 /* Enhanced typography for free-floating text */
 .floating-message-line {
-    font-family: var(--font-display), 'Bebas Neue', Impact, sans-serif;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    z-index: 10;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    display: block;
-    width: 100%;
-    text-align: center;
-    /* Ensure no CSS transitions interfere */
-    transition: none !important;
+  font-family: var(--font-display), 'Bebas Neue', Impact, sans-serif;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  z-index: 10;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: none !important;
 }
 
 /* Default relative positioning for static mode */
 .floating-message-line.static {
-    position: relative;
-    transform: none;
+  position: relative;
+  transform: none;
 }
 
 /* Absolute positioning only during animation */
 .floating-message-card.animating .floating-message-line.animated {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
-/* First line - setup line styling */
+/* Centered display for sequential animation */
+.floating-message-line.centered {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 120px; /* Consistent height to prevent layout shift */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Animated container adjustments */
+.floating-message-card.animated {
+  position: relative;
+  overflow: hidden;
+  min-height: 160px; /* Prevent container jumping during transitions */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Enhanced first line styling */
 .line-setup {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow:
-        0 0 20px rgba(255, 255, 255, 0.8),
-        0 0 40px rgba(255, 255, 255, 0.4),
-        0 4px 8px rgba(0, 0, 0, 0.8);
-    letter-spacing: 0.12em;
-    line-height: 1;
-    white-space: nowrap;
-    overflow: visible;
-    z-index: 2;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+               0 0 40px rgba(255, 255, 255, 0.4),
+               0 4px 8px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.12em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: visible;
+  z-index: 2;
 }
 
-/* Position first line slightly above center during animation */
 .floating-message-card.animating .line-setup.animated {
-    transform: translate(-50%, -70%);
+  transform: translate(-50%, -70%);
 }
 
-/* Second line - explosive impact punch line */
+/* Enhanced second line styling */
 .line-punch {
-    font-size: clamp(4rem, 8vw, 7rem);
-    font-weight: 900;
-    line-height: 0.9;
-    background: linear-gradient(90deg,
-            #ff00ff 0%,
-            #00ffff 15%,
-            #ff6ec7 30%,
-            #00d4ff 45%,
-            #ff00ff 60%,
-            #00ffff 75%,
-            #ff6ec7 90%,
-            #ff00ff 100%);
-    background-size: 400% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: explosiveTextFlow 2.5s ease-in-out infinite;
-
-    /* Massive dramatic shadow layers */
-    filter:
-        drop-shadow(0 0 40px rgba(0, 255, 255, 1)) drop-shadow(0 0 80px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 120px rgba(0, 255, 255, 0.6)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.9));
-
-    /* Enhanced text stroke for definition */
-    -webkit-text-stroke: 3px rgba(255, 255, 255, 0.2);
-
-    /* Transform origin for slam effect */
-    transform-origin: center center;
-    white-space: nowrap;
-    overflow: visible;
-    z-index: 3;
-    /* Higher than first line */
-    /* Ensure text persists and is highly visible */
-    will-change: transform, opacity;
-    /* Ensure proper stacking during overlap */
-    isolation: isolate;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 0.9;
+  background: linear-gradient(90deg,
+    var(--transform-primary) 0%,
+    var(--transform-secondary) 15%,
+    var(--transform-accent) 30%,
+    #00d4ff 45%,
+    var(--transform-primary) 60%,
+    var(--transform-secondary) 75%,
+    var(--transform-accent) 90%,
+    var(--transform-primary) 100%);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: explosiveTextFlow 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px rgba(0, 255, 255, 1))
+          drop-shadow(0 0 80px rgba(255, 0, 255, 0.8))
+          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.9));
+  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.2);
+  transform-origin: center center;
+  white-space: nowrap;
+  overflow: visible;
+  z-index: 3;
+  will-change: transform, opacity;
+  isolation: isolate;
 }
 
-/* Center positioning for animated punch line */
 .floating-message-card.animating .line-punch.animated {
-    transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* Subtle glow effect during animation */
+.floating-message-card.animated::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg,
+    rgba(255, 20, 147, 0.1),
+    rgba(0, 255, 255, 0.1),
+    rgba(255, 215, 0, 0.1)
+  );
+  border-radius: inherit;
+  opacity: 0;
+  animation: pulse-glow 4s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.3; }
 }
 
 @keyframes explosiveTextFlow {
-
-    0%,
-    100% {
-        background-position: 0% 50%;
-        filter:
-            drop-shadow(0 0 40px rgba(0, 255, 255, 1)) drop-shadow(0 0 80px rgba(255, 0, 255, 0.8)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.9));
-    }
-
-    50% {
-        background-position: 100% 50%;
-        filter:
-            drop-shadow(0 0 60px rgba(255, 0, 255, 1)) drop-shadow(0 0 120px rgba(0, 255, 255, 1)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.9));
-    }
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 40px rgba(0, 255, 255, 1))
+            drop-shadow(0 0 80px rgba(255, 0, 255, 0.8))
+            drop-shadow(0 8px 16px rgba(0, 0, 0, 0.9));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 60px rgba(255, 0, 255, 1))
+            drop-shadow(0 0 120px rgba(0, 255, 255, 1))
+            drop-shadow(0 8px 16px rgba(0, 0, 0, 0.9));
+  }
 }
 
-/* Remove border and accent line styling */
-.floating-border,
-.floating-accent-line {
-    display: none;
-}
-
-/* Enhanced floating particles for dramatic effect */
-.floating-text-modern .floating-particle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: radial-gradient(circle,
-            rgba(0, 255, 255, 1) 0%,
-            rgba(255, 0, 255, 0.8) 50%,
-            transparent 100%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 5;
-}
-
-/* Responsive design - maintain better separation on all sizes */
-@media (max-width: 1024px) {
-    .floating-message-card {
-        min-height: 180px;
-    }
-
-    .line-setup {
-        font-size: clamp(2rem, 5vw, 3.2rem);
-        letter-spacing: 0.1em;
-    }
-
-    .floating-message-card.animating .line-setup.animated {
-        transform: translate(-50%, -60%);
-    }
-
-    .line-punch {
-        font-size: clamp(3.2rem, 8vw, 5.5rem);
-        -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
-    }
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-    .floating-message-card {
-        min-height: 160px;
-    }
+  .line-setup {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    white-space: normal;
+    line-height: 1.1;
+  }
 
-    .line-setup {
-        font-size: clamp(1.8rem, 6vw, 2.8rem);
-        white-space: normal;
-        line-height: 1.1;
-    }
+  .floating-message-card.animating .line-setup.animated {
+    transform: translate(-50%, -80%);
+  }
 
-    .floating-message-card.animating .line-setup.animated {
-        transform: translate(-50%, -80%);
-    }
+  .line-punch {
+    font-size: clamp(2.8rem, 9vw, 4.5rem);
+    white-space: normal;
+    line-height: 0.95;
+  }
 
-    .line-punch {
-        font-size: clamp(2.8rem, 9vw, 4.5rem);
-        white-space: normal;
-        line-height: 0.95;
-    }
+  .line-setup.centered {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    min-height: 80px;
+  }
+
+  .line-punch.centered {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    min-height: 80px;
+  }
+
+  .floating-message-card.animated {
+    min-height: 120px;
+  }
 }
 
-@media (max-width: 480px) {
-    .floating-message-card {
-        min-height: 140px;
-    }
-
-    .line-setup {
-        font-size: clamp(1.5rem, 7vw, 2.2rem);
-    }
-
-    .floating-message-card.animating .line-setup.animated {
-        transform: translate(-50%, -90%);
-    }
-
-    .line-punch {
-        font-size: clamp(2.2rem, 10vw, 3.5rem);
-        filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.8));
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-    }
-
-    /* Reduce particle effects on mobile */
-    .floating-text-modern .floating-particle {
-        display: none;
-    }
-}
-
-/* Remove all hover effects for clean design */
-@media (hover: hover) {
-    .floating-text-modern:hover .line-punch {
-        animation-duration: 1.5s;
-    }
-}
-
-/* Performance mode */
-.performance-mode .floating-text-modern {
-    /* Disable animations and filters */
-}
-
-.performance-mode .line-punch {
-    /* Fallback to solid color */
-    background: none;
-    -webkit-text-fill-color: #00ffff;
-    color: #00ffff;
-    filter: none;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-.performance-mode .floating-message-card {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-}
-
-/* Reduced motion */
+/* Performance and accessibility */
 @media (prefers-reduced-motion: reduce) {
+  .floating-message-card.animated {
+    min-height: auto;
+  }
 
-    .floating-text-modern,
-    .floating-text-modern * {
-        animation: none !important;
-        transition: none !important;
-    }
-
-    /* Show both lines in static mode */
-    .floating-message-card {
-        gap: 1rem;
-    }
-
-    .floating-message-line {
-        position: relative !important;
-        transform: none !important;
-    }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-    .floating-border {
-        background: white;
-        inset: -3px;
-    }
-
-    .floating-message-card {
-        background: black;
-        border: 3px solid white;
-    }
-
-    .line-setup {
-        color: white;
-        text-shadow: none;
-    }
-
-    .line-punch {
-        background: none;
-        -webkit-text-fill-color: white;
-        color: white;
-        filter: none;
-        text-shadow: none;
-        font-weight: 900;
-    }
-
-    .floating-accent-line {
-        background: white;
-    }
-}
-
-/* Print styles */
-@media print {
-    .floating-text-modern {
-        border: 2px solid black;
-    }
-
-    .floating-border,
-    .floating-corner {
-        display: none;
-    }
-
-    .floating-message-card {
-        background: white;
-        border: 1px solid black;
-        box-shadow: none;
-    }
-
-    .line-setup,
-    .line-punch {
-        color: black;
-        background: none;
-        -webkit-text-fill-color: black;
-        filter: none;
-        text-shadow: none;
-    }
-}
-
-/* Ensure no CSS transitions interfere with Framer Motion */
-.line-setup,
-.line-punch {
+  .floating-message-line.centered {
+    min-height: auto;
     transition: none;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+
+  .line-setup.centered,
+  .line-punch.centered {
+    animation: none;
+  }
+
+  .line-punch.centered {
+    background: var(--transform-gold);
+    -webkit-text-fill-color: var(--transform-gold);
+    filter: none;
+  }
 }
 
-.floating-text-modern,
-.floating-message-card,
-.floating-message-line {
-    transition: none;
+.performance-mode .floating-message-card.animated::before {
+  display: none;
+}
+
+.performance-mode .line-punch.centered {
+  animation: none;
+  background: var(--transform-gold);
+  -webkit-text-fill-color: var(--transform-gold);
+  filter: none;
 }

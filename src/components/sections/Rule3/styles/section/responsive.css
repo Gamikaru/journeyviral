@@ -1,109 +1,434 @@
-/* Desktop */
-@media (min-width: 1200px) {
-  .rule3-content-wrapper {
-    padding: 4rem;
-  }
+/* src/components/sections/Rule3/styles/section/responsive.css */
 
-  .rule3-content {
-    gap: 5rem;
-  }
+/* Extra large screens (1920px+) */
+@media (min-width: 1920px) {
+    .rule3-content-wrapper {
+        max-width: 1600px;
+        padding: 4rem;
+    }
+
+    .rule3-content {
+        gap: 6rem;
+    }
+
+    .rule3-text-content {
+        padding-right: 3rem;
+    }
+
+    .rule3-visual-content {
+        padding-left: 3rem;
+    }
+
+    .rule3-visual-inner {
+        max-width: 700px;
+    }
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .rule3-section {
-    padding: 3rem 1.5rem;
-  }
+/* Large desktop (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .rule3-content-wrapper {
+        padding: 3.5rem;
+    }
 
-  .rule3-content-wrapper {
-    padding: 2.5rem;
-  }
-
-  .rule3-content {
-    gap: 3rem;
-  }
-
-  .rule3-accent-1 {
-    width: 150px;
-    height: 150px;
-    top: -75px;
-    left: -75px;
-  }
-
-  .rule3-accent-2 {
-    width: 120px;
-    height: 120px;
-    bottom: -60px;
-    right: -60px;
-  }
+    .rule3-content {
+        gap: 5rem;
+    }
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .rule3-section {
-    padding: 2rem 1rem;
-    min-height: auto;
-  }
+/* Desktop (1200px - 1439px) */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .rule3-content-wrapper {
+        padding: 3rem;
+    }
 
-  .rule3-content-wrapper {
-    padding: 2rem;
-    border-radius: 24px;
-  }
+    .rule3-content {
+        gap: 4rem;
+    }
 
-  .rule3-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+    .rule3-gradient-orb-1 {
+        width: 700px;
+        height: 700px;
+        top: -350px;
+        left: -350px;
+    }
 
-  .rule3-text-content {
-    order: 1;
-  }
-
-  .rule3-visual-content {
-    order: 2;
-  }
-
-  .rule3-visual-glow {
-    width: 300px;
-    height: 300px;
-  }
-
-  .rule3-progress-indicator {
-    width: 150px;
-    bottom: 1rem;
-  }
+    .rule3-gradient-orb-2 {
+        width: 500px;
+        height: 500px;
+        bottom: -250px;
+        right: -250px;
+    }
 }
 
-/* Small mobile */
-@media (max-width: 480px) {
-  .rule3-content-wrapper {
-    padding: 1.5rem;
-    border-radius: 20px;
-  }
+/* Small desktop / Large tablet (1024px - 1199px) */
+@media (max-width: 1199px) {
+    .rule3-section {
+        padding: 3rem 1.5rem;
+    }
 
-  .rule3-content {
-    gap: 1.5rem;
-  }
+    .rule3-content-wrapper {
+        padding: 2.5rem;
+    }
 
-  .rule3-accent-1,
-  .rule3-accent-2 {
-    display: none;
-  }
+    .rule3-content {
+        gap: 3rem;
+        grid-template-columns: 45% 55%;
+    }
 
-  .rule3-visual-particles {
-    opacity: 0.5;
-  }
+    .rule3-text-content {
+        padding-right: 1.5rem;
+    }
+
+    .rule3-visual-content {
+        padding-left: 1.5rem;
+    }
+
+    .rule3-accent-1 {
+        width: 180px;
+        height: 180px;
+        top: -90px;
+        left: -90px;
+    }
+
+    .rule3-accent-2 {
+        width: 140px;
+        height: 140px;
+        bottom: -70px;
+        right: -70px;
+    }
 }
 
-/* Animation adjustments for mobile */
-@media (max-width: 768px) {
-  .rule3-text-content,
-  .rule3-visual-content {
-    transform: translateY(20px);
-  }
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .rule3-section {
+        padding: 2.5rem 1rem;
+        min-height: auto;
+    }
 
-  .rule3-visible .rule3-text-content,
-  .rule3-visible .rule3-visual-content {
-    transform: translateY(0);
-  }
+    .rule3-content-wrapper {
+        padding: 2rem;
+        border-radius: 24px;
+    }
+
+    .rule3-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 0;
+    }
+
+    /* Stack order for mobile/tablet */
+    .rule3-text-content {
+        order: 1;
+        padding-right: 0;
+        transform: translateX(0);
+        text-align: center;
+    }
+
+    .rule3-visual-content {
+        order: 2;
+        padding-left: 0;
+        transform: translateX(0);
+    }
+
+    /* Center align text elements */
+    .rule3-headline-container {
+        text-align: center;
+    }
+
+    .rule3-headline-underline {
+        margin: 1rem auto 0;
+    }
+
+    .rule3-supporting-text {
+        text-align: center;
+    }
+
+    .rule3-text-main {
+        margin: 0 auto 1.5rem;
+    }
+
+    .rule3-text-points {
+        max-width: 500px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .rule3-text-point {
+        text-align: left;
+    }
+
+    .rule3-text-emphasis {
+        margin: 0 auto;
+        max-width: 400px;
+    }
+
+    /* Visual adjustments */
+    .rule3-visual-inner {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .rule3-gradient-orb-1 {
+        width: 600px;
+        height: 600px;
+        top: -300px;
+        left: -300px;
+    }
+
+    .rule3-gradient-orb-2 {
+        width: 400px;
+        height: 400px;
+        bottom: -200px;
+        right: -200px;
+    }
+}
+
+/* Mobile (480px - 767px) */
+@media (max-width: 767px) {
+    .rule3-section {
+        padding: 2rem 1rem;
+    }
+
+    .rule3-content-wrapper {
+        padding: 1.5rem;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+    }
+
+    .rule3-content {
+        gap: 2rem;
+    }
+
+    /* Hide decorative elements on mobile */
+    .rule3-accent-1,
+    .rule3-accent-2 {
+        display: none;
+    }
+
+    .rule3-gradient-orb-1,
+    .rule3-gradient-orb-2 {
+        opacity: 0.3;
+    }
+
+    /* Visual optimizations */
+    .rule3-visual-glow {
+        width: 300px;
+        height: 300px;
+        filter: blur(30px);
+    }
+
+    .rule3-visual-particles {
+        opacity: 0.5;
+    }
+
+    /* Reduce animation complexity */
+    .rule3-visual-inner {
+        transform: none !important;
+    }
+}
+
+/* Small mobile (320px - 479px) */
+@media (max-width: 479px) {
+    .rule3-section {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .rule3-content-wrapper {
+        padding: 1.25rem;
+        border-radius: 16px;
+        border: none;
+        background: rgba(25, 15, 35, 0.95);
+    }
+
+    .rule3-content {
+        gap: 1.5rem;
+    }
+
+    /* Further reduce visual complexity */
+    .rule3-visual-particles,
+    .rule3-section-noise {
+        display: none;
+    }
+
+    .rule3-gradient-orb-1,
+    .rule3-gradient-orb-2 {
+        display: none;
+    }
+
+    /* Simplify emphasis box */
+    .rule3-text-emphasis {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+    .rule3-section {
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .rule3-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .rule3-text-content {
+        text-align: left;
+    }
+
+    .rule3-headline-container {
+        text-align: left;
+    }
+
+    .rule3-headline-underline {
+        margin: 1rem 0 0;
+    }
+
+    .rule3-supporting-text {
+        text-align: left;
+    }
+
+    .rule3-text-main {
+        margin: 0 0 1.5rem;
+    }
+
+    .rule3-text-emphasis {
+        margin: 0;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .rule3-section-noise::before {
+        background-size: 128px 128px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Remove hover effects on touch devices */
+    .rule3-content-wrapper:hover {
+        transform: scale(1);
+        animation: none;
+    }
+
+    .rule3-text-point:hover {
+        transform: none;
+    }
+
+    .rule3-visual-content:hover .rule3-visual-overlay {
+        opacity: 0;
+    }
+
+    /* Make interactive elements larger for touch */
+    .rule3-text-point {
+        padding: 0.5rem 0;
+    }
+
+    .rule3-text-emphasis {
+        padding: 1rem 1.25rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .rule3-section {
+        background: white !important;
+        color: black !important;
+        min-height: auto;
+        padding: 2rem;
+    }
+
+    .rule3-content-wrapper {
+        background: none !important;
+        border: 1px solid black;
+        backdrop-filter: none !important;
+        box-shadow: none !important;
+        padding: 1rem;
+    }
+
+    .rule3-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* Hide decorative elements */
+    .rule3-visual-content,
+    .rule3-gradient-orb,
+    .rule3-section-noise,
+    .rule3-visual-particles,
+    .rule3-visual-glow,
+    .rule3-text-accent,
+    .rule3-headline-underline {
+        display: none !important;
+    }
+
+    /* Text adjustments for print */
+    .rule3-headline-number,
+    .rule3-headline-main,
+    .rule3-headline-accent {
+        -webkit-text-fill-color: black !important;
+        color: black !important;
+        background: none !important;
+        filter: none !important;
+    }
+
+    .rule3-text-main,
+    .rule3-text-point {
+        color: black !important;
+    }
+
+    .rule3-point-bullet {
+        background: black !important;
+    }
+
+    .rule3-text-emphasis {
+        background: none !important;
+        border: 1px solid black !important;
+        color: black !important;
+    }
+}
+
+/* Accessibility - High contrast mode */
+@media (prefers-contrast: high) {
+    .rule3-content-wrapper {
+        background: rgba(0, 0, 0, 0.95) !important;
+        border: 2px solid white !important;
+    }
+
+    .rule3-text-accent,
+    .rule3-gradient-orb,
+    .rule3-visual-glow,
+    .rule3-visual-particles,
+    .rule3-section-noise {
+        display: none !important;
+    }
+
+    .rule3-headline-number,
+    .rule3-headline-accent {
+        -webkit-text-fill-color: white !important;
+        color: white !important;
+        background: none !important;
+    }
+
+    .rule3-text-emphasis {
+        background: black !important;
+        border: 2px solid white !important;
+    }
+}
+
+/* Reduced transparency preference */
+@media (prefers-reduced-transparency: reduce) {
+    .rule3-content-wrapper {
+        backdrop-filter: none;
+        background: rgba(25, 15, 35, 0.98);
+    }
+
+    .rule3-gradient-orb {
+        opacity: 0.2;
+    }
 }

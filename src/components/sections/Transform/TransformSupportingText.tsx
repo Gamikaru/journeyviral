@@ -4,7 +4,13 @@
 import { useReducedMotion } from "framer-motion";
 import { memo } from "react";
 import ChatContainer from "./components/ChatContainer";
-import "./styles/transform-supporting-text.css";
+import "./styles/supporting-text/base.css";
+import "./styles/supporting-text/layout.css";
+import "./styles/supporting-text/responsive.css";
+import "./styles/supporting-text/effects.css";
+import "./styles/supporting-text/accessibility.css";
+import "./styles/containers.css";
+import "./styles/animations.css";
 
 interface TransformSupportingTextProps {
   isInView: boolean;

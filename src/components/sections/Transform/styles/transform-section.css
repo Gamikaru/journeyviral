@@ -19,6 +19,8 @@
   background: transparent; /* Remove section background */
   position: relative;
   z-index: 10; /* Ensure content is above unified background */
+  /* Add subtle local effects */
+  overflow: visible; /* Allow effects to extend beyond bounds */
 }
 
 /* Background container */
@@ -109,6 +111,69 @@
   display: none;
 }
 
+/* Local parallax effects that work with unified background */
+.transform-parallax-layer {
+  position: absolute;
+  inset: -10%;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+.transform-parallax-slow {
+  background: radial-gradient(
+    circle at 70% 30%,
+    rgba(255, 0, 255, 0.1) 0%,
+    transparent 50%
+  );
+  transform-origin: center;
+}
+
+.transform-parallax-fast {
+  background: radial-gradient(
+    circle at 30% 70%,
+    rgba(138, 43, 226, 0.08) 0%,
+    transparent 60%
+  );
+  transform-origin: center;
+}
+
+/* Subtle content-aware lighting */
+.transform-content-lighting {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 0, 255, 0.05) 0%,
+    transparent 40%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.transform-section:hover .transform-content-lighting {
+  opacity: 1;
+}
+
+/* Enhanced grid with interactive hover */
+.transform-content-grid::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background:
+    linear-gradient(90deg, rgba(255, 0, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(138, 43, 226, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.transform-section.animate-in .transform-content-grid::before {
+  opacity: 1;
+}
+
 /* Desktop adjustments */
 @media (min-width: 1440px) {
   .transform-content-grid {
@@ -168,39 +233,75 @@
 
   .transform-right-column {
     padding-top: 0;
-    order: -1; /* Show messaging first on mobile */
+    order: -1; /* Show messaging first on tablet */
   }
 }
 
-/* Mobile adjustments */
+/* Mobile adjustments - new flow */
 @media (max-width: 768px) {
+  .transform-section {
+    padding: 3rem 0 4rem;
+    min-height: auto;
+  }
+
   .transform-content-grid {
+    display: flex;
+    flex-direction: column;
     gap: 2.5rem;
-    max-width: 600px;
-  }
-
-  .transform-left-column {
-    gap: 2rem;
-  }
-
-  .transform-headline-container {
     max-width: 100%;
+  }
+
+  /* Break column layout on mobile */
+  .transform-left-column {
+    display: contents;
+  }
+
+  /* Mobile content order: headline -> chat -> CTA */
+  .transform-headline-container {
+    order: 1;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .transform-right-column {
+    order: 2;
+    padding-top: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .transform-cta-container {
+    order: 3;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0 1rem;
   }
 }
 
 /* Small mobile */
 @media (max-width: 480px) {
+  .transform-section {
+    padding: 2.5rem 0 3.5rem;
+  }
+
   .transform-content-grid {
     gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .transform-headline-container {
     max-width: 100%;
   }
 
-  .transform-left-column {
-    gap: 1.5rem;
+  .transform-right-column {
+    max-width: 100%;
   }
 
   .transform-cta-container {
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+    margin-top: 1.5rem;
   }
 }
 

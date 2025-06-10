@@ -66,6 +66,50 @@ export default function UnifiedBackground() {
   const orb1Rotate = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const orb2Rotate = useTransform(scrollYProgress, [0, 1], [0, -120]);
 
+  // Enhanced section-specific overlay opacity controls
+  const transformOverlayOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.08, 0.15, 0.25, 0.32],
+    [0, 0.6, 1, 0.8, 0]
+  );
+
+  const statsOverlayOpacity = useTransform(
+    scrollYProgress,
+    [0.25, 0.32, 0.38, 0.48, 0.55],
+    [0, 0.7, 1, 0.9, 0]
+  );
+
+  const expertiseOverlayOpacity = useTransform(
+    scrollYProgress,
+    [0.45, 0.52, 0.58, 0.68, 0.75],
+    [0, 0.8, 1, 0.7, 0]
+  );
+
+  const rule1OverlayOpacity = useTransform(
+    scrollYProgress,
+    [0.68, 0.75, 0.82, 0.92, 1],
+    [0, 0.9, 1, 0.8, 0.6]
+  );
+
+  const rule2OverlayOpacity = useTransform(
+    scrollYProgress,
+    [0.75, 0.82, 0.88, 0.95, 1],
+    [0, 0.6, 1, 0.7, 0]
+  );
+
+  const footerOverlayOpacity = useTransform(
+    scrollYProgress,
+    [0.85, 0.92, 1],
+    [0, 0.8, 1]
+  );
+
+  // Floating elements animation controls
+  const floatingElementsScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.8, 1.1, 0.9]
+  );
+
   return (
     <>
       {/* Fixed background that covers entire viewport */}
@@ -122,6 +166,83 @@ export default function UnifiedBackground() {
         {/* Enhanced mesh gradient overlay */}
         <div className="unified-mesh" />
 
+        {/* Section-specific overlay effects */}
+        <motion.div
+          className="unified-section-overlay unified-overlay-transform"
+          style={{ opacity: transformOverlayOpacity }}
+        />
+
+        <motion.div
+          className="unified-section-overlay unified-overlay-stats"
+          style={{ opacity: statsOverlayOpacity }}
+        />
+
+        <motion.div
+          className="unified-section-overlay unified-overlay-expertise"
+          style={{ opacity: expertiseOverlayOpacity }}
+        />
+
+        <motion.div
+          className="unified-section-overlay unified-overlay-rule1"
+          style={{ opacity: rule1OverlayOpacity }}
+        />
+
+        <motion.div
+          className="unified-section-overlay unified-overlay-rule2"
+          style={{ opacity: rule2OverlayOpacity }}
+        />
+
+        <motion.div
+          className="unified-section-overlay unified-overlay-footer"
+          style={{ opacity: footerOverlayOpacity }}
+        />
+
+        {/* Section-specific floating elements */}
+        <motion.div
+          className="unified-floating-elements unified-floating-transform"
+          style={{
+            opacity: transformOverlayOpacity,
+            scale: floatingElementsScale
+          }}
+        />
+
+        <motion.div
+          className="unified-floating-elements unified-floating-stats"
+          style={{
+            opacity: statsOverlayOpacity,
+            scale: floatingElementsScale
+          }}
+        />
+
+        {/* Section transition zones */}
+        <motion.div
+          className="unified-transition-zone transition-to-transform"
+          style={{
+            opacity: useTransform(scrollYProgress, [0.05, 0.12, 0.18], [0, 1, 0])
+          }}
+        />
+
+        <motion.div
+          className="unified-transition-zone transition-to-stats"
+          style={{
+            opacity: useTransform(scrollYProgress, [0.28, 0.35, 0.42], [0, 1, 0])
+          }}
+        />
+
+        <motion.div
+          className="unified-transition-zone transition-to-expertise"
+          style={{
+            opacity: useTransform(scrollYProgress, [0.48, 0.55, 0.62], [0, 1, 0])
+          }}
+        />
+
+        <motion.div
+          className="unified-transition-zone transition-to-rule1"
+          style={{
+            opacity: useTransform(scrollYProgress, [0.68, 0.75, 0.82], [0, 1, 0])
+          }}
+        />
+
         {/* Enhanced section-specific accent layers with more variation */}
         <motion.div
           className="unified-accent-layer unified-accent-transform"
@@ -151,36 +272,6 @@ export default function UnifiedBackground() {
           }}
         />
 
-        {/* New: Dynamic floating particles for each section */}
-        <motion.div
-          className="unified-particles unified-particles-transform"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.1, 0.15, 0.25, 0.3], [0, 1, 1, 0])
-          }}
-        />
-
-        <motion.div
-          className="unified-particles unified-particles-stats"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.3, 0.35, 0.45, 0.5], [0, 1, 1, 0])
-          }}
-        />
-
-        <motion.div
-          className="unified-particles unified-particles-expertise"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.5, 0.55, 0.65, 0.7], [0, 1, 1, 0])
-          }}
-        />
-
-        {/* New: Section-specific geometric patterns */}
-        <motion.div
-          className="unified-geometry unified-geometry-grid"
-          style={{
-            opacity: useTransform(scrollYProgress, [0.7, 0.75, 0.9], [0, 0.6, 0.3])
-          }}
-        />
-
         {/* Enhanced vignette with section awareness */}
         <motion.div
           className="unified-vignette"
@@ -190,7 +281,7 @@ export default function UnifiedBackground() {
         />
       </motion.div>
 
-      {/* Container to measure scroll - increased height for all sections */}
+      {/* Container to measure scroll */}
       <div ref={containerRef} className="unified-scroll-container" />
     </>
   );

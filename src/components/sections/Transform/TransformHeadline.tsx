@@ -2,7 +2,12 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { memo } from "react";
-import "./styles/transform-typography.css";
+import "./styles/typography/headline.css";
+import "./styles/typography/colors.css";
+import "./styles/typography/animations.css";
+import "./styles/typography/supporting-text.css";
+import "./styles/typography/responsive.css";
+import "./styles/typography/accessibility.css";
 
 interface TransformHeadlineProps {
   isInView: boolean;

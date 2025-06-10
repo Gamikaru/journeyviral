@@ -3,38 +3,49 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { usePerformanceMode } from "../../../hooks/usePerformanceMode";
+import { TransformSectionProps, ANIMATION_CONSTANTS } from "./types";
 import TransformHeadline from "./TransformHeadline";
 import TransformCTA from "./TransformCTA";
 import TransformSupportingText from "./TransformSupportingText";
-import "./styles/transform-section.css";
+// Updated CSS imports - modular approach
+import "./styles/base.css";
+import "./styles/layout.css";
+import "./styles/animations.css";
 
-// Performance detection hook
-const usePerformanceMode = () => {
-  const [isLowPerf, setIsLowPerf] = useState(false);
+const CONTAINER_VARIANTS = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: ANIMATION_CONSTANTS.STAGGER_DELAY,
+      delayChildren: ANIMATION_CONSTANTS.CHILDREN_DELAY
+    }
+  }
+} as const;
 
-  useEffect(() => {
-    const checkPerformance = () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const memory = (navigator as any).deviceMemory;
-      const connection = (navigator as any).connection;
+const ITEM_VARIANTS = {
+  hidden: {
+    opacity: 0,
+    y: 30
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: ANIMATION_CONSTANTS.TRANSITION_DURATION,
+      ease: ANIMATION_CONSTANTS.EASING
+    }
+  }
+} as const;
 
-      if (prefersReducedMotion) setIsLowPerf(true);
-      if (memory && memory < 4) setIsLowPerf(true);
-      if (connection && (connection.saveData || connection.effectiveType === 'slow-2g')) {
-        setIsLowPerf(true);
-      }
-    };
-
-    checkPerformance();
-  }, []);
-
-  return isLowPerf;
-};
-
-export default function TransformSection() {
+export default function TransformSection({
+  className = "",
+  "aria-label": ariaLabel = "Transform your corporate content into viral success"
+}: TransformSectionProps = {}) {
   const sectionRef = useRef<HTMLElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const isLowPerf = usePerformanceMode();
+  const { isLowPerf } = usePerformanceMode();
 
   const isInView = useInView(sectionRef, {
     once: true,
@@ -52,63 +63,32 @@ export default function TransformSection() {
     }
   }, [isInView, isLowPerf]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    }
-  };
+  const sectionClasses = [
+    "transform-section",
+    "transform-section-unified",
+    isLowPerf && "performance-mode",
+    shouldAnimate && "animate-in",
+    className
+  ].filter(Boolean).join(" ");
 
   return (
     <section
       ref={sectionRef}
       id="transform"
-      className={`transform-section transform-section-unified ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
-      aria-label="Transform your corporate content into viral success"
+      className={sectionClasses}
+      aria-label={ariaLabel}
     >
-      {/* Remove background container - now handled by UnifiedBackground */}
-
-      {/* Main Content Container */}
       <div className="transform-content">
         <motion.div
           className="transform-container"
-          variants={containerVariants}
+          variants={CONTAINER_VARIANTS}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {/* Headline Section */}
-          <motion.div
-            className="transform-headline-wrapper"
-            variants={itemVariants}
-          >
-            <TransformHeadline isInView={isInView} isLowPerf={isLowPerf} />
-          </motion.div>
-
-          {/* Content Grid - Updated for proper two-column layout */}
           <div className="transform-content-grid">
-            {/* Left Column - Headline and CTA */}
             <motion.div
               className="transform-left-column"
-              variants={itemVariants}
+              variants={ITEM_VARIANTS}
             >
               <div className="transform-headline-container">
                 <TransformHeadline isInView={isInView} isLowPerf={isLowPerf} />
@@ -118,10 +98,9 @@ export default function TransformSection() {
               </div>
             </motion.div>
 
-            {/* Right Column - Supporting Text/Chat */}
             <motion.div
               className="transform-right-column"
-              variants={itemVariants}
+              variants={ITEM_VARIANTS}
             >
               <TransformSupportingText isInView={isInView} isLowPerf={isLowPerf} />
             </motion.div>

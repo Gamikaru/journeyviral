@@ -3,7 +3,8 @@
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useState, memo } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
-import "./styles/transform-cta.css";
+import "./styles/cta.css";
+import "./styles/animations.css";
 
 interface TransformCTAProps {
   isInView: boolean;

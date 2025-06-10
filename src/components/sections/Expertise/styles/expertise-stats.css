@@ -70,16 +70,30 @@
 
 @media (max-width: 640px) {
   .expertise-stats-grid {
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on small tablets */
     gap: 1.5rem;
     max-width: 500px;
   }
 }
 
 @media (max-width: 480px) {
+  .expertise-stats-container {
+    padding: 0 0.5rem; /* Add padding for mobile */
+  }
+
   .expertise-stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr; /* 2 columns instead of 1 for better use of space */
+    gap: 1rem;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .expertise-stats-grid {
+    grid-template-columns: 1fr; /* Single column only on very small screens */
     gap: 1.25rem;
     max-width: 320px;
+    margin: 0 auto;
   }
 }
 

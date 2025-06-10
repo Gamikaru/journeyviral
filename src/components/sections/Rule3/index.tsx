@@ -1,9 +1,10 @@
+// src/components/sections/Rule3/index.tsx
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react';
 import Rule3Headline from './Rule3Headline';
-import Rule3PlaceholderVisual from './Rule3PlaceholderVisual';
 import Rule3SupportingText from './Rule3SupportingText';
+import Rule3Visual from './Rule3Visual';
 import './styles/section/layout.css';
 import './styles/section/animations.css';
 import './styles/section/responsive.css';
@@ -12,7 +13,7 @@ const Rule3Section: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
 
   // Intersection Observer for visibility
   useEffect(() => {
@@ -34,27 +35,25 @@ const Rule3Section: React.FC = () => {
     };
   }, []);
 
-  // Scroll progress tracking
+  // Mouse tracking for interactive effects (matching Rule1)
   useEffect(() => {
-    const handleScroll = () => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (!sectionRef.current) return;
 
       const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const sectionHeight = rect.height;
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
 
-      const scrolled = Math.max(0, Math.min(1,
-        (windowHeight - rect.top) / (windowHeight + sectionHeight)
-      ));
-
-      setScrollProgress(scrolled);
+      setMousePosition({
+        x: Math.max(0, Math.min(1, x)),
+        y: Math.max(0, Math.min(1, y))
+      });
     };
 
-    const throttledScroll = throttle(handleScroll, 16);
-    window.addEventListener('scroll', throttledScroll);
-    handleScroll();
+    const throttledMouseMove = throttle(handleMouseMove, 32);
+    window.addEventListener('mousemove', throttledMouseMove);
 
-    return () => window.removeEventListener('scroll', throttledScroll);
+    return () => window.removeEventListener('mousemove', throttledMouseMove);
   }, []);
 
   // Throttle helper function
@@ -89,7 +88,8 @@ const Rule3Section: React.FC = () => {
       className={`rule3-section rule3-section-unified ${isVisible ? 'rule3-visible' : ''}`}
       aria-label="Rule 3 - Your content must provide instant value"
       style={{
-        '--scroll-progress': scrollProgress,
+        '--mouse-x': mousePosition.x,
+        '--mouse-y': mousePosition.y,
       } as React.CSSProperties}
     >
       {/* Content wrapper with glass effect */}
@@ -111,7 +111,7 @@ const Rule3Section: React.FC = () => {
 
           <div className="rule3-visual-content">
             <div className="rule3-visual-inner">
-              <Rule3PlaceholderVisual />
+              <Rule3Visual />
             </div>
 
             {/* Visual effects */}
@@ -119,11 +119,6 @@ const Rule3Section: React.FC = () => {
             <div className="rule3-visual-particles" />
           </div>
         </div>
-      </div>
-
-      {/* Section progress indicator */}
-      <div className="rule3-progress-indicator">
-        <div className="rule3-progress-bar" />
       </div>
 
       {/* Noise overlay */}

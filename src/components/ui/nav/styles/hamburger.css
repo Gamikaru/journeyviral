@@ -153,20 +153,182 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .hamburger-button {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     padding: 6px;
+    margin-right: 0.25rem;
+    /* Larger touch target */
+    min-width: 48px;
+    min-height: 48px;
   }
 
   .hamburger-wrapper {
-    width: 28px;
+    width: 24px;
+    height: calc(2.5px * 3 + 6px * 2);
   }
 
-  /* Reduce glow on mobile */
   .hamburger-bar {
+    height: 2.5px;
+    border-radius: calc(2.5px / 2);
+    /* Reduce glow on mobile */
     box-shadow:
-      0 0 12px rgba(255, 255, 255, 0.7),
-      0 0 25px rgba(255, 255, 255, 0.3);
+      0 0 8px rgba(255, 255, 255, 0.6),
+      0 0 16px rgba(255, 255, 255, 0.2);
+  }
+
+  .hamburger-bar--top {
+    bottom: calc(50% + 6px + 2.5px / 2);
+  }
+
+  .hamburger-bar--middle {
+    top: calc(50% - 2.5px / 2);
+  }
+
+  .hamburger-bar--bottom {
+    top: calc(50% + 6px + 2.5px / 2);
+  }
+
+  .hamburger-button.is-open .hamburger-bar--top {
+    bottom: calc(50% - 2.5px / 2);
+  }
+
+  .hamburger-button.is-open .hamburger-bar--bottom {
+    top: calc(50% - 2.5px / 2);
+  }
+
+  /* Native mobile interactions */
+  .hamburger-button:hover {
+    transform: scale(1.02) translateY(-1px);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      0 0 24px rgba(0, 255, 255, 0.2);
+  }
+
+  .hamburger-button:active {
+    transform: scale(0.96);
+    transition-duration: 0.1s;
+  }
+}
+
+@media (max-width: 480px) {
+  .hamburger-button {
+    width: 44px;
+    height: 44px;
+    padding: 5px;
+    margin-right: 0;
+    /* Ensure minimum touch target */
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .hamburger-wrapper {
+    width: 22px;
+    height: calc(2px * 3 + 5px * 2);
+  }
+
+  .hamburger-bar {
+    height: 2px;
+    border-radius: 1px;
+    /* Minimal effects on small mobile */
+    box-shadow:
+      0 0 6px rgba(255, 255, 255, 0.5),
+      0 0 12px rgba(255, 255, 255, 0.15);
+  }
+
+  .hamburger-bar--top {
+    bottom: calc(50% + 5px + 1px);
+  }
+
+  .hamburger-bar--middle {
+    top: calc(50% - 1px);
+  }
+
+  .hamburger-bar--bottom {
+    top: calc(50% + 5px + 1px);
+  }
+
+  .hamburger-button.is-open .hamburger-bar--top {
+    bottom: calc(50% - 1px);
+  }
+
+  .hamburger-button.is-open .hamburger-bar--bottom {
+    top: calc(50% - 1px);
+  }
+
+  /* Simplified hover for small screens */
+  .hamburger-button:hover {
+    transform: scale(1.01);
+    box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.3),
+      0 0 16px rgba(0, 255, 255, 0.15);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hamburger-button {
+    /* Larger touch target for touch devices */
+    min-width: 48px;
+    min-height: 48px;
+    padding: 8px;
+  }
+
+  .hamburger-button:hover {
+    /* Remove hover effects on touch devices */
+    transform: none;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(8, 5, 20, 0.8);
+  }
+
+  .hamburger-button:hover::before {
+    opacity: 0;
+  }
+
+  .hamburger-button:active {
+    transform: scale(0.94);
+    transition-duration: 0.1s;
+  }
+}
+
+/* Ultra small screens */
+@media (max-width: 320px) {
+  .hamburger-button {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .hamburger-wrapper {
+    width: 20px;
+    height: calc(2px * 3 + 4px * 2);
+  }
+
+  .hamburger-bar {
+    height: 2px;
+    box-shadow:
+      0 0 4px rgba(255, 255, 255, 0.4),
+      0 0 8px rgba(255, 255, 255, 0.1);
+  }
+
+  .hamburger-bar--top {
+    bottom: calc(50% + 4px + 1px);
+  }
+
+  .hamburger-bar--bottom {
+    top: calc(50% + 4px + 1px);
+  }
+
+  .hamburger-button.is-open .hamburger-bar--top {
+    bottom: calc(50% - 1px);
+  }
+
+  .hamburger-button.is-open .hamburger-bar--bottom {
+    top: calc(50% - 1px);
   }
 }
 

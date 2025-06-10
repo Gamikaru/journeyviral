@@ -1,0 +1,169 @@
+/* Transform Animations - Consolidated Keyframes and Animation Utilities */
+
+/* Section-Level Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Typography Animations */
+@keyframes pinkPulse {
+  0%, 100% {
+    text-shadow: var(--transform-glow-primary);
+  }
+  50% {
+    text-shadow:
+      0 0 35px rgba(255, 0, 255, 1),
+      0 0 70px rgba(255, 0, 255, 0.8),
+      0 0 100px rgba(255, 0, 255, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes goldTextShimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+@keyframes punchlineGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 20px rgba(255, 0, 255, 0.6),
+      0 0 40px rgba(255, 0, 255, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(255, 0, 255, 0.9),
+      0 0 60px rgba(255, 0, 255, 0.5),
+      0 0 90px rgba(255, 0, 255, 0.2),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* CTA Animations */
+@keyframes borderGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes shimmerEffect {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Typing Indicator Animations */
+@keyframes typingGlowPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Background & Environment Animations */
+@keyframes ambientGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes cornerPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes accentFade {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
+
+/* Bubble Glow Animations */
+@keyframes bubbleGlowPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* Floating Elements */
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-40px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0);
+  }
+}
+
+/* Final Card Animations */
+@keyframes neonBorderFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes neonGlowPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Utility Animation Classes */
+.animate-in {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-scale-in {
+  animation: fadeInScale 0.8s ease-out;
+}
+
+.animate-glow {
+  animation: pinkPulse 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: goldTextShimmer 3s linear infinite;
+}
+
+/* Reduced Motion Fallbacks */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
