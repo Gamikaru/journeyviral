@@ -1,0 +1,508 @@
+/* Path: src/components/sections/Transform/styles/typography/headline-cyberpunk.css
+   Transform Headline - Cyberpunk Typography Styles */
+
+/* Headline Container */
+.headline-container-cyber {
+  position: relative;
+  z-index: 10;
+}
+
+/* Main Headline */
+.transform-headline-cyber {
+  font-family: var(--font-display), 'Bebas Neue', Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Headline Lines */
+.headline-line-cyber {
+  display: block;
+  position: relative;
+  margin-bottom: -0.05em;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.headline-line-final {
+  margin-bottom: 0;
+}
+
+/* Text Wrapper */
+.headline-text-wrapper {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+}
+
+/* Text Elements */
+.headline-text {
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.headline-space {
+  display: inline-block;
+  width: 0.4em;
+}
+
+/* Base Text Colors and Effects */
+.headline-we {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.headline-transform {
+  color: #ff00ff;
+  position: relative;
+  text-shadow:
+    0 0 20px rgba(255, 0, 255, 0.8),
+    0 0 40px rgba(255, 0, 255, 0.4),
+    2px 2px 0 rgba(255, 0, 255, 0.6),
+    0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.headline-your {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.headline-corporate {
+  color: #00ffff;
+  text-shadow:
+    0 0 20px rgba(0, 255, 255, 0.8),
+    0 0 40px rgba(0, 255, 255, 0.4),
+    2px 2px 0 rgba(0, 255, 255, 0.6),
+    0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.headline-cringe {
+  color: #ff00ff;
+  position: relative;
+  text-shadow:
+    0 0 30px rgba(255, 0, 255, 1),
+    0 0 60px rgba(255, 0, 255, 0.6),
+    3px 3px 0 rgba(255, 0, 255, 0.8),
+    -1px -1px 0 rgba(0, 255, 255, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.8);
+  animation: cringePulse 2s ease-in-out infinite;
+}
+
+@keyframes cringePulse {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.2) saturate(1.5);
+  }
+}
+
+.headline-into {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.headline-viral {
+  color: #00ffff;
+  position: relative;
+  text-shadow:
+    0 0 30px rgba(0, 255, 255, 1),
+    0 0 60px rgba(0, 255, 255, 0.6),
+    3px 3px 0 rgba(0, 255, 255, 0.8),
+    -1px -1px 0 rgba(255, 0, 255, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.headline-gold {
+  color: #ffd700;
+  position: relative;
+  display: inline-block;
+}
+
+/* Gold Shimmer Effect */
+.headline-gold.with-shimmer .text-main {
+  background: linear-gradient(
+    90deg,
+    #ffd700 0%,
+    #ffed4b 10%,
+    #ffd700 20%,
+    #ffed4b 30%,
+    #ffd700 40%,
+    #ffffff 50%,
+    #ffd700 60%,
+    #ffed4b 70%,
+    #ffd700 80%,
+    #ffed4b 90%,
+    #ffd700 100%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 3s linear infinite;
+}
+
+@keyframes goldShimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+.headline-gold.with-shimmer .text-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 3s linear infinite;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+/* Glitch Layers */
+.text-glitch-1,
+.text-glitch-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.text-glitch-1 {
+  color: #ff00ff;
+  transform: translate(-2px, -2px);
+  text-shadow: 2px 2px 0 #00ffff;
+  mix-blend-mode: screen;
+}
+
+.text-glitch-2 {
+  color: #00ffff;
+  transform: translate(2px, 2px);
+  text-shadow: -2px -2px 0 #ff00ff;
+  mix-blend-mode: screen;
+}
+
+/* Text Shadow Layer */
+.text-shadow {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  opacity: 0.3;
+  color: #000;
+  z-index: -1;
+}
+
+/* Neon Glow Effect */
+.text-neon-glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 0, 255, 0.3) 0%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  z-index: -1;
+  animation: neonGlowPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonGlowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Energy Burst Effect */
+.energy-burst {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(
+    circle at center,
+    transparent 30%,
+    rgba(0, 255, 255, 0.2) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  animation: energyBurst 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.headline-viral.with-energy .energy-burst {
+  opacity: 1;
+}
+
+@keyframes energyBurst {
+  0%, 100% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.6;
+  }
+}
+
+/* Gold Particles */
+.gold-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.gold-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffd700;
+  opacity: 0;
+  animation: particleFloat 3s ease-in-out infinite;
+}
+
+.gold-particle:nth-child(1) { top: 20%; left: 10%; }
+.gold-particle:nth-child(2) { top: 30%; left: 30%; }
+.gold-particle:nth-child(3) { top: 10%; left: 60%; }
+.gold-particle:nth-child(4) { top: 40%; left: 80%; }
+.gold-particle:nth-child(5) { top: 60%; left: 40%; }
+.gold-particle:nth-child(6) { top: 80%; left: 70%; }
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0);
+  }
+}
+
+/* Glitch States */
+.headline-glitching .text-glitch-1,
+.headline-glitching .text-glitch-2 {
+  animation: glitchText 0.2s steps(2) infinite;
+}
+
+.headline-glitching .text-glitch-1 {
+  animation-delay: 0s;
+}
+
+.headline-glitching .text-glitch-2 {
+  animation-delay: 0.1s;
+}
+
+@keyframes glitchText {
+  0% { opacity: 0; }
+  25% { opacity: 0.8; transform: translate(-3px, -2px); }
+  50% { opacity: 0.6; transform: translate(2px, 2px); }
+  75% { opacity: 0.8; transform: translate(-1px, 3px); }
+  100% { opacity: 0; }
+}
+
+/* Text Scrambling Effect */
+.text-scrambling .text-main {
+  animation: textScramble 0.1s steps(1) infinite;
+}
+
+@keyframes textScramble {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Holographic Badge */
+.headline-hologram {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 255, 0.1) 0%,
+    rgba(0, 255, 255, 0.1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.hologram-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hologram-text {
+  font-size: 0.875rem;
+  color: #ff00ff;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.hologram-version {
+  font-size: 0.75rem;
+  color: #00ffff;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.hologram-scanline {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: hologramScan 3s linear infinite;
+}
+
+@keyframes hologramScan {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* Responsive Design */
+@media (max-width: 1440px) {
+  .transform-headline-cyber {
+    font-size: clamp(3rem, 8vw, 7rem);
+  }
+}
+
+@media (max-width: 1024px) {
+  .transform-headline-cyber {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    text-align: center;
+  }
+
+  .headline-line-cyber {
+    justify-content: center;
+  }
+
+  .headline-space {
+    width: 0.3em;
+  }
+}
+
+@media (max-width: 768px) {
+  .transform-headline-cyber {
+    font-size: clamp(2rem, 10vw, 5rem);
+    line-height: 0.9;
+  }
+
+  .headline-line-cyber {
+    margin-bottom: -0.03em;
+  }
+
+  .gold-particles,
+  .energy-burst,
+  .text-neon-glow {
+    display: none;
+  }
+
+  .headline-hologram {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .hologram-text {
+    font-size: 0.75rem;
+  }
+
+  .hologram-version {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .transform-headline-cyber {
+    font-size: clamp(1.75rem, 12vw, 4rem);
+  }
+
+  .headline-space {
+    width: 0.2em;
+  }
+
+  .text-glitch-1,
+  .text-glitch-2,
+  .text-shadow {
+    display: none;
+  }
+
+  .headline-hologram {
+    display: none;
+  }
+}
+
+/* Performance Mode */
+.performance-mode .headline-gold.with-shimmer .text-main {
+  background: #ffd700;
+  -webkit-text-fill-color: #ffd700;
+  animation: none;
+}
+
+.performance-mode .text-glitch-1,
+.performance-mode .text-glitch-2,
+.performance-mode .gold-particles,
+.performance-mode .energy-burst,
+.performance-mode .text-neon-glow {
+  display: none;
+}
+
+.performance-mode .headline-cringe,
+.performance-mode .headline-viral {
+  animation: none;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .headline-transform,
+  .headline-cringe {
+    color: #ff6ec7;
+    text-shadow: 0 2px 4px #000;
+  }
+
+  .headline-corporate,
+  .headline-viral {
+    color: #00ffff;
+    text-shadow: 0 2px 4px #000;
+  }
+
+  .headline-gold {
+    color: #ffff00;
+    background: none !important;
+    -webkit-text-fill-color: #ffff00 !important;
+  }
+}

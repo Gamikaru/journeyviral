@@ -1,0 +1,327 @@
+/* Path: src/components/sections/Transform/styles/supporting-text-minimal.css
+   Supporting Text - Minimal Terminal Design */
+
+/* Terminal Window */
+.terminal-window-minimal {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(0, 255, 255, 0.1);
+}
+
+/* Terminal Header */
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.terminal-title {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 10px currentColor;
+}
+
+/* Window Controls */
+.terminal-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-min {
+    background: #ffd700;
+}
+
+.control-max {
+    background: #00ff00;
+}
+
+.control-close {
+    background: #ff0066;
+}
+
+.control:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Terminal Content */
+.terminal-content {
+    padding: 2rem;
+    min-height: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Terminal Messages */
+.terminal-message {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-body), 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.terminal-message::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    animation: messageDot 3s ease-in-out infinite;
+    animation-delay: calc(var(--index) * 0.5s);
+}
+
+@keyframes messageDot {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* Message Icon */
+.message-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px currentColor);
+    transition: all 0.3s ease;
+}
+
+/* Message Text */
+.message-text {
+    flex: 1;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+.terminal-message:hover .message-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.terminal-message:hover .message-text {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Terminal Cursor */
+.terminal-cursor {
+    width: 10px;
+    height: 20px;
+    background: #00ff00;
+    margin-left: 3.5rem;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* Color Accents */
+.terminal-message:nth-child(1)::before {
+    color: #ff0066;
+}
+
+.terminal-message:nth-child(2)::before {
+    color: #00ffff;
+}
+
+.terminal-message:nth-child(3)::before {
+    color: #ffd700;
+}
+
+.terminal-message:nth-child(4)::before {
+    color: #00ff00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .terminal-window-minimal {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .terminal-header {
+        padding: 0.625rem 0.875rem;
+    }
+
+    .terminal-title {
+        font-size: 0.6875rem;
+    }
+
+    .control {
+        width: 10px;
+        height: 10px;
+    }
+
+    .terminal-content {
+        padding: 1.5rem;
+        gap: 1.25rem;
+        min-height: 250px;
+    }
+
+    .terminal-message {
+        font-size: 0.8125rem;
+        gap: 0.875rem;
+    }
+
+    .message-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .message-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-window-minimal {
+        border-radius: 6px;
+    }
+
+    .terminal-header {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .terminal-title {
+        font-size: 0.625rem;
+        letter-spacing: 0.05em;
+    }
+
+    .control {
+        width: 8px;
+        height: 8px;
+        gap: 0.375rem;
+    }
+
+    .terminal-content {
+        padding: 1.25rem;
+        gap: 1rem;
+        min-height: 220px;
+    }
+
+    .terminal-message {
+        font-size: 0.75rem;
+        gap: 0.75rem;
+        padding-left: 0;
+    }
+
+    .terminal-message::before {
+        display: none;
+    }
+
+    .message-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .message-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .terminal-cursor {
+        width: 8px;
+        height: 16px;
+        margin-left: 2.5rem;
+    }
+}
+
+/* Performance Mode */
+.performance-mode .terminal-message::before {
+    animation: none;
+    opacity: 0.4;
+}
+
+.performance-mode .message-icon {
+    filter: none;
+}
+
+.performance-mode .control:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .terminal-window-minimal {
+        background: #000000;
+        border: 2px solid #ffffff;
+    }
+
+    .terminal-header {
+        background: #000000;
+        border-bottom: 2px solid #ffffff;
+    }
+
+    .terminal-title {
+        text-shadow: none;
+    }
+
+    .message-icon {
+        filter: none;
+    }
+
+    .message-text {
+        color: #ffffff;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .terminal-message::before {
+        animation: none;
+        opacity: 0.4;
+    }
+
+    .terminal-cursor {
+        animation: none;
+        opacity: 1;
+    }
+
+    .control,
+    .message-icon,
+    .message-text {
+        transition: none;
+    }
+}

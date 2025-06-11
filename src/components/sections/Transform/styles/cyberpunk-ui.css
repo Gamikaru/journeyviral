@@ -1,0 +1,620 @@
+/* Path: src/components/sections/Transform/styles/cyberpunk-ui.css
+   Cyberpunk UI Elements - Tech Frames, Grids, Matrix Effects */
+
+/* Cyberpunk Grid Background */
+.cyber-grid-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.grid-perspective {
+    position: absolute;
+    inset: -50%;
+    background-image:
+        linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px, 50px 50px;
+    transform: perspective(500px) rotateX(60deg) scale(2);
+    animation: gridScroll 20s linear infinite;
+    opacity: 0.3;
+}
+
+.grid-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center,
+            transparent 0%,
+            rgba(255, 0, 255, 0.1) 50%,
+            rgba(0, 255, 255, 0.05) 100%);
+    animation: gridPulse 4s ease-in-out infinite;
+}
+
+@keyframes gridScroll {
+    0% {
+        transform: perspective(500px) rotateX(60deg) scale(2) translateY(0);
+    }
+
+    100% {
+        transform: perspective(500px) rotateX(60deg) scale(2) translateY(50px);
+    }
+}
+
+@keyframes gridPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Energy Field Effects */
+.energy-field {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.energy-wave {
+    position: absolute;
+    left: -100%;
+    top: 0;
+    bottom: 0;
+    width: 200%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 0, 255, 0.1) 25%,
+            rgba(0, 255, 255, 0.2) 50%,
+            rgba(255, 0, 255, 0.1) 75%,
+            transparent 100%);
+    filter: blur(40px);
+    animation: energyWave 8s ease-in-out infinite;
+}
+
+.energy-wave-2 {
+    animation-delay: 2.67s;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0, 255, 255, 0.1) 25%,
+            rgba(255, 215, 0, 0.2) 50%,
+            rgba(0, 255, 255, 0.1) 75%,
+            transparent 100%);
+}
+
+.energy-wave-3 {
+    animation-delay: 5.33s;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 215, 0, 0.1) 25%,
+            rgba(255, 0, 255, 0.2) 50%,
+            rgba(255, 215, 0, 0.1) 75%,
+            transparent 100%);
+}
+
+@keyframes energyWave {
+    0% {
+        transform: translateX(-100%) skewX(-20deg);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateX(200%) skewX(-20deg);
+        opacity: 0;
+    }
+}
+
+/* Tech Frame UI */
+.tech-frame {
+    position: absolute;
+    inset: 2rem;
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* Frame Corners */
+.frame-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    animation: cornerFadeIn 1s ease-out forwards;
+}
+
+.frame-corner-tl {
+    top: 0;
+    left: 0;
+    animation-delay: 0.2s;
+}
+
+.frame-corner-tr {
+    top: 0;
+    right: 0;
+    animation-delay: 0.4s;
+}
+
+.frame-corner-bl {
+    bottom: 0;
+    left: 0;
+    animation-delay: 0.6s;
+}
+
+.frame-corner-br {
+    bottom: 0;
+    right: 0;
+    animation-delay: 0.8s;
+}
+
+.corner-bracket {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.corner-bracket::before,
+.corner-bracket::after {
+    content: "";
+    position: absolute;
+    background: linear-gradient(135deg, #ff00ff, #00ffff);
+    box-shadow: 0 0 20px currentColor;
+}
+
+.frame-corner-tl .corner-bracket::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+}
+
+.frame-corner-tl .corner-bracket::after {
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+}
+
+.frame-corner-tr .corner-bracket::before {
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+}
+
+.frame-corner-tr .corner-bracket::after {
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+}
+
+.frame-corner-bl .corner-bracket::before {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+}
+
+.frame-corner-bl .corner-bracket::after {
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+}
+
+.frame-corner-br .corner-bracket::before {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+}
+
+.frame-corner-br .corner-bracket::after {
+    bottom: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+}
+
+.corner-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+.frame-corner-tl .corner-dot {
+    top: -2px;
+    left: -2px;
+}
+
+.frame-corner-tr .corner-dot {
+    top: -2px;
+    right: -2px;
+}
+
+.frame-corner-bl .corner-dot {
+    bottom: -2px;
+    left: -2px;
+}
+
+.frame-corner-br .corner-dot {
+    bottom: -2px;
+    right: -2px;
+}
+
+@keyframes cornerFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+/* Tech UI Overlay */
+.tech-ui-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.ui-element {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    animation: uiFadeIn 1s ease-out forwards;
+}
+
+.ui-top-bar {
+    top: -30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
+    animation-delay: 1s;
+}
+
+.ui-text {
+    color: #00ffff;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.ui-status {
+    color: #00ff00;
+    text-shadow: 0 0 10px currentColor;
+    animation: statusBlink 2s ease-in-out infinite;
+}
+
+@keyframes statusBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.ui-side-panel {
+    top: 100px;
+    right: -150px;
+    width: 120px;
+    animation-delay: 1.2s;
+}
+
+.data-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.data-line {
+    color: rgba(0, 255, 255, 0.6);
+    font-size: 0.625rem;
+    opacity: 0;
+    animation: dataFade 3s ease-in-out infinite;
+}
+
+@keyframes dataFade {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes uiFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Terminal Container */
+.terminal-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.terminal-title {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    color: #00ffff;
+    text-shadow: 0 0 10px currentColor;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-min {
+    background: #ffd700;
+}
+
+.control-max {
+    background: #00ff00;
+}
+
+.control-close {
+    background: #ff0066;
+}
+
+.control:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px currentColor;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Warning Badge */
+.warning-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #ff6666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    animation: warningPulse 2s ease-in-out infinite;
+}
+
+@keyframes warningPulse {
+
+    0%,
+    100% {
+        border-color: rgba(255, 0, 0, 0.3);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    }
+
+    50% {
+        border-color: rgba(255, 0, 0, 0.6);
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    }
+}
+
+/* Particle System */
+.particle-system {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 8;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Matrix Rain Effect */
+.matrix-rain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+    opacity: 0.1;
+}
+
+.matrix-column {
+    position: absolute;
+    top: -100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #00ff00;
+    text-shadow: 0 0 5px currentColor;
+    animation: matrixFall linear infinite;
+}
+
+.matrix-char {
+    opacity: 0.8;
+}
+
+@keyframes matrixFall {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 100%));
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .tech-frame {
+        inset: 1rem;
+    }
+
+    .frame-corner {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ui-top-bar {
+        padding: 0 60px;
+        font-size: 0.625rem;
+    }
+
+    .ui-side-panel {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .cyber-grid-bg,
+    .energy-field,
+    .matrix-rain {
+        display: none;
+    }
+
+    .tech-frame {
+        display: none;
+    }
+
+    .terminal-container {
+        border-width: 1px;
+        border-radius: 8px;
+    }
+
+    .terminal-header {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .terminal-title {
+        font-size: 0.75rem;
+    }
+
+    .terminal-body {
+        padding: 1rem;
+        min-height: 250px;
+    }
+}
+
+/* Performance Mode */
+.performance-mode .cyber-grid-bg,
+.performance-mode .energy-field,
+.performance-mode .particle-system,
+.performance-mode .matrix-rain {
+    display: none;
+}
+
+.performance-mode .frame-corner,
+.performance-mode .ui-element {
+    animation: none;
+    opacity: 1;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .terminal-container {
+        background: #000;
+        border-color: #fff;
+    }
+
+    .frame-corner .corner-bracket::before,
+    .frame-corner .corner-bracket::after {
+        background: #fff;
+    }
+
+    .warning-badge {
+        background: #000;
+        border-color: #ff0000;
+        color: #ff0000;
+    }
+}

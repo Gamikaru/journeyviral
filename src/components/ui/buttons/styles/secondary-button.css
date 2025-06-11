@@ -1,0 +1,331 @@
+/* Secondary Button - Glass Effect Design */
+
+.secondary-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 35px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  contain: layout style paint;
+  outline: none;
+  font-family: var(--font-lastica);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Button Sizes */
+.secondary-btn-sm {
+  width: 180px;
+  height: 48px;
+  font-size: 0.8rem;
+  padding: 0 1rem;
+}
+
+.secondary-btn-md {
+  width: 240px;
+  height: 60px;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+}
+
+.secondary-btn-lg {
+  width: 300px;
+  height: 70px;
+  font-size: 1.2rem;
+  padding: 0 2rem;
+}
+
+/* Glass Background */
+.secondary-btn-bg {
+  position: absolute;
+  inset: 1px;
+  border-radius: 34px;
+  overflow: hidden;
+}
+
+.glass-surface {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 15, 46, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+}
+
+.glass-border {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 34px;
+  transition: border-color 0.4s ease;
+}
+
+.glass-glow {
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at center,
+    rgba(138, 43, 226, 0.3) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  filter: blur(25px);
+  transition: opacity 0.4s ease;
+}
+
+/* Animated Border Effect */
+.secondary-border-effect {
+  position: absolute;
+  inset: -2px;
+  border-radius: 37px;
+  overflow: hidden;
+}
+
+.rotating-border {
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    #9e30a9, transparent, transparent, transparent,
+    transparent, transparent, transparent, #9e30a9
+  );
+  opacity: 0;
+  animation: secondaryRotate 4s linear infinite;
+  transition: opacity 0.4s ease;
+}
+
+.rotating-border-secondary {
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    #4090b5, transparent, transparent, transparent,
+    transparent, transparent, transparent, transparent, #4090b5
+  );
+  opacity: 0;
+  animation: secondaryRotate 4s linear infinite reverse;
+  animation-delay: -2s;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes secondaryRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Content */
+.secondary-btn-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+}
+
+.secondary-text {
+  color: #ffffff;
+  text-shadow: 0px 0px 1px #4090b5, 0px 0px 1px #9e30a9, 0 0 1px white;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.secondary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+/* Loading Spinner */
+.secondary-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: secondarySpin 1s linear infinite;
+}
+
+@keyframes secondarySpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hover Effects Container */
+.secondary-hover-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+/* Shimmer Effect */
+.secondary-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 20%,
+    rgba(138, 43, 226, 0.5) 50%,
+    transparent 80%
+  );
+  border-radius: 35px;
+  transition: left 1.2s ease;
+}
+
+/* Ripple Effect */
+.secondary-ripple {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(138, 43, 226, 0.3) 0%,
+    transparent 50%
+  );
+  transform: scale(0);
+  opacity: 0;
+  border-radius: 50%;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover States */
+.secondary-btn:hover .glass-surface {
+  background: rgba(26, 15, 46, 0.6);
+  border-color: rgba(138, 43, 226, 0.6);
+}
+
+.secondary-btn:hover .glass-border {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.secondary-btn:hover .glass-glow {
+  opacity: 0.8;
+}
+
+.secondary-btn:hover .rotating-border,
+.secondary-btn:hover .rotating-border-secondary {
+  opacity: 1;
+}
+
+.secondary-btn:hover .secondary-shimmer {
+  left: 100%;
+}
+
+.secondary-btn:hover .secondary-ripple {
+  transform: scale(1.5);
+  opacity: 0.4;
+  transition-duration: 0.1s;
+}
+
+.secondary-btn:hover .secondary-text {
+  color: #00ffff;
+  text-shadow: 2px 4px 1px #9e30a9, 2px 2px 1px #4090b5, 0 0 20px rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.secondary-btn:hover .secondary-icon {
+  color: #00ffff;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+}
+
+/* Focus State */
+.secondary-btn:focus-visible {
+  outline: 2px solid #9e30a9;
+  outline-offset: 4px;
+}
+
+.secondary-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Disabled State */
+.secondary-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.secondary-btn.disabled .glass-surface {
+  background: rgba(50, 50, 50, 0.4);
+}
+
+.secondary-btn.disabled .glass-border {
+  border-color: rgba(100, 100, 100, 0.3);
+}
+
+.secondary-btn.disabled .secondary-text {
+  color: #888888;
+  text-shadow: none;
+}
+
+.secondary-btn.disabled .secondary-icon {
+  color: #888888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .secondary-btn-sm {
+    width: 160px;
+    height: 44px;
+    font-size: 0.75rem;
+  }
+
+  .secondary-btn-md {
+    width: 200px;
+    height: 56px;
+    font-size: 0.9rem;
+  }
+
+  .secondary-btn-lg {
+    width: 240px;
+    height: 64px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .secondary-btn-sm {
+    width: 140px;
+    height: 40px;
+    font-size: 0.7rem;
+  }
+
+  .secondary-btn-md {
+    width: 180px;
+    height: 52px;
+    font-size: 0.85rem;
+  }
+
+  .secondary-btn-lg {
+    width: 200px;
+    height: 60px;
+    font-size: 1rem;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .secondary-btn {
+    transition: transform 0.2s ease;
+  }
+
+  .rotating-border,
+  .rotating-border-secondary,
+  .secondary-shimmer {
+    animation: none !important;
+    transition: none !important;
+  }
+}

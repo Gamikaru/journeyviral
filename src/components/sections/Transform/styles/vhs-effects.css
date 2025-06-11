@@ -1,0 +1,310 @@
+/* Path: src/components/sections/Transform/styles/vhs-effects.css
+   VHS Effects Layer - Scanlines, Static, Distortion */
+
+/* VHS Effects Container */
+.vhs-effects-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+    mix-blend-mode: screen;
+}
+
+/* Static Scanlines */
+.vhs-scanlines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0.05) 1px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0) 4px);
+    opacity: 0.8;
+}
+
+/* Moving Scanline */
+.vhs-scanline-moving {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 20%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0.1) 80%,
+            transparent 100%);
+    filter: blur(1px);
+    will-change: transform;
+    transition: top 0.05s linear;
+}
+
+/* VHS Noise Texture */
+.vhs-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+}
+
+.vhs-noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+    filter: contrast(200%) brightness(150%);
+    background-size: 50px 50px;
+    animation: noiseShift 0.2s steps(10) infinite;
+}
+
+@keyframes noiseShift {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-5%, -5%);
+    }
+
+    20% {
+        transform: translate(-10%, 5%);
+    }
+
+    30% {
+        transform: translate(5%, -10%);
+    }
+
+    40% {
+        transform: translate(-5%, 15%);
+    }
+
+    50% {
+        transform: translate(-10%, 5%);
+    }
+
+    60% {
+        transform: translate(15%, 0);
+    }
+
+    70% {
+        transform: translate(0, 10%);
+    }
+
+    80% {
+        transform: translate(-15%, 0);
+    }
+
+    90% {
+        transform: translate(10%, 5%);
+    }
+
+    100% {
+        transform: translate(5%, 0);
+    }
+}
+
+/* VHS Tracking Lines */
+.vhs-tracking {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.vhs-tracking::before,
+.vhs-tracking::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    animation: trackingGlitch 8s ease-in-out infinite;
+}
+
+.vhs-tracking::before {
+    top: 20%;
+}
+
+.vhs-tracking::after {
+    top: 70%;
+    animation-delay: 4s;
+}
+
+@keyframes trackingGlitch {
+
+    0%,
+    90%,
+    100% {
+        transform: translateX(0) scaleY(1);
+        opacity: 0.1;
+    }
+
+    92% {
+        transform: translateX(-100%) scaleY(3);
+        opacity: 0.3;
+    }
+
+    94% {
+        transform: translateX(100%) scaleY(1);
+        opacity: 0.1;
+    }
+
+    96% {
+        transform: translateX(-50%) scaleY(5);
+        opacity: 0.2;
+    }
+}
+
+/* RGB Channel Distortion */
+.rgb-distortion-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 6;
+    mix-blend-mode: screen;
+}
+
+.rgb-shift {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    animation: rgbShift 6s ease-in-out infinite;
+}
+
+.rgb-r {
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 0, 0, 0.1) 50%,
+            transparent 70%);
+    animation-delay: 0s;
+}
+
+.rgb-g {
+    background: linear-gradient(-45deg,
+            transparent 30%,
+            rgba(0, 255, 0, 0.1) 50%,
+            transparent 70%);
+    animation-delay: 2s;
+}
+
+.rgb-b {
+    background: linear-gradient(90deg,
+            transparent 30%,
+            rgba(0, 0, 255, 0.1) 50%,
+            transparent 70%);
+    animation-delay: 4s;
+}
+
+@keyframes rgbShift {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateX(0) translateY(0);
+    }
+
+    5% {
+        opacity: 0.4;
+        transform: translateX(-2px) translateY(1px);
+    }
+
+    10% {
+        opacity: 0.3;
+        transform: translateX(2px) translateY(-1px);
+    }
+
+    15% {
+        opacity: 0;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+/* Glitch Active State Effects */
+.transform-section-cyberpunk.glitch-active .vhs-noise {
+    animation: glitchNoise 0.3s steps(2) infinite;
+}
+
+.transform-section-cyberpunk.glitch-active .vhs-scanlines {
+    animation: scanlineGlitch 0.2s steps(3) infinite;
+}
+
+.transform-section-cyberpunk.glitch-active .rgb-shift {
+    animation-duration: 0.1s !important;
+    opacity: 0.6 !important;
+}
+
+@keyframes glitchNoise {
+    0% {
+        opacity: 0.03;
+    }
+
+    33% {
+        opacity: 0.08;
+        transform: scale(1.02);
+    }
+
+    66% {
+        opacity: 0.05;
+        transform: scale(0.98);
+    }
+
+    100% {
+        opacity: 0.03;
+    }
+}
+
+@keyframes scanlineGlitch {
+    0% {
+        transform: translateY(0);
+    }
+
+    33% {
+        transform: translateY(-3px);
+        opacity: 0.6;
+    }
+
+    66% {
+        transform: translateY(3px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+
+    .vhs-effects-layer,
+    .rgb-distortion-layer {
+        display: none;
+    }
+}
+
+.performance-mode .vhs-effects-layer,
+.performance-mode .rgb-distortion-layer {
+    display: none;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .vhs-noise::before {
+        background-size: 100px 100px;
+        animation: none;
+    }
+
+    .vhs-tracking::before,
+    .vhs-tracking::after {
+        display: none;
+    }
+
+    .rgb-shift {
+        display: none;
+    }
+
+    .vhs-scanline-moving {
+        display: none;
+    }
+}

@@ -1,3 +1,4 @@
+// Path: components/navigation/HamburgerButton.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -24,11 +25,28 @@ export default function HamburgerButton({ isOpen, onClick }: HamburgerButtonProp
       }}
       whileTap={{ scale: 0.95 }}
     >
+      {/* Gradient Border */}
+      <div className="hamburger-border" />
+
+      {/* Corner Accents */}
+      <div className="corner-accent corner-tl" />
+      <div className="corner-accent corner-br" />
+
+      {/* Energy Field */}
+      <div className="energy-field" />
+
+      {/* Main Wrapper */}
       <div className="hamburger-wrapper">
         <div className="hamburger-bar hamburger-bar--top" />
         <div className="hamburger-bar hamburger-bar--middle" />
         <div className="hamburger-bar hamburger-bar--bottom" />
+
+        {/* Center Glow */}
+        <div className="center-glow" />
       </div>
+
+      {/* Scan Effect */}
+      <div className="scan-effect" />
     </motion.button>
   );
 }

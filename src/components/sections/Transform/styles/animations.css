@@ -1,169 +1,621 @@
-/* Transform Animations - Consolidated Keyframes and Animation Utilities */
+/* Path: src/components/sections/Transform/styles/animations.css
+   Transform Animations - Cyberpunk Keyframes and Effects */
 
-/* Section-Level Animations */
+/* Section Entry Animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-/* Typography Animations */
-@keyframes pinkPulse {
-  0%, 100% {
-    text-shadow: var(--transform-glow-primary);
-  }
-  50% {
-    text-shadow:
-      0 0 35px rgba(255, 0, 255, 1),
-      0 0 70px rgba(255, 0, 255, 0.8),
-      0 0 100px rgba(255, 0, 255, 0.5),
-      0 2px 4px rgba(0, 0, 0, 0.5);
-  }
+@keyframes fadeInPerspective {
+    from {
+        opacity: 0;
+        transform: perspective(1000px) rotateY(-30deg) translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: perspective(1000px) rotateY(0) translateX(0);
+    }
 }
 
-@keyframes goldTextShimmer {
-  0% { background-position: -100% 0; }
-  100% { background-position: 100% 0; }
+/* Cyberpunk Typography Animations */
+@keyframes cringePulse {
+
+    0%,
+    100% {
+        filter: brightness(1) saturate(1);
+    }
+
+    50% {
+        filter: brightness(1.2) saturate(1.5);
+    }
 }
 
-@keyframes punchlineGlow {
-  0%, 100% {
-    text-shadow:
-      0 0 20px rgba(255, 0, 255, 0.6),
-      0 0 40px rgba(255, 0, 255, 0.3),
-      0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  50% {
-    text-shadow:
-      0 0 30px rgba(255, 0, 255, 0.9),
-      0 0 60px rgba(255, 0, 255, 0.5),
-      0 0 90px rgba(255, 0, 255, 0.2),
-      0 2px 4px rgba(0, 0, 0, 0.5);
-  }
-}
+@keyframes goldShimmer {
+    0% {
+        background-position: -100% 0;
+    }
 
-/* CTA Animations */
-@keyframes borderGradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-@keyframes shimmerEffect {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-/* Typing Indicator Animations */
-@keyframes typingGlowPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-}
-
-/* Background & Environment Animations */
-@keyframes ambientGlow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
-@keyframes cornerPulse {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-}
-
-@keyframes accentFade {
-  0%, 100% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-}
-
-/* Bubble Glow Animations */
-@keyframes bubbleGlowPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
-}
-
-/* Floating Elements */
-@keyframes floatUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-40px) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-120px) scale(0);
-  }
-}
-
-/* Final Card Animations */
-@keyframes neonBorderFlow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+    100% {
+        background-position: 100% 0;
+    }
 }
 
 @keyframes neonGlowPulse {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes energyBurst {
+
+    0%,
+    100% {
+        transform: scale(0.8) rotate(0deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2) rotate(180deg);
+        opacity: 0.6;
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-20px) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-40px) scale(0);
+    }
+}
+
+/* Glitch Text Effects */
+@keyframes glitchText {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.8;
+        transform: translate(-3px, -2px);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translate(2px, 2px);
+    }
+
+    75% {
+        opacity: 0.8;
+        transform: translate(-1px, 3px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes textScramble {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Terminal Animations */
+@keyframes msgGlitch {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-2px);
+        filter: hue-rotate(90deg);
+    }
+
+    50% {
+        transform: translateX(2px);
+        filter: hue-rotate(-90deg);
+    }
+
+    75% {
+        transform: translateX(-1px);
+        filter: hue-rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes progressShine {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.3);
+    }
+}
+
+@keyframes matrixStream {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes maxPulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px currentColor;
+        transform: scale(1);
+    }
+
+    50% {
+        text-shadow: 0 0 20px currentColor;
+        transform: scale(1.05);
+    }
+}
+
+/* VHS Effect Animations */
+@keyframes noiseShift {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-5%, -5%);
+    }
+
+    20% {
+        transform: translate(-10%, 5%);
+    }
+
+    30% {
+        transform: translate(5%, -10%);
+    }
+
+    40% {
+        transform: translate(-5%, 15%);
+    }
+
+    50% {
+        transform: translate(-10%, 5%);
+    }
+
+    60% {
+        transform: translate(15%, 0);
+    }
+
+    70% {
+        transform: translate(0, 10%);
+    }
+
+    80% {
+        transform: translate(-15%, 0);
+    }
+
+    90% {
+        transform: translate(10%, 5%);
+    }
+
+    100% {
+        transform: translate(5%, 0);
+    }
+}
+
+@keyframes trackingGlitch {
+
+    0%,
+    90%,
+    100% {
+        transform: translateX(0) scaleY(1);
+        opacity: 0.1;
+    }
+
+    92% {
+        transform: translateX(-100%) scaleY(3);
+        opacity: 0.3;
+    }
+
+    94% {
+        transform: translateX(100%) scaleY(1);
+        opacity: 0.1;
+    }
+
+    96% {
+        transform: translateX(-50%) scaleY(5);
+        opacity: 0.2;
+    }
+}
+
+@keyframes rgbShift {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateX(0) translateY(0);
+    }
+
+    5% {
+        opacity: 0.4;
+        transform: translateX(-2px) translateY(1px);
+    }
+
+    10% {
+        opacity: 0.3;
+        transform: translateX(2px) translateY(-1px);
+    }
+
+    15% {
+        opacity: 0;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+/* Grid and Energy Animations */
+@keyframes gridScroll {
+    0% {
+        transform: perspective(500px) rotateX(60deg) scale(2) translateY(0);
+    }
+
+    100% {
+        transform: perspective(500px) rotateX(60deg) scale(2) translateY(50px);
+    }
+}
+
+@keyframes gridPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes energyWave {
+    0% {
+        transform: translateX(-100%) skewX(-20deg);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateX(200%) skewX(-20deg);
+        opacity: 0;
+    }
+}
+
+/* UI Element Animations */
+@keyframes cornerFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+@keyframes statusBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes dataFade {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes uiFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CTA Button Animations */
+@keyframes energyRing1 {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.4;
+    }
+}
+
+@keyframes energyRing2 {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 0.3;
+    }
+}
+
+@keyframes energyRing3 {
+
+    0%,
+    100% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.4);
+        opacity: 0.2;
+    }
+}
+
+@keyframes bgPulse {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes textBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes glitchSlide1 {
+    0% {
+        transform: translateX(-100%) skewX(-20deg);
+    }
+
+    100% {
+        transform: translateX(100%) skewX(-20deg);
+    }
+}
+
+@keyframes glitchSlide2 {
+    0% {
+        transform: translateX(-100%) skewX(20deg);
+    }
+
+    100% {
+        transform: translateX(100%) skewX(20deg);
+    }
+}
+
+@keyframes glitchSlide3 {
+    0% {
+        transform: translateX(-100%) skewX(-10deg);
+    }
+
+    100% {
+        transform: translateX(100%) skewX(-10deg);
+    }
+}
+
+@keyframes activatingPulse {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.3);
+    }
+}
+
+/* Hologram Effects */
+@keyframes hologramScan {
+    0% {
+        top: -100%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* Matrix Rain Animation */
+@keyframes matrixFall {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 100%));
+    }
+}
+
+/* Section Glitch Animation */
+@keyframes sectionGlitch {
+    0% {
+        transform: translate(0, 0);
+        filter: none;
+    }
+
+    33% {
+        transform: translate(-2px, 2px);
+        filter: hue-rotate(90deg);
+    }
+
+    66% {
+        transform: translate(2px, -2px);
+        filter: hue-rotate(-90deg);
+    }
+
+    100% {
+        transform: translate(0, 0);
+        filter: none;
+    }
+}
+
+/* Warning Badge Animation */
+@keyframes warningPulse {
+
+    0%,
+    100% {
+        border-color: rgba(255, 0, 0, 0.3);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    }
+
+    50% {
+        border-color: rgba(255, 0, 0, 0.6);
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    }
 }
 
 /* Utility Animation Classes */
 .animate-in {
-  animation: fadeInUp 0.8s ease-out;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .animate-scale-in {
-  animation: fadeInScale 0.8s ease-out;
+    animation: fadeInScale 0.8s ease-out;
+}
+
+.animate-perspective-in {
+    animation: fadeInPerspective 1s ease-out;
 }
 
 .animate-glow {
-  animation: pinkPulse 3s ease-in-out infinite;
+    animation: neonGlowPulse 3s ease-in-out infinite;
 }
 
 .animate-shimmer {
-  animation: goldTextShimmer 3s linear infinite;
+    animation: goldShimmer 3s linear infinite;
+}
+
+/* Performance Mode Overrides */
+.performance-mode * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
 }
 
 /* Reduced Motion Fallbacks */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    /* Critical animations only */
+    .typing-cursor {
+        animation: none;
+        opacity: 1;
+    }
 }

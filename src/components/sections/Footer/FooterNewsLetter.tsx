@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, CheckCircle } from 'lucide-react';
+import { PrimaryButton } from '../../ui/buttons';
 import './styles/footer-newsletter.css';
 
 const FooterNewsLetter: React.FC = () => {
@@ -25,6 +26,15 @@ const FooterNewsLetter: React.FC = () => {
         setStatus('idle');
       }, 3000);
     }, 1500);
+  };
+
+  const handleButtonClick = () => {
+    if (status !== 'loading' && status !== 'success') {
+      const form = document.querySelector('.newsletter-form') as HTMLFormElement;
+      if (form) {
+        form.requestSubmit();
+      }
+    }
   };
 
   return (
@@ -55,21 +65,18 @@ const FooterNewsLetter: React.FC = () => {
             disabled={status === 'loading' || status === 'success'}
           />
 
-          <button
-            type="submit"
-            className={`newsletter-button ${status}`}
+          <PrimaryButton
+            onClick={handleButtonClick}
+            size="md"
             disabled={status === 'loading' || status === 'success'}
+            loading={status === 'loading'}
+            icon={status === 'success' ? <CheckCircle size={18} /> : undefined}
           >
             {status === 'idle' && 'Subscribe'}
             {status === 'loading' && 'Subscribing...'}
-            {status === 'success' && (
-              <>
-                <CheckCircle size={18} />
-                Subscribed!
-              </>
-            )}
+            {status === 'success' && 'Subscribed!'}
             {status === 'error' && 'Try Again'}
-          </button>
+          </PrimaryButton>
         </div>
 
         {status === 'success' && (

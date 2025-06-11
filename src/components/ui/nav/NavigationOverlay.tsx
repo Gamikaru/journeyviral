@@ -1,7 +1,9 @@
+// Path: components/navigation/NavigationOverlay.tsx
 "use client";
 
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { CTAButton } from "../buttons";
 import "./styles/navigation-overlay.css";
 
 interface NavigationOverlayProps {
@@ -13,54 +15,38 @@ const navigationLinks = [
   {
     href: "#hero",
     label: "HOME",
-    description: "Where magic begins",
+    tagline: "START_THE_CHAOS",
     color: "#ff00ff",
-    glow: "rgba(255, 0, 255, 0.8)",
-    glowLight: "rgba(255, 0, 255, 0.3)",
-    icon: "⌂"
+    ascii: "[ 001 ]"
   },
   {
     href: "#transform",
     label: "LEARN",
-    description: "Transform your content",
+    tagline: "BREAK_THE_RULES",
     color: "#00ffff",
-    glow: "rgba(0, 255, 255, 0.8)",
-    glowLight: "rgba(0, 255, 255, 0.3)",
-    icon: "⚡"
+    ascii: "[ 002 ]"
   },
   {
     href: "#viral-expertise",
     label: "PROOF",
-    description: "See our results",
+    tagline: "SEE_THE_DAMAGE",
     color: "#ffd700",
-    glow: "rgba(255, 215, 0, 0.8)",
-    glowLight: "rgba(255, 215, 0, 0.3)",
-    icon: "⚙"
+    ascii: "[ 003 ]"
   },
   {
     href: "#contact",
     label: "CONTACT",
-    description: "Let's talk viral",
+    tagline: "JOIN_THE_RIOT",
     color: "#ff6ec7",
-    glow: "rgba(255, 110, 199, 0.8)",
-    glowLight: "rgba(255, 110, 199, 0.3)",
-    icon: "✉"
+    ascii: "[ 004 ]"
   },
 ];
 
 export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlayProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [glitchText, setGlitchText] = useState("");
+  const [scanlineY, setScanlineY] = useState(0);
   const overlayRef = useRef<HTMLDivElement>(null);
-
-  // Motion values for advanced interactions
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Transform mouse position for lighting effects
-  const lightingX = useTransform(mouseX, [0, 320], [0, 100]);
-  const lightingY = useTransform(mouseY, [0, 480], [0, 100]);
 
   // Close on ESC key
   useEffect(() => {
@@ -74,31 +60,52 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
     }
   }, [isOpen, onClose]);
 
-  // Track mouse movement for dynamic effects
+  // Glitch text effect
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (overlayRef.current) {
-        const rect = overlayRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    if (hoveredIndex !== null) {
+      const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`";
+      const originalText = navigationLinks[hoveredIndex].label;
+      let iterations = 0;
 
-        setCursorPosition({ x, y });
-        mouseX.set(x);
-        mouseY.set(y);
-      }
-    };
+      const interval = setInterval(() => {
+        setGlitchText(
+          originalText
+            .split("")
+            .map((char, index) => {
+              if (index < iterations) {
+                return originalText[index];
+              }
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("")
+        );
 
-    if (isOpen) {
-      window.addEventListener("mousemove", handleMouseMove);
-      return () => window.removeEventListener("mousemove", handleMouseMove);
+        if (iterations >= originalText.length) {
+          clearInterval(interval);
+        }
+
+        iterations += 1;
+      }, 30);
+
+      return () => clearInterval(interval);
+    } else {
+      setGlitchText("");
     }
-  }, [isOpen, mouseX, mouseY]);
+  }, [hoveredIndex]);
+
+  // Scanline animation
+  useEffect(() => {
+    if (isOpen) {
+      const scanInterval = setInterval(() => {
+        setScanlineY((prev) => (prev + 2) % 100);
+      }, 50);
+      return () => clearInterval(scanInterval);
+    }
+  }, [isOpen]);
 
   // Handle link click
   const handleLinkClick = (href: string) => {
     onClose();
-
-    // Smooth scroll to section
     setTimeout(() => {
       const element = document.querySelector(href);
       if (element) {
@@ -110,155 +117,104 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
     }, 300);
   };
 
-  // Set loaded state for enhanced animations
-  useEffect(() => {
-    if (isOpen) {
-      const timer = setTimeout(() => setIsLoaded(true), 100);
-      return () => clearTimeout(timer);
-    } else {
-      setIsLoaded(false);
-    }
-  }, [isOpen]);
-
   return (
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
-          {/* Enhanced Backdrop with Dynamic Blur */}
+          {/* VHS Static Backdrop */}
           <motion.div
-            className="nav-backdrop-enhanced"
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{
-              opacity: 1,
-              backdropFilter: "blur(12px)"
-            }}
-            exit={{
-              opacity: 0,
-              backdropFilter: "blur(0px)"
-            }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            className="nav-backdrop-vhs"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             onClick={onClose}
           />
 
-          {/* Navigation Dropdown - Ultra Enhanced */}
+          {/* Cyberpunk Navigation Panel */}
           <motion.div
             ref={overlayRef}
-            className={`nav-dropdown-ultra ${isLoaded ? 'loaded' : ''}`}
+            className="nav-panel-cyber"
             initial={{
               opacity: 0,
-              y: -60,
-              scale: 0.85,
-              rotateX: -25,
-              rotateY: 5
+              x: 400,
+              rotateY: -30
             }}
             animate={{
               opacity: 1,
-              y: 0,
-              scale: 1,
-              rotateX: 0,
+              x: 0,
               rotateY: 0
             }}
             exit={{
               opacity: 0,
-              y: -60,
-              scale: 0.85,
-              rotateX: -25,
-              rotateY: 5
+              x: 400,
+              rotateY: -30
             }}
             transition={{
-              duration: 0.6,
-              ease: [0.34, 1.26, 0.64, 1],
-              type: "spring",
-              damping: 20,
-              stiffness: 280
+              duration: 0.5,
+              ease: [0.16, 1, 0.3, 1]
             }}
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
-            style={{
-              "--cursor-x": `${cursorPosition.x}px`,
-              "--cursor-y": `${cursorPosition.y}px`,
-              "--lighting-x": `${lightingX.get()}%`,
-              "--lighting-y": `${lightingY.get()}%`,
-            } as React.CSSProperties}
           >
-            {/* Ultra Enhanced Background Elements */}
-            <div className="nav-bg-ultra">
-              {/* Multi-layer animated borders */}
-              <div className="nav-border-primary" />
-              <div className="nav-border-secondary" />
-              <div className="nav-border-accent" />
-
-              {/* Advanced noise texture */}
-              <div className="nav-noise-advanced" />
-
-              {/* Dynamic cursor lighting */}
-              <motion.div
-                className="nav-cursor-light"
-                style={{
-                  x: lightingX,
-                  y: lightingY,
-                }}
+            {/* VHS Scanlines */}
+            <div className="vhs-scanlines">
+              <div
+                className="scanline-moving"
+                style={{ top: `${scanlineY}%` }}
               />
-
-              {/* Enhanced particle system */}
-              <div className="nav-particles-advanced">
-                {[...Array(20)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className={`particle-advanced particle-type-${(i % 4) + 1}`}
-                    initial={{
-                      opacity: 0,
-                      scale: 0,
-                      x: Math.random() * 320,
-                      y: Math.random() * 480
-                    }}
-                    animate={{
-                      opacity: [0, 0.6, 0],
-                      scale: [0, 1, 0],
-                      x: Math.random() * 320,
-                      y: Math.random() * 480
-                    }}
-                    transition={{
-                      duration: Math.random() * 4 + 6,
-                      repeat: Infinity,
-                      delay: Math.random() * 2
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Ambient glow layers */}
-              <div className="nav-ambient-ultra">
-                <div className="ambient-layer-1" />
-                <div className="ambient-layer-2" />
-                <div className="ambient-layer-3" />
-              </div>
             </div>
 
-            {/* Enhanced Content Container */}
-            <div className="nav-content-ultra">
-              {/* Enhanced Header Section */}
+            {/* Static Noise */}
+            <div className="vhs-noise" />
+
+            {/* RGB Distortion */}
+            <div className="rgb-distortion" />
+
+            {/* Glitch Bands */}
+            <div className="glitch-bands">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="glitch-band"
+                  style={{
+                    top: `${20 * i + Math.random() * 10}%`,
+                    animationDelay: `${i * 0.2}s`
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Content Container */}
+            <div className="nav-content-cyber">
+              {/* Header */}
               <motion.div
-                className="nav-header-ultra"
+                className="nav-header-cyber"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <div className="nav-logo-enhanced">
-                  <motion.div
-                    className="logo-ring"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  />
-                  <span className="logo-text">JV</span>
+                <div className="nav-header-text">
+                  <span className="header-label">SYSTEM://NAVIGATION</span>
+                  <span className="header-status">STATUS: ONLINE</span>
                 </div>
-                <h2 className="nav-title">NAVIGATION</h2>
+                <div className="header-close" onClick={onClose}>
+                  <span className="close-icon">[X]</span>
+                  <span className="close-label">ESC</span>
+                </div>
               </motion.div>
 
-              {/* Ultra Enhanced Navigation Links */}
+              {/* Terminal Lines */}
+              <div className="terminal-lines">
+                <span className="terminal-line">{'>'} ACCESSING_VIRAL_MATRIX...</span>
+                <span className="terminal-line">{'>'} ROUTES_LOADED: {navigationLinks.length}</span>
+                <span className="terminal-line blink">{'>'} SELECT_DESTINATION_</span>
+              </div>
+
+              {/* Navigation Links */}
               <motion.nav
-                className="nav-links-ultra"
+                className="nav-links-cyber"
                 initial="hidden"
                 animate="visible"
                 variants={{
@@ -266,7 +222,7 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
                   visible: {
                     opacity: 1,
                     transition: {
-                      staggerChildren: 0.1,
+                      staggerChildren: 0.08,
                       delayChildren: 0.2,
                     },
                   },
@@ -278,150 +234,119 @@ export default function NavigationOverlay({ isOpen, onClose }: NavigationOverlay
                     variants={{
                       hidden: {
                         opacity: 0,
-                        x: 40,
-                        y: 20,
-                        scale: 0.9
+                        x: 50,
+                        scale: 0.8
                       },
                       visible: {
                         opacity: 1,
                         x: 0,
-                        y: 0,
                         scale: 1,
                         transition: {
-                          duration: 0.7,
-                          ease: [0.34, 1.26, 0.64, 1],
-                          type: "spring",
-                          damping: 20,
-                          stiffness: 300
+                          duration: 0.5,
+                          ease: [0.16, 1, 0.3, 1]
                         }
                       },
                     }}
                   >
                     <motion.button
-                      className={`nav-link-ultra ${hoveredIndex === index ? 'is-hovered' : ''}`}
+                      className={`nav-link-cyber ${hoveredIndex === index ? 'is-active' : ''}`}
                       onClick={() => handleLinkClick(link.href)}
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
-                      whileHover={{
-                        scale: 1.02,
-                        y: -3,
-                        transition: { duration: 0.2 }
-                      }}
+                      whileHover={{ x: 10 }}
                       whileTap={{ scale: 0.98 }}
                       style={{
                         '--link-color': link.color,
-                        '--link-glow': link.glow,
-                        '--link-glow-light': link.glowLight,
                       } as React.CSSProperties}
                     >
-                      {/* Ultra Enhanced Background Layers */}
-                      <div className="link-bg-ultra">
-                        <div className="link-bg-main" />
-                        <div className="link-bg-glow" />
-                        <div className="link-bg-pulse" />
-                        <div className="link-border-glow" />
-                        <div className="link-ripple-effect" />
+                      {/* Glitch Background */}
+                      <div className="link-glitch-bg">
+                        <div className="glitch-slice glitch-slice-1" />
+                        <div className="glitch-slice glitch-slice-2" />
+                        <div className="glitch-slice glitch-slice-3" />
                       </div>
 
-                      {/* Enhanced Content */}
-                      <div className="link-content-ultra">
-                        <div className="link-icon-ultra">
-                          <span className="icon-glyph">{link.icon}</span>
-                          <div className="icon-ring" />
-                        </div>
+                      {/* ASCII Art */}
+                      <div className="link-ascii">{link.ascii}</div>
 
-                        <div className="link-text-ultra">
-                          <span className="link-label">{link.label}</span>
-                          <span className="link-desc">{link.description}</span>
-                        </div>
-
-                        <div className="link-arrow-ultra">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M5 12h14M12 5l7 7-7 7" strokeWidth="2"/>
-                          </svg>
-                        </div>
+                      {/* Main Content */}
+                      <div className="link-main">
+                        <span className="link-label-cyber">
+                          {hoveredIndex === index ? glitchText || link.label : link.label}
+                        </span>
+                        <span className="link-tagline">{link.tagline}</span>
                       </div>
 
-                      {/* Dynamic hover indicator */}
-                      <div className="link-hover-ultra">
-                        <div className="hover-trail" />
-                        <div className="hover-spark" />
+                      {/* Power Level */}
+                      <div className="link-power">
+                        <div className="power-bar">
+                          <div className="power-fill" />
+                        </div>
+                        <span className="power-text">PWR</span>
+                      </div>
+
+                      {/* Hover Effects */}
+                      <div className="link-hover-effects">
+                        <div className="hover-line hover-line-top" />
+                        <div className="hover-line hover-line-bottom" />
+                        <div className="hover-corners">
+                          <span className="corner corner-tl" />
+                          <span className="corner corner-tr" />
+                          <span className="corner corner-bl" />
+                          <span className="corner corner-br" />
+                        </div>
                       </div>
                     </motion.button>
                   </motion.div>
                 ))}
               </motion.nav>
 
-              {/* Ultra Enhanced CTA Section */}
+              {/* CTA Section */}
               <motion.div
-                className="nav-cta-ultra"
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.8,
-                  ease: [0.34, 1.26, 0.64, 1],
-                  type: "spring",
-                  damping: 25,
-                  stiffness: 200
-                }}
+                className="nav-cta-cyber"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <motion.button
-                  className="cta-ultra"
-                  onClick={() => handleLinkClick("#contact")}
-                  whileHover={{
-                    scale: 1.05,
-                    y: -4
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {/* Ultra CTA Background Effects */}
-                  <div className="cta-bg-ultra">
-                    <div className="cta-gradient-primary" />
-                    <div className="cta-gradient-secondary" />
-                    <div className="cta-shimmer-ultra" />
-                    <div className="cta-pulse-ring-1" />
-                    <div className="cta-pulse-ring-2" />
-                    <div className="cta-spark-trail" />
-                  </div>
+                <div className="cta-warning">
+                  <span className="warning-icon">⚠</span>
+                  <span className="warning-text">WARNING: VIRAL CONTENT AHEAD</span>
+                </div>
 
-                  {/* Enhanced CTA Content */}
-                  <div className="cta-content-ultra">
-                    <span className="cta-text-ultra">LET'S GO VIRAL</span>
-                    <div className="cta-icon-ultra">
-                      <motion.svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        animate={{ x: [0, 4, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <path d="M13 7l5 5-5 5M6 12h12" strokeWidth="2"/>
-                      </motion.svg>
-                    </div>
-                  </div>
-                </motion.button>
+                <CTAButton
+                  onClick={() => handleLinkClick("#contact")}
+                  size="lg"
+                  variant="primary"
+                >
+                  INITIATE_VIRAL_SEQUENCE
+                </CTAButton>
               </motion.div>
+
+              {/* Footer Matrix */}
+              <div className="nav-footer-matrix">
+                <div className="matrix-rain">
+                  {[...Array(15)].map((_, i) => (
+                    <span
+                      key={i}
+                      className="matrix-char"
+                      style={{
+                        left: `${i * 6.66}%`,
+                        animationDelay: `${Math.random() * 5}s`,
+                        animationDuration: `${3 + Math.random() * 2}s`
+                      }}
+                    >
+                      {String.fromCharCode(33 + Math.floor(Math.random() * 94))}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            {/* Dynamic Background Reactive Elements */}
-            <div className="nav-reactive-bg">
-              <motion.div
-                className="reactive-orb-1"
-                animate={{
-                  x: cursorPosition.x * 0.1,
-                  y: cursorPosition.y * 0.1,
-                }}
-                transition={{ type: "spring", damping: 30, stiffness: 200 }}
-              />
-              <motion.div
-                className="reactive-orb-2"
-                animate={{
-                  x: cursorPosition.x * -0.05,
-                  y: cursorPosition.y * -0.05,
-                }}
-                transition={{ type: "spring", damping: 40, stiffness: 150 }}
-              />
+            {/* Side Decorations */}
+            <div className="panel-side-deco">
+              <div className="deco-line deco-line-1" />
+              <div className="deco-line deco-line-2" />
+              <div className="deco-text">VIRAL_OVERFLOW_V2.0</div>
             </div>
           </motion.div>
         </>

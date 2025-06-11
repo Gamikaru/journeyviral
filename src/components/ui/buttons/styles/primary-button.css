@@ -1,0 +1,307 @@
+/* Primary Button - Vibrant Gradient Design */
+
+.primary-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 35px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  contain: layout style paint;
+  outline: none;
+  font-family: var(--font-lastica);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Button Sizes */
+.primary-btn-sm {
+  width: 180px;
+  height: 48px;
+  font-size: 0.8rem;
+  padding: 0 1rem;
+}
+
+.primary-btn-md {
+  width: 240px;
+  height: 60px;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+}
+
+.primary-btn-lg {
+  width: 300px;
+  height: 70px;
+  font-size: 1.2rem;
+  padding: 0 2rem;
+}
+
+/* Background Container */
+.primary-btn-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+/* Main Gradient */
+.primary-gradient-main {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff006e 0%, #8e00ff 50%, #00ffff 100%);
+  transition: all 0.4s ease;
+}
+
+/* Secondary Gradient for Hover */
+.primary-gradient-secondary {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ff3d8b 0%, #a020f0 50%, #1ae5ff 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Shimmer Effect */
+.primary-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  border-radius: 35px;
+  transition: left 0.8s ease;
+}
+
+/* Glow Effect */
+.primary-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 110, 0.4) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  filter: blur(20px);
+  transition: opacity 0.4s ease;
+}
+
+/* Content */
+.primary-btn-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+}
+
+.primary-text {
+  color: #000000;
+  text-shadow: 2px 4px 1px #ff006e, 2px 2px 1px #00ffff, 0 0 1px white;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.primary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+/* Loading Spinner */
+.primary-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-top: 2px solid #000000;
+  border-radius: 50%;
+  animation: primarySpin 1s linear infinite;
+}
+
+@keyframes primarySpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hover Effects Container */
+.primary-hover-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 35px;
+  overflow: hidden;
+}
+
+/* Spark Trail */
+.primary-spark-trail {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.3) 45deg,
+    transparent 90deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.3) 315deg,
+    transparent 360deg
+  );
+  border-radius: 35px;
+  opacity: 0;
+  animation: primarySparkRotate 4s linear infinite;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes primarySparkRotate {
+  0% { transform: rotate(0deg); opacity: 0; }
+  25% { opacity: 0.5; }
+  75% { opacity: 0.5; }
+  100% { transform: rotate(360deg); opacity: 0; }
+}
+
+/* Pulse Ring */
+.primary-pulse-ring {
+  position: absolute;
+  inset: -30%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  animation: primaryPulse 3s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes primaryPulse {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 0.4; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Hover States */
+.primary-btn:hover .primary-gradient-secondary {
+  opacity: 1;
+}
+
+.primary-btn:hover .primary-shimmer {
+  left: 100%;
+}
+
+.primary-btn:hover .primary-glow {
+  opacity: 0.6;
+}
+
+.primary-btn:hover .primary-spark-trail {
+  opacity: 1;
+}
+
+.primary-btn:hover .primary-pulse-ring {
+  opacity: 1;
+}
+
+.primary-btn:hover .primary-text {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+.primary-btn:hover .primary-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+/* Focus State */
+.primary-btn:focus-visible {
+  outline: 2px solid #00ffff;
+  outline-offset: 4px;
+}
+
+.primary-btn:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Disabled State */
+.primary-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.primary-btn.disabled .primary-gradient-main {
+  background: linear-gradient(135deg, #666666 0%, #444444 50%, #666666 100%);
+}
+
+.primary-btn.disabled .primary-text {
+  color: #999999;
+  text-shadow: none;
+}
+
+.primary-btn.disabled .primary-icon {
+  color: #999999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .primary-btn-sm {
+    width: 160px;
+    height: 44px;
+    font-size: 0.75rem;
+  }
+
+  .primary-btn-md {
+    width: 200px;
+    height: 56px;
+    font-size: 0.9rem;
+  }
+
+  .primary-btn-lg {
+    width: 240px;
+    height: 64px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .primary-btn-sm {
+    width: 140px;
+    height: 40px;
+    font-size: 0.7rem;
+  }
+
+  .primary-btn-md {
+    width: 180px;
+    height: 52px;
+    font-size: 0.85rem;
+  }
+
+  .primary-btn-lg {
+    width: 200px;
+    height: 60px;
+    font-size: 1rem;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .primary-btn {
+    transition: transform 0.2s ease;
+  }
+
+  .primary-shimmer,
+  .primary-spark-trail,
+  .primary-pulse-ring {
+    animation: none !important;
+  }
+}

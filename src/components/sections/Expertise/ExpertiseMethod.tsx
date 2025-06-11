@@ -4,6 +4,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { memo, useState } from "react";
 import { Brain, Cpu, TrendingUp, Sparkles } from "lucide-react";
+import { PrimaryButton } from "../../ui/buttons";
 import "./styles/expertise-method.css";
 
 interface ExpertiseMethodProps {
@@ -100,27 +101,20 @@ const ExpertiseMethod = memo(function ExpertiseMethod({
           </motion.p>
 
           {/* Centered CTA Button */}
-          <motion.button
-            className="method-cta"
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            whileHover={shouldAnimate ? { scale: 1.03, y: -2 } : {}}
-            whileTap={{ scale: 0.98 }}
-            aria-label="Discover our secret sauce methodology"
+            style={{ display: 'flex', justifyContent: 'center' }}
           >
-            <span className="cta-text">The Secret Sauce?</span>
-            <motion.span
-              className="cta-sparkle"
-              animate={isHovered && shouldAnimate ? {
-                rotate: [0, 180, 360],
-                scale: [1, 1.2, 1]
-              } : {}}
-              transition={{ duration: 0.8, repeat: Infinity }}
+            <PrimaryButton
+              size="md"
+              icon={<Sparkles size={18} />}
+              onClick={() => console.log("Secret sauce clicked!")}
             >
-              <Sparkles size={18} />
-            </motion.span>
-          </motion.button>
+              The Secret Sauce?
+            </PrimaryButton>
+          </motion.div>
         </div>
       </div>
     </motion.article>

@@ -6,15 +6,17 @@ import { SimpleTransitions } from "./SimpleTransitions";
 import { BackgroundPerformance } from "./performance";
 import "./unified-background.css";
 
-// Lightweight media query hook
+// SSR-safe media query hook
 const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    // Check if we're in a browser environment
-    if (typeof window === 'undefined') {
-      return;
-    }
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted) return;
 
     const media = window.matchMedia(query);
     setMatches(media.matches);
@@ -22,9 +24,9 @@ const useMediaQuery = (query: string) => {
     const listener = (event: MediaQueryListEvent) => setMatches(event.matches);
     media.addEventListener("change", listener);
     return () => media.removeEventListener("change", listener);
-  }, [query]);
+  }, [query, hasMounted]);
 
-  return matches;
+  return hasMounted ? matches : false;
 };
 
 interface UnifiedBackgroundProps {
@@ -39,16 +41,33 @@ export default function UnifiedBackground({
   debug = false,
 }: UnifiedBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [hasMounted, setHasMounted] = useState(false);
+
   const isMobile = useMediaQuery("(max-width: 768px)");
   const prefersReducedMotion = useMediaQuery(
     "(prefers-reduced-motion: reduce)"
   );
 
-  // Get optimal performance settings
-  const performanceSettings = useMemo(
-    () => BackgroundPerformance.getOptimalSettings(),
-    []
-  );
+  // Set mounted state after hydration
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  // Get optimal performance settings only after mounting
+  const performanceSettings = useMemo(() => {
+    if (!hasMounted) {
+      // Return safe defaults for SSR
+      return {
+        enableOrbs: false,
+        enableWaves: false,
+        enableRays: false,
+        enableTransitions: false,
+        orbCount: 0,
+        animationDuration: 'normal'
+      };
+    }
+    return BackgroundPerformance.getOptimalSettings();
+  }, [hasMounted]);
 
   // Track scroll progress with optimized settings
   const { scrollYProgress } = useScroll({
@@ -73,16 +92,16 @@ export default function UnifiedBackground({
     ]
   );
 
-  // Conditional orb animations based on performance
+  // Conditional orb animations based on performance (only after mounting)
   const shouldShowOrbs =
-    performanceSettings.enableOrbs && !prefersReducedMotion && !reducedMotion;
+    hasMounted && performanceSettings.enableOrbs && !prefersReducedMotion && !reducedMotion;
   const shouldShowWaves =
-    performanceSettings.enableWaves &&
+    hasMounted && performanceSettings.enableWaves &&
     !isMobile &&
     !prefersReducedMotion &&
     !reducedMotion;
   const shouldShowRays =
-    performanceSettings.enableRays &&
+    hasMounted && performanceSettings.enableRays &&
     !isMobile &&
     !prefersReducedMotion &&
     !reducedMotion;
@@ -112,8 +131,8 @@ export default function UnifiedBackground({
     [0.8, 1.2, 0.9, 1.3, 1.0, 1.1, 0.7] // More dramatic scaling
   );
 
-  // Second orb (only if not mobile and performance allows)
-  const showSecondOrb = performanceSettings.orbCount > 1 && shouldShowOrbs;
+  // Second orb (only if not mobile and performance allows and mounted)
+  const showSecondOrb = hasMounted && performanceSettings.orbCount > 1 && shouldShowOrbs;
   const orb2X = useTransform(
     scrollYProgress,
     [0, 0.4, 1],
@@ -162,6 +181,13 @@ export default function UnifiedBackground({
     scrollYProgress,
     [0.55, 0.7, 0.9, 1],
     [0, 0.15, 0.15, 0]
+  );
+
+  // Mobile gradient overlay opacity (always defined to avoid conditional hooks)
+  const mobileGradientOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.08, 0.2, 0.08]
   );
 
   // Start performance monitoring in development
@@ -238,15 +264,11 @@ export default function UnifiedBackground({
         )}
 
         {/* Mobile-only: Simple gradient overlay */}
-        {isMobile && !prefersReducedMotion && (
+        {hasMounted && isMobile && !prefersReducedMotion && (
           <motion.div
             className="mobile-gradient-overlay"
             style={{
-              opacity: useTransform(
-                scrollYProgress,
-                [0, 0.5, 1],
-                [0.08, 0.2, 0.08]
-              ),
+              opacity: mobileGradientOpacity,
             }}
           />
         )}

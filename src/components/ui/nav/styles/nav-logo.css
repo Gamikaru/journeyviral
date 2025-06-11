@@ -1,279 +1,341 @@
-/* Nav Logo - Clean Simple Design */
+/* Path: components/navigation/styles/nav-logo.css
+   Nav Logo - Enhanced Cyberpunk Design */
 
-.nav-logo-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem;
-  min-width: fit-content;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border-radius: 8px;
+.nav-logo-cyberpunk {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    overflow: visible;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateZ(0);
+    isolation: isolate;
 }
 
-.nav-logo-link:hover {
-  transform: translateY(-1px);
+/* Dynamic Background Glow */
+.logo-dynamic-bg {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at center,
+            rgba(255, 0, 255, 0) 0%,
+            rgba(255, 0, 255, 0.1) 40%,
+            rgba(0, 255, 255, 0.05) 70%,
+            transparent 100%);
+    filter: blur(20px);
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
 }
 
-/* Logo Icon */
-.nav-logo-icon {
-  position: relative;
-  flex-shrink: 0;
-  width: 2.75rem;
-  height: 2.75rem;
-  transition: all 0.3s ease;
+.nav-logo-cyberpunk:hover .logo-dynamic-bg {
+    opacity: 1;
+    transform: scale(1.2);
 }
 
-.nav-logo-link:hover .nav-logo-icon {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+/* Text Wrapper */
+.nav-logo-text-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    z-index: 3;
 }
 
-.nav-logo-icon img {
-  width: 100%;
-  height: 100%;
-  filter: brightness(0) saturate(100%) invert(100%);
-  transition: filter 0.3s ease;
+/* Split Text Styling */
+.nav-logo-text-split {
+    position: relative;
+    font-family: var(--font-lastica);
+    font-weight: 900;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
 }
 
-.nav-logo-link:hover .nav-logo-icon img {
-  filter: brightness(0) saturate(100%) invert(65%) sepia(95%) saturate(3207%) hue-rotate(300deg) brightness(101%) contrast(101%);
+/* JOURNEY styling */
+.text-journey {
+    display: inline-flex;
+    align-items: baseline;
 }
 
-/* Logo Text */
-.nav-logo-text {
-  font-family: var(--font-lastica);
-  font-size: 1.3rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  white-space: nowrap;
-  transition: all 0.3s ease;
+.letter-j {
+    font-size: 1.75rem;
+    color: #ff00ff;
+    text-shadow:
+        0 0 20px rgba(255, 0, 255, 0.8),
+        0 0 40px rgba(255, 0, 255, 0.4),
+        2px 2px 0 rgba(255, 0, 255, 0.6);
+    margin-right: -2px;
+    transition: all 0.3s ease;
 }
 
-.nav-logo-link:hover .nav-logo-text {
-  color: #ff00ff;
-  text-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
-  letter-spacing: 0.1em;
+.text-ourney {
+    font-size: 1.35rem;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        2px 2px 0 rgba(255, 0, 255, 0.3);
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
 }
 
-/* Tablet adjustments */
+/* VIRAL styling */
+.text-viral {
+    display: inline-flex;
+    align-items: baseline;
+    font-style: italic;
+    transform: skewX(-10deg);
+    margin-left: -2px;
+}
+
+.letter-v {
+    font-size: 1.75rem;
+    color: #00ffff;
+    text-shadow:
+        0 0 20px rgba(0, 255, 255, 0.8),
+        0 0 40px rgba(0, 255, 255, 0.4),
+        2px 2px 0 rgba(0, 255, 255, 0.6);
+    margin-right: -3px;
+    transition: all 0.3s ease;
+}
+
+.text-iral {
+    font-size: 1.35rem;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        2px 2px 0 rgba(0, 255, 255, 0.3);
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+/* Hover states for text */
+.nav-logo-text-split.text-hovered .letter-j {
+    color: #ff00ff;
+    text-shadow:
+        0 0 30px rgba(255, 0, 255, 1),
+        0 0 60px rgba(255, 0, 255, 0.6),
+        3px 3px 0 rgba(255, 0, 255, 0.8),
+        -1px -1px 0 rgba(0, 255, 255, 0.3);
+    transform: scale(1.1) translateY(-2px);
+}
+
+.nav-logo-text-split.text-hovered .letter-v {
+    color: #00ffff;
+    text-shadow:
+        0 0 30px rgba(0, 255, 255, 1),
+        0 0 60px rgba(0, 255, 255, 0.6),
+        3px 3px 0 rgba(0, 255, 255, 0.8),
+        -1px -1px 0 rgba(255, 0, 255, 0.3);
+    transform: scale(1.1) translateY(-2px);
+}
+
+.nav-logo-text-split.text-hovered .text-ourney,
+.nav-logo-text-split.text-hovered .text-iral {
+    color: #ffffff;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.8),
+        3px 3px 0 rgba(255, 0, 255, 0.4);
+}
+
+/* Glitch Layers */
+.text-glitch-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: baseline;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.text-glitch-layer.layer-1 {
+    transform: translate(-2px, -2px);
+    filter: hue-rotate(45deg);
+    mix-blend-mode: screen;
+}
+
+.text-glitch-layer.layer-2 {
+    transform: translate(2px, 2px);
+    filter: hue-rotate(-45deg);
+    mix-blend-mode: screen;
+}
+
+/* Glitch Animation */
+.nav-logo-text-split.text-glitch .text-glitch-layer {
+    animation: textLayerGlitch 0.2s steps(2) forwards;
+}
+
+@keyframes textLayerGlitch {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    33% {
+        opacity: 0.8;
+    }
+
+    66% {
+        opacity: 0.6;
+    }
+}
+
+/* Enhanced Subtitle */
+.nav-logo-subtitle {
+    font-family: var(--font-interphases);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.nav-logo-cyberpunk:hover .nav-logo-subtitle {
+    opacity: 1;
+    text-shadow:
+        0 0 15px rgba(255, 215, 0, 1),
+        0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Particles */
+.logo-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.particle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .nav-logo-link {
-    gap: 0.75rem;
-    padding: 0.25rem;
-    /* Better touch target */
-    min-height: 44px;
-    align-items: center;
-  }
+    .nav-logo-cyberpunk {
+        padding: 0.375rem 0.75rem;
+    }
 
-  .nav-logo-icon {
-    width: 2.25rem;
-    height: 2.25rem;
-    flex-shrink: 0;
-  }
+    .letter-j,
+    .letter-v {
+        font-size: 1.5rem;
+    }
 
-  .nav-logo-text {
-    font-size: 1.15rem;
-    letter-spacing: 0.06em;
-    /* Prevent text from being cut off */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0;
-  }
+    .text-ourney,
+    .text-iral {
+        font-size: 1.15rem;
+    }
 
-  .nav-logo-link:hover .nav-logo-text {
-    letter-spacing: 0.08em;
-  }
+    .nav-logo-subtitle {
+        font-size: 0.5625rem;
+    }
 }
 
-/* Mobile optimizations */
 @media (max-width: 480px) {
-  .nav-logo-link {
-    gap: 0.5rem;
-    padding: 0.125rem;
-    min-height: 40px;
-    /* Ensure full touch area */
-    align-items: center;
-    justify-content: flex-start;
-  }
+    .nav-logo-cyberpunk {
+        padding: 0.25rem 0.625rem;
+    }
 
-  .nav-logo-icon {
-    width: 2rem;
-    height: 2rem;
-    flex-shrink: 0;
-  }
+    .letter-j,
+    .letter-v {
+        font-size: 1.35rem;
+    }
 
-  .nav-logo-text {
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    font-weight: 800;
-    /* Better mobile readability */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: calc(100vw - 120px);
-  }
+    .text-ourney,
+    .text-iral {
+        font-size: 1rem;
+    }
 
-  .nav-logo-link:hover .nav-logo-text {
-    letter-spacing: 0.06em;
-  }
+    .nav-logo-subtitle {
+        font-size: 0.5rem;
+    }
 
-  .nav-logo-link:hover .nav-logo-icon {
-    transform: scale(1.02);
-  }
+    .logo-particles {
+        display: none;
+    }
 }
 
-/* Ultra small screens */
 @media (max-width: 360px) {
-  .nav-logo-link {
-    gap: 0.375rem;
-    padding: 0.0625rem;
-    min-height: 36px;
-  }
+    .letter-j,
+    .letter-v {
+        font-size: 1.2rem;
+    }
 
-  .nav-logo-icon {
-    width: 1.75rem;
-    height: 1.75rem;
-  }
+    .text-ourney,
+    .text-iral {
+        font-size: 0.9rem;
+    }
 
-  .nav-logo-text {
-    font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    font-weight: 800;
-    max-width: calc(100vw - 100px);
-  }
-
-  .nav-logo-link:hover .nav-logo-text {
-    letter-spacing: 0.05em;
-  }
-}
-
-/* Very small screens */
-@media (max-width: 320px) {
-  .nav-logo-link {
-    gap: 0.25rem;
-    min-height: 32px;
-  }
-
-  .nav-logo-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .nav-logo-text {
-    font-size: 0.85rem;
-    letter-spacing: 0.03em;
-    max-width: calc(100vw - 80px);
-  }
-
-  .nav-logo-link:hover .nav-logo-text {
-    letter-spacing: 0.04em;
-  }
+    .nav-logo-subtitle {
+        display: none;
+    }
 }
 
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
-  .nav-logo-link {
-    /* Remove hover effects on touch devices */
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    min-height: 44px;
-  }
+    .nav-logo-cyberpunk:active {
+        transform: scale(0.98);
+    }
 
-  .nav-logo-link:hover {
-    transform: none;
-  }
-
-  .nav-logo-link:hover .nav-logo-icon {
-    transform: none;
-    filter: none;
-  }
-
-  .nav-logo-link:hover .nav-logo-text {
-    color: #ffffff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    letter-spacing: 0.08em;
-  }
-
-  /* Active state for touch feedback */
-  .nav-logo-link:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-
-  .nav-logo-link:active .nav-logo-icon {
-    transform: scale(0.95);
-  }
-}
-
-/* Landscape mobile optimizations */
-@media (max-width: 768px) and (orientation: landscape) {
-  .nav-logo-link {
-    gap: 0.5rem;
-  }
-
-  .nav-logo-icon {
-    width: 1.875rem;
-    height: 1.875rem;
-  }
-
-  .nav-logo-text {
-    font-size: 1rem;
-  }
+    .logo-particles {
+        display: none;
+    }
 }
 
 /* Performance mode */
 @media (prefers-reduced-motion: reduce) {
-  .nav-logo-link,
-  .nav-logo-icon,
-  .nav-logo-text,
-  .nav-logo-icon img {
-    transition: none !important;
-  }
+    * {
+        animation: none !important;
+        transition: transform 0.1s ease !important;
+    }
 }
 
 /* High contrast mode */
 @media (prefers-contrast: high) {
-  .nav-logo-text {
-    color: #ffffff;
-    text-shadow: none;
-  }
+    .letter-j {
+        color: #ff00ff;
+        text-shadow: none;
+    }
 
-  .nav-logo-link:hover .nav-logo-text {
-    color: #ffffff;
-    text-shadow: none;
-  }
+    .letter-v {
+        color: #00ffff;
+        text-shadow: none;
+    }
 
-  .nav-logo-icon {
-    filter: none;
-  }
+    .text-ourney,
+    .text-iral {
+        color: #ffffff;
+        text-shadow: none;
+    }
 
-  .nav-logo-link:hover .nav-logo-icon {
-    filter: none;
-  }
-
-  .nav-logo-icon img {
-    filter: brightness(0) invert(1);
-  }
-
-  .nav-logo-link:hover .nav-logo-icon img {
-    filter: brightness(0) invert(1);
-  }
+    .nav-logo-subtitle {
+        color: #ffffff;
+        text-shadow: none;
+    }
 }
 
-/* Focus state for accessibility */
-.nav-logo-link:focus-visible {
-  outline: 2px solid #00ffff;
-  outline-offset: 4px;
-  border-radius: 8px;
+/* Focus state */
+.nav-logo-cyberpunk:focus-visible {
+    outline: 3px solid #ff00ff;
+    outline-offset: 6px;
+    border-radius: 16px;
 }
 
-.nav-logo-link:focus:not(:focus-visible) {
-  outline: none;
+.nav-logo-cyberpunk:focus:not(:focus-visible) {
+    outline: none;
 }
