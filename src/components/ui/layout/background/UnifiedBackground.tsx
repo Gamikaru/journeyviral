@@ -11,6 +11,11 @@ const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
+    // Check if we're in a browser environment
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     const media = window.matchMedia(query);
     setMatches(media.matches);
 

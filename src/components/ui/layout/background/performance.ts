@@ -32,6 +32,11 @@ export const BackgroundPerformance = {
 
   // Detect if device is low-powered
   isLowPowerDevice: () => {
+    // Check if we're in a browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return false; // Default to high performance on server
+    }
+
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 
@@ -49,6 +54,19 @@ export const BackgroundPerformance = {
 
   // Get optimal performance settings
   getOptimalSettings: () => {
+    // Check if we're in a browser environment
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+      // Return safe defaults for server-side rendering
+      return {
+        enableOrbs: true,
+        enableWaves: true,
+        enableRays: true,
+        enableTransitions: true,
+        orbCount: 2,
+        animationDuration: 'normal'
+      };
+    }
+
     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const isLowPower = BackgroundPerformance.isLowPowerDevice();
     const slowConnection = 'connection' in navigator && (navigator as any).connection?.effectiveType === 'slow-2g';

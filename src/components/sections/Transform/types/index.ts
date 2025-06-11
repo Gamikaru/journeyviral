@@ -1,30 +1,3 @@
-import { LucideIcon } from 'lucide-react';
-
-export interface AnimationProps {
-  isVisible: boolean;
-  shouldAnimate: boolean;
-  isLowPerf?: boolean;
-}
-
-export interface Message {
-  id: number;
-  text: string;
-  type: 'setup' | 'problem' | 'bridge' | 'final';
-  delay: number;
-}
-
-export interface ChatBubbleProps extends AnimationProps {
-  text: string;
-  type: 'setup' | 'problem' | 'bridge';
-  onAnimationComplete?: () => void;
-}
-
-export interface FloatingTextProps extends AnimationProps {
-  text: string;
-}
-
-export interface TypingIndicatorProps extends AnimationProps {}
-
 export interface TransformSectionProps {
   className?: string;
   'aria-label'?: string;

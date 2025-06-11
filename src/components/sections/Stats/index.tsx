@@ -12,6 +12,11 @@ const usePerformanceMode = () => {
 
   useEffect(() => {
     const checkPerformance = () => {
+      // Check if we're in a browser environment
+      if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+        return; // Skip performance check on server
+      }
+
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const memory = (navigator as any).deviceMemory;
       const connection = (navigator as any).connection;
