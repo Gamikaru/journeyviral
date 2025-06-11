@@ -1,44 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Inter, JetBrains_Mono, Monoton } from "next/font/google";
 import Script from "next/script";
 import { Navbar } from "@/components/ui/nav";
-import UnifiedBackground from "@/components/ui/layout/UnifiedBackground";
+import UnifiedBackground from "@/components/ui/layout/background/UnifiedBackground";
 import "./globals.css";
-
-// Font configurations with optimization
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-lastica",
-  display: "swap",
-  preload: true,
-  fallback: ["Arial Black", "sans-serif"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-interphases",
-  display: "swap",
-  preload: true,
-  fallback: ["Helvetica", "Arial", "sans-serif"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-anonymous",
-  display: "swap",
-  preload: true,
-  fallback: ["Courier New", "monospace"],
-});
-
-const monoton = Monoton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-monoton",
-  display: "swap",
-  preload: true,
-  fallback: ["Impact", "sans-serif"],
-});
 
 // Enhanced metadata
 export const metadata: Metadata = {
@@ -180,7 +144,6 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${inter.variable} ${jetbrainsMono.variable} ${monoton.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -191,6 +154,7 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        <link rel="preconnect" href="https://api.fontshare.com" />
 
         {/* Favicon variations */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -216,26 +180,28 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="bg-transparent text-white antialiased overflow-x-hidden"
+        className="bg-transparent text-white antialiased overflow-x-hidden font-pairing-anton"
         suppressHydrationWarning
       >
-        {/* Unified background - moved to lower z-index */}
-        <div className="fixed inset-0 z-0">
+        {/* Unified background - ensure it's behind everything */}
+        <div className="fixed inset-0 z-[-1]">
           <UnifiedBackground />
         </div>
 
-        {/* Noise texture overlay */}
+        {/* Noise texture overlay - above background but below content */}
         <div
-          className="fixed inset-0 opacity-[0.015] pointer-events-none z-[1]"
+          className="fixed inset-0 opacity-[0.02] pointer-events-none z-[1]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E")`,
           }}
         />
 
-        {/* Navigation */}
-        <Navbar />
+        {/* Navigation - ensure it's above background */}
+        <div className="relative z-20">
+          <Navbar />
+        </div>
 
-        {/* Main content */}
+        {/* Main content - ensure it's above background */}
         <main className="relative z-10">{children}</main>
 
         {/* Global scripts */}

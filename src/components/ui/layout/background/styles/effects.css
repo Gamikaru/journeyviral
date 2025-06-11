@@ -1,0 +1,126 @@
+/* Visual Effects - Waves, rays, and other background patterns */
+
+/* More visible waves with section-specific colors */
+.subtle-waves {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 48%,
+      hsla(var(--bg-accent-h) var(--bg-accent-s) var(--bg-accent-l) / calc(var(--bg-overlay-opacity) * 1.2)) 50%,
+      transparent 52%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 48%,
+      hsla(calc(var(--bg-accent-h) + 60) var(--bg-accent-s) calc(var(--bg-accent-l) + 10%) / calc(var(--bg-overlay-opacity) * 0.8)) 50%,
+      transparent 52%
+    ),
+    linear-gradient(
+      135deg,
+      transparent 48%,
+      hsla(calc(var(--bg-accent-h) - 40) 80% calc(var(--bg-accent-l) - 10%) / calc(var(--bg-overlay-opacity) * 0.6)) 50%,
+      transparent 52%
+    );
+  background-size: 100px 100px, 140px 140px, 80px 80px;
+  animation: enhanced-wave 20s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.25; /* Reduced from 0.8 */
+}
+
+/* Gentle rays for later sections */
+.gentle-rays {
+  position: absolute;
+  inset: 0;
+  background:
+    conic-gradient(from 0deg at 25% 75%,
+      transparent 0deg,
+      hsla(var(--bg-accent-h) var(--bg-accent-s) calc(var(--bg-accent-l) + 20%) / calc(var(--bg-overlay-opacity) * 0.8)) 20deg,
+      hsla(var(--bg-accent-h) var(--bg-accent-s) calc(var(--bg-accent-l) + 10%) / calc(var(--bg-overlay-opacity) * 1.2)) 30deg,
+      transparent 60deg),
+    conic-gradient(from 120deg at 75% 25%,
+      transparent 0deg,
+      hsla(calc(var(--bg-accent-h) + 80) var(--bg-accent-s) var(--bg-accent-l) / calc(var(--bg-overlay-opacity) * 1.0)) 25deg,
+      hsla(calc(var(--bg-accent-h) + 40) 90% calc(var(--bg-accent-l) - 5%) / calc(var(--bg-overlay-opacity) * 0.6)) 45deg,
+      transparent 90deg);
+  animation: enhanced-ray-rotate 35s linear infinite;
+  pointer-events: none;
+  opacity: 0.20; /* Reduced from 0.7 */
+}
+
+/* === SECTION-SPECIFIC OVERLAYS ====================== */
+.pattern-grid {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px 99px,
+    hsla(var(--bg-accent-h) 80% 60% / 0.04) 100px 100px
+  );
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.pattern-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    hsla(var(--bg-accent-h) 90% 62% / 0.05) 0px 2px,
+    transparent 3px 100%
+  );
+  background-size: 70px 70px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.pattern-aurora {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    hsla(calc(var(--bg-accent-h) - 40) 100% 55% / 0.06) 0%,
+    hsla(calc(var(--bg-accent-h) + 45) 100% 55% / 0.04) 60%,
+    transparent 100%
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+/* Pattern binding */
+[data-theme="hero"] .pattern-aurora { opacity: 1; }
+[data-theme="stats"] .pattern-grid { opacity: 1; }
+[data-theme="expertise"] .pattern-dots { opacity: 1; }
+[data-theme="rule1"] .pattern-aurora { opacity: 1; }
+[data-theme="rule2"] .pattern-grid { opacity: 1; }
+[data-theme="rule3"] .pattern-dots { opacity: 1; }
+
+/* Animation keyframes with variable-driven transforms */
+@keyframes enhanced-wave {
+  0%, 100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+    transform: rotate(calc(-1deg + var(--twist))) scale(1);
+  }
+  33% {
+    background-position: 30% 30%, 70% 70%, 20% 80%;
+    transform: rotate(calc(1deg + var(--twist))) scale(1.05);
+  }
+  66% {
+    background-position: 70% 70%, 30% 30%, 80% 20%;
+    transform: rotate(calc(-1deg + var(--twist))) scale(0.95);
+  }
+}
+
+@keyframes enhanced-ray-rotate {
+  from {
+    transform: rotate(calc(0deg + var(--twist)));
+  }
+  to {
+    transform: rotate(calc(360deg + var(--twist)));
+  }
+}

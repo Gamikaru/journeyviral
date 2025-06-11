@@ -1,0 +1,142 @@
+/* Enhanced floating particles with performance optimizations */
+.particles-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  contain: layout;
+  overflow: hidden;
+}
+
+/* Floating particles for extra depth */
+.unified-floating-particles {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.3) 0%, transparent 2%),
+    radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.25) 0%, transparent 2%),
+    radial-gradient(circle at 30% 60%, rgba(0, 255, 136, 0.2) 0%, transparent 1.5%),
+    radial-gradient(circle at 70% 30%, rgba(138, 43, 226, 0.2) 0%, transparent 2%),
+    radial-gradient(circle at 50% 90%, rgba(0, 255, 255, 0.15) 0%, transparent 1%),
+    radial-gradient(circle at 20% 40%, rgba(255, 0, 255, 0.15) 0%, transparent 1.5%),
+    radial-gradient(circle at 80% 60%, rgba(0, 255, 136, 0.1) 0%, transparent 1%),
+    radial-gradient(circle at 60% 10%, rgba(255, 64, 129, 0.12) 0%, transparent 1.5%);
+  filter: blur(0.5px);
+  animation: particleFloat 30s ease-in-out infinite;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+/* Density variations */
+.unified-floating-particles.density-low {
+  opacity: 0.6;
+  animation-duration: 45s;
+  background-image:
+    radial-gradient(circle at 25% 35%, rgba(0, 255, 255, 0.2) 0%, transparent 2%),
+    radial-gradient(circle at 75% 65%, rgba(255, 0, 255, 0.15) 0%, transparent 2%),
+    radial-gradient(circle at 50% 20%, rgba(138, 43, 226, 0.15) 0%, transparent 1.5%),
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.1) 0%, transparent 1%);
+}
+
+.unified-floating-particles.density-medium {
+  opacity: 1;
+  animation-duration: 30s;
+}
+
+.unified-floating-particles.density-high {
+  opacity: 1.2;
+  animation-duration: 20s;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.4) 0%, transparent 2%),
+    radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.35) 0%, transparent 2%),
+    radial-gradient(circle at 30% 60%, rgba(0, 255, 136, 0.3) 0%, transparent 1.5%),
+    radial-gradient(circle at 70% 30%, rgba(138, 43, 226, 0.3) 0%, transparent 2%),
+    radial-gradient(circle at 50% 90%, rgba(0, 255, 255, 0.25) 0%, transparent 1%),
+    radial-gradient(circle at 20% 40%, rgba(255, 0, 255, 0.25) 0%, transparent 1.5%),
+    radial-gradient(circle at 80% 60%, rgba(0, 255, 136, 0.2) 0%, transparent 1%),
+    radial-gradient(circle at 60% 10%, rgba(255, 64, 129, 0.22) 0%, transparent 1.5%),
+    radial-gradient(circle at 15% 70%, rgba(147, 112, 219, 0.15) 0%, transparent 1%),
+    radial-gradient(circle at 85% 25%, rgba(64, 224, 255, 0.18) 0%, transparent 1.2%);
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    background-position: 0% 0%, 100% 100%, 30% 60%, 70% 30%, 50% 90%, 20% 40%, 80% 60%, 60% 10%;
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  25% {
+    background-position: 10% 30%, 90% 70%, 40% 50%, 60% 40%, 60% 80%, 30% 50%, 70% 50%, 50% 20%;
+    opacity: 0.8;
+    transform: translateY(-5px);
+  }
+  50% {
+    background-position: 20% 60%, 80% 40%, 50% 40%, 50% 50%, 70% 70%, 40% 60%, 60% 40%, 40% 30%;
+    opacity: 0.9;
+    transform: translateY(3px);
+  }
+  75% {
+    background-position: 30% 90%, 70% 10%, 60% 30%, 40% 60%, 80% 60%, 50% 70%, 50% 30%, 30% 40%;
+    opacity: 0.7;
+    transform: translateY(-2px);
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 1200px) {
+  .unified-floating-particles {
+    filter: blur(0.3px);
+    animation-duration: 40s;
+  }
+
+  .unified-floating-particles.density-high {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .unified-floating-particles {
+    opacity: 0.6;
+    filter: blur(0.2px);
+    animation-duration: 50s;
+  }
+
+  .unified-floating-particles.density-low {
+    opacity: 0.4;
+  }
+
+  .unified-floating-particles.density-high {
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 480px) {
+  .unified-floating-particles {
+    opacity: 0.3;
+    animation: none;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .unified-floating-particles {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .unified-floating-particles {
+    animation-play-state: paused;
+  }
+}
+
+/* Battery optimization */
+@media (max-device-width: 768px) and (max-device-height: 1024px) {
+  .unified-floating-particles {
+    will-change: auto;
+    transform: none;
+  }
+}

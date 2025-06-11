@@ -1,0 +1,109 @@
+/* Responsive Styles - Media queries and device-specific optimizations */
+
+/* Enhanced mobile optimizations */
+@media (max-width: 768px) {
+  .gentle-orb {
+    width: 250px;
+    height: 250px;
+    filter: blur(60px);
+  }
+
+  .orb-cyan,
+  .orb-pink {
+    opacity: 0.9;
+  }
+
+  .simple-vignette {
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.25) 80%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+    opacity: 0.9;
+  }
+
+  .subtle-waves,
+  .gentle-rays {
+    display: none; /* Disable complex effects on mobile */
+  }
+
+  .unified-orb {
+    filter: blur(60px);
+  }
+
+  .unified-orb-cyan,
+  .unified-orb-magenta {
+    width: 80vw;
+    height: 80vw;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .unified-orb-green,
+  .unified-orb-purple {
+    width: 70vw;
+    height: 70vw;
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+
+/* Small mobile optimization */
+@media (max-width: 480px) {
+  .gentle-orb {
+    width: 150px;
+    height: 150px;
+    filter: blur(30px);
+  }
+
+  .simplified-background {
+    transition: background-color 1s ease-out; /* Slower transition for smoother feel */
+  }
+
+  .unified-orb {
+    filter: blur(40px);
+  }
+
+  .unified-scroll-container {
+    height: 300vh;
+  }
+}
+
+/* Large desktop optimizations */
+@media (max-width: 1200px) {
+  .unified-orb-cyan {
+    width: 55vw;
+    height: 55vw;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  .unified-orb-magenta {
+    width: 65vw;
+    height: 65vw;
+    max-width: 700px;
+    max-height: 700px;
+  }
+}
+
+/* Performance optimizations for mobile portrait */
+@media (max-width: 768px) and (orientation: portrait) {
+  .unified-orb {
+    animation: none;
+    will-change: opacity;
+  }
+}
+
+/* Battery saving for mobile devices */
+@media (max-device-width: 768px) and (max-device-height: 1024px) {
+  .gentle-orb {
+    will-change: auto; /* Remove will-change on mobile for battery */
+  }
+
+  .subtle-waves,
+  .gentle-rays {
+    animation-duration: 60s; /* Slow down animations */
+  }
+}

@@ -2,7 +2,7 @@
 
 import { motion, useTransform, MotionValue } from "framer-motion";
 import { ReactNode, useMemo } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../../lib/utils";
 
 interface BackgroundColorManagerProps {
   scrollYProgress: MotionValue<number>;

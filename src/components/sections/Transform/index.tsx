@@ -75,6 +75,7 @@ export default function TransformSection({
     <section
       ref={sectionRef}
       id="transform"
+      data-theme="pain"
       className={sectionClasses}
       aria-label={ariaLabel}
     >

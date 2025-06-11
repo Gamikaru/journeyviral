@@ -74,6 +74,7 @@ export default function StatsSection() {
     <section
       ref={sectionRef}
       id="stats"
+      data-theme="stats"
       className={`stats-section stats-section-unified ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
       aria-label="Proven results and viral content statistics"
     >

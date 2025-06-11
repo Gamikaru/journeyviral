@@ -16,7 +16,7 @@
   /* Glow Colors (with transparency) */
   --color-glow-pink: rgba(255, 0, 255, 0.5);
   --color-glow-cyan: rgba(0, 255, 255, 0.5);
-  --color-glow-green: rgba(0, 255, 136, 0.5);
+  --color-glow-green: rgba(43, 192, 123, 0.5);
   --color-glow-purple: rgba(142, 0, 255, 0.5);
 
   /* Background Colors */
@@ -172,6 +172,69 @@
   --backdrop-blur-md: blur(12px);
   --backdrop-blur-lg: blur(20px);
   --backdrop-blur-xl: blur(40px);
+
+  /* ---------- THEME TOKENS ---------- */
+  --bg-accent-h: 180;   /* default cyan */
+  --bg-accent-s: 100%;
+  --bg-accent-l: 50%;
+  --bg-overlay-opacity: 0.07;
+  --twist: 0deg;
+}
+
+/* HERO SCROLL ZONE */
+[data-theme="hero"] {
+  --bg-accent-h: 200;
+  --bg-overlay-opacity: 0.09;
+  --twist: 0deg;
+}
+
+/* PAIN SECTION */
+[data-theme="pain"] {
+  --bg-accent-h: 300;
+  --bg-overlay-opacity: 0.08;
+  --twist: 0.5deg;
+}
+
+/* STATS */
+[data-theme="stats"] {
+  --bg-accent-h: 60;
+  --bg-overlay-opacity: 0.10;
+  --twist: -0.7deg;
+}
+
+/* EXPERTISE */
+[data-theme="expertise"] {
+  --bg-accent-h: 285;
+  --bg-overlay-opacity: 0.06;
+  --twist: 1deg;
+}
+
+/* RULE 1 */
+[data-theme="rule1"] {
+  --bg-accent-h: 320;
+  --bg-overlay-opacity: 0.08;
+  --twist: -0.5deg;
+}
+
+/* RULE 2 */
+[data-theme="rule2"] {
+  --bg-accent-h: 260;
+  --bg-overlay-opacity: 0.07;
+  --twist: 0.8deg;
+}
+
+/* RULE 3 */
+[data-theme="rule3"] {
+  --bg-accent-h: 240;
+  --bg-overlay-opacity: 0.09;
+  --twist: -1deg;
+}
+
+/* FOOTER */
+[data-theme="footer"] {
+  --bg-accent-h: 220;
+  --bg-overlay-opacity: 0.05;
+  --twist: 0deg;
 }
 
 /* Dark Mode Support (already dark by default) */

@@ -1,3 +1,6 @@
+"use client";
+
+import { useSectionObserver } from "@/hooks/useSectionObserver";
 import HeroSection from "@/components/sections/Hero";
 import TransformSection from "@/components/sections/Transform";
 import StatsSection from "@/components/sections/Stats";
@@ -8,9 +11,10 @@ import Rule2Section from "@/components/sections/Rule2";
 import Rule3Section from "@/components/sections/Rule3";
 import FooterSection from "@/components/sections/Footer";
 
-
-
 export default function Home() {
+  // Initialize section observer
+  useSectionObserver();
+
   return (
     <>
       {/* Scroll Progress Indicator */}
@@ -40,7 +44,6 @@ export default function Home() {
         {/* Footer Section */}
         <FooterSection />
         {/* Add more sections as needed */}
-
       </main>
     </>
   );

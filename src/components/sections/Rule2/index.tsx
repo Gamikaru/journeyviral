@@ -86,6 +86,7 @@ const Rule2Section: React.FC = () => {
     <section
       ref={sectionRef}
       id="rule2"
+      data-theme="rule2"
       className={`rule2-section rule2-section-unified ${isVisible ? 'rule2-visible' : ''}`}
       aria-label="Rule 2 - Your audience doesn't want to see ads"
       style={{

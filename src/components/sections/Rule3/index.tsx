@@ -85,6 +85,7 @@ const Rule3Section: React.FC = () => {
     <section
       ref={sectionRef}
       id="rule3"
+      data-theme="rule3"
       className={`rule3-section rule3-section-unified ${isVisible ? 'rule3-visible' : ''}`}
       aria-label="Rule 3 - Your content must provide instant value"
       style={{

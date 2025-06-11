@@ -6,22 +6,29 @@
   text-transform: uppercase;
   letter-spacing: -0.03em;
   text-shadow:
-    0 0 120px rgba(255, 255, 255, 0.4),
-    0 10px 20px rgba(0, 0, 0, 1),
-    0 0 80px rgba(255, 0, 255, 0.3);
+    0 0 120px var(--color-text-primary),
+    0 10px 20px var(--color-primary-dark),
+    0 0 80px var(--color-glow-pink);
   position: relative;
   transform-style: preserve-3d;
 }
 
 .hero-subtitle-primary {
   font-family: var(--font-lastica);
-  font-size: clamp(4.5rem, 14vw, 9rem);
-  line-height: 0.8;
-  font-weight: 900;
+  font-size: clamp(3.5rem, 11vw, 7rem); /* Reduced from 14vw and 9rem */
+  line-height: 0.85;
+  font-weight: 400; /* Reduced from 900 for lighter appearance */
+  font-style: italic; /* Added italic */
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em; /* Slightly less tight */
   position: relative;
   transform-style: preserve-3d;
+  background: var(--gradient-neon);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 1px var(--color-neon-purple);
+  filter: drop-shadow(0 0 20px var(--color-glow-purple));
 }
 
 .hero-tagline-text {
@@ -31,6 +38,8 @@
   letter-spacing: -0.025em;
   text-transform: uppercase;
   font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-text-secondary);
+  text-shadow: 0 0 30px var(--color-glow-green);
 }
 
 /* Responsive adjustments */
@@ -42,8 +51,9 @@
   }
 
   .hero-subtitle-primary {
-    font-size: clamp(3.5rem, 12vw, 6rem);
-    line-height: 0.85;
+    font-size: clamp(2.8rem, 9vw, 5rem); /* Reduced proportionally */
+    line-height: 0.9;
+    letter-spacing: 0em;
   }
 
   .hero-tagline-text {
@@ -61,13 +71,258 @@
   }
 
   .hero-subtitle-primary {
-    font-size: clamp(2.5rem, 10vw, 4.5rem);
-    line-height: 0.9;
+    font-size: clamp(2.2rem, 8vw, 3.8rem); /* Reduced proportionally */
+    line-height: 0.95;
+    letter-spacing: 0.01em;
   }
 
   .hero-tagline-text {
     line-height: 0.9;
     letter-spacing: -0.01em;
     font-size: clamp(1.25rem, 3vw, 2rem);
+  }
+}
+
+/* Retro Metallic Effect Classes */
+.retro-metal {
+  background: linear-gradient(
+    var(--color-primary) 15%,
+    var(--color-primary-light) 25%,
+    var(--color-neon-cyan) 35%,
+    var(--color-neon-green) 45%,
+    var(--color-text-primary) 50%,
+    var(--color-primary-dark) 52%,
+    var(--color-primary) 60%,
+    var(--color-neon-blue) 70%,
+    var(--color-neon-purple) 80%,
+    var(--color-neon-cyan) 85%
+  );
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px var(--color-neon-cyan);
+}
+
+.retro-raise {
+  filter: drop-shadow(1px 3px 0px var(--color-primary-dark))
+    drop-shadow(2px 6px 0px var(--color-primary))
+    drop-shadow(3px 9px 0px var(--color-primary-light))
+    drop-shadow(0px 0px 20px var(--color-glow-pink));
+}
+
+/* Enhanced retro effect for hero titles - NOW USES LAYERED SHADOWS */
+.hero-title-primary.retro-enhanced {
+  /* Keep existing font properties */
+  font-family: var(--font-lastica);
+  font-size: clamp(5rem, 15vw, 10rem);
+  line-height: 0.75;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  position: relative;
+  transform-style: preserve-3d;
+
+  /* NEW: Retro layered shadow design with our brand colors */
+  color: rgba(255, 255, 255, 0.95); /* Primary white color */
+  text-shadow:
+    -3px 3px 0 var(--color-neon-pink),      /* First layer - Pink */
+    -6px 6px 0 var(--color-neon-cyan),      /* Second layer - Cyan */
+    -9px 9px 0 var(--color-neon-purple),    /* Third layer - Purple */
+    -12px 12px 0 rgba(255, 182, 193, 0.6),  /* Fourth layer - Light pink */
+    -15px 15px 30px rgba(0, 0, 0, 0.4);     /* Final shadow for depth */
+
+  /* Subtle skew for retro effect */
+  transform: skewX(-3deg) translate3d(0, 0, 0);
+
+  /* Smooth transition for interactions */
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Remove old gradient effects */
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-stroke: none;
+  filter: none;
+}
+
+/* Enhanced hover effect for retro title */
+.hero-title-primary.retro-enhanced:hover {
+  color: #ffffff; /* Brighter white on hover */
+  transform: skewX(-3deg) scale(1.03) translate3d(0, -3px, 0); /* Slight lift and scale */
+  text-shadow:
+    -3px 3px 0 rgba(255, 0, 255, 1),        /* Brighter pink */
+    -6px 6px 0 rgba(0, 255, 255, 1),        /* Brighter cyan */
+    -9px 9px 0 rgba(142, 0, 255, 1),        /* Brighter purple */
+    -12px 12px 0 rgba(255, 182, 193, 0.8),  /* Enhanced light pink */
+    -15px 15px 0 rgba(255, 255, 255, 0.3),  /* White glow layer */
+    -18px 18px 40px rgba(0, 0, 0, 0.6);     /* Deeper shadow */
+}
+
+.hero-subtitle-primary.retro-enhanced {
+  /* Keep existing font properties but switch to gradient effect */
+  font-family: var(--font-lastica);
+  font-size: clamp(3.5rem, 11vw, 7rem);
+  line-height: 0.85;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  position: relative;
+  transform-style: preserve-3d;
+
+  /* NEW: Gradient effect (moved from title) */
+  background: linear-gradient(
+    135deg,
+    var(--color-neon-pink) 0%,
+    var(--color-neon-cyan) 25%,
+    var(--color-neon-purple) 50%,
+    var(--color-neon-blue) 75%,
+    var(--color-neon-green) 100%
+  );
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 1px var(--color-neon-cyan);
+
+  /* Subtle skew for retro effect */
+  transform: skewX(-2deg) translate3d(0, 0, 0);
+
+  /* Smooth transition for interactions */
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Enhanced filter effects */
+  filter: drop-shadow(0 0 25px var(--color-glow-pink))
+    drop-shadow(0 0 50px var(--color-glow-cyan));
+}
+
+/* Enhanced hover effect for gradient subtitle */
+.hero-subtitle-primary.retro-enhanced:hover {
+  transform: skewX(-2deg) scale(1.03) translate3d(0, -2px, 0); /* Slight lift and scale */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 255, 1) 0%,
+    rgba(0, 255, 255, 1) 25%,
+    rgba(142, 0, 255, 1) 50%,
+    rgba(0, 212, 255, 1) 75%,
+    rgba(0, 255, 136, 1) 100%
+  );
+  -webkit-text-stroke: 1px rgba(0, 255, 255, 0.8);
+  filter: drop-shadow(0 0 35px var(--color-glow-pink))
+    drop-shadow(0 0 70px var(--color-glow-cyan))
+    drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+
+/* Alternative retro design - keep for fallback */
+.hero-subtitle-retro-layered {
+  font-family: var(--font-lastica);
+  font-size: clamp(3.5rem, 11vw, 7rem);
+  line-height: 0.85;
+  font-weight: 400;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  position: relative;
+
+  /* Retro layered effect with animation */
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow:
+    -1px 1px 0 var(--color-neon-pink),
+    -2px 2px 0 var(--color-neon-cyan),
+    -3px 3px 0 var(--color-neon-purple),
+    -4px 4px 0 rgba(255, 182, 193, 0.7),
+    -5px 5px 15px rgba(0, 0, 0, 0.5);
+
+  transform: skewX(-3deg);
+  transition: all 0.4s ease;
+  animation: retroLayeredPulse 8s ease-in-out infinite;
+}
+
+/* Subtle pulsing animation for layered effect */
+@keyframes retroLayeredPulse {
+  0%, 100% {
+    text-shadow:
+      -1px 1px 0 var(--color-neon-pink),
+      -2px 2px 0 var(--color-neon-cyan),
+      -3px 3px 0 var(--color-neon-purple),
+      -4px 4px 0 rgba(255, 182, 193, 0.7),
+      -5px 5px 15px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    text-shadow:
+      -2px 2px 0 rgba(255, 0, 255, 0.9),
+      -4px 4px 0 rgba(0, 255, 255, 0.9),
+      -6px 6px 0 rgba(142, 0, 255, 0.9),
+      -8px 8px 0 rgba(255, 182, 193, 0.8),
+      -10px 10px 25px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Remove old gradient animations */
+.hero-subtitle-retro-neon {
+  display: none; /* Hide old version */
+}
+
+@keyframes elegantPinkFlow {
+  /* Keep for backwards compatibility but not used */
+}
+
+/* Performance optimizations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-primary.retro-enhanced,
+  .hero-subtitle-primary.retro-enhanced,
+  .hero-subtitle-retro-layered {
+    animation: none !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  .hero-title-primary.retro-enhanced:hover {
+    transform: skewX(-3deg) scale(1.02) translate3d(0, -1px, 0) !important;
+  }
+
+  .hero-subtitle-primary.retro-enhanced:hover {
+    transform: skewX(-2deg) scale(1.02) translate3d(0, -1px, 0) !important;
+  }
+}
+
+/* Responsive adjustments for layered shadows */
+@media (max-width: 768px) {
+  .hero-title-primary.retro-enhanced {
+    text-shadow:
+      -2px 2px 0 var(--color-neon-pink),
+      -4px 4px 0 var(--color-neon-cyan),
+      -6px 6px 0 var(--color-neon-purple),
+      -8px 8px 0 rgba(255, 182, 193, 0.6),
+      -10px 10px 20px rgba(0, 0, 0, 0.4);
+    transform: skewX(-2deg);
+  }
+
+  .hero-title-primary.retro-enhanced:hover {
+    text-shadow:
+      -2px 2px 0 rgba(255, 0, 255, 1),
+      -4px 4px 0 rgba(0, 255, 255, 1),
+      -6px 6px 0 rgba(142, 0, 255, 1),
+      -8px 8px 0 rgba(255, 182, 193, 0.8),
+      -10px 10px 0 rgba(255, 255, 255, 0.3),
+      -12px 12px 25px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-subtitle-primary.retro-enhanced {
+    transform: skewX(-1deg);
+    -webkit-text-stroke: 0.8px var(--color-neon-cyan);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title-primary.retro-enhanced {
+    text-shadow:
+      -1px 1px 0 var(--color-neon-pink),
+      -2px 2px 0 var(--color-neon-cyan),
+      -3px 3px 0 var(--color-neon-purple),
+      -4px 4px 15px rgba(0, 0, 0, 0.4);
+    transform: skewX(-1deg);
+  }
+
+  .hero-subtitle-primary.retro-enhanced {
+    transform: skewX(-0.5deg);
+    -webkit-text-stroke: 0.6px var(--color-neon-cyan);
   }
 }

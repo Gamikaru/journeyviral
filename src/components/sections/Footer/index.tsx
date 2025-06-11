@@ -56,6 +56,7 @@ const FooterSection: React.FC = () => {
   return (
     <footer
       ref={footerRef}
+      data-theme="footer"
       className={`footer-section ${isVisible ? 'footer-visible' : ''}`}
       style={{
         '--mouse-x': mousePosition.x,

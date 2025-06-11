@@ -26,7 +26,7 @@ export default function HeroBackground() {
         onCanPlay={() => console.log("Video can play")}
         onLoadStart={() => console.log("Video load started")}
       >
-        <source src="/videos/video_version_of_Homepage_hero_bg.mp4" type="video/mp4" />
+        <source src="/videos/skater_nostalgic_1.mp4" type="video/mp4" />
         <p className="absolute inset-0 flex items-center justify-center text-white bg-red-500/50">
           Your browser does not support the video tag. Video path: /videos/video_version_of_Homepage_hero_bg.mp4
         </p>

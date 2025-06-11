@@ -74,7 +74,7 @@ const StyledWrapper = styled.div`
     z-index: 2;
     color: aliceblue;
     font-family: var(--font-lastica);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: uppercase;

@@ -131,6 +131,7 @@ export default function ExpertiseSection() {
     <section
       ref={sectionRef}
       id="expertise"
+      data-theme="expertise"
       className={`expertise-section expertise-section-unified ${isLowPerf ? 'performance-mode' : ''} ${shouldAnimate ? 'animate-in' : ''}`}
       aria-label="Our viral content expertise and methodology"
       data-performance={performanceScore}

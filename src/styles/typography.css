@@ -2,18 +2,15 @@
 
 /* ============================================
    Font Assignments & Base Typography
+   Note: Font families are now controlled by font-pairings.css
    ============================================ */
 
 :root {
-    /* Font stacks using Next.js font variables */
-    --font-display: var(--font-lastica);
-    /* Bebas Neue */
-    --font-body: var(--font-interphases);
-    /* Inter */
-    --font-mono: var(--font-anonymous);
-    /* JetBrains Mono */
-    --font-decorative: var(--font-monoton);
-    /* Monoton */
+    /* Legacy font variables for backwards compatibility */
+    --font-lastica: var(--font-hero);
+    --font-interphases: var(--font-body);
+    --font-anonymous: var(--font-mono);
+    --font-monoton: var(--font-accent);
 
     /* Fallback stacks */
     --font-fallback-display: 'Arial Black', 'Arial Bold', sans-serif;
@@ -22,21 +19,21 @@
 }
 
 /* ============================================
-   Base Typography Classes
+   Base Typography Classes (Updated)
    ============================================ */
 
-/* Display Typography - Bebas Neue */
+/* Display Typography */
 .font-display {
-    font-family: var(--font-display), var(--font-fallback-display);
-    font-weight: 400;
+    font-family: var(--font-display);
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-tight);
     line-height: var(--line-height-tight);
 }
 
-/* Body Typography - Inter */
+/* Body Typography */
 .font-body {
-    font-family: var(--font-body), var(--font-fallback-body);
+    font-family: var(--font-body);
     font-weight: 400;
     letter-spacing: var(--letter-spacing-normal);
     line-height: var(--line-height-normal);

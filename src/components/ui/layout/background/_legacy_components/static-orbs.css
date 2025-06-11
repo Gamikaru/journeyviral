@@ -1,0 +1,53 @@
+/* Enhanced static orbs with performance optimizations */
+.static-orbs-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  contain: layout;
+  overflow: hidden;
+}
+
+/* Performance optimizations inherit from unified-background.css for .unified-orb styles */
+/* Additional static orb specific optimizations */
+
+/* Enhanced responsive design for static orbs */
+@media (max-width: 1200px) {
+  .static-orbs-container .unified-orb {
+    filter: blur(100px);
+  }
+}
+
+@media (max-width: 768px) {
+  .static-orbs-container .unified-orb {
+    filter: blur(70px);
+    will-change: opacity;
+  }
+}
+
+@media (max-width: 480px) {
+  .static-orbs-container .unified-orb {
+    filter: blur(50px);
+  }
+}
+
+/* Performance mode specific optimizations */
+.static-orbs-container .unified-orb.performance-low {
+  animation: none;
+  transition: opacity 0.5s ease;
+}
+
+.static-orbs-container .unified-orb.performance-medium {
+  animation: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.static-orbs-container .unified-orb.performance-high {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Battery optimization */
+@media (max-device-width: 768px) and (max-device-height: 1024px) {
+  .static-orbs-container .unified-orb {
+    will-change: auto;
+  }
+}

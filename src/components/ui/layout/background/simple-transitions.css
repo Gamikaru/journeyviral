@@ -1,0 +1,42 @@
+/* Simple, subtle transition effects - FIXED VERSION */
+
+.simple-transitions-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  contain: layout;
+}
+
+/* REMOVE ALL SECTION GLOW STYLES - they were causing the hard edges */
+/* Instead, we'll use the CSS custom properties and pattern system we set up */
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .simple-transitions-container {
+    opacity: 0.8;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .simple-transitions-container {
+    display: none;
+  }
+}
+
+/* Keep only the keyframes that are used by other systems */
+@keyframes grid-shift {
+  0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: -40px -40px, -30px 0, 0 -30px, 0 0; }
+}
+
+@keyframes circuit-pulse {
+  0%, 100% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+    opacity: 1;
+  }
+  50% {
+    background-position: 30px 30px, 30px 30px, 4px 4px, 0 0;
+    opacity: 0.8;
+  }
+}

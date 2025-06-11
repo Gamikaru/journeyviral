@@ -5,10 +5,35 @@ import { useState, useEffect, useRef } from "react";
 import HeroBackground from "./HeroBackground";
 import HeroContent from "./HeroContent";
 
+// Performance detection hook
+const usePerformanceMode = () => {
+  const [isLowPerf, setIsLowPerf] = useState(false);
+
+  useEffect(() => {
+    const checkPerformance = () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const memory = (navigator as any).deviceMemory;
+      const connection = (navigator as any).connection;
+
+      if (prefersReducedMotion) setIsLowPerf(true);
+      if (memory && memory < 4) setIsLowPerf(true);
+      if (connection && (connection.saveData || connection.effectiveType === 'slow-2g')) {
+        setIsLowPerf(true);
+      }
+    };
+
+    checkPerformance();
+  }, []);
+
+  return isLowPerf;
+};
+
 export default function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
+  const isLowPerf = usePerformanceMode();
 
   const { scrollY } = useScroll();
   const opacityFade = useTransform(scrollY, [0, 400], [1, 0]);
@@ -29,6 +54,7 @@ export default function HeroSection() {
 
   useEffect(() => {
     setIsLoaded(true);
+    setShouldAnimate(true);
   }, []);
 
   const containerVariants = {
@@ -56,16 +82,30 @@ export default function HeroSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
-      className="min-h-screen relative overflow-hidden flex items-center justify-center"
-      style={{ padding: 0, margin: 0 }}
+      data-theme="hero"
+      className={`hero-section hero-section-unified ${
+        isLowPerf ? "performance-mode" : ""
+      } ${shouldAnimate ? "animate-in" : ""}`}
+      aria-label="Revolutionary AI-powered viral content creation"
+      style={{
+        padding: 0,
+        margin: 0,
+        position: 'relative',
+        overflow: 'hidden',
+        minHeight: '100vh',
+        isolation: 'isolate'
+      }}
     >
+      {/* Hero background video - contained within this section */}
       <HeroBackground />
 
+      {/* Gradient overlay above video but below content */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none z-10" />
 
+      {/* Content container */}
       <div
-        ref={sectionRef}
         className="relative z-30 w-full"
         style={{
           paddingTop: "2rem",

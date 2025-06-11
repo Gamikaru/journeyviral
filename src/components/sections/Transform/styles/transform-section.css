@@ -12,6 +12,9 @@
   padding: 5rem 0;
   overflow: hidden;
   isolation: isolate;
+  margin-top: -100px; /* Pull up to overlap with hero blend zone */
+  padding-top: 150px; /* Compensate with padding */
+  z-index: 20; /* Ensure content is above blend */
 }
 
 /* Updated section for unified background */
@@ -49,7 +52,7 @@
 /* Content wrapper */
 .transform-content {
   position: relative;
-  z-index: 10;
+  z-index: 25;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;

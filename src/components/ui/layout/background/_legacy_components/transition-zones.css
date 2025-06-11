@@ -1,0 +1,109 @@
+/* Enhanced section transition zones with performance optimizations */
+.transitions-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  contain: layout;
+}
+
+/* Enhanced section transition zones with more dynamic morphing */
+.transition-to-transform {
+  background:
+    radial-gradient(ellipse at center, rgba(255, 0, 255, 0.18) 0%, rgba(138, 43, 226, 0.12) 40%, transparent 70%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, transparent 50%, rgba(255, 0, 255, 0.08) 100%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 0, 255, 0.03) 0px,
+      rgba(255, 0, 255, 0.03) 2px,
+      transparent 2px,
+      transparent 40px
+    );
+  animation: transformTransition 8s ease-in-out infinite;
+}
+
+@keyframes transformTransition {
+  0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%; }
+  50% { background-position: 50% 50%, 0% 0%, 20px 20px; }
+}
+
+.transition-to-stats {
+  background:
+    radial-gradient(ellipse at center, rgba(0, 255, 255, 0.22) 0%, rgba(0, 255, 136, 0.15) 35%, transparent 65%),
+    linear-gradient(to bottom, rgba(255, 0, 255, 0.08) 0%, transparent 50%, rgba(0, 255, 255, 0.12) 100%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 255, 255, 0.05) 0px,
+      rgba(0, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 25px
+    );
+  animation: statsTransition 6s ease-in-out infinite;
+}
+
+@keyframes statsTransition {
+  0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%; }
+  50% { background-position: 25% 75%, 0% 0%, 12px 0%; }
+}
+
+.transition-to-expertise {
+  background:
+    radial-gradient(ellipse at center, rgba(138, 43, 226, 0.25) 0%, rgba(0, 212, 255, 0.18) 40%, transparent 75%),
+    linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 0%, transparent 50%, rgba(138, 43, 226, 0.12) 100%),
+    linear-gradient(45deg, rgba(138, 43, 226, 0.03) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+  animation: expertiseTransition 10s ease-in-out infinite;
+}
+
+@keyframes expertiseTransition {
+  0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  50% { background-position: 50% 50%, 0% 0%, 15px 15px, -15px 15px; }
+}
+
+.transition-to-rule1 {
+  background:
+    linear-gradient(to bottom,
+      rgba(138, 43, 226, 0.12) 0%,
+      rgba(0, 0, 0, 0.4) 25%,
+      rgba(0, 255, 255, 0.15) 50%,
+      rgba(255, 0, 255, 0.12) 75%,
+      rgba(0, 0, 0, 0.8) 100%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.3) 0%, transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(0, 255, 255, 0.05) 1px,
+      transparent 2px,
+      transparent 50px,
+      rgba(255, 0, 255, 0.04) 50px,
+      rgba(255, 0, 255, 0.04) 51px,
+      transparent 51px,
+      transparent 100px
+    );
+  animation: rule1Transition 12s ease-in-out infinite;
+}
+
+@keyframes rule1Transition {
+  0%, 100% {
+    background-position: 0% 0%, 50% 50%, 0% 0%;
+    filter: contrast(1) brightness(1);
+  }
+  50% {
+    background-position: 0% 0%, 25% 75%, 0% 25px;
+    filter: contrast(1.1) brightness(1.05);
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .unified-transition-zone {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .unified-transition-zone {
+    opacity: 0.7;
+  }
+}

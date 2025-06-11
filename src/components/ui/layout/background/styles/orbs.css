@@ -1,0 +1,143 @@
+/* Floating Orbs - All orb effects and configurations */
+
+/* Base orb styling */
+.gentle-orb {
+  position: absolute;
+  width: 500px; /* Increased from 400px */
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(100px) brightness(1.2); /* Added brightness boost */
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: filter 0.3s ease;
+}
+
+/* Cyan orb - Primary accent */
+.orb-cyan {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0, 255, 255, 1) 0%, rgba(0, 255, 255, 0.6) 25%, transparent 70%),
+    radial-gradient(circle at center, rgba(0, 255, 255, 0.9) 0%, rgba(0, 200, 255, 0.7) 30%, rgba(64, 224, 255, 0.5) 60%,
+    transparent 80%);
+  box-shadow:
+    0 0 300px rgba(0, 255, 255, 0.5),
+    0 0 150px rgba(0, 255, 255, 0.3);
+}
+
+/* Pink/Magenta orb - Secondary accent */
+.orb-pink {
+  background:
+    radial-gradient(circle at 70% 70%, rgba(255, 0, 255, 1) 0%, rgba(255, 0, 255, 0.6) 25%, transparent 70%),
+    radial-gradient(circle at center, rgba(255, 105, 180, 0.9) 0%, rgba(255, 0, 255, 0.8) 30%, rgba(255, 64, 129, 0.6) 60%,
+    transparent 80%);
+  box-shadow:
+    0 0 300px rgba(255, 0, 255, 0.5),
+    0 0 150px rgba(255, 105, 180, 0.3);
+}
+
+/* Performance-based orb variations */
+.unified-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.unified-orb.performance-medium {
+  filter: blur(120px);
+  opacity: 1;
+}
+
+.unified-orb.performance-high {
+  filter: blur(140px) saturate(1.1);
+  opacity: 1;
+}
+
+/* Enhanced cyan orb with improved gradients */
+.unified-orb-cyan {
+  width: 60vw;
+  height: 60vw;
+  max-width: 800px;
+  max-height: 800px;
+  min-width: 200px;
+  min-height: 200px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0, 255, 255, 0.9) 0%, rgba(0, 255, 255, 0.4) 30%, transparent 70%),
+    radial-gradient(circle at center, rgba(0, 255, 255, 0.7) 0%, rgba(0, 212, 255, 0.5) 20%, rgba(0, 255, 255, 0.2) 50%, transparent 80%),
+    radial-gradient(circle at 70% 70%, rgba(64, 224, 255, 0.3) 0%, transparent 50%);
+  box-shadow:
+    0 0 300px rgba(0, 255, 255, 0.6),
+    0 0 150px rgba(0, 255, 255, 0.3),
+    inset 0 0 150px rgba(0, 255, 255, 0.3);
+}
+
+/* Enhanced magenta orb with improved gradients */
+.unified-orb-magenta {
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  min-width: 250px;
+  min-height: 250px;
+  background:
+    radial-gradient(circle at 70% 70%, rgba(255, 0, 255, 0.8) 0%, rgba(255, 0, 255, 0.4) 25%, transparent 70%),
+    radial-gradient(circle at center, rgba(255, 0, 255, 0.6) 0%, rgba(255, 64, 129, 0.4) 20%, rgba(255, 0, 255, 0.15) 50%, transparent 80%),
+    radial-gradient(circle at 30% 30%, rgba(255, 105, 180, 0.35) 0%, transparent 45%);
+  box-shadow:
+    0 0 280px rgba(255, 0, 255, 0.5),
+    0 0 140px rgba(255, 0, 255, 0.25),
+    inset 0 0 120px rgba(255, 0, 255, 0.25);
+}
+
+/* Enhanced green orb with improved gradients */
+.unified-orb-green {
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
+  min-width: 180px;
+  min-height: 180px;
+  background:
+    radial-gradient(circle at 40% 60%, rgba(0, 255, 136, 0.7) 0%, rgba(0, 255, 136, 0.3) 35%, transparent 70%),
+    radial-gradient(circle at center, rgba(0, 255, 136, 0.5) 0%, rgba(0, 255, 136, 0.25) 30%, rgba(0, 255, 136, 0.1) 50%, transparent 80%),
+    radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.4) 0%, transparent 40%);
+  box-shadow:
+    0 0 220px rgba(0, 255, 136, 0.4),
+    0 0 110px rgba(0, 255, 136, 0.2),
+    inset 0 0 80px rgba(0, 255, 136, 0.15);
+}
+
+/* Enhanced purple orb with improved gradients */
+.unified-orb-purple {
+  width: 45vw;
+  height: 45vw;
+  max-width: 550px;
+  max-height: 550px;
+  min-width: 160px;
+  min-height: 160px;
+  background:
+    radial-gradient(circle at 60% 40%, rgba(138, 43, 226, 0.8) 0%, rgba(138, 43, 226, 0.4) 30%, transparent 70%),
+    radial-gradient(circle at center, rgba(138, 43, 226, 0.6) 0%, rgba(186, 85, 211, 0.3) 25%, rgba(138, 43, 226, 0.15) 50%, transparent 80%),
+    radial-gradient(circle at 20% 80%, rgba(147, 112, 219, 0.4) 0%, transparent 45%);
+  box-shadow:
+    0 0 200px rgba(138, 43, 226, 0.4),
+    0 0 100px rgba(138, 43, 226, 0.2),
+    inset 0 0 70px rgba(138, 43, 226, 0.2);
+}
+
+/* Add pulsing animation for more life */
+@keyframes gentle-pulse {
+  0%, 100% {
+    filter: blur(100px) brightness(1.2) saturate(1);
+  }
+  50% {
+    filter: blur(120px) brightness(1.4) saturate(1.2);
+  }
+}
+
+.gentle-orb {
+  animation: gentle-pulse 6s ease-in-out infinite;
+}

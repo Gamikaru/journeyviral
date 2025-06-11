@@ -8,12 +8,33 @@
 @import '../styles/animations.css';
 @import '../styles/utilities.css';
 
-
 /* Ensure font variables are available */
 :root {
     --font-lastica: 'Lastica', 'Bebas Neue', Impact, Arial, sans-serif;
     --font-anonymous: 'Anonymous Pro', 'JetBrains Mono', 'Courier New', monospace;
     --font-monoton: 'Monoton', cursive;
+}
+
+/* FX Slot - Container for section-specific effects */
+.fx-slot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Section pattern activation */
+section[data-theme].is-active .pattern-grid,
+section[data-theme].is-active .pattern-dots,
+section[data-theme].is-active .pattern-aurora {
+  opacity: 1;
+}
+
+section[data-theme] .pattern-grid,
+section[data-theme] .pattern-dots,
+section[data-theme] .pattern-aurora {
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
 @media (max-width: 768px) {
@@ -40,4 +61,29 @@
         padding-top: 40px;
         padding-bottom: 40px;
     }
+}
+
+/* Hero section specific styles */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  contain: layout style paint;
+}
+
+.hero-section video {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 1 !important;
+}
+
+/* Ensure seamless section transitions */
+.hero-section + section {
+  position: relative;
+  z-index: 2;
+  background: transparent;
 }
