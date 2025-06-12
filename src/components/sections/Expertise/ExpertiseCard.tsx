@@ -1,9 +1,9 @@
 // src/components/sections/Expertise/ExpertiseCard.tsx
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { memo, useState } from "react";
-import { LucideIcon } from "lucide-react";
+import { motion, useAnimation } from "framer-motion";
+import { memo, useState, useEffect } from "react";
+import type { LucideIcon } from "lucide-react";
 import "./styles/expertise-card.css";
 
 interface ExpertiseCardProps {
@@ -14,156 +14,189 @@ interface ExpertiseCardProps {
     gradient: string;
     icon: LucideIcon;
     description: string;
+    glowIntensity?: number;
   };
   index: number;
-  shouldAnimate?: boolean;
+  performanceLevel?: 'high' | 'medium' | 'low';
 }
+
+// Counter animation hook
+const useCountAnimation = (endValue: string, duration: number = 2000, isInView: boolean) => {
+  const [displayValue, setDisplayValue] = useState("0");
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    // Extract numeric value
+    const numericEnd = parseFloat(endValue.replace(/[^0-9.]/g, ''));
+    const suffix = endValue.replace(/[0-9.]/g, '');
+    const startTime = Date.now();
+
+    const animate = () => {
+      const now = Date.now();
+      const progress = Math.min((now - startTime) / duration, 1);
+
+      // Easing function (ease-out-expo)
+      const easeOutExpo = 1 - Math.pow(2, -10 * progress);
+      const current = numericEnd * easeOutExpo;
+
+      // Format based on suffix
+      if (suffix.includes('M')) {
+        setDisplayValue(`${(current / 1000000).toFixed(1)}M+`);
+      } else if (suffix.includes('%')) {
+        setDisplayValue(`${Math.floor(current)}%`);
+      } else {
+        setDisplayValue(`${Math.floor(current)}${suffix}`);
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(endValue);
+      }
+    };
+
+    animate();
+  }, [endValue, duration, isInView]);
+
+  return displayValue;
+};
 
 const ExpertiseCard = memo(function ExpertiseCard({
   stat,
   index,
-  shouldAnimate = true
+  performanceLevel = 'high'
 }: ExpertiseCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const [isInView, setIsInView] = useState(false);
+  const controls = useAnimation();
   const Icon = stat.icon;
+
+  const animatedNumber = useCountAnimation(stat.number, 2000, isInView);
 
   const cardVariants = {
     hidden: {
       opacity: 0,
-      y: shouldAnimate ? 30 : 0,
-      scale: shouldAnimate ? 0.9 : 1,
-      rotateX: shouldAnimate ? -15 : 0
+      y: 30,
+      scale: 0.9,
     },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      rotateX: 0,
-      transition: shouldAnimate ? {
+      transition: {
         duration: 0.6,
         delay: index * 0.1,
         ease: [0.22, 1, 0.36, 1]
-      } : {
-        duration: 0.3
       }
     }
   };
 
+  const glowIntensity = stat.glowIntensity || 0.8;
+
   return (
     <motion.article
-      className={`expertise-card expertise-card-${stat.gradient} ${isHovered ? 'is-hovered' : ''}`}
+      className={`expertise-card-enhanced expertise-card-${stat.gradient}`}
       role="listitem"
       aria-label={`${stat.number} ${stat.label}`}
       variants={cardVariants}
-      whileHover={shouldAnimate && !prefersReducedMotion ? {
+      whileHover={performanceLevel !== 'low' ? {
         scale: 1.05,
-        y: -8,
-        transition: {
-          duration: 0.3,
-          ease: [0.4, 0, 0.2, 1]
-        }
-      } : {}}
-      whileTap={shouldAnimate ? {
-        scale: 0.98
+        y: -5,
+        transition: { duration: 0.3, ease: "easeOut" }
       } : {}}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
+      onViewportEnter={() => setIsInView(true)}
       style={{
         '--card-color': stat.color,
+        '--glow-intensity': glowIntensity,
       } as React.CSSProperties}
     >
-      {/* Gradient border wrapper */}
-      <div className="card-border" aria-hidden="true">
-        <div className="border-gradient" />
-        <motion.div
-          className="border-glow"
-          animate={isHovered && shouldAnimate ? {
-            opacity: [0.5, 1, 0.5],
-            scale: [1, 1.1, 1]
-          } : {}}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+      {/* Neon glow background */}
+      <div className="card-glow-bg" aria-hidden="true">
+        <div className="glow-inner" />
+        {performanceLevel === 'high' && (
+          <div className="glow-pulse" />
+        )}
       </div>
 
-      {/* Card inner content */}
-      <div className="card-inner">
-        {/* Background effects */}
-        <div className="card-bg-gradient" aria-hidden="true" />
-        <div className="card-bg-pattern" aria-hidden="true" />
+      {/* Glass border effect */}
+      <div className="card-border-enhanced" aria-hidden="true">
+        <div className="border-gradient" />
+        <div className="border-corner border-corner-tl" />
+        <div className="border-corner border-corner-tr" />
+        <div className="border-corner border-corner-bl" />
+        <div className="border-corner border-corner-br" />
+      </div>
 
-        {/* Icon container */}
-        <motion.div
-          className="card-icon-container"
-          animate={isHovered && shouldAnimate ? {
-            rotate: [0, -10, 10, 0],
-            scale: [1, 1.2, 1]
-          } : {}}
-          transition={{
-            duration: 0.6,
-            ease: "easeInOut"
-          }}
-        >
-          <Icon className="card-icon" size={32} />
-          <div className="icon-glow" />
-          {shouldAnimate && (
-            <motion.div
-              className="icon-ring"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.5, 0, 0.5]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: index * 0.2
-              }}
-            />
-          )}
-        </motion.div>
-
-        {/* Number with enhanced neon effect */}
-        <motion.div
-          className="card-number"
-          initial={shouldAnimate ? { scale: 0.5, opacity: 0 } : {}}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={shouldAnimate ? {
-            delay: 0.3 + index * 0.1,
-            duration: 0.5,
-            type: "spring",
-            stiffness: 200,
-            damping: 15
-          } : {}}
-        >
-          <span className="number-text">{stat.number}</span>
-          {shouldAnimate && (
-            <motion.span
-              className="number-glow"
-              animate={{
-                opacity: [0.7, 1, 0.7],
-                scale: [1, 1.05, 1]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          )}
-        </motion.div>
-
-        {/* Label */}
-        <div className="card-label">
+      {/* Card content */}
+      <div className="card-content-enhanced">
+        {/* DEBUG: Simple test content */}
+        <div style={{ color: 'white', fontSize: '24px', fontWeight: 'bold' }}>
+          TEST CARD {index + 1}
+        </div>
+        <div style={{ color: 'cyan', fontSize: '48px', fontWeight: 'bold' }}>
+          {stat.number}
+        </div>
+        <div style={{ color: 'white', fontSize: '14px' }}>
           {stat.label}
         </div>
 
-        {/* Description - shows on hover */}
+        {/* Icon with enhanced glow */}
         <motion.div
-          className="card-description"
+          className="icon-container-enhanced"
+          animate={isHovered && performanceLevel !== 'low' ? {
+            rotate: [0, -10, 10, 0],
+            scale: [1, 1.1, 1]
+          } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <Icon className="card-icon-enhanced" size={28} />
+          <div className="icon-glow-enhanced" />
+          {performanceLevel === 'high' && (
+            <motion.div
+              className="icon-orbit"
+              animate={{
+                rotate: 360
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+          )}
+        </motion.div>
+
+        {/* Animated number display */}
+        <motion.div
+          className="number-display-enhanced"
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{
+            delay: 0.3 + index * 0.1,
+            duration: 0.5,
+            type: "spring",
+            stiffness: 200
+          }}
+        >
+          <span className="number-value">{animatedNumber}</span>
+          {performanceLevel !== 'low' && (
+            <span className="number-shadow" aria-hidden="true">
+              {animatedNumber}
+            </span>
+          )}
+        </motion.div>
+
+        {/* Label with glow */}
+        <div className="label-enhanced">
+          {stat.label}
+        </div>
+
+        {/* Description tooltip on hover */}
+        <motion.div
+          className="description-tooltip"
           initial={{ opacity: 0, y: 10 }}
           animate={isHovered ? {
             opacity: 1,
@@ -172,42 +205,55 @@ const ExpertiseCard = memo(function ExpertiseCard({
             opacity: 0,
             y: 10
           }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
         >
           {stat.description}
         </motion.div>
 
-        {/* Corner accents */}
-        <div className="card-corners" aria-hidden="true">
-          <div className="corner corner-tl" />
-          <div className="corner corner-tr" />
-          <div className="corner corner-bl" />
-          <div className="corner corner-br" />
-        </div>
+        {/* Data visualization bars */}
+        {performanceLevel !== 'low' && (
+          <div className="data-bars" aria-hidden="true">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="data-bar"
+                initial={{ scaleY: 0 }}
+                animate={isInView ? {
+                  scaleY: 0.3 + Math.random() * 0.7,
+                  opacity: [0.3, 0.8, 0.3]
+                } : {}}
+                transition={{
+                  scaleY: { delay: 0.5 + i * 0.1, duration: 0.6 },
+                  opacity: {
+                    duration: 2 + Math.random(),
+                    repeat: Infinity,
+                    delay: i * 0.2
+                  }
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Hover particles effect */}
-      {shouldAnimate && isHovered && !prefersReducedMotion && (
-        <div className="card-particles" aria-hidden="true">
-          {[...Array(6)].map((_, i) => (
+      {/* Hover state particles */}
+      {performanceLevel === 'high' && isHovered && (
+        <div className="hover-particles" aria-hidden="true">
+          {[...Array(4)].map((_, i) => (
             <motion.div
               key={i}
-              className="particle"
+              className="particle-enhanced"
               initial={{ opacity: 0, scale: 0 }}
               animate={{
                 opacity: [0, 1, 0],
                 scale: [0, 1, 0],
-                x: Math.random() * 100 - 50,
-                y: -Math.random() * 100 - 20
+                y: -50 - Math.random() * 50,
+                x: (Math.random() - 0.5) * 100
               }}
               transition={{
                 duration: 1,
                 delay: i * 0.1,
                 ease: "easeOut"
-              }}
-              style={{
-                left: `${50 + (Math.random() - 0.5) * 30}%`,
-                top: `${50 + (Math.random() - 0.5) * 30}%`
               }}
             />
           ))}

@@ -1,0 +1,189 @@
+/* Enhanced Glitch Button Styles */
+
+.glitch-button {
+    position: relative;
+    padding: 1rem 2rem;
+    background: #000;
+    border: 2px solid var(--arcade-cyan);
+    color: var(--arcade-cyan);
+    font-family: var(--font-lastica, 'Impact', Arial Black, sans-serif);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.glitch-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Variants */
+.glitch-button.danger {
+    border-color: #ff006e;
+    color: #ff006e;
+}
+
+.glitch-button.success {
+    border-color: #00ff88;
+    color: #00ff88;
+}
+
+.glitch-text {
+    position: relative;
+    z-index: 2;
+    display: block;
+}
+
+.glitch-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.glitch-button:hover .glitch-bg {
+    transform: translateX(100%);
+}
+
+/* Glitch Clones */
+.glitch-clone {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+}
+
+.glitch-clone-1 {
+    color: #ff006e;
+    animation: glitchClone1 0.4s infinite;
+    text-shadow: 2px 0 #00ff88;
+}
+
+.glitch-clone-2 {
+    color: #00ffff;
+    animation: glitchClone2 0.4s infinite;
+    text-shadow: -2px 0 #ff00ff;
+}
+
+@keyframes glitchClone1 {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 0.8;
+    }
+
+    20% {
+        transform: translate(calc(-50% + 2px), calc(-50% - 2px));
+        opacity: 1;
+    }
+
+    40% {
+        transform: translate(calc(-50% - 2px), calc(-50% + 1px));
+        opacity: 0.8;
+    }
+
+    60% {
+        transform: translate(calc(-50% + 1px), -50%);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translate(-50%, calc(-50% + 2px));
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 0.8;
+    }
+}
+
+@keyframes glitchClone2 {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 0.8;
+    }
+
+    20% {
+        transform: translate(calc(-50% - 2px), calc(-50% + 2px));
+        opacity: 0.8;
+    }
+
+    40% {
+        transform: translate(calc(-50% + 2px), calc(-50% - 1px));
+        opacity: 1;
+    }
+
+    60% {
+        transform: translate(calc(-50% - 1px), -50%);
+        opacity: 0.8;
+    }
+
+    80% {
+        transform: translate(-50%, calc(-50% - 2px));
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 0.8;
+    }
+}
+
+/* Hover States */
+.glitch-button:hover {
+    transform: scale(1.02);
+    border-color: #fff;
+    color: #fff;
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, 0.5),
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.glitch-button.danger:hover {
+    box-shadow:
+        0 0 20px rgba(255, 0, 110, 0.5),
+        inset 0 0 20px rgba(255, 0, 110, 0.1);
+}
+
+.glitch-button.success:hover {
+    box-shadow:
+        0 0 20px rgba(0, 255, 136, 0.5),
+        inset 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+/* Active State */
+.glitch-button:active {
+    transform: scale(0.98);
+}
+
+/* Noise Effect */
+.glitch-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.glitch-button.glitching::before {
+    opacity: 1;
+}

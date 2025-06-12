@@ -4,16 +4,18 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { memo, useState } from "react";
 import { Brain, Cpu, TrendingUp, Sparkles } from "lucide-react";
-import { PrimaryButton } from "../../ui/buttons";
+import PrimaryButton from "../../ui/buttons/PrimaryButton";
 import "./styles/expertise-method.css";
 
 interface ExpertiseMethodProps {
   isInView: boolean;
+  performanceLevel?: 'high' | 'medium' | 'low';
   isLowPerf?: boolean;
 }
 
 const ExpertiseMethod = memo(function ExpertiseMethod({
   isInView,
+  performanceLevel = 'high',
   isLowPerf = false
 }: ExpertiseMethodProps) {
   const [isHovered, setIsHovered] = useState(false);

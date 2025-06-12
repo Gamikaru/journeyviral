@@ -1,0 +1,567 @@
+/* Isolated Hamburger Button - Cyberpunk Enhanced Design */
+/* Based on the source hamburger.css with isolated modifications */
+
+.isolated-hamburger-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    margin-right: 0.5rem;
+    background: #000000;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow:
+        0 4px 20px rgba(255, 0, 255, 0.2),
+        0 0 40px rgba(0, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 0, 255, 0.1);
+}
+
+/* Size variants */
+.isolated-hamburger--small {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+}
+
+.isolated-hamburger--small .hamburger-wrapper {
+    width: 24px;
+    height: calc(2px * 3 + 5px * 2);
+}
+
+.isolated-hamburger--small .hamburger-bar {
+    height: 2px;
+    border-radius: 1px;
+}
+
+.isolated-hamburger--medium {
+    width: 56px;
+    height: 56px;
+}
+
+.isolated-hamburger--large {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+}
+
+.isolated-hamburger--large .hamburger-wrapper {
+    width: 36px;
+    height: calc(4px * 3 + 10px * 2);
+}
+
+.isolated-hamburger--large .hamburger-bar {
+    height: 4px;
+    border-radius: 3px;
+}
+
+/* Disable effects class */
+.isolated-hamburger-button.no-effects .hamburger-border,
+.isolated-hamburger-button.no-effects .corner-accent,
+.isolated-hamburger-button.no-effects .energy-field,
+.isolated-hamburger-button.no-effects .center-glow,
+.isolated-hamburger-button.no-effects .scan-effect {
+    display: none;
+}
+
+.isolated-hamburger-button.no-hover:hover {
+    transform: none;
+    box-shadow:
+        0 4px 20px rgba(255, 0, 255, 0.2),
+        0 0 40px rgba(0, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 0, 255, 0.1);
+}
+
+/* Gradient Border */
+.isolated-hamburger-button .hamburger-border {
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(45deg,
+            #ff00ff,
+            #00ffff,
+            #ff00ff,
+            #ffd700,
+            #00ffff);
+    border-radius: 19px;
+    opacity: 0.7;
+    z-index: -1;
+    animation: borderRotate 4s linear infinite;
+    transition: all 0.4s ease;
+}
+
+@keyframes borderRotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.isolated-hamburger-button::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background: #000000;
+    border-radius: 14px;
+    z-index: 0;
+    transition: all 0.3s ease;
+}
+
+/* Hover State Enhancement */
+.isolated-hamburger-button:hover {
+    transform: scale(1.1) translateY(-3px) rotateZ(5deg);
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow:
+        0 8px 40px rgba(255, 0, 255, 0.4),
+        0 0 80px rgba(0, 255, 255, 0.3),
+        inset 0 0 30px rgba(255, 0, 255, 0.2);
+}
+
+.isolated-hamburger-button:hover .hamburger-border {
+    opacity: 1;
+    animation-duration: 2s;
+    filter: blur(1px);
+}
+
+/* Corner Accents */
+.isolated-hamburger-button .corner-accent {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid transparent;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+
+.isolated-hamburger-button .corner-tl {
+    top: -2px;
+    left: -2px;
+    border-top-color: #ff00ff;
+    border-left-color: #ff00ff;
+    border-radius: 4px 0 0 0;
+}
+
+.isolated-hamburger-button .corner-br {
+    bottom: -2px;
+    right: -2px;
+    border-bottom-color: #00ffff;
+    border-right-color: #00ffff;
+    border-radius: 0 0 4px 0;
+}
+
+.isolated-hamburger-button:hover .corner-accent {
+    opacity: 1;
+    width: 12px;
+    height: 12px;
+}
+
+/* Energy Field */
+.isolated-hamburger-button .energy-field {
+    position: absolute;
+    inset: -15px;
+    background: radial-gradient(circle at center,
+            transparent 30%,
+            rgba(255, 0, 255, 0.1) 50%,
+            transparent 70%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.isolated-hamburger-button:hover .energy-field {
+    opacity: 1;
+    animation: energyPulse 2s ease-in-out infinite;
+}
+
+@keyframes energyPulse {
+
+    0%,
+    100% {
+        transform: scale(0.8) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.2) rotate(180deg);
+    }
+}
+
+/* Hamburger Wrapper */
+.isolated-hamburger-button .hamburger-wrapper {
+    position: relative;
+    width: 32px;
+    height: calc(3px * 3 + 8px * 2);
+    z-index: 2;
+}
+
+/* Cyberpunk Bar Styling */
+.isolated-hamburger-button .hamburger-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #ff00ff 0%, #00ffff 50%, #ff00ff 100%);
+    box-shadow:
+        0 0 10px rgba(255, 0, 255, 0.8),
+        0 0 20px rgba(0, 255, 255, 0.4),
+        inset 0 0 4px rgba(255, 255, 255, 0.8);
+    opacity: 1;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: translateZ(0);
+}
+
+.isolated-hamburger-button .hamburger-bar--top {
+    bottom: calc(50% + 8px + 3px / 2);
+    background: linear-gradient(90deg, #ff00ff 0%, #ff6ec7 100%);
+    transition-property: bottom, transform, background;
+    transition-delay: calc(0s + 0.35s * 0.6);
+}
+
+.isolated-hamburger-button .hamburger-bar--middle {
+    top: calc(50% - 3px / 2);
+    background: linear-gradient(90deg, #00ffff 0%, #00ff88 100%);
+    transition-property: opacity, transform, background;
+    transition-delay: calc(0s + 0.35s * 0.3);
+}
+
+.isolated-hamburger-button .hamburger-bar--bottom {
+    top: calc(50% + 8px + 3px / 2);
+    background: linear-gradient(90deg, #ffd700 0%, #ff6ec7 100%);
+    transition-property: top, transform, background;
+    transition-delay: 0s;
+}
+
+/* Hover state for bars */
+.isolated-hamburger-button:hover .hamburger-bar {
+    box-shadow:
+        0 0 20px rgba(255, 0, 255, 1),
+        0 0 40px rgba(0, 255, 255, 0.6),
+        inset 0 0 6px rgba(255, 255, 255, 1);
+}
+
+.isolated-hamburger-button:hover .hamburger-bar--top {
+    background: linear-gradient(90deg, #ff00ff 0%, #00ffff 100%);
+    transform: translateX(-2px);
+}
+
+.isolated-hamburger-button:hover .hamburger-bar--middle {
+    background: linear-gradient(90deg, #00ffff 0%, #ff00ff 100%);
+    transform: scaleX(0.8);
+}
+
+.isolated-hamburger-button:hover .hamburger-bar--bottom {
+    background: linear-gradient(90deg, #ffd700 0%, #00ffff 100%);
+    transform: translateX(2px);
+}
+
+/* Center Glow */
+.isolated-hamburger-button .center-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.isolated-hamburger-button:hover .center-glow {
+    opacity: 0.8;
+    animation: glowPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+}
+
+/* Active/Open state */
+.isolated-hamburger-button.is-open {
+    transform: scale(1.05) rotateZ(-90deg);
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow:
+        0 0 50px rgba(255, 0, 255, 0.6),
+        0 0 100px rgba(0, 255, 255, 0.4),
+        inset 0 0 40px rgba(255, 0, 255, 0.3);
+}
+
+.isolated-hamburger-button.is-open .hamburger-border {
+    opacity: 1;
+    animation-duration: 1s;
+    filter: blur(2px);
+}
+
+.isolated-hamburger-button.is-open .hamburger-bar {
+    background: linear-gradient(45deg, #ff00ff 0%, #00ffff 100%);
+    box-shadow:
+        0 0 30px rgba(255, 0, 255, 1),
+        0 0 60px rgba(0, 255, 255, 0.8),
+        inset 0 0 8px rgba(255, 255, 255, 1);
+}
+
+.isolated-hamburger-button.is-open .hamburger-bar--top {
+    transform: rotate(-135deg);
+    transition-delay: 0s;
+    bottom: calc(50% - 3px / 2);
+}
+
+.isolated-hamburger-button.is-open .hamburger-bar--middle {
+    opacity: 0;
+    transform: rotate(-135deg) scaleX(0);
+    transition-delay: calc(0s + 0.35s * 0.3);
+}
+
+.isolated-hamburger-button.is-open .hamburger-bar--bottom {
+    top: calc(50% - 3px / 2);
+    transform: rotate(-225deg);
+    transition-delay: calc(0s + 0.35s * 0.6);
+}
+
+.isolated-hamburger-button.is-open .center-glow {
+    opacity: 1;
+    animation: glowPulse 0.8s ease-in-out infinite;
+}
+
+/* Scan Effect */
+.isolated-hamburger-button .scan-effect {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%);
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.isolated-hamburger-button:hover .scan-effect {
+    opacity: 1;
+    animation: scanDown 2s ease-in-out infinite;
+}
+
+@keyframes scanDown {
+    0% {
+        top: -100%;
+    }
+
+    50% {
+        top: 100%;
+    }
+
+    100% {
+        top: -100%;
+    }
+}
+
+/* Focus state for accessibility */
+.isolated-hamburger-button:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 3px rgba(255, 0, 255, 0.5),
+        0 0 0 6px rgba(0, 255, 255, 0.3),
+        0 8px 40px rgba(255, 0, 255, 0.4),
+        0 0 80px rgba(0, 255, 255, 0.3);
+}
+
+.isolated-hamburger-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Active/Click state */
+.isolated-hamburger-button:active {
+    transform: scale(0.95) rotateZ(0deg);
+    transition: transform 0.1s ease;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .isolated-hamburger-button {
+        width: 48px;
+        height: 48px;
+        margin-right: 0.25rem;
+    }
+
+    .isolated-hamburger-button .hamburger-wrapper {
+        width: 26px;
+        height: calc(2.5px * 3 + 6px * 2);
+    }
+
+    .isolated-hamburger-button .hamburger-bar {
+        height: 2.5px;
+        border-radius: 1.5px;
+    }
+
+    .isolated-hamburger-button .hamburger-bar--top {
+        bottom: calc(50% + 6px + 2.5px / 2);
+    }
+
+    .isolated-hamburger-button .hamburger-bar--middle {
+        top: calc(50% - 2.5px / 2);
+    }
+
+    .isolated-hamburger-button .hamburger-bar--bottom {
+        top: calc(50% + 6px + 2.5px / 2);
+    }
+
+    .isolated-hamburger-button.is-open .hamburger-bar--top {
+        bottom: calc(50% - 2.5px / 2);
+    }
+
+    .isolated-hamburger-button.is-open .hamburger-bar--bottom {
+        top: calc(50% - 2.5px / 2);
+    }
+
+    /* Simplify effects on mobile */
+    .isolated-hamburger-button .energy-field,
+    .isolated-hamburger-button .scan-effect {
+        display: none;
+    }
+
+    .isolated-hamburger-button:hover {
+        transform: scale(1.02) translateY(-1px);
+    }
+}
+
+@media (max-width: 480px) {
+    .isolated-hamburger-button {
+        width: 44px;
+        height: 44px;
+        margin-right: 0;
+        border-radius: 12px;
+    }
+
+    .isolated-hamburger-button .hamburger-wrapper {
+        width: 24px;
+        height: calc(2px * 3 + 5px * 2);
+    }
+
+    .isolated-hamburger-button .hamburger-bar {
+        height: 2px;
+        border-radius: 1px;
+        box-shadow:
+            0 0 6px rgba(255, 255, 255, 0.5),
+            0 0 12px rgba(255, 255, 255, 0.15);
+    }
+
+    .isolated-hamburger-button .hamburger-bar--top {
+        bottom: calc(50% + 5px + 1px);
+    }
+
+    .isolated-hamburger-button .hamburger-bar--middle {
+        top: calc(50% - 1px);
+    }
+
+    .isolated-hamburger-button .hamburger-bar--bottom {
+        top: calc(50% + 5px + 1px);
+    }
+
+    .isolated-hamburger-button.is-open .hamburger-bar--top {
+        bottom: calc(50% - 1px);
+    }
+
+    .isolated-hamburger-button.is-open .hamburger-bar--bottom {
+        top: calc(50% - 1px);
+    }
+
+    .isolated-hamburger-button .corner-accent,
+    .isolated-hamburger-button .center-glow {
+        display: none;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .isolated-hamburger-button {
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .isolated-hamburger-button:hover {
+        transform: none;
+        box-shadow:
+            0 4px 20px rgba(255, 0, 255, 0.2),
+            0 0 40px rgba(0, 255, 255, 0.1),
+            inset 0 0 20px rgba(255, 0, 255, 0.1);
+    }
+
+    .isolated-hamburger-button:hover .hamburger-border {
+        opacity: 0.7;
+        animation: borderRotate 4s linear infinite;
+    }
+
+    .isolated-hamburger-button .energy-field,
+    .isolated-hamburger-button .scan-effect,
+    .isolated-hamburger-button .corner-accent {
+        display: none;
+    }
+
+    .isolated-hamburger-button:active {
+        transform: scale(0.94);
+    }
+}
+
+/* Performance mode */
+@media (prefers-reduced-motion: reduce) {
+    .isolated-hamburger-button .hamburger-border {
+        animation: none !important;
+    }
+
+    .isolated-hamburger-button .energy-field,
+    .isolated-hamburger-button .center-glow,
+    .isolated-hamburger-button .scan-effect {
+        animation: none !important;
+    }
+
+    .isolated-hamburger-button,
+    .isolated-hamburger-button .hamburger-bar {
+        transition-duration: 0.1s !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .isolated-hamburger-button {
+        background: #000000;
+        border: 2px solid #ffffff;
+    }
+
+    .isolated-hamburger-button .hamburger-border {
+        display: none;
+    }
+
+    .isolated-hamburger-button .hamburger-bar {
+        background: #ffffff;
+        box-shadow: none;
+    }
+
+    .isolated-hamburger-button.is-open .hamburger-bar {
+        background: #ffffff;
+    }
+}

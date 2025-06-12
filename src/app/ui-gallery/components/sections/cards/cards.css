@@ -1,0 +1,183 @@
+/* Card Components Styles */
+
+.cards-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: var(--blur-medium);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: var(--glow-large) rgba(0, 255, 255, 0.2);
+}
+
+/* Neon Card */
+.neon-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--arcade-pink);
+  position: relative;
+}
+
+.neon-card .neon-border {
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(45deg, var(--arcade-pink), var(--arcade-cyan), var(--arcade-pink));
+  border-radius: 20px;
+  z-index: -1;
+  animation: neonRotate 3s linear infinite;
+}
+
+@keyframes neonRotate {
+  to { transform: rotate(360deg); }
+}
+
+.neon-card:hover {
+  box-shadow: var(--glow-large) var(--arcade-pink);
+}
+
+/* Cyberpunk Card */
+.cyber-card {
+  background: linear-gradient(135deg, #000 0%, #1a1a2e 100%);
+  border: 1px solid var(--arcade-green);
+  position: relative;
+}
+
+.cyber-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+.cyber-card:hover {
+  border-color: var(--arcade-cyan);
+  box-shadow: var(--glow-medium) var(--arcade-green);
+}
+
+.cyber-card:hover .cyber-grid {
+  opacity: 0.6;
+}
+
+/* Interactive Card */
+.interactive-card {
+  background: rgba(26, 26, 36, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, var(--arcade-cyan), transparent);
+  animation: cardRotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.interactive-card:hover::before {
+  opacity: 0.3;
+}
+
+@keyframes cardRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Card Common Elements */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-icon {
+  color: var(--arcade-cyan);
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-content p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.card-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.stat {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--arcade-cyan);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.card-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  color: var(--arcade-cyan);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.card-button:hover {
+  background: rgba(0, 255, 255, 0.2);
+  transform: translateX(4px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .cards-showcase {
+    grid-template-columns: 1fr;
+  }
+}

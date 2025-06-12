@@ -1,0 +1,300 @@
+/* Enhanced Loading Button Styles */
+
+.loading-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 32px;
+    font-family: var(--font-lastica, 'Impact', Arial Black, sans-serif);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: not-allowed;
+    min-width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Color Variants */
+.loading-button.purple {
+    --loading-color: #8e00ff;
+    --loading-color-light: #b366ff;
+    --loading-color-dark: #6600cc;
+    background: rgba(142, 0, 255, 0.2);
+    border: 1px solid var(--loading-color);
+    color: var(--loading-color);
+}
+
+.loading-button.cyan {
+    --loading-color: #00ffff;
+    --loading-color-light: #66ffff;
+    --loading-color-dark: #00cccc;
+    background: rgba(0, 255, 255, 0.2);
+    border: 1px solid var(--loading-color);
+    color: var(--loading-color);
+}
+
+.loading-button.green {
+    --loading-color: #00ff88;
+    --loading-color-light: #66ffaa;
+    --loading-color-dark: #00cc66;
+    background: rgba(0, 255, 136, 0.2);
+    border: 1px solid var(--loading-color);
+    color: var(--loading-color);
+}
+
+/* Cyber Variant */
+.loading-button.cyber .loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top: 2px solid var(--loading-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-button.cyber .loading-text {
+    animation: textPulse 1.5s ease-in-out infinite;
+}
+
+/* Orbital Variant */
+.loading-button.orbital .orbital-container {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.loading-button.orbital .orbital-core {
+    position: absolute;
+    inset: 25%;
+    background: var(--loading-color);
+    border-radius: 50%;
+    animation: corePulse 2s ease-in-out infinite;
+}
+
+.loading-button.orbital .orbital-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--loading-color);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: ringExpand 2s ease-out infinite;
+}
+
+.loading-button.orbital .orbital-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--loading-color-light);
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: particleOrbit 1.5s linear infinite;
+}
+
+/* Quantum Variant */
+.loading-button.quantum .quantum-field {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.loading-button.quantum .quantum-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--loading-color);
+    border-radius: 50%;
+    animation: quantumJump 1.4s ease-in-out infinite;
+}
+
+.loading-button.quantum .dot-1 {
+    animation-delay: 0s;
+}
+
+.loading-button.quantum .dot-2 {
+    animation-delay: 0.2s;
+}
+
+.loading-button.quantum .dot-3 {
+    animation-delay: 0.4s;
+}
+
+/* Animations */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes textPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes corePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes ringExpand {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes particleOrbit {
+    0% {
+        transform: rotate(0deg) translateX(12px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(12px) rotate(-360deg);
+    }
+}
+
+@keyframes quantumJump {
+
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: scale(1.5) translateY(-4px);
+        opacity: 1;
+    }
+}
+
+/* Loading Bar */
+.loading-button::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--loading-color);
+    animation: loadingBar 2s ease-in-out infinite;
+}
+
+@keyframes loadingBar {
+    0% {
+        width: 0;
+        left: 0;
+    }
+
+    50% {
+        width: 100%;
+        left: 0;
+    }
+
+    100% {
+        width: 0;
+        left: 100%;
+    }
+}
+
+/* Glitch Effect for Text */
+.loading-button.cyber .loading-text::before,
+.loading-button.cyber .loading-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.loading-button.cyber .loading-text::before {
+    animation: glitchTop 2s linear infinite;
+    color: var(--loading-color-light);
+    z-index: -1;
+}
+
+.loading-button.cyber .loading-text::after {
+    animation: glitchBottom 2s linear infinite;
+    color: var(--loading-color-dark);
+    z-index: -1;
+}
+
+@keyframes glitchTop {
+
+    0%,
+    100% {
+        clip-path: inset(0 0 100% 0);
+        transform: translateX(0);
+    }
+
+    50% {
+        clip-path: inset(0 0 50% 0);
+        transform: translateX(-2px);
+    }
+}
+
+@keyframes glitchBottom {
+
+    0%,
+    100% {
+        clip-path: inset(100% 0 0 0);
+        transform: translateX(0);
+    }
+
+    50% {
+        clip-path: inset(50% 0 0 0);
+        transform: translateX(2px);
+    }
+}
+
+/* Background Pattern */
+.loading-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 20px);
+    border-radius: 32px;
+    opacity: 0.5;
+    animation: patternMove 20s linear infinite;
+}
+
+@keyframes patternMove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(20px, 20px);
+    }
+}

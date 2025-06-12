@@ -1,0 +1,16 @@
+{
+  "name": "JourneyViral Enhanced",
+  "short_name": "JourneyViral",
+  "description": "Premium content creation and viral marketing platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00ffff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

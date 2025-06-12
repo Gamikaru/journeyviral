@@ -1,0 +1,34 @@
+/* ========================================
+   ISOLATED HERO TAGLINE
+   ======================================== */
+
+.isolated-hero-tagline-container {
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tagline-content {
+    position: relative;
+}
+
+.tagline-backdrop {
+    background: linear-gradient(135deg, rgba(215, 60, 190, 0.2) 0%, rgba(138, 43, 226, 0.2) 50%, rgba(75, 0, 130, 0.2) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 20px 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tagline-text {
+    font-family: var(--font-lastica, 'Impact', Arial Black, sans-serif);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}

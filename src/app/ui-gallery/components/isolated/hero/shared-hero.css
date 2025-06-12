@@ -1,0 +1,22 @@
+/* Shared Hero Components Styles - Variables and Common Styles */
+
+/* CSS Variables for Isolated Components */
+:root {
+  /* Fallback arcade colors if not defined elsewhere */
+  --arcade-pink: #ff00ff;
+  --arcade-cyan: #00ffff;
+  --arcade-purple: #8e00ff;
+  --arcade-blue: #00d4ff;
+  --arcade-green: #00ff88;
+
+  /* Font families - fallback if not defined */
+  --font-lastica: 'Impact', 'Arial Black', sans-serif;
+}
+
+/* Performance optimizations - Applied to all components */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

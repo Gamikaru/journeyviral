@@ -1,0 +1,277 @@
+/* Form Components Styles */
+
+.forms-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.form-group h4 {
+  color: var(--arcade-cyan);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.input-variants {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Input Styles */
+.input-cyber, .input-neon, .input-glass {
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input-cyber {
+  border: 1px solid var(--arcade-green);
+  background: rgba(0, 255, 0, 0.05);
+}
+
+.input-cyber:focus {
+  border-color: var(--arcade-cyan);
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: var(--glow-small) var(--arcade-cyan);
+}
+
+.input-neon {
+  border: 2px solid var(--arcade-pink);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.input-neon:focus {
+  box-shadow: var(--glow-medium) var(--arcade-pink);
+}
+
+.input-glass {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: var(--blur-light);
+}
+
+.input-glass:focus {
+  border-color: rgba(0, 255, 255, 0.4);
+  background: rgba(0, 255, 255, 0.1);
+}
+
+/* Textarea */
+.textarea-cyber {
+  padding: 1rem 1.5rem;
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid var(--arcade-green);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+}
+
+.textarea-cyber:focus {
+  border-color: var(--arcade-cyan);
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: var(--glow-small) var(--arcade-cyan);
+}
+
+/* Controls Grid */
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* Checkbox Styles */
+.checkbox-cyber, .checkbox-neon {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.checkbox-cyber input, .checkbox-neon input {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.checkbox-cyber .checkmark {
+  border: 2px solid var(--arcade-green);
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.checkbox-cyber input:checked + .checkmark {
+  background: var(--arcade-green);
+  border-color: var(--arcade-green);
+}
+
+.checkbox-cyber input:checked + .checkmark::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-weight: bold;
+}
+
+.checkbox-neon .checkmark {
+  border: 2px solid var(--arcade-pink);
+  background: rgba(255, 0, 255, 0.1);
+}
+
+.checkbox-neon input:checked + .checkmark {
+  background: var(--arcade-pink);
+  border-color: var(--arcade-pink);
+  box-shadow: var(--glow-small) var(--arcade-pink);
+}
+
+.checkbox-neon input:checked + .checkmark::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-weight: bold;
+}
+
+/* Radio Styles */
+.radio-cyber {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.radio-cyber input {
+  display: none;
+}
+
+.radiomark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--arcade-green);
+  border-radius: 50%;
+  background: rgba(0, 255, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.radio-cyber input:checked + .radiomark {
+  background: var(--arcade-green);
+  border-color: var(--arcade-green);
+}
+
+.radio-cyber input:checked + .radiomark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+}
+
+/* Toggle Switches */
+.toggles-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.toggle-cyber, .toggle-neon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.toggle-cyber input, .toggle-neon input {
+  display: none;
+}
+
+.toggle-slider {
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.toggle-cyber .toggle-slider {
+  background: rgba(0, 255, 0, 0.2);
+  border: 2px solid var(--arcade-green);
+}
+
+.toggle-cyber .toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: var(--arcade-green);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.toggle-cyber input:checked + .toggle-slider {
+  background: var(--arcade-green);
+}
+
+.toggle-cyber input:checked + .toggle-slider::before {
+  transform: translateX(28px);
+  background: #000;
+}
+
+.toggle-neon .toggle-slider {
+  background: rgba(255, 0, 255, 0.2);
+  border: 2px solid var(--arcade-pink);
+}
+
+.toggle-neon .toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: var(--arcade-pink);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.toggle-neon input:checked + .toggle-slider {
+  background: var(--arcade-pink);
+  box-shadow: var(--glow-small) var(--arcade-pink);
+}
+
+.toggle-neon input:checked + .toggle-slider::before {
+  transform: translateX(28px);
+  background: #000;
+}
+
+.toggle-label {
+  font-weight: 500;
+}

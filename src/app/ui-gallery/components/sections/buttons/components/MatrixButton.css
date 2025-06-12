@@ -1,0 +1,243 @@
+/* Enhanced Matrix Button Styles */
+
+.matrix-button {
+    position: relative;
+    padding: 1rem 2rem;
+    background: #000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    overflow: hidden;
+    min-width: 200px;
+    transition: all 0.3s ease;
+}
+
+.matrix-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Matrix Background */
+.matrix-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.3;
+}
+
+.matrix-char {
+    position: absolute;
+    color: #00ff00;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 0 0 5px #00ff00;
+    pointer-events: none;
+}
+
+.matrix-char.active {
+    animation: matrixRain var(--duration, 2s) linear infinite;
+}
+
+/* Speed Variants */
+.matrix-button.slow {
+    --duration: 3s;
+}
+
+.matrix-button.normal {
+    --duration: 2s;
+}
+
+.matrix-button.fast {
+    --duration: 1s;
+}
+
+/* Matrix Grid */
+.matrix-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 255, 0, 0.1) 2px),
+        repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(0, 255, 0, 0.1) 2px);
+    background-size: 20px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Text */
+.matrix-text {
+    position: relative;
+    z-index: 2;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Border */
+.matrix-border {
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(90deg, transparent, #00ff00, transparent);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+/* Matrix Rain Animation */
+@keyframes matrixRain {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(calc(100% + 100px));
+        opacity: 0;
+    }
+}
+
+/* Hover Effects */
+.matrix-button:hover:not(:disabled) {
+    background: #001100;
+    text-shadow:
+        0 0 10px #00ff00,
+        0 0 20px #00ff00;
+    box-shadow:
+        0 0 30px rgba(0, 255, 0, 0.5),
+        inset 0 0 30px rgba(0, 255, 0, 0.1);
+}
+
+.matrix-button:hover:not(:disabled) .matrix-grid {
+    opacity: 1;
+    animation: gridScroll 20s linear infinite;
+}
+
+.matrix-button:hover:not(:disabled) .matrix-border {
+    opacity: 1;
+    animation: borderScan 2s linear infinite;
+}
+
+.matrix-button:hover:not(:disabled) .matrix-text {
+    animation: textGlitch 0.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes gridScroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(20px);
+    }
+}
+
+@keyframes borderScan {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes textGlitch {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-2px);
+    }
+
+    40% {
+        transform: translateX(2px);
+    }
+
+    60% {
+        transform: translateX(-1px);
+    }
+
+    80% {
+        transform: translateX(1px);
+    }
+}
+
+/* Terminal Cursor */
+.matrix-button::before {
+    content: '>';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00ff00;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: cursorBlink 1s step-end infinite;
+}
+
+.matrix-button:hover::before {
+    opacity: 1;
+}
+
+@keyframes cursorBlink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Code Effect */
+.matrix-button::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.9);
+    white-space: pre;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.matrix-button:active::after {
+    content: 'ACCESSING MAINFRAME...';
+    opacity: 1;
+    animation: codeScroll 0.5s ease-out;
+}
+
+@keyframes codeScroll {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

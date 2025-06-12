@@ -1,0 +1,109 @@
+/* Dividers Components Styles */
+
+.dividers-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.divider-item h4 {
+  color: var(--arcade-cyan);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.divider {
+  height: 2px;
+  width: 100%;
+  position: relative;
+}
+
+/* Gradient Divider */
+.gradient-divider {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--arcade-cyan) 20%,
+    var(--arcade-purple) 50%,
+    var(--arcade-pink) 80%,
+    transparent 100%);
+}
+
+/* Neon Divider */
+.neon-divider {
+  background: var(--arcade-pink);
+  box-shadow:
+    0 0 10px var(--arcade-pink),
+    0 0 20px var(--arcade-pink),
+    0 0 30px var(--arcade-pink);
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+/* Circuit Divider */
+.circuit-divider {
+  background: var(--arcade-green);
+  position: relative;
+}
+
+.circuit-nodes {
+  position: absolute;
+  top: -3px;
+  left: 20%;
+  width: 8px;
+  height: 8px;
+  background: var(--arcade-green);
+  border-radius: 50%;
+  box-shadow:
+    60px 0 0 var(--arcade-green),
+    120px 0 0 var(--arcade-green),
+    180px 0 0 var(--arcade-green);
+}
+
+/* Matrix Divider */
+.matrix-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  height: 40px;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.matrix-char {
+  font-family: 'Courier New', monospace;
+  color: var(--arcade-green);
+  font-size: 1.2rem;
+  animation: matrixRain 2s infinite;
+}
+
+.matrix-char:nth-child(2) { animation-delay: 0.5s; }
+.matrix-char:nth-child(3) { animation-delay: 1s; }
+
+@keyframes matrixRain {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
+}
+
+/* Glitch Divider */
+.glitch-divider {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: 6px;
+}
+
+.glitch-line {
+  height: 1px;
+  background: var(--arcade-red);
+  animation: glitchLine 3s infinite;
+}
+
+.glitch-line:nth-child(2) { animation-delay: 0.5s; }
+.glitch-line:nth-child(3) { animation-delay: 1s; }
+
+@keyframes glitchLine {
+  0%, 90%, 100% { transform: scaleX(1); opacity: 1; }
+  91% { transform: scaleX(0.8); opacity: 0.8; }
+  92% { transform: scaleX(1.2); opacity: 0.6; }
+  93% { transform: scaleX(0.9); opacity: 0.9; }
+}

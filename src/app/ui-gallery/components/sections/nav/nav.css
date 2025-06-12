@@ -1,0 +1,106 @@
+/* Nav Section Styles */
+
+.nav-section .component-demo {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  position: relative;
+  overflow: visible;
+}
+
+/* Overlay Demo Specific */
+.overlay-demo {
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid rgba(255, 0, 255, 0.4);
+  min-height: 150px;
+}
+
+.demo-trigger-btn {
+  background: linear-gradient(45deg, #ff00ff, #00ffff);
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+}
+
+.demo-trigger-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+}
+
+/* Navbar Demo */
+.navbar-demo {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
+  min-height: 120px;
+  overflow: hidden;
+}
+
+/* Variants Demo */
+.variants-demo {
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem;
+  min-height: 300px;
+}
+
+.variant-item {
+  width: 100%;
+}
+
+.variant-item h5 {
+  color: #00ffff;
+  font-size: 0.875rem;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  font-family: var(--font-interphases, 'Courier New', monospace);
+}
+
+/* Component Grid Overrides for Nav */
+.nav-section .component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.nav-section .component-item.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-section .component-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .overlay-demo {
+    min-height: 120px;
+  }
+
+  .variants-demo {
+    min-height: 250px;
+    gap: 1.5rem;
+  }
+
+  .demo-trigger-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.8125rem;
+  }
+}

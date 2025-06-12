@@ -1,0 +1,53 @@
+/* Hero Elements Section Styles */
+
+.hero-buttons-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  flex-wrap: wrap;
+}
+
+.component-description {
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-style: italic;
+  min-height: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.effects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Ensure buttons maintain their original styling */
+.hero-buttons-showcase .isolated-neon-btn {
+  flex-shrink: 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .hero-buttons-showcase {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .effects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-buttons-showcase {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+}
