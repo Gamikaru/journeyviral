@@ -1,0 +1,641 @@
+/* Gradient Text Demo Styles - Advanced Gradient Typography */
+
+/* ==============================================================================
+   GRADIENT TEXT DEMO CONTAINER
+   ============================================================================== */
+
+.gradient-text-demo .demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-xl);
+}
+
+.gradient-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-lg);
+}
+
+.gradient-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-md);
+}
+
+.group-title {
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  margin: 0;
+  opacity: 0.8;
+  padding-bottom: var(--demo-spacing-xs);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-samples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--demo-spacing-md);
+}
+
+.gradient-item {
+  position: relative;
+  padding: var(--demo-spacing-md);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  isolation: isolate;
+}
+
+.gradient-item:hover {
+  background: rgba(0, 0, 0, 0.5);
+  border-color: var(--demo-arcade-cyan);
+  transform: translateY(-2px);
+  box-shadow: var(--demo-glow-cyan);
+}
+
+.copy-indicator {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: var(--demo-arcade-cyan);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+}
+
+.copy-indicator:hover {
+  background: rgba(0, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* ==============================================================================
+   CYBERPUNK GRADIENTS
+   ============================================================================== */
+
+.gradient-cyber-pink {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #ff006e, #8338ec, #3a86ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.5));
+  isolation: isolate;
+}
+
+.gradient-cyber-blue {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #0066ff, #00ccff, #66ffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.5));
+  isolation: isolate;
+}
+
+.gradient-cyber-green {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #00ff88, #00ffcc, #88ffaa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.5));
+  isolation: isolate;
+}
+
+/* ==============================================================================
+   HOLOGRAPHIC EFFECTS
+   ============================================================================== */
+
+.gradient-holographic {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    45deg,
+    #ff006e 0%,
+    #8338ec 14%,
+    #3a86ff 28%,
+    #06ffa5 42%,
+    #ffbe0b 57%,
+    #fb5607 71%,
+    #ff006e 85%,
+    #8338ec 100%
+  );
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holographic-shift 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 110, 0.6));
+  isolation: isolate;
+}
+
+@keyframes holographic-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 110, 0.6)) hue-rotate(0deg);
+  }
+  25% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 15px rgba(131, 56, 236, 0.6)) hue-rotate(90deg);
+  }
+  50% {
+    background-position: 50% 0%;
+    filter: drop-shadow(0 0 15px rgba(58, 134, 255, 0.6)) hue-rotate(180deg);
+  }
+  75% {
+    background-position: 50% 100%;
+    filter: drop-shadow(0 0 15px rgba(6, 255, 165, 0.6)) hue-rotate(270deg);
+  }
+}
+
+.gradient-iridescent {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    90deg,
+    #ff0080 0%,
+    #ff8c00 16%,
+    #40e0d0 32%,
+    #da70d6 48%,
+    #98fb98 64%,
+    #f0e68c 80%,
+    #ff0080 100%
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: iridescent-flow 3s linear infinite;
+  isolation: isolate;
+}
+
+@keyframes iridescent-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.gradient-prism {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    45deg,
+    #ff0000 0%,
+    #ff7f00 14%,
+    #ffff00 28%,
+    #00ff00 42%,
+    #0000ff 57%,
+    #4b0082 71%,
+    #9400d3 85%,
+    #ff0000 100%
+  );
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: prism-rainbow 5s ease-in-out infinite;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  isolation: isolate;
+}
+
+@keyframes prism-rainbow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ==============================================================================
+   NEON FLOW EFFECTS
+   ============================================================================== */
+
+.gradient-electric {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #00ffff, #0080ff, #8000ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.7));
+  animation: electric-pulse 2s ease-in-out infinite alternate;
+  isolation: isolate;
+}
+
+@keyframes electric-pulse {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.7));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1)) drop-shadow(0 0 30px rgba(128, 0, 255, 0.8));
+  }
+}
+
+.gradient-plasma {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #ff0080, #ff8c00, #ff0080);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: plasma-flow 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 128, 0.6));
+  isolation: isolate;
+}
+
+@keyframes plasma-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 128, 0.6));
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.6));
+  }
+}
+
+.gradient-energy {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #ffff00, #ff8c00, #ff0040);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.8));
+  animation: energy-burst 1.5s ease-in-out infinite alternate;
+  isolation: isolate;
+}
+
+@keyframes energy-burst {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.8));
+  }
+  100% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 1)) drop-shadow(0 0 30px rgba(255, 0, 64, 0.8));
+  }
+}
+
+/* ==============================================================================
+   SUNSET & VINTAGE GRADIENTS
+   ============================================================================== */
+
+.gradient-sunset {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #ff6b35, #f7931e, #ffd23f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.5));
+  isolation: isolate;
+}
+
+.gradient-vintage {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #d4af37, #ffd700, #ffecb3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+  isolation: isolate;
+}
+
+.gradient-ocean {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #0077be, #00a8e8, #007ea7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(0, 119, 190, 0.5));
+  isolation: isolate;
+}
+
+/* ==============================================================================
+   ADVANCED EXAMPLES
+   ============================================================================== */
+
+.advanced-examples {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: var(--demo-spacing-lg);
+  margin-top: var(--demo-spacing-xl);
+}
+
+.examples-title {
+  font-family: var(--demo-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  margin: 0 0 var(--demo-spacing-md) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--demo-spacing-md);
+}
+
+.example-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: var(--demo-spacing-md);
+  text-align: center;
+}
+
+.example-name {
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--demo-arcade-yellow);
+  margin: 0 0 var(--demo-spacing-sm) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.example-demo {
+  padding: var(--demo-spacing-md);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  margin: var(--demo-spacing-sm) 0;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-description {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Advanced gradient effects */
+.gradient-multi-layer {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background:
+    linear-gradient(45deg, #ff006e, transparent),
+    linear-gradient(135deg, #8338ec, transparent),
+    linear-gradient(225deg, #3a86ff, transparent),
+    linear-gradient(315deg, #06ffa5, transparent);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  isolation: isolate;
+}
+
+.gradient-animated {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ff006e);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 3s ease-in-out infinite;
+  isolation: isolate;
+}
+
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-textured {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background:
+    radial-gradient(circle at 20% 50%, transparent 20%, rgba(255, 255, 255, 0.1) 21%, rgba(255, 255, 255, 0.1) 34%, transparent 35%, transparent),
+    linear-gradient(135deg, #ff006e, #8338ec, #3a86ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  isolation: isolate;
+}
+
+/* ==============================================================================
+   IMPLEMENTATION GUIDE
+   ============================================================================== */
+
+.implementation-guide {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: var(--demo-spacing-lg);
+  margin-top: var(--demo-spacing-xl);
+}
+
+.guide-title {
+  font-family: var(--demo-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  margin: 0 0 var(--demo-spacing-md) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--demo-spacing-md);
+}
+
+.code-example {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: var(--demo-spacing-sm);
+}
+
+.code-label {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--demo-arcade-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--demo-spacing-xs);
+}
+
+.code-example code {
+  font-family: var(--demo-font-mono);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================== */
+
+@media (max-width: 768px) {
+  .gradient-samples {
+    grid-template-columns: 1fr;
+    gap: var(--demo-spacing-sm);
+  }
+
+  .examples-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .code-examples {
+    grid-template-columns: 1fr;
+  }
+
+  .gradient-cyber-pink,
+  .gradient-cyber-blue,
+  .gradient-cyber-green,
+  .gradient-holographic,
+  .gradient-iridescent,
+  .gradient-prism,
+  .gradient-electric,
+  .gradient-plasma,
+  .gradient-energy,
+  .gradient-sunset,
+  .gradient-vintage,
+  .gradient-ocean {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gradient-item {
+    padding: var(--demo-spacing-sm);
+    flex-direction: column;
+    gap: var(--demo-spacing-sm);
+  }
+
+  .gradient-cyber-pink,
+  .gradient-cyber-blue,
+  .gradient-cyber-green,
+  .gradient-holographic,
+  .gradient-iridescent,
+  .gradient-prism,
+  .gradient-electric,
+  .gradient-plasma,
+  .gradient-energy,
+  .gradient-sunset,
+  .gradient-vintage,
+  .gradient-ocean {
+    font-size: 1rem;
+  }
+
+  .gradient-multi-layer,
+  .gradient-animated,
+  .gradient-textured {
+    font-size: 1rem;
+  }
+}
+
+/* ==============================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-holographic,
+  .gradient-iridescent,
+  .gradient-prism,
+  .gradient-electric,
+  .gradient-plasma,
+  .gradient-energy,
+  .gradient-animated {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .gradient-cyber-pink,
+  .gradient-cyber-blue,
+  .gradient-cyber-green,
+  .gradient-holographic,
+  .gradient-iridescent,
+  .gradient-prism,
+  .gradient-electric,
+  .gradient-plasma,
+  .gradient-energy,
+  .gradient-sunset,
+  .gradient-vintage,
+  .gradient-ocean,
+  .gradient-multi-layer,
+  .gradient-animated,
+  .gradient-textured {
+    background: none;
+    color: #ffffff;
+    -webkit-text-fill-color: unset;
+    filter: none;
+    text-shadow: none;
+  }
+}

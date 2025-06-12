@@ -1,0 +1,493 @@
+/* Typography Isolation System - Complete CSS Isolation for UI Gallery Demos */
+
+/* ==============================================================================
+   CSS ISOLATION ROOT - PREVENTS STYLE BLEEDING
+   ============================================================================== */
+
+/**
+ * The typography-isolation-root creates a complete styling isolation boundary.
+ * All styles within this container are scoped and cannot affect the main app.
+ * Similarly, global app styles cannot interfere with these demo styles.
+ *
+ * This uses CSS containment, isolation, and custom properties to create
+ * a completely separate styling context.
+ */
+.typography-isolation-root {
+  /* CSS Isolation Properties */
+  isolation: isolate;
+  contain: style layout;
+
+  /* Reset all inherited styles */
+  all: unset;
+
+  /* Re-establish basic layout properties */
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+
+  /* Create clean typography baseline */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+
+  /* Typography rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
+  /* Background and container styles */
+  background: transparent;
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Reset all child elements within isolation root */
+.typography-isolation-root *,
+.typography-isolation-root *::before,
+.typography-isolation-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==============================================================================
+   ISOLATED TYPOGRAPHY VARIABLES - DEMO-SPECIFIC VALUES
+   ============================================================================== */
+
+.typography-isolation-root {
+  /* Demo-specific color palette */
+  --demo-arcade-pink: #ff6ec7;
+  --demo-arcade-cyan: #00ffff;
+  --demo-arcade-purple: #8e2de2;
+  --demo-arcade-green: #00ff88;
+  --demo-arcade-blue: #4facfe;
+  --demo-arcade-yellow: #ffeb3b;
+
+  /* Demo-specific font families */
+  --demo-font-display: 'Bebas Neue', 'Impact', Arial Black, sans-serif;
+  --demo-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --demo-font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --demo-font-lastica: 'Lastica', 'Impact', Arial Black, sans-serif;
+
+  /* Demo-specific spacing */
+  --demo-spacing-xs: 0.5rem;
+  --demo-spacing-sm: 1rem;
+  --demo-spacing-md: 1.5rem;
+  --demo-spacing-lg: 2rem;
+  --demo-spacing-xl: 3rem;
+
+  /* Demo-specific shadows and effects */
+  --demo-glow-pink: 0 0 20px rgba(255, 110, 199, 0.5);
+  --demo-glow-cyan: 0 0 20px rgba(0, 255, 255, 0.5);
+  --demo-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ==============================================================================
+   CONTAINER LAYOUTS
+   ============================================================================== */
+
+.typography-demos-container {
+  padding: var(--demo-spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #000000 100%);
+  min-height: 100vh;
+}
+
+/* Demo Navigation */
+.demo-navigation {
+  margin-bottom: var(--demo-spacing-xl);
+}
+
+.demo-filters {
+  display: flex;
+  gap: var(--demo-spacing-sm);
+  margin-bottom: var(--demo-spacing-lg);
+  flex-wrap: wrap;
+}
+
+.demo-filter-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.demo-filter-btn:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: var(--demo-arcade-cyan);
+  color: var(--demo-arcade-cyan);
+}
+
+.demo-filter-btn.active {
+  background: var(--demo-gradient-neon);
+  border-color: var(--demo-arcade-pink);
+  color: #000000;
+  font-weight: 600;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--demo-spacing-md);
+}
+
+.demo-card {
+  background: rgba(26, 26, 36, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: var(--demo-spacing-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+  backdrop-filter: blur(10px);
+  isolation: isolate;
+  outline: none;
+}
+
+.demo-card:hover {
+  border-color: var(--demo-arcade-cyan);
+  background: rgba(26, 26, 36, 0.9);
+  box-shadow: var(--demo-glow-cyan);
+}
+
+.demo-card.active {
+  border-color: var(--demo-arcade-pink);
+  background: rgba(26, 26, 36, 0.95);
+  box-shadow: var(--demo-glow-pink);
+}
+
+.demo-card.featured::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: var(--demo-gradient-neon);
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.demo-card.featured:hover::before {
+  opacity: 0.3;
+}
+
+.demo-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--demo-spacing-sm);
+}
+
+.demo-card-title {
+  font-family: var(--demo-font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demo-card-category {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demo-card-description {
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.demo-card-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--demo-gradient-neon);
+  color: #000000;
+  font-family: var(--demo-font-body);
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--demo-shadow-lg);
+}
+
+/* Demo Display */
+.demo-display {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: var(--demo-spacing-xl);
+  backdrop-filter: blur(20px);
+  isolation: isolate;
+}
+
+.demo-content-wrapper {
+  width: 100%;
+}
+
+.demo-header-info {
+  text-align: center;
+  margin-bottom: var(--demo-spacing-xl);
+  padding-bottom: var(--demo-spacing-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo-header-info .demo-title {
+  font-family: var(--demo-font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--demo-arcade-cyan);
+  margin-bottom: var(--demo-spacing-sm);
+  text-shadow: var(--demo-glow-cyan);
+  letter-spacing: 0.05em;
+}
+
+.demo-header-info .demo-description {
+  font-family: var(--demo-font-body);
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.demo-component-container {
+  isolation: isolate;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==============================================================================
+   DEMO COMPONENT BASE STYLES
+   ============================================================================== */
+
+.demo-component {
+  background: rgba(26, 26, 36, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: var(--demo-spacing-lg);
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  isolation: isolate;
+}
+
+.demo-component:hover {
+  border-color: var(--demo-arcade-cyan);
+  background: rgba(26, 26, 36, 0.9);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    var(--demo-glow-cyan);
+}
+
+.demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--demo-spacing-md);
+  padding-bottom: var(--demo-spacing-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo-title {
+  font-family: var(--demo-font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  margin: 0;
+}
+
+.demo-content {
+  isolation: isolate;
+  position: relative;
+}
+
+/* ==============================================================================
+   INTERACTIVE CONTROLS
+   ============================================================================== */
+
+.demo-controls {
+  display: flex;
+  gap: var(--demo-spacing-sm);
+  align-items: center;
+}
+
+.demo-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 6px;
+  color: var(--demo-arcade-cyan);
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  outline: none;
+}
+
+.demo-btn:hover {
+  background: rgba(0, 255, 255, 0.2);
+  border-color: var(--demo-arcade-cyan);
+  transform: translateY(-1px);
+  box-shadow: var(--demo-glow-cyan);
+}
+
+.demo-btn:active {
+  transform: translateY(0);
+}
+
+.demo-btn.success {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.3);
+  color: var(--demo-arcade-green);
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================== */
+
+@media (min-width: 768px) {
+  .demos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .demo-component.full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .typography-demos-container {
+    padding: var(--demo-spacing-xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .typography-demos-container {
+    padding: var(--demo-spacing-md);
+  }
+
+  .demo-component {
+    padding: var(--demo-spacing-md);
+  }
+
+  .demo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--demo-spacing-sm);
+  }
+
+  .demo-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ==============================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .typography-isolation-root {
+    --demo-arcade-pink: #ff69b4;
+    --demo-arcade-cyan: #00ffff;
+    --demo-arcade-green: #00ff00;
+  }
+
+  .demo-component {
+    border-width: 2px;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .demo-btn {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .typography-isolation-root * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .demo-component:hover {
+    transform: none;
+  }
+
+  .demo-btn:hover {
+    transform: none;
+  }
+}
+
+/* Focus management for accessibility */
+.typography-isolation-root :focus {
+  outline: 2px solid var(--demo-arcade-cyan);
+  outline-offset: 2px;
+}
+
+.typography-isolation-root :focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Print styles */
+@media print {
+  .typography-isolation-root {
+    background: white;
+    color: black;
+  }
+
+  .demo-component {
+    background: white;
+    border: 1px solid black;
+    page-break-inside: avoid;
+  }
+
+  .demo-controls {
+    display: none;
+  }
+}

@@ -1,0 +1,403 @@
+/* Headline Styles Demo - Isolated Styles */
+
+/* ==============================================================================
+   HEADLINES DEMO CONTAINER
+   ============================================================================== */
+
+.headlines-demo .demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-xl);
+}
+
+.headline-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-md);
+}
+
+.group-title {
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  margin: 0;
+  opacity: 0.8;
+  padding-bottom: var(--demo-spacing-xs);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headline-samples,
+.body-samples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-md);
+}
+
+.headline-item {
+  position: relative;
+  padding: var(--demo-spacing-sm);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  isolation: isolate;
+}
+
+.headline-item:hover {
+  background: rgba(0, 0, 0, 0.5);
+  border-color: var(--demo-arcade-cyan);
+  transform: translateY(-2px);
+  box-shadow: var(--demo-glow-cyan);
+}
+
+.copy-indicator {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: var(--demo-arcade-cyan);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+}
+
+.copy-indicator:hover {
+  background: rgba(0, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.demo-info {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* ==============================================================================
+   H1 STYLES
+   ============================================================================== */
+
+.h1-gradient {
+  font-family: var(--demo-font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--demo-arcade-cyan), var(--demo-arcade-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  transition: all 0.3s ease;
+  isolation: isolate;
+}
+
+.h1-glitch {
+  font-family: var(--demo-font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--demo-arcade-pink);
+  text-shadow:
+    0.1em 0 0 var(--demo-arcade-cyan),
+    -0.1em 0 0 var(--demo-arcade-yellow);
+  animation: glitch-text 3s infinite;
+  margin: 0;
+  isolation: isolate;
+}
+
+@keyframes glitch-text {
+  0%, 90%, 100% { transform: translate(0); }
+  91% { transform: translate(-2px, -1px); }
+  92% { transform: translate(2px, 1px); }
+  93% { transform: translate(-1px, 2px); }
+  94% { transform: translate(1px, -2px); }
+  95% { transform: translate(-2px, 1px); }
+}
+
+.h1-neon {
+  font-family: var(--demo-font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--demo-arcade-green);
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px currentColor;
+  animation: neon-flicker 2s infinite alternate;
+  margin: 0;
+  isolation: isolate;
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.h1-layered-shadow {
+  font-family: var(--demo-font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow:
+    -2px 2px 0 var(--demo-arcade-pink),
+    -4px 4px 0 var(--demo-arcade-cyan),
+    -6px 6px 0 var(--demo-arcade-purple),
+    -8px 8px 20px rgba(0, 0, 0, 0.4);
+  transform: skewX(-2deg);
+  transition: all 0.3s ease;
+  margin: 0;
+  isolation: isolate;
+}
+
+.h1-layered-shadow:hover {
+  transform: skewX(-2deg) scale(1.02) translateY(-2px);
+  text-shadow:
+    -2px 2px 0 rgba(255, 0, 255, 1),
+    -4px 4px 0 rgba(0, 255, 255, 1),
+    -6px 6px 0 rgba(142, 0, 255, 1),
+    -8px 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* ==============================================================================
+   H2 STYLES
+   ============================================================================== */
+
+.h2-cyber {
+  font-family: var(--demo-font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: var(--demo-arcade-green);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  margin: 0;
+  isolation: isolate;
+}
+
+.h2-cyber::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--demo-arcade-green), transparent);
+}
+
+.h2-glass {
+  font-family: var(--demo-font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.h2-gradient-flow {
+  font-family: var(--demo-font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  background: linear-gradient(
+    45deg,
+    var(--demo-arcade-cyan) 0%,
+    var(--demo-arcade-purple) 25%,
+    var(--demo-arcade-pink) 50%,
+    var(--demo-arcade-cyan) 75%,
+    var(--demo-arcade-purple) 100%
+  );
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 4s ease-in-out infinite;
+  margin: 0;
+  isolation: isolate;
+}
+
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ==============================================================================
+   H3 STYLES
+   ============================================================================== */
+
+.h3-accent {
+  font-family: var(--demo-font-body);
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  margin: 0;
+  isolation: isolate;
+}
+
+.h3-outline {
+  font-family: var(--demo-font-body);
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--demo-arcade-purple);
+  text-stroke: 1px var(--demo-arcade-purple);
+  margin: 0;
+  isolation: isolate;
+}
+
+.h3-glow {
+  font-family: var(--demo-font-body);
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  text-shadow:
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 30px currentColor;
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+  margin: 0;
+  isolation: isolate;
+}
+
+@keyframes pulse-glow {
+  from {
+    text-shadow:
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor;
+  }
+  to {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
+  }
+}
+
+/* ==============================================================================
+   BODY TEXT STYLES
+   ============================================================================== */
+
+.body-samples {
+  background: rgba(0, 0, 0, 0.3);
+  padding: var(--demo-spacing-md);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.h4-standard {
+  font-family: var(--demo-font-body);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 var(--demo-spacing-sm) 0;
+  isolation: isolate;
+}
+
+.body-primary {
+  font-family: var(--demo-font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 var(--demo-spacing-sm) 0;
+  isolation: isolate;
+}
+
+.body-secondary {
+  font-family: var(--demo-font-body);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 var(--demo-spacing-sm) 0;
+  isolation: isolate;
+}
+
+.body-accent {
+  font-family: var(--demo-font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--demo-arcade-pink);
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+  margin: 0;
+  isolation: isolate;
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================== */
+
+@media (max-width: 768px) {
+  .headline-samples,
+  .body-samples {
+    gap: var(--demo-spacing-sm);
+  }
+
+  .body-samples {
+    padding: var(--demo-spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .h1-gradient,
+  .h1-glitch,
+  .h1-neon,
+  .h1-layered-shadow {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+
+  .h2-cyber,
+  .h2-glass,
+  .h2-gradient-flow {
+    font-size: clamp(1.25rem, 6vw, 1.5rem);
+  }
+}
+
+/* ==============================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .h1-glitch,
+  .h1-neon,
+  .h2-gradient-flow,
+  .h3-glow {
+    animation: none;
+  }
+
+  .h1-layered-shadow:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .h1-gradient {
+    background: none;
+    color: var(--demo-arcade-cyan);
+    -webkit-text-fill-color: var(--demo-arcade-cyan);
+  }
+
+  .h1-glitch {
+    text-shadow: none;
+  }
+
+  .h3-outline {
+    color: var(--demo-arcade-purple);
+    -webkit-text-stroke: none;
+  }
+}

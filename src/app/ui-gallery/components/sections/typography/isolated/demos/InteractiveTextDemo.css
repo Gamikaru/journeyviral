@@ -1,0 +1,770 @@
+/* Interactive Text Demo Styles - Advanced Interactive Typography */
+
+/* ==============================================================================
+   INTERACTIVE TEXT DEMO CONTAINER
+   ============================================================================== */
+
+.interactive-text-demo .demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-xl);
+}
+
+.interactive-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-lg);
+}
+
+.interactive-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-md);
+}
+
+.group-title {
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  margin: 0;
+  opacity: 0.8;
+  padding-bottom: var(--demo-spacing-xs);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.interactive-samples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--demo-spacing-md);
+}
+
+.interactive-item {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: var(--demo-spacing-md);
+  text-align: center;
+  transition: all 0.3s ease;
+  isolation: isolate;
+}
+
+.interactive-item:hover {
+  border-color: var(--demo-arcade-cyan);
+  box-shadow: var(--demo-glow-cyan);
+  transform: translateY(-2px);
+}
+
+.effect-name {
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--demo-arcade-yellow);
+  margin: 0 0 var(--demo-spacing-sm) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.effect-demo {
+  padding: var(--demo-spacing-lg);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  margin: var(--demo-spacing-sm) 0;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.effect-description {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-style: italic;
+}
+
+.demo-btn.active {
+  background: var(--demo-arcade-cyan);
+  color: #000000;
+}
+
+/* ==============================================================================
+   MOUSE TRACKING EFFECTS
+   ============================================================================== */
+
+.text-3d-tilt {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+  isolation: isolate;
+}
+
+.text-3d-tilt.tracking {
+  transform:
+    perspective(1000px)
+    rotateX(calc((var(--mouse-y, 50) - 50) * 0.3deg))
+    rotateY(calc((var(--mouse-x, 50) - 50) * 0.3deg))
+    translateZ(20px);
+  text-shadow:
+    calc((var(--mouse-x, 50) - 50) * 0.1px) calc((var(--mouse-y, 50) - 50) * 0.1px) 0 rgba(0, 255, 255, 0.8),
+    calc((var(--mouse-x, 50) - 50) * 0.2px) calc((var(--mouse-y, 50) - 50) * 0.2px) 0 rgba(0, 255, 255, 0.6),
+    calc((var(--mouse-x, 50) - 50) * 0.3px) calc((var(--mouse-y, 50) - 50) * 0.3px) 0 rgba(0, 255, 255, 0.4);
+}
+
+.text-magnetic {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-pink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  isolation: isolate;
+}
+
+.text-magnetic:hover {
+  transform: scale(1.1);
+  color: var(--demo-arcade-cyan);
+  text-shadow:
+    0 0 20px currentColor,
+    0 0 40px currentColor,
+    0 0 60px currentColor;
+}
+
+.text-spotlight {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: transparent;
+  background: linear-gradient(45deg, var(--demo-arcade-purple), var(--demo-arcade-cyan));
+  background-clip: text;
+  -webkit-background-clip: text;
+  position: relative;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.text-spotlight::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.4) 20%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.text-spotlight:hover::before {
+  opacity: 1;
+  animation: spotlight-move 2s ease-in-out infinite;
+}
+
+@keyframes spotlight-move {
+  0%, 100% { transform: translate(-20%, -20%); }
+  50% { transform: translate(20%, 20%); }
+}
+
+/* ==============================================================================
+   HOVER INTERACTIONS
+   ============================================================================== */
+
+.text-char-split {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-green);
+  cursor: pointer;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.text-char-split:hover {
+  animation: char-split 0.6s ease-in-out;
+}
+
+@keyframes char-split {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.1) skewX(-5deg); }
+  40% { transform: scale(0.9) skewX(5deg); }
+  60% { transform: scale(1.05) skewX(-2deg); }
+  80% { transform: scale(0.95) skewX(2deg); }
+  100% { transform: scale(1); }
+}
+
+.text-wave {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-purple);
+  cursor: pointer;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.text-wave:hover {
+  animation: wave-distort 1s ease-in-out;
+}
+
+@keyframes wave-distort {
+  0%, 100% {
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  25% {
+    transform: scaleY(1.2) scaleX(0.8);
+    filter: blur(1px);
+  }
+  50% {
+    transform: scaleY(0.8) scaleX(1.2);
+    filter: blur(2px);
+  }
+  75% {
+    transform: scaleY(1.1) scaleX(0.9);
+    filter: blur(1px);
+  }
+}
+
+.text-color-burst {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-yellow);
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+}
+
+.text-color-burst:hover {
+  animation: color-explosion 0.8s ease-out;
+}
+
+@keyframes color-explosion {
+  0% {
+    color: var(--demo-arcade-yellow);
+    text-shadow: none;
+  }
+  20% {
+    color: var(--demo-arcade-pink);
+    text-shadow:
+      0 0 20px var(--demo-arcade-pink),
+      0 0 40px var(--demo-arcade-pink);
+  }
+  40% {
+    color: var(--demo-arcade-cyan);
+    text-shadow:
+      0 0 30px var(--demo-arcade-cyan),
+      0 0 60px var(--demo-arcade-cyan);
+  }
+  60% {
+    color: var(--demo-arcade-green);
+    text-shadow:
+      0 0 40px var(--demo-arcade-green),
+      0 0 80px var(--demo-arcade-green);
+  }
+  80% {
+    color: var(--demo-arcade-purple);
+    text-shadow:
+      0 0 50px var(--demo-arcade-purple),
+      0 0 100px var(--demo-arcade-purple);
+  }
+  100% {
+    color: var(--demo-arcade-yellow);
+    text-shadow: none;
+  }
+}
+
+/* ==============================================================================
+   CLICK INTERACTIONS
+   ============================================================================== */
+
+.text-shatter {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+}
+
+.text-shatter:active {
+  animation: shatter-effect 0.6s ease-out;
+}
+
+@keyframes shatter-effect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  40% {
+    transform: scale(0.9) rotate(2deg);
+    opacity: 0.6;
+    filter: blur(1px);
+  }
+  60% {
+    transform: scale(1.2) rotate(-3deg);
+    opacity: 0.4;
+    filter: blur(2px);
+  }
+  80% {
+    transform: scale(0.8) rotate(5deg);
+    opacity: 0.2;
+    filter: blur(3px);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.text-morph {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-pink);
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+}
+
+.text-morph:active {
+  animation: morph-transform 1s ease-in-out;
+}
+
+@keyframes morph-transform {
+  0%, 100% {
+    transform: scale(1);
+    letter-spacing: 0.1em;
+  }
+  25% {
+    transform: scaleX(0.5) scaleY(1.5);
+    letter-spacing: 0.05em;
+  }
+  50% {
+    transform: scaleX(1.5) scaleY(0.5);
+    letter-spacing: 0.2em;
+  }
+  75% {
+    transform: scaleX(0.8) scaleY(1.2);
+    letter-spacing: 0.15em;
+  }
+}
+
+.text-particles {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-green);
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+}
+
+.text-particles:active {
+  animation: particle-burst 0.8s ease-out;
+}
+
+@keyframes particle-burst {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+  20% {
+    transform: scale(1.2);
+    box-shadow:
+      0 0 0 10px rgba(0, 255, 136, 0.6),
+      0 0 0 20px rgba(0, 255, 136, 0.4);
+  }
+  40% {
+    transform: scale(0.8);
+    box-shadow:
+      0 0 0 30px rgba(0, 255, 136, 0.4),
+      0 0 0 60px rgba(0, 255, 136, 0.2);
+  }
+  60% {
+    transform: scale(1.1);
+    box-shadow:
+      0 0 0 50px rgba(0, 255, 136, 0.2),
+      0 0 0 100px rgba(0, 255, 136, 0.1);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+
+/* ==============================================================================
+   SCROLL INTERACTIONS
+   ============================================================================== */
+
+.scroll-demo {
+  min-height: 120px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.text-parallax {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-purple);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: parallax-reveal 2s ease-out 0.5s forwards;
+  isolation: isolate;
+}
+
+@keyframes parallax-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.text-letter-reveal {
+  font-family: var(--demo-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  opacity: 0;
+  animation: letter-reveal 3s ease-out 0.8s forwards;
+  isolation: isolate;
+}
+
+@keyframes letter-reveal {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* ==============================================================================
+   ADVANCED INTERACTIVE DEMO
+   ============================================================================== */
+
+.advanced-interactive {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: var(--demo-spacing-lg);
+  margin-top: var(--demo-spacing-xl);
+}
+
+.advanced-title {
+  font-family: var(--demo-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  margin: 0 0 var(--demo-spacing-md) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.advanced-demo-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-playground {
+  text-align: center;
+  position: relative;
+}
+
+.interactive-playground-text {
+  font-family: var(--demo-font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-pink);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.interactive-playground-text:hover {
+  transform: scale(1.1) perspective(1000px) rotateX(10deg);
+  text-shadow:
+    0 0 20px var(--demo-arcade-pink),
+    0 0 40px var(--demo-arcade-cyan),
+    0 0 60px var(--demo-arcade-purple);
+  color: var(--demo-arcade-cyan);
+}
+
+.interactive-playground-text:active {
+  animation: playground-burst 0.8s ease-out;
+}
+
+@keyframes playground-burst {
+  0% {
+    transform: scale(1.1);
+  }
+  20% {
+    transform: scale(1.3) rotate(5deg);
+  }
+  40% {
+    transform: scale(0.9) rotate(-3deg);
+  }
+  60% {
+    transform: scale(1.2) rotate(2deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-1deg);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.interaction-indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--demo-spacing-md);
+  margin-top: var(--demo-spacing-md);
+  opacity: 0.7;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--demo-spacing-xs);
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==============================================================================
+   IMPLEMENTATION GUIDE
+   ============================================================================== */
+
+.implementation-guide {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: var(--demo-spacing-lg);
+  margin-top: var(--demo-spacing-xl);
+}
+
+.guide-title {
+  font-family: var(--demo-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  margin: 0 0 var(--demo-spacing-md) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--demo-spacing-md);
+}
+
+.code-example {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: var(--demo-spacing-sm);
+}
+
+.code-label {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--demo-arcade-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--demo-spacing-xs);
+}
+
+.code-example code {
+  font-family: var(--demo-font-mono);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================== */
+
+@media (max-width: 768px) {
+  .interactive-samples {
+    grid-template-columns: 1fr;
+    gap: var(--demo-spacing-sm);
+  }
+
+  .code-examples {
+    grid-template-columns: 1fr;
+  }
+
+  .interaction-indicators {
+    flex-direction: column;
+    gap: var(--demo-spacing-xs);
+  }
+
+  .text-3d-tilt,
+  .text-magnetic,
+  .text-spotlight,
+  .text-char-split,
+  .text-wave,
+  .text-color-burst,
+  .text-shatter,
+  .text-morph,
+  .text-particles,
+  .text-parallax,
+  .text-letter-reveal {
+    font-size: 1.25rem;
+  }
+
+  .interactive-playground-text {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .effect-demo {
+    padding: var(--demo-spacing-sm);
+    min-height: 60px;
+  }
+
+  .advanced-demo-area {
+    min-height: 150px;
+  }
+
+  .text-3d-tilt,
+  .text-magnetic,
+  .text-spotlight,
+  .text-char-split,
+  .text-wave,
+  .text-color-burst,
+  .text-shatter,
+  .text-morph,
+  .text-particles,
+  .text-parallax,
+  .text-letter-reveal {
+    font-size: 1rem;
+  }
+
+  .interactive-playground-text {
+    font-size: 1.25rem;
+  }
+}
+
+/* ==============================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .text-3d-tilt,
+  .text-magnetic,
+  .text-spotlight,
+  .text-char-split,
+  .text-wave,
+  .text-color-burst,
+  .text-shatter,
+  .text-morph,
+  .text-particles,
+  .text-parallax,
+  .text-letter-reveal,
+  .interactive-playground-text {
+    animation: none;
+    transition: none;
+  }
+
+  .text-3d-tilt.tracking {
+    transform: none;
+    text-shadow: 0 0 10px var(--demo-arcade-cyan);
+  }
+
+  .text-spotlight::before {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .text-3d-tilt,
+  .text-magnetic,
+  .text-char-split,
+  .text-wave,
+  .text-color-burst,
+  .text-shatter,
+  .text-morph,
+  .text-particles,
+  .text-parallax,
+  .text-letter-reveal,
+  .interactive-playground-text {
+    text-shadow: none;
+    color: #ffffff;
+  }
+
+  .text-spotlight {
+    background: none;
+    color: #ffffff;
+    -webkit-text-fill-color: unset;
+  }
+}

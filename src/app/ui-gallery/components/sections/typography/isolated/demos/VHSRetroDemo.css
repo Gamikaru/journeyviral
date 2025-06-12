@@ -1,0 +1,1447 @@
+/* app/ui-gallery/components/sections/typography/isolated/demos/VHSRetroDemo.css */
+
+/* ==============================================================================
+   VHS RETRO DEMO CONTAINER
+   ============================================================================== */
+
+.vhs-retro-demo {
+  position: relative;
+  overflow: hidden;
+}
+
+.vhs-retro-demo::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 0, 255, 0.05) 0%,
+    transparent 50%
+  );
+  animation: retro-float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.vhs-retro-demo .demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==============================================================================
+   RETRO SHOWCASE GRID
+   ============================================================================== */
+
+.retro-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.retro-item {
+  background: var(--color-glass-dark);
+  backdrop-filter: var(--backdrop-blur-md);
+  -webkit-backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-neon-pink) 50%,
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: scan-line 4s linear infinite;
+}
+
+.retro-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-neon-pink);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(255, 0, 255, 0.1);
+}
+
+.retro-title {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-neon-cyan);
+  margin: 0 0 1rem 0;
+  opacity: 0.9;
+}
+
+.retro-demo {
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-description {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--color-text-tertiary);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ==============================================================================
+   VHS RECORDING STYLE - ENHANCED
+   ============================================================================== */
+
+.vhs-screen {
+  background: #000;
+  border: 2px solid #333;
+  position: relative;
+  padding: 2rem;
+}
+
+.vhs-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    );
+  pointer-events: none;
+  z-index: 3;
+}
+
+.vhs-tracking {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.vhs-tracking[data-tracking="true"] {
+  animation: vhs-tracking 2s ease-out;
+}
+
+.vhs-text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.rec-indicator {
+  font-size: 1rem;
+  color: #ff0000;
+  animation: rec-blink 1s infinite;
+  text-shadow:
+    0 0 10px #ff0000,
+    0 0 20px #ff0000;
+}
+
+.vhs-title {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow:
+    2px 2px 0 rgba(255, 0, 0, 0.5),
+    -1px -1px 0 rgba(0, 255, 255, 0.5);
+  animation: vhs-distort 0.5s infinite;
+}
+
+.vhs-timestamp {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #333;
+  z-index: 4;
+}
+
+.vhs-play {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+  z-index: 4;
+}
+
+@keyframes rec-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes vhs-tracking {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes vhs-distort {
+  0%, 90% {
+    transform: translateX(0);
+    filter: blur(0);
+  }
+  91% {
+    transform: translateX(-2px);
+    filter: blur(1px);
+  }
+  92% {
+    transform: translateX(2px);
+    filter: blur(0.5px);
+  }
+  93% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* ==============================================================================
+   CHROME METAL EFFECT - ENHANCED
+   ============================================================================== */
+
+.chrome-demo {
+  background: linear-gradient(
+    135deg,
+    #1a1a1a 0%,
+    #2a2a2a 50%,
+    #1a1a1a 100%
+  );
+  position: relative;
+}
+
+.chrome-reflection {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 70%
+  );
+  animation: chrome-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.retro-metal {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    135deg,
+    #c0c0c0 0%,
+    #ffffff 20%,
+    #ffffff 40%,
+    #c0c0c0 50%,
+    #808080 60%,
+    #ffffff 80%,
+    #c0c0c0 100%
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8))
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  animation: chrome-shine 4s ease-in-out infinite;
+  position: relative;
+}
+
+.retro-metal::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: none;
+  color: rgba(0, 0, 0, 0.3);
+  filter: blur(2px);
+  transform: translate(2px, 2px);
+}
+
+@keyframes chrome-sweep {
+  0%, 100% {
+    transform: rotate(25deg) translateX(-200%);
+  }
+  50% {
+    transform: rotate(25deg) translateX(200%);
+  }
+}
+
+@keyframes chrome-shine {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ==============================================================================
+   CRT SCANLINES EFFECT - ENHANCED
+   ============================================================================== */
+
+.crt-monitor {
+  background: radial-gradient(
+    ellipse at center,
+    #001100 0%,
+    #000000 100%
+  );
+  border: 3px solid #222;
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 0 50px rgba(0, 255, 0, 0.2),
+    0 0 20px rgba(0, 0, 0, 0.8);
+  position: relative;
+  padding: 2rem;
+}
+
+.crt-frame {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 3px solid #444;
+  border-radius: 1rem;
+  pointer-events: none;
+}
+
+.scanlines-text {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00ff00;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow:
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 30px #00ff00;
+  position: relative;
+  z-index: 1;
+  animation: crt-text-flicker 4s infinite;
+}
+
+.scanlines-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0, 255, 0, 0.15) 1px,
+    rgba(0, 255, 0, 0.15) 2px,
+    transparent 2px,
+    transparent 3px
+  );
+  animation: scanlines-move 0.1s linear infinite;
+  pointer-events: none;
+}
+
+.crt-flicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 255, 0, 0.05);
+  opacity: 0;
+  animation: crt-flicker 0.15s infinite;
+  pointer-events: none;
+}
+
+.phosphor-burn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 255, 0, 0.1) 50%,
+    rgba(0, 255, 0, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+@keyframes crt-text-flicker {
+  0%, 90%, 100% {
+    opacity: 1;
+  }
+  91% {
+    opacity: 0.8;
+  }
+  92% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes crt-flicker {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes scanlines-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(3px);
+  }
+}
+
+/* ==============================================================================
+   80S NEON SIGN EFFECT - ENHANCED
+   ============================================================================== */
+
+.neon-demo {
+  background: #0a0a0a;
+  position: relative;
+  padding: 2.5rem 2rem;
+}
+
+.neon-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.neon-sign span {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  position: relative;
+}
+
+.neon-sign span:first-child {
+  color: var(--color-neon-pink);
+  text-shadow:
+    0 0 10px var(--color-neon-pink),
+    0 0 20px var(--color-neon-pink),
+    0 0 40px var(--color-neon-pink),
+    0 0 80px var(--color-neon-pink),
+    0 0 120px var(--color-neon-pink);
+  animation: neon-pulse-pink 2s ease-in-out infinite alternate;
+}
+
+.neon-sign span:last-child {
+  color: var(--color-neon-cyan);
+  text-shadow:
+    0 0 10px var(--color-neon-cyan),
+    0 0 20px var(--color-neon-cyan),
+    0 0 40px var(--color-neon-cyan),
+    0 0 80px var(--color-neon-cyan),
+    0 0 120px var(--color-neon-cyan);
+  animation: neon-pulse-cyan 2s ease-in-out infinite alternate 0.5s;
+}
+
+.neon-reflection {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 0, 255, 0.2) 0%,
+    transparent 50%
+  );
+  filter: blur(20px);
+  transform: scaleY(-1);
+  opacity: 0.5;
+}
+
+@keyframes neon-pulse-pink {
+  0%, 100% {
+    text-shadow:
+      0 0 10px var(--color-neon-pink),
+      0 0 20px var(--color-neon-pink),
+      0 0 40px var(--color-neon-pink),
+      0 0 80px var(--color-neon-pink),
+      0 0 120px var(--color-neon-pink);
+  }
+  50% {
+    text-shadow:
+      0 0 5px var(--color-neon-pink),
+      0 0 10px var(--color-neon-pink),
+      0 0 20px var(--color-neon-pink),
+      0 0 40px var(--color-neon-pink),
+      0 0 80px var(--color-neon-pink);
+  }
+}
+
+@keyframes neon-pulse-cyan {
+  0%, 100% {
+    text-shadow:
+      0 0 10px var(--color-neon-cyan),
+      0 0 20px var(--color-neon-cyan),
+      0 0 40px var(--color-neon-cyan),
+      0 0 80px var(--color-neon-cyan),
+      0 0 120px var(--color-neon-cyan);
+  }
+  50% {
+    text-shadow:
+      0 0 5px var(--color-neon-cyan),
+      0 0 10px var(--color-neon-cyan),
+      0 0 20px var(--color-neon-cyan),
+      0 0 40px var(--color-neon-cyan),
+      0 0 80px var(--color-neon-cyan);
+  }
+}
+
+/* ==============================================================================
+   DIGITAL CLOCK DISPLAY - ENHANCED
+   ============================================================================== */
+
+.digital-demo {
+  background: #000;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.digital-frame {
+  background: #111;
+  border: 3px solid #333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(0, 255, 0, 0.2);
+  position: relative;
+}
+
+.digital-clock {
+  font-family: 'Courier New', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #00ff00;
+  text-shadow:
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 30px #00ff00;
+  letter-spacing: 0.2em;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.digital-clock::before {
+  content: attr(data-time);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(0, 100, 0, 0.3);
+  filter: blur(1px);
+  z-index: -1;
+}
+
+.digital-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: #00ff00;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+  opacity: 0.6;
+}
+
+.led-dots {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.led-dots::before,
+.led-dots::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: #00ff00;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff00;
+  animation: led-blink 1s infinite;
+}
+
+@keyframes led-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ==============================================================================
+   SYNTHWAVE STYLE - ENHANCED
+   ============================================================================== */
+
+.synthwave-demo {
+  background: linear-gradient(
+    180deg,
+    #0a0a2e 0%,
+    #1e1e3f 50%,
+    #2d1b4e 100%
+  );
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 2rem 2rem;
+}
+
+.synthwave-grid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background-image:
+    linear-gradient(rgba(255, 0, 255, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.3) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(400px) rotateX(60deg);
+  transform-origin: center bottom;
+  animation: grid-move 10s linear infinite;
+}
+
+.synthwave-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.synth-main {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  background: linear-gradient(
+    180deg,
+    #ff00ff 0%,
+    #ff006e 25%,
+    #ff4500 50%,
+    #ffff00 75%,
+    #ff00ff 100%
+  );
+  background-size: 100% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: synthwave-gradient 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.5));
+}
+
+.synth-year {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-neon-cyan);
+  text-stroke: 2px var(--color-neon-cyan);
+  text-shadow:
+    0 0 20px var(--color-neon-cyan),
+    0 0 40px var(--color-neon-cyan);
+  margin-top: -0.5rem;
+}
+
+.synthwave-sun {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(
+    circle,
+    #ff006e 0%,
+    #ff4500 50%,
+    #ffff00 100%
+  );
+  border-radius: 50%;
+  box-shadow:
+    0 0 60px rgba(255, 0, 110, 0.8),
+    0 0 120px rgba(255, 69, 0, 0.6);
+  animation: sun-pulse 4s ease-in-out infinite;
+}
+
+@keyframes grid-move {
+  0% {
+    transform: perspective(400px) rotateX(60deg) translateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateX(60deg) translateY(50px);
+  }
+}
+
+@keyframes synthwave-gradient {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes sun-pulse {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+/* ==============================================================================
+   ARCADE GAME STYLE - ENHANCED
+   ============================================================================== */
+
+.arcade-demo {
+  background: #000;
+  padding: 0;
+  border: 4px solid #222;
+  border-radius: 0.5rem;
+}
+
+.arcade-screen {
+  background: radial-gradient(
+    ellipse at center,
+    #001a00 0%,
+    #000000 100%
+  );
+  padding: 2rem;
+  position: relative;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.arcade-text {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffff00;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow:
+    3px 3px 0px #ff8c00,
+    6px 6px 0px #ff4500,
+    9px 9px 0px #dc143c,
+    12px 12px 20px rgba(0, 0, 0, 0.8);
+  transform: perspective(300px) rotateX(-10deg);
+  animation: arcade-pulse 2s ease-in-out infinite;
+}
+
+.arcade-score,
+.arcade-credits {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #00ff00;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.arcade-credits {
+  color: #ff0000;
+  animation: credits-blink 1s step-end infinite;
+}
+
+.arcade-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 4px
+  );
+  pointer-events: none;
+}
+
+@keyframes arcade-pulse {
+  0%, 100% {
+    transform: perspective(300px) rotateX(-10deg) scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: perspective(300px) rotateX(-10deg) scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes credits-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* ==============================================================================
+   TERMINAL GREEN STYLE - ENHANCED
+   ============================================================================== */
+
+.terminal-demo {
+  background: #0a0a0a;
+  border: 2px solid #1a1a1a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  padding: 0;
+}
+
+.terminal-header {
+  background: #1a1a1a;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.terminal-dot.red {
+  background: #ff5f56;
+}
+
+.terminal-dot.yellow {
+  background: #ffbd2e;
+}
+
+.terminal-dot.green {
+  background: #27c93f;
+}
+
+.terminal-content {
+  padding: 1rem;
+  font-family: var(--font-mono);
+  color: #00ff00;
+}
+
+.terminal-line {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terminal-prompt {
+  color: #00ff00;
+  text-shadow: 0 0 5px currentColor;
+}
+
+.terminal-green {
+  color: #00ff00;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.terminal-output {
+  color: #00ff00;
+  text-shadow: 0 0 5px currentColor;
+  animation: terminal-type 2s steps(20) infinite;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+  animation: terminal-blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes terminal-type {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes terminal-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* ==============================================================================
+   ERA COLLECTIONS - ENHANCED
+   ============================================================================== */
+
+.era-collections {
+  background: var(--color-glass-dark);
+  backdrop-filter: var(--backdrop-blur-md);
+  -webkit-backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.collections-title {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-neon-cyan);
+  margin: 0 0 1.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.collections-title::before {
+  content: '//';
+  position: absolute;
+  left: 0;
+  color: var(--color-neon-pink);
+  opacity: 0.6;
+}
+
+.era-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.era-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.era-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--color-neon-pink);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.era-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.era-80s .era-background {
+  background: linear-gradient(
+    135deg,
+    var(--color-neon-pink) 0%,
+    var(--color-neon-cyan) 100%
+  );
+}
+
+.era-90s .era-background {
+  background: linear-gradient(
+    135deg,
+    var(--color-neon-purple) 0%,
+    var(--color-neon-green) 100%
+  );
+}
+
+.era-00s .era-background {
+  background: linear-gradient(
+    135deg,
+    #333 0%,
+    #666 100%
+  );
+}
+
+.era-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+}
+
+.era-80s .era-name {
+  color: var(--color-neon-pink);
+  text-shadow: 0 0 20px currentColor;
+}
+
+.era-90s .era-name {
+  color: var(--color-neon-green);
+  text-shadow: 0 0 20px currentColor;
+}
+
+.era-00s .era-name {
+  color: #999;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.era-samples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.era-decoration {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.era-80s .era-decoration {
+  background: radial-gradient(
+    circle,
+    var(--color-neon-pink) 0%,
+    transparent 70%
+  );
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.era-90s .era-decoration {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    var(--color-neon-green) 5px,
+    var(--color-neon-green) 10px
+  );
+  animation: rotate 10s linear infinite;
+}
+
+.era-00s .era-decoration {
+  background: conic-gradient(
+    from 45deg,
+    #666 0deg,
+    #999 90deg,
+    #666 180deg,
+    #999 270deg,
+    #666 360deg
+  );
+  animation: rotate 20s linear infinite reverse;
+}
+
+/* Era-specific text styles remain the same but enhanced */
+.sample-80s-1,
+.sample-80s-2,
+.sample-80s-3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.sample-80s-1 {
+  color: var(--color-neon-pink);
+  text-shadow: 0 0 10px currentColor;
+}
+
+.sample-80s-2 {
+  color: var(--color-neon-cyan);
+  text-shadow: 0 0 10px currentColor;
+}
+
+.sample-80s-3 {
+  background: linear-gradient(
+    45deg,
+    #c0c0c0,
+    #ffffff,
+    #c0c0c0
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Continue with other era samples... */
+
+/* ==============================================================================
+   IMPLEMENTATION GUIDE - ENHANCED
+   ============================================================================== */
+
+.implementation-guide {
+  background: var(--color-glass-dark);
+  backdrop-filter: var(--backdrop-blur-md);
+  -webkit-backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.guide-title {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-neon-cyan);
+  margin: 0 0 1.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.guide-title::before {
+  content: '</>';
+  position: absolute;
+  left: 0;
+  color: var(--color-neon-green);
+  opacity: 0.8;
+}
+
+.css-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.css-example {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.css-example:hover {
+  border-color: var(--color-neon-green);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.css-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-neon-green);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 255, 136, 0.1);
+  border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.css-code {
+  padding: 1rem;
+  margin: 0;
+  overflow-x: auto;
+}
+
+.css-code code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  white-space: pre;
+  display: block;
+}
+
+/* ==============================================================================
+   ANIMATIONS
+   ============================================================================== */
+
+@keyframes retro-float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(50px, -50px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-30px, 30px) rotate(240deg);
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================== */
+
+@media (max-width: 768px) {
+  .retro-showcase {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .era-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .css-examples {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-metal,
+  .neon-sign span,
+  .synth-main,
+  .arcade-text {
+    font-size: 1.5rem;
+  }
+
+  .digital-clock {
+    font-size: 2rem;
+  }
+
+  .era-collections,
+  .implementation-guide {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .retro-demo {
+    padding: 1.5rem;
+    min-height: 80px;
+  }
+
+  .retro-metal,
+  .neon-sign span,
+  .synth-main,
+  .arcade-text {
+    font-size: 1.25rem;
+  }
+
+  .digital-clock {
+    font-size: 1.5rem;
+  }
+
+  .vhs-title,
+  .scanlines-text {
+    font-size: 1rem;
+  }
+
+  .synth-year {
+    font-size: 2rem;
+  }
+
+  .synthwave-sun {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ==============================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .vhs-tracking,
+  .rec-indicator,
+  .vhs-title,
+  .chrome-reflection,
+  .retro-metal,
+  .scanlines-text::before,
+  .crt-flicker,
+  .neon-sign span,
+  .led-dots::before,
+  .led-dots::after,
+  .synthwave-grid,
+  .synth-main,
+  .synthwave-sun,
+  .arcade-text,
+  .arcade-credits,
+  .terminal-cursor,
+  .era-decoration {
+    animation: none;
+  }
+
+  .terminal-output {
+    animation: none;
+    width: auto;
+  }
+
+  .vhs-tracking[data-tracking="true"] {
+    animation: none;
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-contrast: high) {
+  .retro-metal,
+  .synth-main,
+  .sample-80s-3,
+  .sample-90s-3,
+  .sample-00s-3 {
+    background: none;
+    color: #ffffff;
+    -webkit-text-fill-color: unset;
+  }
+
+  .vhs-text,
+  .scanlines-text,
+  .neon-sign span,
+  .digital-clock,
+  .arcade-text,
+  .terminal-green {
+    text-shadow: none;
+  }
+
+  .retro-demo {
+    background: #000;
+  }
+
+  .retro-item {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}

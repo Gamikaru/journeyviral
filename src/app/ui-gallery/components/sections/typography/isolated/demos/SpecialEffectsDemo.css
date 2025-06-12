@@ -1,0 +1,584 @@
+/* Special Effects Demo Styles - Isolated Typography Effects */
+
+/* ==============================================================================
+   SPECIAL EFFECTS DEMO CONTAINER
+   ============================================================================== */
+
+.special-effects-demo .demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--demo-spacing-xl);
+}
+
+.effects-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--demo-spacing-lg);
+}
+
+.effect-item {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: var(--demo-spacing-md);
+  text-align: center;
+  transition: all 0.3s ease;
+  isolation: isolate;
+}
+
+.effect-item:hover {
+  border-color: var(--demo-arcade-cyan);
+  box-shadow: var(--demo-glow-cyan);
+  transform: translateY(-2px);
+}
+
+.effect-title {
+  font-family: var(--demo-font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--demo-arcade-cyan);
+  margin: 0 0 var(--demo-spacing-sm) 0;
+  opacity: 0.8;
+}
+
+.effect-demo {
+  padding: var(--demo-spacing-md);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  margin: var(--demo-spacing-sm) 0;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.effect-description {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ==============================================================================
+   TEXT SCRAMBLE EFFECT
+   ============================================================================== */
+
+.text-scramble {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--demo-arcade-green);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  transition: all 0.3s ease;
+  isolation: isolate;
+}
+
+.text-scramble.active {
+  animation: scramble-effect 2s ease-in-out;
+}
+
+@keyframes scramble-effect {
+  0% { opacity: 1; }
+  10% {
+    content: "█▓▒░ ░▒▓█ ░▒▓█ ░▒▓█";
+    color: var(--demo-arcade-yellow);
+  }
+  20% {
+    content: "▒░█▓ ▓█░▒ ▓█░▒ ▓█░▒";
+    color: var(--demo-arcade-cyan);
+  }
+  40% {
+    content: "░▓█▒ ▒█▓░ ▒█▓░ ▒█▓░";
+    color: var(--demo-arcade-pink);
+  }
+  60% {
+    content: "▓▒░█ █░▒▓ █░▒▓ █░▒▓";
+    color: var(--demo-arcade-purple);
+  }
+  80% {
+    content: "█▓▒░ ░▒▓█ ░▒▓█ ░▒▓█";
+    color: var(--demo-arcade-green);
+  }
+  100% { opacity: 1; }
+}
+
+/* ==============================================================================
+   TYPEWRITER EFFECT
+   ============================================================================== */
+
+.text-typewriter {
+  font-family: var(--demo-font-mono);
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--demo-arcade-green);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  isolation: isolate;
+}
+
+.text-typewriter::after {
+  content: '_';
+  color: var(--demo-arcade-green);
+  animation: blink-cursor 1s infinite;
+  margin-left: 2px;
+}
+
+.text-typewriter.active {
+  animation: typewriter 3s steps(30, end) infinite;
+}
+
+@keyframes typewriter {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 100%; }
+}
+
+@keyframes blink-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ==============================================================================
+   MATRIX CODE EFFECT
+   ============================================================================== */
+
+.text-matrix {
+  font-family: var(--demo-font-mono);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--demo-arcade-green);
+  letter-spacing: 0.1em;
+  background: rgba(0, 0, 0, 0.8);
+  padding: var(--demo-spacing-sm);
+  border-radius: 4px;
+  text-shadow: 0 0 10px var(--demo-arcade-green);
+  isolation: isolate;
+}
+
+.text-matrix.active {
+  animation: matrix-rain 2s linear infinite;
+}
+
+@keyframes matrix-rain {
+  0% {
+    content: "01001000 01100101 01101100";
+    opacity: 1;
+  }
+  25% {
+    content: "11000101 10011001 00110101";
+    opacity: 0.8;
+  }
+  50% {
+    content: "00110011 11001100 10101010";
+    opacity: 0.6;
+  }
+  75% {
+    content: "10101010 01010101 11110000";
+    opacity: 0.8;
+  }
+  100% {
+    content: "01001000 01100101 01101100";
+    opacity: 1;
+  }
+}
+
+/* ==============================================================================
+   GLITCH EFFECT
+   ============================================================================== */
+
+.text-glitch {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--demo-arcade-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  isolation: isolate;
+}
+
+.text-glitch.active {
+  animation: glitch-effect 1s ease-in-out;
+}
+
+@keyframes glitch-effect {
+  0% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    filter: hue-rotate(90deg);
+    text-shadow: 2px 0 var(--demo-arcade-cyan), -2px 0 var(--demo-arcade-yellow);
+  }
+  20% {
+    transform: translate(2px, -2px);
+    filter: hue-rotate(180deg);
+    text-shadow: -2px 0 var(--demo-arcade-green), 2px 0 var(--demo-arcade-purple);
+  }
+  30% {
+    transform: translate(-2px, -2px);
+    filter: hue-rotate(270deg);
+    text-shadow: 1px 0 var(--demo-arcade-yellow), -1px 0 var(--demo-arcade-cyan);
+  }
+  40% {
+    transform: translate(2px, 2px);
+    filter: hue-rotate(360deg);
+    text-shadow: -2px 0 var(--demo-arcade-pink), 2px 0 var(--demo-arcade-green);
+  }
+  50% {
+    transform: translate(0);
+    filter: hue-rotate(180deg) contrast(200%);
+    text-shadow: 0 0 10px var(--demo-arcade-cyan);
+  }
+  60% {
+    transform: translate(1px, -1px);
+    filter: hue-rotate(90deg) brightness(150%);
+    text-shadow: 1px 0 var(--demo-arcade-yellow), -1px 0 var(--demo-arcade-purple);
+  }
+  70% {
+    transform: translate(-1px, 1px);
+    filter: hue-rotate(270deg) saturate(200%);
+    text-shadow: -1px 0 var(--demo-arcade-green), 1px 0 var(--demo-arcade-pink);
+  }
+  80% {
+    transform: translate(0);
+    filter: hue-rotate(0deg) invert(1) brightness(200%);
+    text-shadow: 0 0 5px var(--demo-arcade-cyan);
+  }
+  90% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+    text-shadow: 2px 0 var(--demo-arcade-cyan), -2px 0 var(--demo-arcade-yellow);
+  }
+  100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+    text-shadow: none;
+  }
+}
+
+/* ==============================================================================
+   NEON PULSE EFFECT
+   ============================================================================== */
+
+.text-neon-pulse {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--demo-arcade-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px currentColor;
+  animation: neon-pulse 2s ease-in-out infinite alternate;
+  isolation: isolate;
+}
+
+@keyframes neon-pulse {
+  0% {
+    text-shadow:
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+    opacity: 1;
+  }
+  100% {
+    text-shadow:
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 35px currentColor,
+      0 0 50px currentColor;
+    opacity: 0.8;
+  }
+}
+
+/* ==============================================================================
+   RAINBOW FLOW EFFECT
+   ============================================================================== */
+
+.text-rainbow {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #9400d3
+  );
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-flow 3s ease-in-out infinite;
+  isolation: isolate;
+}
+
+@keyframes rainbow-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==============================================================================
+   HOLOGRAPHIC EFFECT
+   ============================================================================== */
+
+.text-holographic {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(
+    45deg,
+    #ff006e,
+    #8338ec,
+    #3a86ff,
+    #06ffa5,
+    #ffbe0b,
+    #fb5607,
+    #ff006e
+  );
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holographic-shift 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.5));
+  isolation: isolate;
+}
+
+@keyframes holographic-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 110, 0.5)) hue-rotate(0deg);
+  }
+  25% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 10px rgba(131, 56, 236, 0.5)) hue-rotate(90deg);
+  }
+  50% {
+    background-position: 50% 0%;
+    filter: drop-shadow(0 0 10px rgba(58, 134, 255, 0.5)) hue-rotate(180deg);
+  }
+  75% {
+    background-position: 50% 100%;
+    filter: drop-shadow(0 0 10px rgba(6, 255, 165, 0.5)) hue-rotate(270deg);
+  }
+}
+
+/* ==============================================================================
+   CYBERPUNK SCAN EFFECT
+   ============================================================================== */
+
+.text-cyber-scan {
+  font-family: var(--demo-font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--demo-arcade-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  text-shadow: 0 0 10px var(--demo-arcade-cyan);
+  isolation: isolate;
+}
+
+.text-cyber-scan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 255, 255, 0.1) 20%,
+    rgba(0, 255, 255, 0.3) 50%,
+    rgba(0, 255, 255, 0.1) 80%,
+    transparent 100%
+  );
+  animation: cyber-scan 2s linear infinite;
+  pointer-events: none;
+}
+
+.text-cyber-scan::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.05) 2px,
+    rgba(0, 255, 255, 0.05) 4px
+  );
+  pointer-events: none;
+}
+
+@keyframes cyber-scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ==============================================================================
+   USAGE GUIDE
+   ============================================================================== */
+
+.usage-guide {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: var(--demo-spacing-lg);
+  margin-top: var(--demo-spacing-xl);
+}
+
+.guide-title {
+  font-family: var(--demo-font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--demo-arcade-cyan);
+  margin: 0 0 var(--demo-spacing-md) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--demo-spacing-md);
+}
+
+.code-example {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: var(--demo-spacing-sm);
+}
+
+.code-label {
+  font-family: var(--demo-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--demo-arcade-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--demo-spacing-xs);
+}
+
+.code-example code {
+  font-family: var(--demo-font-mono);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+/* ==============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================== */
+
+@media (max-width: 768px) {
+  .effects-showcase {
+    grid-template-columns: 1fr;
+    gap: var(--demo-spacing-md);
+  }
+
+  .effect-item {
+    padding: var(--demo-spacing-sm);
+  }
+
+  .text-scramble,
+  .text-glitch,
+  .text-neon-pulse,
+  .text-rainbow,
+  .text-holographic,
+  .text-cyber-scan {
+    font-size: 1rem;
+  }
+
+  .code-examples {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .effect-demo {
+    padding: var(--demo-spacing-sm);
+    min-height: 50px;
+  }
+
+  .text-typewriter {
+    font-size: 0.875rem;
+  }
+
+  .text-matrix {
+    font-size: 0.75rem;
+  }
+}
+
+/* ==============================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .text-scramble.active,
+  .text-typewriter.active,
+  .text-matrix.active,
+  .text-glitch.active,
+  .text-neon-pulse,
+  .text-rainbow,
+  .text-holographic,
+  .text-cyber-scan::before {
+    animation: none;
+  }
+
+  .text-typewriter::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .text-scramble,
+  .text-typewriter,
+  .text-matrix,
+  .text-glitch,
+  .text-neon-pulse {
+    text-shadow: none;
+    color: #ffffff;
+  }
+
+  .text-rainbow,
+  .text-holographic {
+    background: none;
+    color: #ffffff;
+    -webkit-text-fill-color: unset;
+  }
+}

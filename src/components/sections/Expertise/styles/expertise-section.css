@@ -1,303 +1,310 @@
 /* src/components/sections/Expertise/styles/expertise-section.css */
 
-/* Main Section - Optimized for viewport fit */
+/* CSS Custom Properties */
+:root {
+    --expertise-cyan: #00ffff;
+    --expertise-blue: #00d4ff;
+    --expertise-pink: #ff00ff;
+    --expertise-purple: #ff6ec7;
+    --expertise-dark: #0a0616;
+    --expertise-darker: #050208;
+    --expertise-glass: rgba(255, 255, 255, 0.02);
+    --expertise-border: rgba(255, 255, 255, 0.1);
+    --expertise-glow-size: 60px;
+}
+
+/* Main Section Container */
 .expertise-section {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(4rem, 8vh, 6rem) 0;
-  overflow: visible; /* Changed from hidden to visible */
-  isolation: isolate;
-  background: transparent;
-  margin-bottom: 2rem; /* Add margin to create space before next section */
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(4rem, 8vh, 6rem) 0;
+    overflow: hidden;
+    isolation: isolate;
+    background: linear-gradient(180deg, rgba(10, 6, 22, 0.9) 0%, rgba(5, 2, 8, 0.95) 100%);
 }
 
-/* Updated section for unified background */
-.expertise-section.expertise-section-unified {
-  background: transparent; /* Remove section background */
-  position: relative;
-  z-index: 10; /* Ensure content is above unified background */
-  /* Add professional tech-inspired effects */
-  overflow: visible;
+/* Perspective grid floor effect */
+.perspective-grid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70vh;
+    background-image: 
+        linear-gradient(to bottom, 
+            rgba(0,0,0,0) 0%, 
+            rgba(var(--expertise-pink), 0.1) 75%),
+        linear-gradient(90deg, 
+            rgba(var(--expertise-cyan), 0.2) 1px, 
+            transparent 1px),
+        linear-gradient(0deg, 
+            rgba(var(--expertise-cyan), 0.2) 1px, 
+            transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    transform: perspective(500px) rotateX(60deg);
+    transform-origin: bottom;
+    z-index: 0;
+    pointer-events: none;
+    animation: grid-move 20s linear infinite;
 }
 
-/* Tech-inspired circuit pattern overlay */
-.expertise-circuit-overlay {
-  position: absolute;
-  inset: -5%;
-  pointer-events: none;
-  background:
-    linear-gradient(0deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(138, 43, 226, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask: radial-gradient(ellipse at center, black 60%, transparent 80%);
-  -webkit-mask: radial-gradient(ellipse at center, black 60%, transparent 80%);
-  opacity: 0;
-  animation: circuitFade 3s ease-in-out 1s forwards;
+@keyframes grid-move {
+    0% { background-position: 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, -40px 0, 0 -40px; }
 }
 
-@keyframes circuitFade {
-  0% { opacity: 0; transform: scale(0.9); }
-  100% { opacity: 1; transform: scale(1); }
+/* Circuit board pattern overlay */
+.circuit-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.08) 0%, transparent 20%),
+        radial-gradient(circle at 85% 60%, rgba(255, 0, 255, 0.08) 0%, transparent 30%);
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    pointer-events: none;
 }
 
-/* Data visualization inspired elements */
-.expertise-data-viz {
-  position: absolute;
-  top: 20%;
-  right: 10%;
-  width: 100px;
-  height: 60px;
-  pointer-events: none;
-  opacity: 0.4;
+/* Performance modes */
+.expertise-section.performance-high {
+    will-change: transform;
 }
 
-.expertise-data-viz::before,
-.expertise-data-viz::after {
-  content: '';
-  position: absolute;
-  background: linear-gradient(45deg, rgba(0, 255, 255, 0.6), rgba(0, 212, 255, 0.3));
-  animation: dataVisualization 4s ease-in-out infinite;
+.expertise-section.performance-medium {
+    /* Reduced effects */
 }
 
-.expertise-data-viz::before {
-  width: 3px;
-  height: 20px;
-  left: 20%;
-  bottom: 0;
-  animation-delay: 0s;
+.expertise-section.performance-low {
+    /* Minimal effects */
 }
 
-.expertise-data-viz::after {
-  width: 3px;
-  height: 40px;
-  right: 20%;
-  bottom: 0;
-  animation-delay: -2s;
+.expertise-section.performance-low * {
+    animation: none !important;
+    transition: opacity 0.3s ease !important;
 }
 
-@keyframes dataVisualization {
-  0%, 100% { transform: scaleY(0.5); opacity: 0.4; }
-  50% { transform: scaleY(1); opacity: 1; }
+/* Loading state */
+.expertise-section.expertise-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Content Container - Enhanced with CSS Grid */
+.expertise-loader {
+    width: 60px;
+    height: 60px;
+    border: 3px solid var(--expertise-border);
+    border-top-color: var(--expertise-cyan);
+    border-radius: 50%;
+    animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Scan lines overlay */
+.scan-lines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 255, 0.03) 2px,
+            rgba(0, 255, 255, 0.03) 4px);
+    pointer-events: none;
+    z-index: 15;
+    animation: scan-lines-move 8s linear infinite;
+    mix-blend-mode: overlay;
+}
+
+@keyframes scan-lines-move {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(10px);
+    }
+}
+
+/* Circuit overlay pattern */
+.circuit-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    animation: circuit-fade-in 2s ease-out 0.5s forwards;
+}
+
+.circuit-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(0, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(0, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask: radial-gradient(ellipse at center, black 50%, transparent 80%);
+    -webkit-mask: radial-gradient(ellipse at center, black 50%, transparent 80%);
+}
+
+@keyframes circuit-fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Content wrapper */
 .expertise-content {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 clamp(1.5rem, 4vw, 4rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+    will-change: transform;
 }
 
-/* Grid Layout for Precise Control */
-.expertise-grid {
-  display: grid;
-  grid-template-rows: auto auto auto; /* Changed from auto 1fr auto */
-  gap: clamp(2rem, 4vh, 3rem); /* Increased gaps for better spacing */
-  width: 100%;
-  align-items: center;
-  /* Removed min-height constraint that was causing issues */
+/* Inner container */
+.expertise-inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 5vh, 4rem);
+    align-items: center;
+    width: 100%;
 }
 
-/* Grid Areas */
-.expertise-headline-area {
-  grid-row: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Section wrappers */
+.expertise-headline-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
-.expertise-stats-area {
-  grid-row: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+.expertise-stats-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
 }
 
-.expertise-method-area {
-  grid-row: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.expertise-method-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-/* Background Container */
-.expertise-bg-container {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 1;
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .expertise-section {
+        padding: clamp(3rem, 6vh, 5rem) 0;
+    }
+
+    .expertise-inner {
+        gap: clamp(2.5rem, 4vh, 3.5rem);
+    }
 }
 
-/* Static Background Fallback */
-.expertise-bg-static {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at top, rgba(10, 6, 22, 0.9) 0%, rgba(5, 2, 8, 1) 40%),
-    radial-gradient(ellipse at bottom, rgba(5, 2, 8, 1) 0%, rgba(2, 1, 4, 1) 100%);
-}
-
-/* Performance Mode Optimizations */
-.expertise-section.performance-mode {
-  /* Disable expensive effects */
-  transform: none !important;
-  will-change: auto !important;
-}
-
-.expertise-section.performance-mode * {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* Remove background container when using unified */
-.expertise-section-unified .expertise-bg-container {
-  display: none;
-}
-
-/* Responsive Design - Tablet */
 @media (max-width: 1024px) {
-  .expertise-section {
-    padding: clamp(3rem, 6vh, 5rem) 0;
-    margin-bottom: 3rem;
-    min-height: auto; /* Allow natural height */
-  }
-
-  .expertise-grid {
-    gap: clamp(2rem, 4vh, 3rem);
-    grid-template-rows: auto auto auto; /* Ensure consistent layout */
-  }
-
-  .expertise-content {
-    padding: 0 clamp(1.5rem, 3vw, 2rem);
-  }
+    .expertise-content {
+        padding: 0 clamp(1.5rem, 3vw, 2rem);
+    }
 }
 
-/* Responsive Design - Mobile */
 @media (max-width: 768px) {
-  .expertise-section {
-    padding: 4rem 0;
-    margin-bottom: 2rem;
-    min-height: auto;
-    display: block; /* Change to block layout for mobile */
-  }
+    .expertise-section {
+        min-height: auto;
+        padding: 3rem 0;
+    }
 
-  .expertise-content {
-    display: block; /* Remove flex constraints */
-    height: auto;
-  }
+    .expertise-inner {
+        gap: 2.5rem;
+    }
 
-  .expertise-grid {
-    display: block; /* Switch to block layout on mobile */
-    gap: 0; /* Remove gap, handle with margins */
-  }
+    .scan-lines {
+        display: none;
+    }
 
-  .expertise-headline-area {
-    margin-bottom: 3rem;
-  }
-
-  .expertise-stats-area {
-    margin-bottom: 3rem;
-  }
-
-  .expertise-method-area {
-    margin-bottom: 2rem;
-  }
+    .circuit-overlay {
+        opacity: 0.5;
+    }
 }
 
 @media (max-width: 480px) {
-  .expertise-section {
-    padding: 3rem 0;
-    min-height: auto;
-  }
+    .expertise-section {
+        padding: 2.5rem 0;
+    }
 
-  .expertise-content {
-    padding: 0 1rem;
-  }
+    .expertise-content {
+        padding: 0 1rem;
+    }
 
-  .expertise-headline-area {
-    margin-bottom: 2.5rem;
-  }
+    .expertise-inner {
+        gap: 2rem;
+    }
 
-  .expertise-stats-area {
-    margin-bottom: 2.5rem;
-  }
-
-  .expertise-method-area {
-    margin-bottom: 1.5rem;
-  }
+    .circuit-overlay {
+        display: none;
+    }
 }
 
-/* Large Desktop Optimization */
-@media (min-width: 1920px) {
-  .expertise-section {
-    padding: clamp(3rem, 4vh, 6rem) 0;
-  }
+/* High performance displays */
+@media (min-width: 1920px) and (min-resolution: 2dppx) {
+    .expertise-section {
+        min-height: 90vh;
+    }
 
-  .expertise-content {
-    max-width: 1600px;
-  }
-
-  .expertise-grid {
-    gap: clamp(2rem, 2.5vh, 4rem);
-  }
+    .expertise-content {
+        max-width: 1600px;
+    }
 }
 
-/* Ultra-wide Display Support */
-@media (min-width: 2560px) {
-  .expertise-content {
-    max-width: 1800px;
-  }
-}
-
-/* High Contrast Mode */
-@media (prefers-contrast: high) {
-  .expertise-bg-container {
-    opacity: 0.2;
-  }
-
-  .corner-accent {
-    opacity: 1;
-  }
-
-  .corner-accent::before,
-  .corner-accent::after {
-    width: 3px;
-    height: 3px;
-  }
-}
-
-/* Reduced Motion Support */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .expertise-section,
-  .expertise-section * {
-    animation: none !important;
-    transition: none !important;
-  }
 
-  .corner-accent {
-    opacity: 0.8;
-  }
+    .scan-lines,
+    .circuit-overlay {
+        animation: none !important;
+    }
+
+    .expertise-section * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
-/* Print Styles */
-@media print {
-  .expertise-section {
-    min-height: auto;
-    padding: 2rem 0;
-  }
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .expertise-section {
+    }
 
-  .expertise-grid {
-    gap: 1rem;
-  }
+    .scan-lines,
+    .circuit-overlay {
+        display: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .expertise-section {
+        min-height: auto;
+        padding: 2rem 0;
+        background: white;
+    }
+
+    .scan-lines,
+    .circuit-overlay,
+    .expertise-loader {
+        display: none;
+    }
 }

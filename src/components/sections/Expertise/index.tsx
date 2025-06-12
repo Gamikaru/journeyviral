@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import ExpertiseHeadline from "./ExpertiseHeadline";
 import ExpertiseStats from "./ExpertiseStats";
 import ExpertiseMethod from "./ExpertiseMethod";
@@ -141,29 +141,41 @@ export default function ExpertiseSection() {
       aria-label="Our viral content expertise and methodology"
       data-performance={performanceScore}
     >
-      {/* Remove background container - now handled by UnifiedBackground */}
+      {/* Perspective Grid Floor */}
+      <div className="perspective-grid" aria-hidden="true"></div>
+      
+      {/* Circuit Overlay Pattern */}
+      <div className="circuit-overlay" aria-hidden="true"></div>
 
       {/* Main Content Container with Grid Layout */}
       <div className="expertise-content">
         <motion.div
-          className="expertise-grid"
+          className="expertise-inner"
           variants={containerVariants}
           initial="hidden"
           animate={shouldAnimate ? "visible" : "hidden"}
         >
           {/* Headline Section */}
-          <div className="expertise-headline-area">
-            <ExpertiseHeadline isInView={isInView} isLowPerf={isLowPerf} />
+          <div className="expertise-headline-wrapper">
+            <ExpertiseHeadline
+              isInView={shouldAnimate}
+              isLowPerf={isLowPerf}
+              performanceLevel={isLowPerf ? 'low' : 'high'} // Add this line
+            />
           </div>
 
           {/* Stats Section */}
-          <div className="expertise-stats-area">
-            <ExpertiseStats isInView={isInView} isLowPerf={isLowPerf} />
+          <div className="expertise-stats-wrapper">
+            <ExpertiseStats
+              isInView={shouldAnimate}
+              isLowPerf={isLowPerf}
+              performanceLevel={isLowPerf ? 'low' : 'high'}
+            />
           </div>
 
           {/* Method Section */}
-          <div className="expertise-method-area">
-            <ExpertiseMethod isInView={isInView} isLowPerf={isLowPerf} />
+          <div className="expertise-method-wrapper">
+            <ExpertiseMethod isInView={shouldAnimate} isLowPerf={isLowPerf} />
           </div>
         </motion.div>
       </div>
