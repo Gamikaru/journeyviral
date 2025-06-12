@@ -3,6 +3,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { usePerformanceMode } from "../../../hooks/usePerformanceMode";
 import { TransformSectionProps, ANIMATION_CONSTANTS } from "./types";
 import TransformHeadline from "./TransformHeadline";
@@ -40,6 +41,7 @@ export default function TransformSection({
     chars: string[];
   }>>([]);
   const { isLowPerf } = usePerformanceMode();
+  const router = useRouter();
 
   const isInView = useInView(sectionRef, {
     once: true,
@@ -213,7 +215,10 @@ export default function TransformSection({
               >
                 <TransformCTA
                   isInView={shouldAnimate}
-                  onClick={() => console.log("Transform CTA clicked - Initiating viral protocol!")}
+                  onClick={() => {
+                    console.log("Transform CTA clicked - Navigating to UI Gallery!");
+                    router.push('/ui-gallery');
+                  }}
                 />
               </motion.div>
             </motion.div>

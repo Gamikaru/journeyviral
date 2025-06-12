@@ -1,0 +1,257 @@
+/* Enhanced Holographic Button Styles */
+
+.holographic-button {
+    position: relative;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    min-width: 200px;
+    isolation: isolate;
+}
+
+.holographic-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Background Gradient */
+.holo-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    opacity: 0.9;
+    z-index: -2;
+    transition: all 0.3s ease;
+}
+
+/* Rainbow Variant */
+.holographic-button.rainbow .holo-bg {
+    background: linear-gradient(135deg,
+            #ff006e 0%,
+            #ff4500 10%,
+            #ffd700 20%,
+            #00ff00 30%,
+            #00ffff 40%,
+            #0080ff 50%,
+            #8000ff 60%,
+            #ff00ff 70%,
+            #ff006e 80%,
+            #ff4500 90%,
+            #ffd700 100%);
+    background-size: 300% 300%;
+    animation: holoRainbow 3s ease infinite;
+}
+
+/* Cosmic Variant */
+.holographic-button.cosmic .holo-bg {
+    background:
+        radial-gradient(circle at 20% 50%, #ff006e 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, #00ffff 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #8000ff 0%, transparent 80%);
+    animation: holoCosmic 4s ease-in-out infinite;
+}
+
+/* Neon Variant */
+.holographic-button.neon .holo-bg {
+    background: linear-gradient(45deg,
+            #ff006e,
+            #ff006e 20%,
+            #00ffff 40%,
+            #00ffff 60%,
+            #ff006e 80%,
+            #ff006e);
+    background-size: 400% 100%;
+    animation: holoNeon 2s linear infinite;
+}
+
+/* Shine Effect */
+.holo-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.2) 20%,
+            transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    mix-blend-mode: overlay;
+}
+
+.holographic-button:hover .holo-shine {
+    opacity: 1;
+}
+
+/* Text */
+.holo-text {
+    position: relative;
+    z-index: 2;
+    color: #000;
+    font-family: var(--font-lastica, 'Impact', Arial Black, sans-serif);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.5);
+    mix-blend-mode: overlay;
+}
+
+/* Particles */
+.holo-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 10px #fff;
+}
+
+.holographic-button:hover .particle {
+    animation: particleFloat 2s ease-in-out infinite;
+}
+
+.particle-1 {
+    animation-delay: 0s;
+    left: 10%;
+}
+
+.particle-2 {
+    animation-delay: 0.3s;
+    left: 30%;
+}
+
+.particle-3 {
+    animation-delay: 0.6s;
+    left: 50%;
+}
+
+.particle-4 {
+    animation-delay: 0.9s;
+    left: 70%;
+}
+
+.particle-5 {
+    animation-delay: 1.2s;
+    left: 90%;
+}
+
+.particle-6 {
+    animation-delay: 1.5s;
+    left: 50%;
+}
+
+/* Animations */
+@keyframes holoRainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes holoCosmic {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(180deg);
+    }
+}
+
+@keyframes holoNeon {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100%) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100%) translateX(20px);
+        opacity: 0;
+    }
+}
+
+/* Hover Effects */
+.holographic-button:hover .holo-bg {
+    filter: brightness(1.2) contrast(1.1);
+    transform: scale(1.02);
+}
+
+.holographic-button:hover .holo-text {
+    color: #fff;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 1),
+        0 0 40px rgba(255, 255, 255, 0.8);
+}
+
+/* Border Glow */
+.holographic-button::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 52px;
+    background: linear-gradient(45deg, #ff006e, #00ffff, #8000ff, #ff006e);
+    background-size: 400% 400%;
+    opacity: 0;
+    z-index: -3;
+    transition: opacity 0.3s ease;
+    animation: borderGlow 3s ease infinite;
+}
+
+.holographic-button:hover::before {
+    opacity: 1;
+}
+
+@keyframes borderGlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

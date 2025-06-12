@@ -1,0 +1,63 @@
+/* Button Section Layout Styles */
+
+.button-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  flex-wrap: wrap;
+}
+
+.button-description {
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-style: italic;
+  min-height: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.icon-button-group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-button-group {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .button-showcase {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .loading-button-group {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .button-showcase {
+    flex-direction: column;
+  }
+
+  .icon-button-group {
+    flex-wrap: wrap;
+  }
+
+  .loading-button-group {
+    flex-direction: column;
+  }
+}

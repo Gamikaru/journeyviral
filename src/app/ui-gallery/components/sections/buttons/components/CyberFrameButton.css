@@ -1,0 +1,248 @@
+/* Enhanced Cyber Frame Button Styles */
+
+.cyber-frame-button {
+  position: relative;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.9);
+  border: none;
+  font-family: var(--font-lastica, 'Impact', Arial Black, sans-serif);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  overflow: hidden;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  min-width: 220px;
+  transition: all 0.3s ease;
+}
+
+.cyber-frame-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Variants */
+.cyber-frame-button.default {
+  color: var(--arcade-green, #00ff88);
+}
+
+.cyber-frame-button.alert {
+  color: #ff4444;
+}
+
+.cyber-frame-button.success {
+  color: #44ff44;
+}
+
+/* Frame Border */
+.cyber-frame {
+  position: absolute;
+  inset: 0;
+  border: 2px solid currentColor;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+/* Corner Decorations */
+.cyber-corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  opacity: 0.8;
+}
+
+.corner-tl {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.corner-tr {
+  top: -2px;
+  right: -2px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.corner-bl {
+  bottom: -2px;
+  left: -2px;
+  border-right: none;
+  border-top: none;
+}
+
+.corner-br {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Text */
+.cyber-text {
+  position: relative;
+  z-index: 2;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+/* Grid Background */
+.cyber-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 9px, rgba(0, 255, 136, 0.03) 10px),
+    repeating-linear-gradient(90deg, transparent, transparent 9px, rgba(0, 255, 136, 0.03) 10px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Scan Effect */
+.cyber-scan {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    currentColor 45%,
+    rgba(255, 255, 255, 0.8) 50%,
+    currentColor 55%,
+    transparent
+  );
+  opacity: 0.3;
+  transition: left 0.6s ease;
+  mix-blend-mode: screen;
+}
+
+/* Active Scan Line */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+  animation: scanLine 1s ease-out;
+}
+
+@keyframes scanLine {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Hover Effects */
+.cyber-frame-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: rgba(0, 20, 10, 0.9);
+}
+
+.cyber-frame-button:hover:not(:disabled) .cyber-frame {
+  opacity: 1;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.cyber-frame-button:hover:not(:disabled) .cyber-scan {
+  left: 100%;
+}
+
+.cyber-frame-button:hover:not(:disabled) .cyber-grid {
+  opacity: 1;
+}
+
+.cyber-frame-button:hover:not(:disabled) .cyber-text {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.cyber-frame-button:hover:not(:disabled) .corner {
+  opacity: 1;
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+/* Default variant hover */
+.cyber-frame-button.default:hover:not(:disabled) {
+  box-shadow:
+    0 10px 30px rgba(0, 255, 136, 0.3),
+    inset 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+/* Alert variant hover */
+.cyber-frame-button.alert:hover:not(:disabled) {
+  background: rgba(20, 0, 0, 0.9);
+  box-shadow:
+    0 10px 30px rgba(255, 68, 68, 0.3),
+    inset 0 0 20px rgba(255, 68, 68, 0.1);
+}
+
+/* Success variant hover */
+.cyber-frame-button.success:hover:not(:disabled) {
+  box-shadow:
+    0 10px 30px rgba(68, 255, 68, 0.3),
+    inset 0 0 20px rgba(68, 255, 68, 0.1);
+}
+
+/* Scanning State */
+.cyber-frame-button.scanning .cyber-text {
+  animation: textFlicker 0.1s ease-in-out infinite;
+}
+
+.cyber-frame-button.scanning .cyber-frame {
+  animation: frameFlicker 0.2s ease-in-out infinite;
+}
+
+@keyframes textFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes frameFlicker {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Data Stream Effect */
+.cyber-frame-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 136, 0.1) 2px,
+    rgba(0, 255, 136, 0.1) 4px
+  );
+  opacity: 0;
+  animation: dataStream 20s linear infinite;
+  pointer-events: none;
+}
+
+.cyber-frame-button:hover::after {
+  opacity: 0.3;
+}
+
+@keyframes dataStream {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100px); }
+}

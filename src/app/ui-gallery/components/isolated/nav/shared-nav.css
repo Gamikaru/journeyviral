@@ -1,0 +1,163 @@
+/* Shared Nav Styles for Isolated Components */
+/* This file contains shared utilities and font imports for the nav components */
+
+/* CSS Variables for consistency */
+:root {
+  --font-lastica: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-interphases: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Base container for gallery items */
+.isolated-nav-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: #000000;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.isolated-nav-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 0, 255, 0.2);
+}
+
+.isolated-nav-demo h3 {
+  font-family: var(--font-lastica);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.isolated-nav-demo p {
+  font-family: var(--font-interphases);
+  font-size: 0.875rem;
+  color: #cccccc;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Controls for customization */
+.isolated-nav-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.isolated-nav-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.isolated-nav-control label {
+  font-family: var(--font-interphases);
+  font-size: 0.75rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.isolated-nav-control input[type="checkbox"] {
+  accent-color: #ff00ff;
+}
+
+.isolated-nav-control input[type="text"],
+.isolated-nav-control input[type="number"] {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+.isolated-nav-control select {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+}
+
+/* Gallery-specific styles */
+.nav-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.nav-gallery-item {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.nav-gallery-title {
+  font-family: var(--font-lastica);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff00ff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.nav-gallery-description {
+  font-family: var(--font-interphases);
+  font-size: 0.8rem;
+  color: #cccccc;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+/* Dark theme for demos */
+.isolated-nav-container {
+  color-scheme: dark;
+}
+
+/* Performance optimizations */
+.isolated-nav-container * {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .isolated-nav-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .nav-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .isolated-nav-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

@@ -1,0 +1,251 @@
+/* Enhanced Icon Button Styles */
+
+.icon-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.icon-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Size Variants */
+.icon-button.small {
+    width: 40px;
+    height: 40px;
+}
+
+.icon-button.medium {
+    width: 48px;
+    height: 48px;
+}
+
+.icon-button.large {
+    width: 56px;
+    height: 56px;
+}
+
+/* Color Variants */
+.icon-button.cyan {
+    --icon-color: #00ffff;
+    --icon-color-light: #66ffff;
+    --icon-color-dark: #00cccc;
+}
+
+.icon-button.pink {
+    --icon-color: #ff00ff;
+    --icon-color-light: #ff66ff;
+    --icon-color-dark: #cc00cc;
+}
+
+.icon-button.purple {
+    --icon-color: #8e00ff;
+    --icon-color-light: #b366ff;
+    --icon-color-dark: #6600cc;
+}
+
+.icon-button.green {
+    --icon-color: #00ff88;
+    --icon-color-light: #66ffaa;
+    --icon-color-dark: #00cc66;
+}
+
+/* Neon Variant */
+.icon-button.neon .icon-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.icon-button.neon .icon-border {
+    position: absolute;
+    inset: -2px;
+    background: conic-gradient(from 0deg,
+            transparent,
+            var(--icon-color),
+            transparent,
+            var(--icon-color),
+            transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: iconBorderSpin 3s linear infinite;
+    z-index: -1;
+}
+
+.icon-button.neon .icon-content {
+    position: relative;
+    z-index: 2;
+    color: var(--icon-color);
+    transition: all 0.3s ease;
+}
+
+.icon-button.neon .icon-highlight {
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(circle at center,
+            var(--icon-color) 0%,
+            transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(20px);
+    z-index: -2;
+}
+
+/* Glass Variant */
+.icon-button.glass .icon-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.icon-button.glass .icon-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.icon-button.glass .icon-highlight {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            transparent 50%);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+/* Minimal Variant */
+.icon-button.minimal {
+    background: transparent;
+    border: 1px solid var(--icon-color);
+}
+
+.icon-button.minimal .icon-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--icon-color);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    z-index: 0;
+}
+
+.icon-button.minimal .icon-content {
+    position: relative;
+    z-index: 2;
+    color: var(--icon-color);
+    transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+/* Neon Hover */
+.icon-button.neon:hover:not(:disabled) .icon-bg {
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.icon-button.neon:hover:not(:disabled) .icon-border {
+    opacity: 1;
+}
+
+.icon-button.neon:hover:not(:disabled) .icon-content {
+    color: #fff;
+    filter: drop-shadow(0 0 10px var(--icon-color));
+}
+
+.icon-button.neon:hover:not(:disabled) .icon-highlight {
+    opacity: 0.5;
+}
+
+.icon-button.neon:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.3),
+        0 5px 30px var(--icon-color);
+}
+
+/* Glass Hover */
+.icon-button.glass:hover:not(:disabled) .icon-bg {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--icon-color);
+}
+
+.icon-button.glass:hover:not(:disabled) .icon-content {
+    color: var(--icon-color);
+    filter: drop-shadow(0 0 5px var(--icon-color));
+}
+
+.icon-button.glass:hover:not(:disabled) .icon-highlight {
+    transform: translate(100%, 100%);
+}
+
+/* Minimal Hover */
+.icon-button.minimal:hover:not(:disabled) .icon-bg {
+    transform: scale(1);
+}
+
+.icon-button.minimal:hover:not(:disabled) .icon-content {
+    color: #000;
+}
+
+/* Animations */
+@keyframes iconBorderSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pulse Animation on Click */
+.icon-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--icon-color);
+    opacity: 0;
+    transform: scale(1);
+    transition: all 0.6s ease;
+}
+
+.icon-button:active::after {
+    transform: scale(1.5);
+    opacity: 0;
+    transition: all 0.3s ease;
+    animation: iconPulse 0.6s ease-out;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}

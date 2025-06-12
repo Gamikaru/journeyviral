@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useState, memo } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
 import "./styles/cta.css";
 import "./styles/animations.css";
 
@@ -20,6 +21,7 @@ const TransformCTA = memo(function TransformCTA({
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const router = useRouter();
 
   const handleClick = () => {
     if (isLoading) return;
@@ -28,11 +30,12 @@ const TransformCTA = memo(function TransformCTA({
     // Visual feedback
     setTimeout(() => setIsClicked(false), 600);
 
-    // Call parent handler
+    // Call parent handler or navigate to UI gallery
     if (onClick) {
       onClick();
     } else {
-      console.log("CTA clicked - Let's get started!");
+      // Navigate to UI Gallery page using Next.js router
+      router.push('/ui-gallery');
     }
   };
 

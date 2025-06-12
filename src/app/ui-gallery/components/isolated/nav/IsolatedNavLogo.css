@@ -1,0 +1,327 @@
+/* ========================================
+   ISOLATED NAV LOGO
+   ======================================== */
+
+.isolated-nav-logo {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    overflow: visible;
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateZ(0);
+    isolation: isolate;
+    cursor: pointer;
+}
+
+/* Dynamic Background Glow */
+.logo-dynamic-bg {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at center,
+            rgba(255, 0, 255, 0) 0%,
+            rgba(255, 0, 255, 0.1) 40%,
+            rgba(0, 255, 255, 0.05) 70%,
+            transparent 100%);
+    filter: blur(20px);
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.isolated-nav-logo:hover .logo-dynamic-bg {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Text Wrapper */
+.nav-logo-text-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    z-index: 3;
+}
+
+/* Split Text Styling */
+.nav-logo-text-split {
+    position: relative;
+    font-family: var(--font-lastica, 'Impact', Arial Black, sans-serif);
+    font-weight: 900;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+}
+
+/* JOURNEY styling */
+.text-journey {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.letter-j {
+    font-size: 1.75rem;
+    color: #ff00ff;
+    text-shadow:
+        0 0 20px rgba(255, 0, 255, 0.8),
+        0 0 40px rgba(255, 0, 255, 0.4),
+        2px 2px 0 rgba(255, 0, 255, 0.6);
+    margin-right: -3px;
+    transition: all 0.3s ease;
+}
+
+.text-ourney {
+    font-size: 1.35rem;
+    color: #00ffff;
+    text-shadow:
+        0 0 20px rgba(0, 255, 255, 0.8),
+        0 0 40px rgba(0, 255, 255, 0.4),
+        2px 2px 0 rgba(0, 255, 255, 0.6);
+    margin-right: -3px;
+    transition: all 0.3s ease;
+}
+
+.text-iral {
+    font-size: 1.35rem;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        2px 2px 0 rgba(0, 255, 255, 0.3);
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+/* VIRAL styling */
+.text-viral {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.letter-v {
+    font-size: 1.75rem;
+    color: #00ffff;
+    text-shadow:
+        0 0 20px rgba(0, 255, 255, 0.8),
+        0 0 40px rgba(0, 255, 255, 0.4),
+        2px 2px 0 rgba(0, 255, 255, 0.6);
+    margin-right: -3px;
+    transition: all 0.3s ease;
+}
+
+/* Hover states for text */
+.nav-logo-text-split.text-hovered .letter-j {
+    color: #ff00ff;
+    text-shadow:
+        0 0 30px rgba(255, 0, 255, 1),
+        0 0 60px rgba(255, 0, 255, 0.6),
+        3px 3px 0 rgba(255, 0, 255, 0.8),
+        -1px -1px 0 rgba(0, 255, 255, 0.3);
+    transform: scale(1.1) translateY(-2px);
+}
+
+.nav-logo-text-split.text-hovered .letter-v {
+    color: #00ffff;
+    text-shadow:
+        0 0 30px rgba(0, 255, 255, 1),
+        0 0 60px rgba(0, 255, 255, 0.6),
+        3px 3px 0 rgba(0, 255, 255, 0.8),
+        -1px -1px 0 rgba(255, 0, 255, 0.3);
+    transform: scale(1.1) translateY(-2px);
+}
+
+.nav-logo-text-split.text-hovered .text-ourney,
+.nav-logo-text-split.text-hovered .text-iral {
+    color: #ffffff;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.8),
+        3px 3px 0 rgba(255, 0, 255, 0.4);
+}
+
+/* Glitch Layers */
+.text-glitch-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: baseline;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.text-glitch-layer.layer-1 {
+    transform: translate(-2px, -2px);
+    filter: hue-rotate(45deg);
+    mix-blend-mode: screen;
+}
+
+.text-glitch-layer.layer-2 {
+    transform: translate(2px, 2px);
+    filter: hue-rotate(-45deg);
+    mix-blend-mode: screen;
+}
+
+/* Glitch Animation */
+.nav-logo-text-split.text-glitch .text-glitch-layer {
+    animation: textLayerGlitch 0.2s steps(2) forwards;
+}
+
+@keyframes textLayerGlitch {
+    0%, 100% {
+        opacity: 0;
+    }
+    33% {
+        opacity: 0.8;
+    }
+    66% {
+        opacity: 0.6;
+    }
+}
+
+/* Enhanced Subtitle */
+.nav-logo-subtitle {
+    font-family: var(--font-interphases, 'Courier New', monospace);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.isolated-nav-logo:hover .nav-logo-subtitle {
+    opacity: 1;
+    text-shadow:
+        0 0 15px rgba(255, 215, 0, 1),
+        0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Particles */
+.logo-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.particle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px currentColor;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .isolated-nav-logo {
+        padding: 0.375rem 0.75rem;
+    }
+
+    .letter-j,
+    .letter-v {
+        font-size: 1.5rem;
+    }
+
+    .text-ourney,
+    .text-iral {
+        font-size: 1.15rem;
+    }
+
+    .nav-logo-subtitle {
+        font-size: 0.5625rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .isolated-nav-logo {
+        padding: 0.25rem 0.625rem;
+    }
+
+    .letter-j,
+    .letter-v {
+        font-size: 1.35rem;
+    }
+
+    .text-ourney,
+    .text-iral {
+        font-size: 1rem;
+    }
+
+    .nav-logo-subtitle {
+        font-size: 0.5rem;
+    }
+
+    .logo-particles {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .letter-j,
+    .letter-v {
+        font-size: 1.2rem;
+    }
+
+    .text-ourney,
+    .text-iral {
+        font-size: 0.9rem;
+    }
+
+    .nav-logo-subtitle {
+        display: none;
+    }
+}
+
+/* Performance mode */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: transform 0.1s ease !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .letter-j {
+        color: #ff00ff;
+        text-shadow: none;
+    }
+
+    .letter-v {
+        color: #00ffff;
+        text-shadow: none;
+    }
+
+    .text-ourney,
+    .text-iral {
+        color: #ffffff;
+        text-shadow: none;
+    }
+
+    .nav-logo-subtitle {
+        color: #ffffff;
+        text-shadow: none;
+    }
+}
+
+/* Focus state */
+.isolated-nav-logo:focus-visible {
+    outline: 3px solid #ff00ff;
+    outline-offset: 6px;
+    border-radius: 16px;
+}
+
+.isolated-nav-logo:focus:not(:focus-visible) {
+    outline: none;
+}
